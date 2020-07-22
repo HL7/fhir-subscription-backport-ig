@@ -1,0 +1,61 @@
+{
+  "resourceType" : "OperationDefinition",
+  "id" : "Backport-subscription-status",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><h2>Backported R5 Subscription Status</h2><p>OPERATION: Backported R5 Subscription Status</p><p>The official URL for this operation definition is: </p><pre>http://hl7.org/fhir/OperationDefinition/Backport-subscription-status</pre><div><p>This operation is used to return the current status information about one or more R5-Style Subscriptions in R4.</p>\n</div><p>URL: [base]/Subscription/$status</p><p>URL: [base]/Subscription/[id]/$status</p><p>Parameters</p><table class=\"grid\"><tr><td><b>Use</b></td><td><b>Name</b></td><td><b>Cardinality</b></td><td><b>Type</b></td><td><b>Binding</b></td><td><b>Documentation</b></td></tr><tr><td>IN</td><td>ids</td><td>0..*</td><td><a href=\"http://hl7.org/fhir/datatypes.html#id\">id</a></td><td/><td><div><p>At the Resource level, one or more parameters containing one or more comma-delimited FHIR ids of Subscriptions to get status information for.  In the absense of any specified ids, the server returns the status for all Subscriptions available to the caller.  At the Instance level, this parameter is ignored.</p>\n</div></td></tr><tr><td>OUT</td><td>return</td><td>1..1</td><td><a href=\"http://hl7.org/fhir/bundle.html\">Bundle</a></td><td/><td><div><p>The bundle type is &quot;searchset&quot;. The operation returns a bundle containing one or more Parameters resources, compliant with &quot;backport-subscription-status&quot;, one per Subscription being queried.</p>\n</div></td></tr></table><div/></div>"
+  },
+  "extension" : [{
+    "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm",
+    "valueInteger" : 0
+  },
+  {
+    "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
+    "valueCode" : "trial-use"
+  }],
+  "url" : "http://hl7.org/fhir/OperationDefinition/Backport-subscription-status",
+  "version" : "4.4.0",
+  "name" : "R5SubscriptionStatus",
+  "status" : "draft",
+  "kind" : "operation",
+  "date" : "2020-06-01T17:23:37+00:00",
+  "publisher" : "HL7 FHIR Infrastructure WG",
+  "contact" : [{
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://hl7.org/Special/committees/fiwg/index.cfm"
+    }]
+  }],
+  "description" : "This operation is used to return the current status information about one or more backported R5-Style Subscriptions in R4.",
+  "jurisdiction" : [
+    {
+      "coding" : [
+        {
+          "system" : "http://unstats.un.org/unsd/methods/m49/m49.htm",
+          "code" : "001"
+        }
+      ]
+    }
+  ],
+  "code" : "status",
+  "resource" : ["Subscription"],
+  "system" : false,
+  "type" : true,
+  "instance" : true,
+  "parameter" : [{
+    "name" : "ids",
+    "use" : "in",
+    "min" : 0,
+    "max" : "*",
+    "documentation" : "At the Resource level, one or more parameters containing one or more comma-delimited FHIR ids of Subscriptions to get status information for.  In the absense of any specified ids, the server returns the status for all Subscriptions available to the caller.  At the Instance level, this parameter is ignored.",
+    "type" : "id"
+  },
+  {
+    "name" : "return",
+    "use" : "out",
+    "min" : 1,
+    "max" : "1",
+    "documentation" : "The bundle type is \"searchset\". The operation returns a bundle containing one or more Parameters resources, compliant with \"backport-subscription-status\", one per Subscription being queried.",
+    "type" : "Bundle"
+  }]
+}
