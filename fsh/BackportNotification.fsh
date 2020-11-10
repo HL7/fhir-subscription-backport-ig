@@ -34,18 +34,19 @@ Description: "Profile on the Parameters resource to enable R5-style topic-based 
 * parameter  ^slicing.ordered = false
 * parameter  ^slicing.description = "Slice on parameter name"
 * parameter 
-    contains subscriptionUrl 1..1 MS
-    and subscriptionTopicUrl 0..1 MS
-    and status 1..1 MS
+    contains subscription 1..1 MS
+    and topic 1..1 MS
+    and status 0..1 MS
     and type 1..1 MS
-    and subscriptionEventCount 1..1 MS
-    and bundleEventCount 1..1 MS
-* parameter[subscriptionUrl].name = "subscription-url" (exactly)
-* parameter[subscriptionUrl].value[x] 1..1 MS
-* parameter[subscriptionUrl].value[x] only uri
-* parameter[subscriptionTopicUrl].name = "subscription-topic-url" (exactly)
-* parameter[subscriptionTopicUrl].value[x] 0..1 MS
-* parameter[subscriptionTopicUrl].value[x] only uri
+    and eventsSinceSubscriptionStart 0..1 MS
+    and eventsInNotification 0..1 MS
+    and error 0..1 MS
+* parameter[subscription].name = "subscription" (exactly)
+* parameter[subscription].value[x] 1..1 MS
+* parameter[subscription].value[x] only uri
+* parameter[topic].name = "topic" (exactly)
+* parameter[topic].value[x] 0..1 MS
+* parameter[topic].value[x] only canonical
 * parameter[status].name = "status" (exactly)
 * parameter[status].value[x] 1..1 MS
 * parameter[status].value[x] only code
@@ -54,12 +55,15 @@ Description: "Profile on the Parameters resource to enable R5-style topic-based 
 * parameter[type].value[x] 1..1 MS
 * parameter[type].value[x] only code
 * parameter[type].value[x] from BackportNotificationTypeValueSet
-* parameter[subscriptionEventCount].name = "subscription-event-count" (exactly)
-* parameter[subscriptionEventCount].value[x] 1..1 MS
-* parameter[subscriptionEventCount].value[x] only unsignedInt
-* parameter[bundleEventCount].name = "bundle-event-count" (exactly)
-* parameter[bundleEventCount].value[x] 0..1 MS
-* parameter[bundleEventCount].value[x] only unsignedInt
+* parameter[eventsSinceSubscriptionStart].name = "events-since-subscription-start" (exactly)
+* parameter[eventsSinceSubscriptionStart].value[x] 1..1 MS
+* parameter[eventsSinceSubscriptionStart].value[x] only unsignedInt
+* parameter[eventsInNotification].name = "events-in-notification" (exactly)
+* parameter[eventsInNotification].value[x] 0..1 MS
+* parameter[eventsInNotification].value[x] only unsignedInt
+* parameter[error].name = "error" (exactly)
+* parameter[error].value[x] 1..1 MS
+* parameter[error].value[x] only CodeableConcept
 
 CodeSystem:  BackportNotificationTypeCodeSystem
 Id:          backport-notification-type-code-system
@@ -83,23 +87,35 @@ Instance:    BackportStatusEventNotification
 InstanceOf:  BackportSubscriptionStatus
 Usage:       #inline
 * id = "b21e4fae-ce73-45cb-8e37-1e203362b2ae"
-* parameter[subscriptionUrl].valueUri                = "https://example.org/fhir/r4/Subscription/admission"
-* parameter[subscriptionTopicUrl].valueUri           = "http://hl7.org/SubscriptionTopic/admission"
-* parameter[status].valueCode                        = #active
-* parameter[type].valueCode                          = #event-notification
-* parameter[subscriptionEventCount].valueUnsignedInt = 310
-* parameter[bundleEventCount].valueUnsignedInt       = 1
+* parameter[subscription].valueUri                         = "https://example.org/fhir/r4/Subscription/admission"
+* parameter[topic].valueCanonical                          = "http://hl7.org/SubscriptionTopic/admission"
+* parameter[status].valueCode                              = #active
+* parameter[type].valueCode                                = #event-notification
+* parameter[eventsSinceSubscriptionStart].valueUnsignedInt = 310
+* parameter[eventsInNotification].valueUnsignedInt         = 1
+
+
+Instance:    BackportStatusErrorNotification
+InstanceOf:  BackportSubscriptionStatus
+Usage:       #inline
+* id = "2efd9e8b-e894-4460-97f1-1d0c09daeb10"
+* parameter[subscription].valueUri                         = "https://example.org/fhir/r4/Subscription/admission"
+* parameter[topic].valueCanonical                          = "http://hl7.org/SubscriptionTopic/admission"
+* parameter[status].valueCode                              = #error
+* parameter[type].valueCode                                = #query-status
+* parameter[eventsSinceSubscriptionStart].valueUnsignedInt = 315
+* parameter[error].valueCodeableConcept                    = http://example.org/systems/error#example-error "Example Error"
 
 
 Instance:    BackportNotificationStatusExample
 InstanceOf:  BackportSubscriptionStatus
 Description: "Example Backported R5 Notification Status."
-* parameter[subscriptionUrl].valueUri                = "https://example.org/fhir/r4/Subscription/admission"
-* parameter[subscriptionTopicUrl].valueUri           = "http://hl7.org/SubscriptionTopic/admission"
-* parameter[status].valueCode                        = #active
-* parameter[type].valueCode                          = #event-notification
-* parameter[subscriptionEventCount].valueUnsignedInt = 310
-* parameter[bundleEventCount].valueUnsignedInt       = 1
+* parameter[subscription].valueUri                         = "https://example.org/fhir/r4/Subscription/admission"
+* parameter[topic].valueCanonical                          = "http://hl7.org/SubscriptionTopic/admission"
+* parameter[status].valueCode                              = #active
+* parameter[type].valueCode                                = #event-notification
+* parameter[eventsSinceSubscriptionStart].valueUnsignedInt = 310
+* parameter[eventsInNotification].valueUnsignedInt         = 1
 
 
 Instance:    BackportNotificationExampleEmpty
@@ -135,34 +151,16 @@ Description: "Example of a backported notification with 'id-only' content."
 * entry[1].request.url    = "Encounter"
 * entry[1].response.status = "201"
 
-
-// Extension:   BackportNotificationType
-// Id:          backport-notification-type
-// Title:       "R5 Subscription Notification Type"
-// Description: "The type of event being conveyed with this notificaiton."
-// * value[x] only code
-// * valueCode from BackportNotificationTypeValueSet
-
-// Extension:   BackportSubscriptionEventCount
-// Id:          backport-subscription-event-count
-// Title:       "R5 Subscription Event Count"
-// Description: "Indicates the number of unique events that have triggered notification attempts on this Subscription inclusive of the current notification being sent."
-// * value[x] only unsignedInt
-
-// Extension:   BackportBundleEventCount
-// Id:          backport-bundle-event-count
-// Title:       "R5 Subscription Bundle Event Count"
-// Description: "Represents the number of event notifications conveyed by this Bundle."
-// * value[x] only unsignedInt
-
-// Extension:   BackportSubscriptionTopicUrl
-// Id:          backport-subscription-topic-url
-// Title:       "R5 Canonical SubscriptionTopic"
-// Description: "The Canonical SubscriptionTopic resource relevant to this notification (e.g., the topic the triggering subscription relates to)."
-// * value[x] only uri
-
-// Extension:   BackportSubscriptionUrl
-// Id:          backport-subscription-url
-// Title:       "R5 Subscription Absolute URL"
-// Description: "The Subscription resource that triggered this notification, as an absolute URL for the Subscription resource on the server that generated the notification."
-// * value[x] only uri
+Instance:    BackportNotificationExampleError
+InstanceOf:  BackportSubscriptionNotification
+Usage:       #example
+Title:       "Backported Notification: Error"
+Description: "Example of a backported notification with an error state."
+* id         = "333943ea-ef7b-4e25-9f4e-a8e4c6b574a6"
+* type       = #history
+* timestamp = "2020-05-29T11:44:13.1882432-05:00"
+* entry[subscriptionStatus].fullUrl  = "urn:uuid:2efd9e8b-e894-4460-97f1-1d0c09daeb10"
+* entry[subscriptionStatus].resource = BackportStatusErrorNotification
+* entry[subscriptionStatus].request.method = #GET
+* entry[subscriptionStatus].request.url = "https://example.org/fhir/r4/Subscription/admission/$status"
+* entry[subscriptionStatus].response.status = "200"
