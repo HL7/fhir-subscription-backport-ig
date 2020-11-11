@@ -16,6 +16,8 @@ lists those files generated from project configs or the contents in the ig-data 
 | input\includes\menu.xml                                                   | generated | fsh\config.yaml                                                              |
 | package-list.json                                                         | generated | fsh\config.yaml                                                              |
 | ig.ini                                                                    | copied    | fsh\ig-data\ig.ini                                                           |
+| input\images\subscriptions-no-event.svg                                   | copied    | fsh\ig-data\input\images\subscriptions-no-event.svg                          |
+| input\images\subscriptions-skipped-event.svg                              | copied    | fsh\ig-data\input\images\subscriptions-skipped-event.svg                     |
 | input\operations\OperationDefinition-Backport-subscription-status.json    | copied    | fsh\ig-data\input\operations\OperationDefinition-subscription-status.json    |
 | input\operations\OperationDefinition-Backport-subscriptiontopic-list.json | copied    | fsh\ig-data\input\operations\OperationDefinition-subscriptiontopic-list.json |
 | input\pagecontent\actors_and_transactions.md                              | copied    | fsh\ig-data\input\pagecontent\actors_and_transactions.md                     |

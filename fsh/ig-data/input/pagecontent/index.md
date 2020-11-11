@@ -1,12 +1,12 @@
 The Subscription R5 Backport Implementation Guide enables servers running verions of FHIR earlier than R5 to implement a subset of R5 Subscriptions in a standardized way.
 
-## About This Guide
+### About This Guide
 
-This is a draft implementation guide to enable the implementation of R5-style subscriptions in earlier versions of FHIR.
+During the development of FHIR R5, the Subscriptions Framework has gone through a significant redesign.  Many implementers have expressed a need for functionality from the FHIR R5 version of Subscriptions to be made available in FHIR R4.
 
-The goal of publishing this guide is to define a standard method of back-porting newer subscriptions for greater compatibility and adoption.
+The goal of publishing this guide is to define a standard method of back-porting the R5 Subscriptions Framework for greater compatibility and adoption.
 
-## Contents
+### Contents
 
 * [Overview](overview.html)
   * R5 Subscription Redesign
@@ -21,9 +21,9 @@ The goal of publishing this guide is to define a standard method of back-porting
 
 * [Implementation Conformance](conformance.html)
 
-* Handling Errors
-  * Server
-  * Client
+* [Handling Errors](errors.html)
+  * Handling Errors as a Server
+  * Detecting Errors as a Client
 
 * Profiles and Extensions
   * Profile: [Subscription](StructureDefinition-backport-subscription.html)
