@@ -20,7 +20,7 @@ lists those files generated from project configs or the contents in the ig-data 
 | input\images\subscriptions-skipped-event.svg                              | copied    | fsh\ig-data\input\images\subscriptions-skipped-event.svg                     |
 | input\operations\OperationDefinition-Backport-subscription-status.json    | copied    | fsh\ig-data\input\operations\OperationDefinition-subscription-status.json    |
 | input\operations\OperationDefinition-Backport-subscriptiontopic-list.json | copied    | fsh\ig-data\input\operations\OperationDefinition-subscriptiontopic-list.json |
-| input\pagecontent\actors_and_transactions.md                              | copied    | fsh\ig-data\input\pagecontent\actors_and_transactions.md                     |
+| input\pagecontent\actors_and_operations.md                                | copied    | fsh\ig-data\input\pagecontent\actors_and_operations.md                       |
 | input\pagecontent\conformance.md                                          | copied    | fsh\ig-data\input\pagecontent\conformance.md                                 |
 | input\pagecontent\errors.md                                               | copied    | fsh\ig-data\input\pagecontent\errors.md                                      |
 | input\pagecontent\index.md                                                | copied    | fsh\ig-data\input\pagecontent\index.md                                       |

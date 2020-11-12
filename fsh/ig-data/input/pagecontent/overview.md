@@ -74,5 +74,3 @@ Some topic and server implementation combinations may trigger internal notificat
 Subscribers should ensure an appropriate process to validate incoming messages. For example, if the `full-resource` content type is used, clients should provide a header or some other secret to the server so that messages can be verified prior to being used for health decisions. Using content types of `empty` or `id-only` can mitigate this risk, as resources must be retrieved from a trusted location prior to use.
 
 Subscribers should be aware of, and protect against, the possibility of being used as part of an attack on a FHIR server. For example, a malicious client may send a large volume of fake notifications with `empty` notifications, which would cause the subscriber to send many (potentially expensive) queries to a server.
-
-## Useful Links

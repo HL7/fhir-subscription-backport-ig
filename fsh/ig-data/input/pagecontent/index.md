@@ -9,21 +9,27 @@ The goal of publishing this guide is to define a standard method of back-porting
 ### Contents
 
 * [Overview](overview.html)
-  * R5 Subscription Redesign
-  * Subscriptions Overview
-  * Useful Links
+  * Comonents of a Subscription
+    * Subscription Topics
+    * Subscriptions
+    * Subscription Notifications
+  * Safety and Security
 
-* [Actors and Operations](actors_and_transactions.html)
+* [Actors and Operations](actors_and_operations.html)
   * Server
   * Client
-  * Endpoint (REST Hook)
-  * Endpoint (Email)
+  * Endpoint
+    * REST Hook
+    * Websocket
+    * Email
+    * FHIR Messaging
 
 * [Implementation Conformance](conformance.html)
 
 * [Handling Errors](errors.html)
   * Handling Errors as a Server
   * Detecting Errors as a Client
+  * Recovering from Errors
 
 * Profiles and Extensions
   * Profile: [Subscription](StructureDefinition-backport-subscription.html)
