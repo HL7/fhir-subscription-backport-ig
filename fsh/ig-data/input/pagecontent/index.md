@@ -32,13 +32,20 @@ The goal of publishing this guide is to define a standard method of back-porting
   * Recovering from Errors
 
 * Profiles and Extensions
+  * Profile: [Subscription Topic URL Parameters](StructureDefinition-backport-subscription-topic-canonical-urls.html)
   * Profile: [Subscription](StructureDefinition-backport-subscription.html)
     * Extension: [Backport Topic Canonical](StructureDefinition-backport-topic-canonical.html)
     * Extension: [Backport Heartbeat Period](StructureDefinition-backport-heartbeat-period.html)
     * Extension: [Backport Timeout](StructureDefinition-backport-timeout.html)
+    * Extension: [Backport Notification URL Location](StructureDefinition-backport-notification-url-location.html)
+    * Extension: [Backport Notification Max Count](StructureDefinition-backport-max-count.html)
     * Extension: [Backport Payload Content](StructureDefinition-backport-payload-content.html)
-  * Profile: Subscription Status - [Parameters](StructureDefinition-backport-subscription-status.html)
   * Profile: Notification [Bundle](StructureDefinition-backport-subscription-notification.html)
+  * Profile: Subscription Status - [Parameters](StructureDefinition-backport-subscription-status.html)
+
+* Operations
+  * Operation: [$status](OperationDefinition-Backport-subscription-status.html)
+  * Operation: [$topic-list](OperationDefinition-Backport-subscriptiontopic-list.html)
 
 * Value Sets and Code Systems
   * Subscription Contents
@@ -47,3 +54,6 @@ The goal of publishing this guide is to define a standard method of back-porting
   * Subscription Notification Types
     * [Code System](CodeSystem-backport-notification-type-code-system.html)
     * [Value Set](ValueSet-backport-notification-type-value-set.html)
+  * Subscription Notification URL Location
+    * [Code System](CodeSystem-backport-notification-url-location-code-system.html)
+    * [Value Set](ValueSet-backport-notification-url-location-value-set.html)
