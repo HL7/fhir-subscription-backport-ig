@@ -109,6 +109,7 @@ Description: "Example of a backported R5 admissions subscription in R4."
 * channel.extension[heartbeatPeriod].valueUnsignedInt  = 86400
 * channel.extension[timeout].valueUnsignedInt          = 60
 * channel.extension[notificationUrlLocation].valueCode = #all
+* channel.extension[maxCount].valuePositiveInt         = 20
 * channel.payload                                      = #application/fhir+json
 * channel.payload.extension[content].valueCode         = #id-only
 * channel.header[0]                                    = "Authorization: Bearer secret-token-abc-123"
