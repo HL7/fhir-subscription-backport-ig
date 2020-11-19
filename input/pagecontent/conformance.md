@@ -17,14 +17,14 @@ FHIR Servers claiming conformance to this Implementation Guide must include:
 ### Payload Content Types
 
 At least one of:
-* [Empty](actors_and_operations.html#empty)
-* [Id Only](actors_and_operations.html#id-only)
-* [Full Resource](actors_and_operations.html#full-resource)
+* [Empty](payloads.html#empty)
+* [Id Only](payloads.html#id-only)
+* [Full Resource](payloads.html#full-resource)
 
 ### Channel Types
 
 At least one of:
-* [REST Hook](actors_and_operations.html#rest-hook)
-* [Websockets](actors_and_operations.html#websockets)
-* [Email](actors_and_operations.html#email)
-* [FHIR Messaging](actors_and_operations.html#fhir-messaging)
+* [REST Hook](channels.html#rest-hook)
+* [Websockets](channels.html#websockets)
+* [Email](channels.html#email)
+* [FHIR Messaging](channels.html#fhir-messaging)

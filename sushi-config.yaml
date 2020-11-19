@@ -45,11 +45,16 @@ jurisdiction: http://unstats.un.org/unsd/methods/m49/m49.htm#001 "World"
 # ╰────────────────────────────────────────────────────────────────────────────────────────────────╯
 menu:
   IG Home: index.html
-  Table of Contents: toc.html
+  Background: background.html
+  Specification:
+    Overview: overview.html
+    Channels: channels.html
+    Payload Types: payloads.html
   Artifacts:
     Profiles: artifacts.html#2
     Extensions: artifacts.html#3
     Value Sets: artifacts.html#4
+  Safety and Security: safety_security.html
   Downloads: downloads.html
   Support:
     FHIR Spec: http://hl7.org/fhir/R4/index.html
