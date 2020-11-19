@@ -43,7 +43,7 @@ Description: "Profile on the Parameters resource to enable R5-style topic-based 
     and error 0..1 MS
 * parameter[subscription].name = "subscription" (exactly)
 * parameter[subscription].value[x] 1..1 MS
-* parameter[subscription].value[x] only uri
+* parameter[subscription].value[x] only Reference(Subscription)
 * parameter[topic].name = "topic" (exactly)
 * parameter[topic].value[x] 0..1 MS
 * parameter[topic].value[x] only canonical
@@ -87,7 +87,8 @@ Instance:    BackportStatusEventNotification
 InstanceOf:  BackportSubscriptionStatus
 Usage:       #inline
 * id = "b21e4fae-ce73-45cb-8e37-1e203362b2ae"
-* parameter[subscription].valueUri                         = "https://example.org/fhir/r4/Subscription/admission"
+//* parameter[subscription].valueReference                   = Reference("https://example.org/fhir/r4/Subscription/admission")
+* parameter[subscription].valueReference                   = Reference("Subscription/admission")
 * parameter[topic].valueCanonical                          = "http://hl7.org/SubscriptionTopic/admission"
 * parameter[status].valueCode                              = #active
 * parameter[type].valueCode                                = #event-notification
@@ -99,7 +100,8 @@ Instance:    BackportStatusErrorNotification
 InstanceOf:  BackportSubscriptionStatus
 Usage:       #inline
 * id = "2efd9e8b-e894-4460-97f1-1d0c09daeb10"
-* parameter[subscription].valueUri                         = "https://example.org/fhir/r4/Subscription/admission"
+//* parameter[subscription].valueReference                   = Reference("https://example.org/fhir/r4/Subscription/admission")
+* parameter[subscription].valueReference                   = Reference("Subscription/admission")
 * parameter[topic].valueCanonical                          = "http://hl7.org/SubscriptionTopic/admission"
 * parameter[status].valueCode                              = #error
 * parameter[type].valueCode                                = #query-status
@@ -110,7 +112,8 @@ Usage:       #inline
 Instance:    BackportNotificationStatusExample
 InstanceOf:  BackportSubscriptionStatus
 Description: "Example Backported R5 Notification Status."
-* parameter[subscription].valueUri                         = "https://example.org/fhir/r4/Subscription/admission"
+//* parameter[subscription].valueReference                   = Reference("https://example.org/fhir/r4/Subscription/admission")
+* parameter[subscription].valueReference                   = Reference("Subscription/admission")
 * parameter[topic].valueCanonical                          = "http://hl7.org/SubscriptionTopic/admission"
 * parameter[status].valueCode                              = #active
 * parameter[type].valueCode                                = #event-notification

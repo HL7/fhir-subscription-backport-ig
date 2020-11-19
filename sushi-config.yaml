@@ -14,8 +14,8 @@ id: hl7.fhir.uv.subscriptions-backport
 canonical: http://hl7.org/fhir/uv/subscriptions-backport
 version: 0.1.1
 name: SubscriptionsR5Backport
-title: Subscriptions R5 Backport
-status: active
+title: "Subscriptions R5 Backport"
+status: draft
 publisher:
   name: HL7 FHIR Infrastructure WG
   url: https://hl7.org/Special/committees/fiwg/index.cfm
@@ -24,6 +24,10 @@ contact:
     telecom:
       - system: email
         value: mailto:gino.canessa@microsoft.com
+  - name: Eric Haas
+    telecom:
+      - system: email
+        value: mailto:ehaas@healthedatainc.com
 description: The Subscription R5 Backport Implementation Guide enables servers running
   verions of FHIR earlier than R5 to implement a subset of R5 Subscriptions in a
   standardized way.
@@ -33,10 +37,8 @@ parameters:
   show-inherited-invariants: false
   usage-stats-opt-out: true
 copyrightYear: 2020+
-releaseLabel: CI Build
+releaseLabel: ci-build
 jurisdiction: http://unstats.un.org/unsd/methods/m49/m49.htm#001 "World"
-
-
 
 # ╭────────────────────────────────────────────menu.xml────────────────────────────────────────────╮
 # │  To use a provided ig-data/input/includes/menu.xml file, delete the "menu" property below.     │
@@ -44,9 +46,13 @@ jurisdiction: http://unstats.un.org/unsd/methods/m49/m49.htm#001 "World"
 menu:
   IG Home: index.html
   Table of Contents: toc.html
-  Artifact Index: artifacts.html
+  Artifacts:
+    Profiles: artifacts.html#2
+    Extensions: artifacts.html#3
+    Value Sets: artifacts.html#4
+  Downloads: downloads.html
   Support:
-    FHIR Spec: external http://hl7.org/fhir/R4/index.html
+    FHIR Spec: http://hl7.org/fhir/R4/index.html
 
 # ╭───────────────────────────────────────package-list.json────────────────────────────────────────╮
 # │  To use a provided ig-data/package-list.json file, delete the "history" property below.        │

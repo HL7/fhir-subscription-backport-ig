@@ -2,7 +2,9 @@
 
 Subscriptions are used to establish proactive event notifications from a FHIR application to another system.  The R5 version of the subscriptions framework aligns (in concept) with specifications such as [W3 WebSub](https://www.w3.org/TR/websub/).
 
-...
+#### Background
+
+
 
 ### Components of a Subscription
 
@@ -43,7 +45,7 @@ When a FHIR Server accepts a request to create a `Subscription`, the server is i
 * is capable of detecting when events covered by the requestion SubscriptionTopic occur, and
 * is willing to make a simple best effort  attempt at delivering a notification for each occurance of a matching event.
 
-In order to add the functionality of R5 subscriptions to the [R4 Subscription](http://hl7.org/fhir/subscription.html) resource, this guide defines several extensions.  A list of extensions defined by this guide can be found on the [Artifacts](artifacts.html#structures-extension-definitions) page.
+In order to add the functionality of R5 subscriptions to the [R4 Subscription](http://hl7.org/fhir/subscription.html) resource, this guide defines several extensions.  A list of extensions defined by this guide can be found on the [Artifacts](artifacts.html#3) page.
 
 ### Subscription Notifications
 

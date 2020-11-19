@@ -57,3 +57,5 @@ The goal of publishing this guide is to define a standard method of back-porting
   * Subscription Notification URL Location
     * [Code System](CodeSystem-backport-notification-url-location-code-system.html)
     * [Value Set](ValueSet-backport-notification-url-location-value-set.html)
+
+* [Downloads](downloads.html)
