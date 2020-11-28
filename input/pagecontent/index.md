@@ -8,21 +8,33 @@ The goal of publishing this guide is to define a standard method of back-porting
 
 ### Contents
 
-* [Overview](overview.html)
-  * Comonents of a Subscription
+* [Background](background.html)
+  * What are Subscriptions?
+  * Subscriptions in R4
+  * Subscriptions in R5
+  * This IG
+
+* Specification
+  * [Actors](actors.html)
+    * Server
+    * Client
+    * Endpoint
+  * [Components](components.html)
     * Subscription Topics
     * Subscriptions
-    * Subscription Notifications
-  * Safety and Security
-
-* [Actors and Operations](actors_and_operations.html)
-  * Server
-  * Client
-  * Endpoint
-    * REST Hook
-    * Websocket
+    * Notifications
+  * [Channels](channels.html)
+    * REST-Hook (http/s POST)
+    * Websockets
     * Email
     * FHIR Messaging
+  * [Payloads](payloads.html)
+    * Empty
+    * Id Only
+    * Full Resource
+  * Workflow
+
+* [Safety and Security](safety_security.html)
 
 * [Implementation Conformance](conformance.html)
 

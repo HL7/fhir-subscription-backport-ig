@@ -1,4 +1,5 @@
-### Channel Types
+
+In FHIR R5, there are four channel types which were common enough to be defined in the specification (additional channel types can be defined externally).  In this Implementation Guide, we define those same channel types; additional channel definitions may be defined by other implementations or Implementation Guides.
 
 #### REST-Hook
 

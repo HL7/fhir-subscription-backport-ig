@@ -1,8 +1,3 @@
-## Subscriptions Overview
-
-Subscriptions are used to establish proactive event notifications from a FHIR application to another system.  The R5 version of the subscriptions framework aligns (in concept) with specifications such as [W3 WebSub](https://www.w3.org/TR/websub/).
-
-### Components of a Subscription
 
 The subscription mechanism is composed of three parts:
 
@@ -49,7 +44,7 @@ In FHIR R5, a new type of `Bundle` has been introduced, which uses the new `Subs
 
 Unless otherwise specified by a server implementation and channel, the Subscriptions Framework does not involve guaranteed  delivery of notifications. While the Subscriptions Framework is able to support such mechanisms, defining them are beyond the scope of the standard.
 
-Subscribers should be aware of some limitations regarding delivery. In particular:
+Clients should be aware of some limitations regarding delivery. In particular:
 
 * Some notifications might not be delivered.
 * Some notifications might be delivered multiple times.

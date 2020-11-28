@@ -47,14 +47,18 @@ menu:
   IG Home: index.html
   Background: background.html
   Specification:
-    Overview: overview.html
+    Actors: actors.html
+    Components: components.html
     Channels: channels.html
     Payload Types: payloads.html
+    Workflow: workflow.html
+  Safety and Security: safety_security.html
   Artifacts:
+    Operations: artifacts.html#1
     Profiles: artifacts.html#2
     Extensions: artifacts.html#3
     Value Sets: artifacts.html#4
-  Safety and Security: safety_security.html
+    Examples: artifacts.html#6
   Downloads: downloads.html
   Support:
     FHIR Spec: http://hl7.org/fhir/R4/index.html
