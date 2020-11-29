@@ -13,3 +13,12 @@ Description: "Profile on the R4 Parameters resource to enable R5-style topic-bas
 * parameter[subscriptionTopicCanonical].name = "subscription-topic-canonical" (exactly)
 * parameter[subscriptionTopicCanonical].value[x] 1..1 MS
 * parameter[subscriptionTopicCanonical].value[x] only canonical
+
+Instance:    BackportTopicListExampleSingle
+InstanceOf:  BackportTopicList
+Usage:       #example
+Title:       "Backported Subscription Topic List"
+Description: "Example of a backported subscription topic list with a single entry."
+* id       = "topic-list-single"
+* parameter[subscriptionTopicCanonical].name = "subscription-topic-canonical"
+* parameter[subscriptionTopicCanonical].valueCanonical = "http://argonautproject.org/encounters-ig/SubscriptionTopic/encounter-start"
