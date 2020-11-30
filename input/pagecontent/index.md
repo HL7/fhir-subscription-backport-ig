@@ -32,16 +32,11 @@ The goal of publishing this guide is to define a standard method of back-porting
     * Empty
     * Id Only
     * Full Resource
-  * Workflow
-
+  * [Conformance](conformance.html)
+  * [Workflow](workflow.html)
+  * [Handling Errors](errors.html)
+ 
 * [Safety and Security](safety_security.html)
-
-* [Implementation Conformance](conformance.html)
-
-* [Handling Errors](errors.html)
-  * Handling Errors as a Server
-  * Detecting Errors as a Client
-  * Recovering from Errors
 
 * Profiles and Extensions
   * Profile: [Subscription Topic URL Parameters](StructureDefinition-backport-subscription-topic-canonical-urls.html)
@@ -53,7 +48,7 @@ The goal of publishing this guide is to define a standard method of back-porting
     * Extension: [Backport Notification Max Count](StructureDefinition-backport-max-count.html)
     * Extension: [Backport Payload Content](StructureDefinition-backport-payload-content.html)
   * Profile: Notification [Bundle](StructureDefinition-backport-subscription-notification.html)
-  * Profile: Subscription Status - [Parameters](StructureDefinition-backport-subscription-status.html)
+  * Profile: Subscription Status - [Parameters](StructureDefinition-backport-subscriptionstatus.html)
 
 * Operations
   * Operation: [$status](OperationDefinition-Backport-subscription-status.html)

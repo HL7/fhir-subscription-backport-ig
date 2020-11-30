@@ -42,6 +42,10 @@ In order to add the functionality of R5 subscriptions to the [R4 Subscription](h
 
 In FHIR R5, a new type of `Bundle` has been introduced, which uses the new `SubscriptionStatus` resource to convey status information in notifications.  For FHIR R4, notifications are instead based on a [history Bundle](http://hl7.org/fhir/bundle.html#history), and a [Parameters](http://hl7.org/fhir/parameters.html) resource is used to convey meta-information.
 
+Since notifications use `history` type Bundles, a few additional elements are required.  Specifically, in order to meet the requirements of `bdl-3` and `bdl-4`, `Bundle.entry.request` must exist for each entry.  For the status resource (`entry[0]`), the request SHALL filled out to match a request to the `$status` operation.
+
+For additional entries, the request SHOULD be filled out in a way that makes sense given the subscription (e.g., a `POST` or `PUT` operation on the resource, etc.).  However, a server MAY choose to simply include a `GET` to the relevant resource instead.
+
 Unless otherwise specified by a server implementation and channel, the Subscriptions Framework does not involve guaranteed  delivery of notifications. While the Subscriptions Framework is able to support such mechanisms, defining them are beyond the scope of the standard.
 
 Clients should be aware of some limitations regarding delivery. In particular:

@@ -24,7 +24,7 @@ XPath:       "f:entry[1]/f:resource/f:Parameters"
 
 Profile:     BackportSubscriptionStatus
 Parent:      Parameters
-Id:          backport-subscription-status
+Id:          backport-subscriptionstatus
 Title:       "Backported R5 Subscription Notification Status"
 Description: "Profile on the Parameters resource to enable R5-style topic-based subscription notifications in FHIR R4."
 * ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
@@ -109,7 +109,9 @@ Usage:       #inline
 
 Instance:    BackportNotificationStatusExample
 InstanceOf:  BackportSubscriptionStatus
-Description: "Example Backported R5 Notification Status."
+Title:       "Backported Notification: Status"
+Description: "Example of a backported notification with status content."
+* id       = "notification-status"
 * parameter[subscription].valueReference.reference         = "https://example.org/fhir/r4/Subscription/admission"
 * parameter[topic].valueCanonical                          = "http://hl7.org/SubscriptionTopic/admission"
 * parameter[status].valueCode                              = #active
@@ -123,7 +125,7 @@ InstanceOf:  BackportSubscriptionNotification
 Usage:       #example
 Title:       "Backported Notification: Empty"
 Description: "Example of a backported notification with 'empty' content."
-* id        = "9601c07a-e34f-4945-93ca-6efb5394c995"
+* id        = "notification-empty"
 * type      = #history
 * timestamp = "2020-05-29T11:44:13.1882432-05:00"
 * entry[subscriptionStatus].fullUrl  = "urn:uuid:b21e4fae-ce73-45cb-8e37-1e203362b2ae"
@@ -138,7 +140,7 @@ InstanceOf:  BackportSubscriptionNotification
 Usage:       #example
 Title:       "Backported Notification: Id Only"
 Description: "Example of a backported notification with 'id-only' content."
-* id        = "3945182f-d315-4dbf-9259-09d863c7e7da"
+* id        = "notification-id-only"
 * type      = #history
 * timestamp = "2020-05-29T11:44:13.1882432-05:00"
 * entry[subscriptionStatus].fullUrl  = "urn:uuid:b21e4fae-ce73-45cb-8e37-1e203362b2ae"
@@ -151,12 +153,13 @@ Description: "Example of a backported notification with 'id-only' content."
 * entry[1].request.url    = "Encounter"
 * entry[1].response.status = "201"
 
+
 Instance:    BackportNotificationExampleError
 InstanceOf:  BackportSubscriptionNotification
 Usage:       #example
 Title:       "Backported Notification: Error"
 Description: "Example of a backported notification with an error state."
-* id         = "333943ea-ef7b-4e25-9f4e-a8e4c6b574a6"
+* id         = "notification-error"
 * type       = #history
 * timestamp = "2020-05-29T11:44:13.1882432-05:00"
 * entry[subscriptionStatus].fullUrl  = "urn:uuid:2efd9e8b-e894-4460-97f1-1d0c09daeb10"

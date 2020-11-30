@@ -105,7 +105,7 @@ InstanceOf:  BackportSubscription
 Usage:       #example
 Title:       "Backported Subscription: Admission"
 Description: "Example of a backported R5 admissions subscription in R4."
-* id       = "admission"
+* id       = "subscription-admission"
 * extension[subscriptionTopic].valueUri                = "http://hl7.org/SubscriptionTopic/admission"
 * status   = #active
 * end      = "2020-12-31T12:00:00Z"
@@ -126,7 +126,7 @@ InstanceOf:  BackportSubscription
 Usage:       #example
 Title:       "Backported Subscription: Multi-Resource"
 Description: "Example of a backported R5 subscription in R4 with multiple resources."
-* id       = "multiResource"
+* id       = "subscription-multi-resource"
 * extension[subscriptionTopic].valueUri                = "http://example.org/fhir/SubscriptionTopic/PatientEncounterObservation"
 * status   = #active
 * end      = "2020-12-31T12:00:00Z"
