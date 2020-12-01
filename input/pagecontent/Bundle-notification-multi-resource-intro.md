@@ -1,0 +1,2 @@
+
+This Bundle provides an example of an `full-resource` notification that includes a related resource (e.g., the triggering resource of `Encounter` and the related `Patient`).  This `Bundle` is typical of what may be posted to a notification endpoint (e.g., a listening HTTP server, etc.).

@@ -83,6 +83,25 @@ Description: "Codes to represent types of notification bundles."
 * codes from system BackportNotificationTypeCodeSystem
 
 
+CodeSystem:  BackportNotificationErrorCodeSystem
+Id:          backport-notification-error-code-system
+Title:       "R5 Subscription Error Code System"
+Description: "Codes to represent error states on subscriptions."
+* ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
+* #unreachable          "Unreachable"       "The subscription endpoint is currently unreachable."
+* #certificate-error    "Certificate Error" "The subscription endpoint has an invalid certificate."
+* #timeout              "Timeout"           "An attempt to send a notification has timed out."
+* #processing           "Processing Error"  "An error occurred while processing the event or notification."
+* #unathorized          "Unauthorized"      "The server has determined the endpoint is not authorized to receive notifications."
+
+ValueSet:    BackportNotificationErrorValueSet
+Id:          backport-notification-error-value-set
+Title:       "R5 Subscription Error Codes Value Set"
+Description: "Codes to represent error states on subscriptions."
+* ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
+* codes from system BackportNotificationErrorCodeSystem
+
+
 Instance:    BackportStatusEventNotification
 InstanceOf:  BackportSubscriptionStatus
 Usage:       #inline
@@ -104,7 +123,7 @@ Usage:       #inline
 * parameter[status].valueCode                              = #error
 * parameter[type].valueCode                                = #query-status
 * parameter[eventsSinceSubscriptionStart].valueUnsignedInt = 315
-* parameter[error].valueCodeableConcept                    = http://example.org/systems/error#example-error "Example Error"
+* parameter[error].valueCodeableConcept                    = BackportNotificationErrorCodeSystem#unreachable
 
 
 Instance:    BackportNotificationStatusExample
@@ -152,6 +171,68 @@ Description: "Example of a backported notification with 'id-only' content."
 * entry[1].request.method = #POST
 * entry[1].request.url    = "Encounter"
 * entry[1].response.status = "201"
+
+Instance:    BackportNotificationPatient
+InstanceOf:  Patient
+Usage:       #inline
+* id               = "46db3334-dbf5-43f3-868f-93ae0883cce1"
+* active           = true
+* name[0].use      = #usual
+* name[0].text     = "Example Patient"
+* name[0].family   = "Patient"
+* name[0].given[0] = "Example"
+
+Instance:    BackportNotificationEncounter
+InstanceOf:  Encounter
+Usage:       #inline
+* id       = "551683b3-1477-41d1-b58e-32fe8b0047b0"
+* status   = #in-progress
+* class    = http://terminology.hl7.org/CodeSystem/v3-ActCode#VR
+* subject.reference = "https://example.org/fhir/r4/Patient/46db3334-dbf5-43f3-868f-93ae0883cce1"
+* subject.display   = "Example Patient"
+
+Instance:    BackportNotificationExampleFullResource
+InstanceOf:  BackportSubscriptionNotification
+Usage:       #example
+Title:       "Backported Notification: Full Resource"
+Description: "Example of a backported notification with 'full-resource' content."
+* id        = "notification-full-resource"
+* type      = #history
+* timestamp = "2020-05-29T11:44:13.1882432-05:00"
+* entry[subscriptionStatus].fullUrl  = "urn:uuid:b21e4fae-ce73-45cb-8e37-1e203362b2ae"
+* entry[subscriptionStatus].resource = BackportStatusEventNotification
+* entry[subscriptionStatus].request.method = #GET
+* entry[subscriptionStatus].request.url = "https://example.org/fhir/r4/Subscription/admission/$status"
+* entry[subscriptionStatus].response.status = "200"
+* entry[1].fullUrl  = "https://example.org/fhir/r4/Encounter/551683b3-1477-41d1-b58e-32fe8b0047b0"
+* entry[1].resource = BackportNotificationEncounter
+* entry[1].request.method = #POST
+* entry[1].request.url    = "Encounter"
+* entry[1].response.status = "201"
+
+Instance:    BackportNotificationExampleMultiResource
+InstanceOf:  BackportSubscriptionNotification
+Usage:       #example
+Title:       "Backported Notification: Multiple Resources"
+Description: "Example of a backported notification with 'full-resource' content and a related resource."
+* id        = "notification-multi-resource"
+* type      = #history
+* timestamp = "2020-05-29T11:44:13.1882432-05:00"
+* entry[subscriptionStatus].fullUrl  = "urn:uuid:babce097-c165-4b54-b7d1-0301b8a095d3"
+* entry[subscriptionStatus].resource = BackportStatusEventNotification
+* entry[subscriptionStatus].request.method = #GET
+* entry[subscriptionStatus].request.url = "https://example.org/fhir/r4/Subscription/admission/$status"
+* entry[subscriptionStatus].response.status = "200"
+* entry[1].fullUrl  = "https://example.org/fhir/r4/Encounter/551683b3-1477-41d1-b58e-32fe8b0047b0"
+* entry[1].resource = BackportNotificationEncounter
+* entry[1].request.method = #POST
+* entry[1].request.url    = "Encounter"
+* entry[1].response.status = "201"
+* entry[2].fullUrl  = "https://example.org/fhir/r4/Patient/46db3334-dbf5-43f3-868f-93ae0883cce1"
+* entry[2].resource = BackportNotificationPatient
+* entry[2].request.method = #GET
+* entry[2].request.url    = "Patient/46db3334-dbf5-43f3-868f-93ae0883cce1"
+* entry[2].response.status = "200"
 
 
 Instance:    BackportNotificationExampleError
