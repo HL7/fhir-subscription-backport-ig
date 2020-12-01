@@ -16,6 +16,7 @@ Usage:         #definition
 Title:         "Backport Subscription Server Capability Statement"
 Description:   "Example CapabilityStatement describing the expected capabilities of a FHIR Server supporting backported R5 Subscriptions."
 * id            = "backport-subscription-server"
+* name          = "BackportSubscriptionCapabilityStatement"
 * description   = "Example CapabilityStatement describing the expected capabilities of a FHIR Server supporting backported R5 Subscriptions."
 * implementationGuide = "http://hl7.org/fhir/uv/subscriptions-backport/ImplementationGuide/hl7.fhir.uv.subscriptions-backport"
 * insert CapabilityCommon
