@@ -17,7 +17,7 @@ Title:         "Backport Subscription Server Capability Statement"
 Description:   "Example CapabilityStatement describing the expected capabilities of a FHIR Server supporting backported R5 Subscriptions."
 * id            = "backport-subscription-server"
 * description   = "Example CapabilityStatement describing the expected capabilities of a FHIR Server supporting backported R5 Subscriptions."
-* implementationGuide = "http://hl7.org/fhir/uv/subscriptions-backport"
+* implementationGuide = "http://hl7.org/fhir/uv/subscriptions-backport/ImplementationGuide/hl7.fhir.uv.subscriptions-backport"
 * insert CapabilityCommon
 * rest[0].mode  = #server
 * rest[0].resource[0].type                = #Subscription
@@ -27,6 +27,6 @@ Description:   "Example CapabilityStatement describing the expected capabilities
 * rest[0].resource[0].interaction[2].code = #update
 * rest[0].resource[0].interaction[3].code = #delete
 * rest[0].resource[0].operation[0].name       = "$topic-list"
-* rest[0].resource[0].operation[0].definition = "http://hl7.org/fhir/uv/subscriptions-backport/OperationDefinition/backport-subscriptiontopic-list"
+* rest[0].resource[0].operation[0].definition = "http://hl7.org/fhir/uv/subscriptions-backport/OperationDefinition/Backport-subscriptiontopic-list"
 * rest[0].resource[0].operation[1].name       = "$status"
-* rest[0].resource[0].operation[1].definition = "http://hl7.org/fhir/uv/subscriptions-backport/OperationDefinition/backport-subscription-status"
+* rest[0].resource[0].operation[1].definition = "http://hl7.org/fhir/uv/subscriptions-backport/OperationDefinition/Backport-subscription-status"
