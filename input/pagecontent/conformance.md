@@ -1,30 +1,5 @@
 
-FHIR Servers claiming conformance to this Implementation Guide must include:
+FHIR Servers claiming conformance to this Implementation Guide must conform to the expectations described in the [Server CapabilityStatement](CapabilityStatement-backport-subscription-server.html).
 
-### Resource Support
+Some options of the Subscriptions Framework are not easily expressed in a `CapabilityStatement`.  In addition to the basic support in the CapabilityStatement (e.g., resources, interactions, and operations), a conformant server SHALL support at least one [Payload Type](payloads.html) and SHOULD support one [Channel Type](channels.html) listed in this IG.
 
-* [Subscription](http://hl7.org/fhir/subscription.html)
-  * Create
-  * Update
-  * Delete
-  * Search
-
-### Operations
-
-* Topic discovery: [$topic-list](OperationDefinition-Backport-subscriptiontopic-list.html)
-* Subscription Status: [$status](OperationDefinition-Backport-subscription-status.html)
-
-### Payload Content Types
-
-At least one of:
-* [Empty](payloads.html#empty)
-* [Id Only](payloads.html#id-only)
-* [Full Resource](payloads.html#full-resource)
-
-### Channel Types
-
-At least one of:
-* [REST Hook](channels.html#rest-hook)
-* [Websockets](channels.html#websockets)
-* [Email](channels.html#email)
-* [FHIR Messaging](channels.html#fhir-messaging)

@@ -53,4 +53,5 @@
 <page key="safety_security" name="Safety Security"/>
 <page key="toc" name="Table of Contents"/>
 <page key="workflow" name="Workflow"/>
+<page key="workflow-diagrams" name="Workflow Diagrams"/>
 </specification>
