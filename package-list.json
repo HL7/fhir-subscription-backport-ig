@@ -15,7 +15,7 @@
       "version": "0.0.1",
       "date": "2020-07-21",
       "desc": "Initial STU ballot (Jan 2021 Ballot)",
-      "path": "http://hl7.org/fhir/subscriptions-backport/STU1/",
+      "path": "http://hl7.org/fhir/subscriptions-backport/2020Jan/",
       "status": "ballot",
       "sequence": "STU 1",
       "fhirversion": "4.0.1",
