@@ -12,7 +12,7 @@
       "current": true
     },
     {
-      "version": "0.0.1",
+      "version": "0.1.0",
       "date": "2020-07-21",
       "desc": "Initial STU ballot (Jan 2021 Ballot)",
       "path": "http://hl7.org/fhir/subscriptions-backport/2020Jan/",
