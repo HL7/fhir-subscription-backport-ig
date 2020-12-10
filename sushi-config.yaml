@@ -37,7 +37,7 @@ parameters:
   show-inherited-invariants: false
   usage-stats-opt-out: true
 copyrightYear: 2020+
-releaseLabel: ci-build
+releaseLabel: ballot
 jurisdiction: http://unstats.un.org/unsd/methods/m49/m49.htm#001 "World"
 
 # ╭────────────────────────────────────────────menu.xml────────────────────────────────────────────╮
