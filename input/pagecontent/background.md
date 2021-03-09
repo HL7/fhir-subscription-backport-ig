@@ -23,7 +23,7 @@ More than a year of focused work resulted in a new design for Subscriptions in F
 1. Changing the `Subscription` resource to add clarity and flexibility.
 1. Restructuring notifications by adding a new `Bundle` type.
 
-The result of the work has been overwhelmingly positive - changes to the mechanism address the issues identified and retain all of the existing functionality.  However, many implementers are concerned that both publication and adoption of FHIR R5 are both in the future.
+The implementer response to these changes has been overwhelmingly positive - changes to the mechanism address the issues identified and retain all of the existing functionality.  However, many implementers are concerned that both publication and adoption of FHIR R5 are both in the future.
 
 ### This IG
 
