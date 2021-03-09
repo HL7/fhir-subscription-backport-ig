@@ -20,6 +20,8 @@ Id:          backport-topic-canonical
 Title:       "Backport R5 Subscription Topic Canonical"
 Description: "Canonical reference to the subscription topic being subscribed to."
 * ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
+* ^context[0].type = #element
+* ^context[0].expression = "Subscription"
 * value[x] only uri
 * valueUri 1..1 MS
 
@@ -28,6 +30,8 @@ Id:          backport-additional-criteria
 Title:       "Backported R5 Additional Criteria"
 Description: "Criteria for additional resource types."
 * ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
+* ^context[0].type = #element
+* ^context[0].expression = "Subscription.criteria"
 * value[x] only string
 
 CodeSystem:  BackportContentCodeSystem
@@ -51,6 +55,8 @@ Id:          backport-payload-content
 Title:       "Backport R5 Subscription Payload Content Information"
 Description: "How much of the resource content to deliver in the notification payload. The choices are an empty payload, only the resource id, or the full resource content."
 * ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
+* ^context[0].type = #element
+* ^context[0].expression = "Subscription.channel.payload"
 * value[x] only code
 * valueCode from BackportContentValueSet
 
@@ -59,6 +65,8 @@ Id:          backport-heartbeat-period
 Title:       "Backport R5 Subscription Heartbeat Period"
 Description: "Interval in seconds to send 'heartbeat' notifications."
 * ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
+* ^context[0].type = #element
+* ^context[0].expression = "Subscription.channel"
 * value[x] only unsignedInt
 
 Extension:   BackportTimeout
@@ -66,6 +74,8 @@ Id:          backport-timeout
 Title:       "Backport R5 Subscription Timeout"
 Description: "Timeout in seconds to attempt notification delivery."
 * ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
+* ^context[0].type = #element
+* ^context[0].expression = "Subscription.channel"
 * value[x] only unsignedInt
 
 CodeSystem:  BackportNotificationUrlLocationCodeSystem
@@ -90,6 +100,8 @@ Id:          backport-notification-url-location
 Title:       "Backport R5 Subscription Notification URL Location"
 Description: "If present, where to place URLs of resources in notifications."
 * ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
+* ^context[0].type = #element
+* ^context[0].expression = "Subscription.channel"
 * value[x] only code
 * valueCode from BackportNotificationUrlLocationValueSet
 
@@ -98,6 +110,8 @@ Id:          backport-max-count
 Title:       "Backported R5 Subscription MaxCount"
 Description: "Maximum number of triggering resources included in notification bundles."
 * ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
+* ^context[0].type = #element
+* ^context[0].expression = "Subscription.channel"
 * value[x] only positiveInt
 
 Instance:    BackportSubscriptionExampleAdmission
