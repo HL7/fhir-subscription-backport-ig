@@ -18,7 +18,7 @@ An example workflow for establishing a <code>rest-hook</code> subscription is in
 1. Server performs an HTTP POST to the requested endpoint with a `handshake` notification.
 1. Client Endpoint accepts the POST and returns a success HTTP code (e.g., `200`).
 1. Server may send a notification of type `heartbeat` at any time.
-1. Server may send a notificaiton of type `event-notificaiton` at any time.
+1. Server may send a notification of type `event-notification` at any time.
 
 ##### Security Notes
 
@@ -89,7 +89,7 @@ An example workflow for receiving notifications via email is shown below:
 1. Server responds with a success code and creates the subscription with a state of either `requested` or `active`.
 1. Optional: Server sends a email message to the requested endpoint with a `handshake` notification. If the subscription was set to `requested`, it should be updated to `active` after successfully sending the email (pending additional steps such as user confirmation, etc.).
 1. Server may send an email for a notification of type `heartbeat` at any time.
-1. Server may send an email for a notificaiton of type `event-notificaiton` at any time.
+1. Server may send an email for a notification of type `event-notification` at any time.
 
 ##### Security Notes
 
@@ -112,7 +112,7 @@ An example workflow for receiving notification via FHIR messaging is shown below
 1. Server sends a FHIR Message to the requested endpoint with a `handshake` notification.
 1. Client Endpoint accepts the Message and returns success.
 1. Server may send a Message containing a notification of type `heartbeat` at any time.
-1. Server may send a Message containing a notificaiton of type `event-notificaiton` at any time.
+1. Server may send a Message containing a notification of type `event-notification` at any time.
 
 ##### Security Notes
 
