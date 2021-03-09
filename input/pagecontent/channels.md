@@ -7,7 +7,10 @@ When a `Subscription` is created for a REST Hook channel type, the server SHALL 
 
 To receive notifications via HTTP/S POST, a client should request a subscription with the channel type of `rest-hook` and set the endpoint to the appropriate client URL. Note that this URL must be accessible by the hosting server.
 
-To convey an event notification, the server POSTs a `Bundle` to the client's nominated endpoint URL per the format requests in the Subscription. The `content-type` of the POST SHALL match the `contentType` requested during creation of the Subscription. Each `Subscription.header` value SHALL be conveyed as an HTTP request header.
+To convey an event notification, the server POSTs a `Bundle` to the client's nominated endpoint URL, which SHALL match the configuration agreed upon in the Subscription:
+* The `content-type` of the POST SHALL match the `contentType` requested during creation of the Subscription.
+* Each `Subscription.header` value SHALL be conveyed as an HTTP request header.
+* The bundle SHALL comply with the [Backported R5 Notification Bundle](StructureDefinition-backport-subscription-notification.html).
 
 An example workflow for establishing a <code>rest-hook</code> subscription is included below.
 
