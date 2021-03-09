@@ -1,7 +1,7 @@
 
 Subscriptions are operations which typically involve three actors:
 
-1. Server
+1. Server or Publisher
 1. Client or Subscriber
 1. Endpoint
 
