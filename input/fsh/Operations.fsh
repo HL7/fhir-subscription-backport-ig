@@ -18,7 +18,7 @@ InstanceOf:    OperationDefinition
 Usage:         #definition
 Title:         "Backport Subscription Status Operation"
 Description:   "This operation is used to return the current status information about one or more backported R5-Style Subscriptions in R4."
-* id            = "Backport-subscription-status"
+* id            = "backport-subscription-status"
 * name          = "R5SubscriptionStatus"
 * description   = "This operation is used to return the current status information about one or more backported R5-Style Subscriptions in R4."
 * insert OperationCommon
@@ -46,7 +46,7 @@ InstanceOf:    OperationDefinition
 Usage:         #definition
 Title:         "Backport Subscription Topic List Operation"
 Description:   "This operation is used to return the current list of R5 SubscriptionTopics in a Backported-R4 environment."
-* id            = "Backport-subscriptiontopic-list"
+* id            = "backport-subscriptiontopic-list"
 * name          = "R5SubscriptionTopicList"
 * description   = "This operation is used to return the current list of R5 SubscriptionTopics in a Backported-R4 environment."
 * insert OperationCommon
