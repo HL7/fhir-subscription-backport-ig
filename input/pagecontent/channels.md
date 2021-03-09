@@ -17,8 +17,8 @@ An example workflow for establishing a <code>rest-hook</code> subscription is in
 1. Server responds with a success code and creates the subscription with a state of `requested`.
 1. Server performs an HTTP POST to the requested endpoint with a `handshake` notification.
 1. Client Endpoint accepts the POST and returns a success HTTP code (e.g., `200`).
-1. Server may send a notification of type `heartbeat` at any time.
-1. Server may send a notificaiton of type `event-notificaiton` at any time.
+1. Server may send notifications of type `heartbeat` at any time.
+1. Server may send notifications of type `event-notificaiton` at any time.
 
 ##### Security Notes
 
@@ -45,8 +45,8 @@ An example workflow for receiving notifications via websockets is shown below:
 1. Server returns `Parameters` with a `token` and an `expiration`.
 1. Client sends a `bind-with-token` message via websockets, with the token provided by the server. Note: this operation can be repeated concurrently for multiple subscriptions, and serially for continued operation over a single websocket connection.
 1. Server sends one or more `handshake` messages via websockets (one per Subscription included in the token). Note: some servers may additionally send one or more `event-notification` messages at this time (e.g., all messages since last connected, last 'n' messages, etc.). Clients are expected to handle either flow.
-1. Server may send a `heartbeat` message via websockets at any time.
-1. Server may send an `event-notification` message via websockets at any time.
+1. Server may send notifications of type `heartbeat` at any time.
+1. Server may send notifications of type `event-notification` at any time.
 1. Either the server or the client may close the websocket connection.
 
 Note: all notifications sent from the server SHALL be in the format specified by the Subscription it is for (e.g., `contentType` and content fields).
@@ -88,8 +88,8 @@ An example workflow for receiving notifications via email is shown below:
 1. Client creates a Subscription with the channelType set to `email`.
 1. Server responds with a success code and creates the subscription with a state of either `requested` or `active`.
 1. Optional: Server sends a email message to the requested endpoint with a `handshake` notification. If the subscription was set to `requested`, it should be updated to `active` after successfully sending the email (pending additional steps such as user confirmation, etc.).
-1. Server may send an email for a notification of type `heartbeat` at any time.
-1. Server may send an email for a notificaiton of type `event-notificaiton` at any time.
+1. Server may send notifications of type `heartbeat` at any time.
+1. Server may send notifications of type `event-notification` at any time.
 
 ##### Security Notes
 
@@ -111,8 +111,8 @@ An example workflow for receiving notification via FHIR messaging is shown below
 1. Server responds with a success code and creates the subscription with a state of `requested`.
 1. Server sends a FHIR Message to the requested endpoint with a `handshake` notification.
 1. Client Endpoint accepts the Message and returns success.
-1. Server may send a Message containing a notification of type `heartbeat` at any time.
-1. Server may send a Message containing a notificaiton of type `event-notificaiton` at any time.
+1. Server may send notifications of type `heartbeat` at any time.
+1. Server may send notifications of type `event-notification` at any time.
 
 ##### Security Notes
 
