@@ -9,7 +9,7 @@ To receive notifications via HTTP/S POST, a client should request a subscription
 
 To convey an event notification, the server POSTs a `Bundle` to the client's nominated endpoint URL per the format requests in the Subscription. The `content-type` of the POST SHALL match the `contentType` requested during creation of the Subscription. Each `Subscription.header` value SHALL be conveyed as an HTTP request header.
 
-An example workflow for establishing a <code>rest-hook</code> subscription is included below.
+An example workflow for establishing a <code>rest-hook</code> subscription is show below.
 
 <img src="subscription-rest-hook-flow.svg" alt="Diagram showing a workflow for rest-hook subscriptions" style="float:none;" />
 
