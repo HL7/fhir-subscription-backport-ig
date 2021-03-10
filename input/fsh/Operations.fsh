@@ -24,7 +24,7 @@ Description:   "This operation is used to return the current status information 
 * insert OperationCommon
 * system        = false
 * type          = true
-* instance      = false
+* instance      = true
 * code          = #status
 * resource[0]   = #Subscription
 * parameter[0].name          = #ids
