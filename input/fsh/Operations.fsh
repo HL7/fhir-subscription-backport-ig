@@ -5,6 +5,7 @@ RuleSet:       OperationCommon
 * publisher           = "HL7 International - FHIR Infrastructure Work Group"
 * contact[0].telecom[0].system = #url
 * contact[0].telecom[0].value  = "https://hl7.org/Special/committees/fiwg/index.cfm"
+* affectsState        = false
 * version             = "0.1.1"
 * kind                = #operation
 * extension[0].url          = "http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm"
