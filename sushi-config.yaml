@@ -49,10 +49,10 @@ menu:
   Specification:
     Actors: actors.html
     Components: components.html
+    Workflow: workflow.html
     Channels: channels.html
     Payload Types: payloads.html
     Conformance: conformance.html
-    Workflow: workflow.html
     Handling Errors: errors.html
   Safety and Security: safety_security.html
   Artifacts:
