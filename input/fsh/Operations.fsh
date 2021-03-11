@@ -31,7 +31,7 @@ Description:   "This operation is used to return the current status information 
 * parameter[0].use           = #in
 * parameter[0].min           = 0
 * parameter[0].max           = "*"
-* parameter[0].documentation = "At the Resource level, one or more parameters containing one or more comma-delimited FHIR ids of Subscriptions to get status information for.  In the absense of any specified ids, the server returns the status for all Subscriptions available to the caller.  At the Instance level, this parameter is ignored."
+* parameter[0].documentation = "At the Resource level, one or more parameters containing one or more comma-delimited FHIR ids of Subscriptions to get status information for.  In the absence of any specified ids, the server returns the status for all Subscriptions available to the caller.  At the Instance level, this parameter is ignored."
 * parameter[0].type          = #id
 * parameter[1].name          = #return
 * parameter[1].use           = #out
