@@ -88,7 +88,7 @@ Description: "Codes to represent the location in Bundle.entry where URLs for res
 Extension:   BackportNotificationUrlLocation
 Id:          backport-notification-url-location
 Title:       "Backport R5 Subscription Notification URL Location"
-Description: "If present, where to place URLs of resources in notifications."
+Description: "If present, where to place URLs of resources in notifications. If not present, 'full-url' is assumed."
 * ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
 * value[x] only code
 * valueCode from BackportNotificationUrlLocationValueSet
