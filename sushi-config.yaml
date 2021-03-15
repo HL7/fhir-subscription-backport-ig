@@ -50,6 +50,7 @@ menu:
     Actors: actors.html
     Components: components.html
     Channels: channels.html
+    Notifications: notifications.html
     Payload Types: payloads.html
     Conformance: conformance.html
     Workflow: workflow.html
