@@ -32,6 +32,8 @@ While the primary interface for FHIR servers is the FHIR REST API, notifications
 
 A client can declare its intention to receive notifications via Web Sockets by requesting a subscription with the channel type of `websocket`.
 
+Servers SHALL honor the `Subscription.channel.payload` MIME type for notifications for each Subscription. Note that this means a single channel MAY receive notification in multiple formats (e.g., `application/fhir+json` and `application/fhir+xml`) over the same connection. Clients should ensure the settings are correct prior to establishing a connection.
+
 An example workflow for receiving notifications via websockets is shown below:
 
 <img src="subscription-websocket-flow.svg" alt="Diagram showing a workflow for websocket subscriptions" style="float:none;" />
