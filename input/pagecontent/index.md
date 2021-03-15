@@ -51,6 +51,7 @@ The goal of publishing this guide is to define a standard method of back-porting
   * Profile: Subscription Status - [Parameters](StructureDefinition-backport-subscriptionstatus.html)
 
 * Operations
+  * Operation: [$get-ws-binding-token](OperationDefinition-backport-subscription-get-ws-binding-token.html)
   * Operation: [$status](OperationDefinition-Backport-subscription-status.html)
   * Operation: [$topic-list](OperationDefinition-Backport-subscriptiontopic-list.html)
 
