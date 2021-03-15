@@ -28,7 +28,7 @@ HTTP does not provide endpoint verification. It is strongly recommended that imp
 
 #### Websockets 
 
-While the primary interface for FHIR servers is the FHIR REST API, notifications need not occur via REST. Indeed, some subscribers may be unable to expose an outward-facing HTTP server to receive triggered notifications. For example, a pure client-side Web app or mobile app may want to subscribe to a data feed without polling using the /history operation. This can be accomplished using a `websocket` notification channel.
+While the primary interface for FHIR servers is the FHIR REST API, notifications need not occur via REST. Indeed, some subscribers may be unable to expose an outward-facing HTTP server to receive triggered notifications. For example, a pure client-side Web app or mobile app may want to subscribe to a data feed. This can be accomplished using a `websocket` notification channel.
 
 A client can declare its intention to receive notifications via Web Sockets by requesting a subscription with the channel type of `websocket`.
 
