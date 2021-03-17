@@ -34,6 +34,11 @@ A client can declare its intention to receive notifications via Web Sockets by r
 
 Servers SHALL honor the `Subscription.channel.payload` MIME type for notifications for each Subscription. Note that this means a single channel MAY receive notification in multiple formats (e.g., `application/fhir+json` and `application/fhir+xml`) over the same connection. Clients should ensure the settings are correct prior to establishing a connection.
 
+When using a `websocket` channel, connections are governed by ([RFC 6455](https://tools.ietf.org/html/rfc6455)). For example:
+* [URI schemes](https://tools.ietf.org/html/rfc6455#section-3) are prefixed with either `wss://` or `ws://` (secure websockets is preferred)
+* Data is transferred as UTF-8 text according to the [Base Framing Protocol](https://tools.ietf.org/html/rfc6455#section-5.2)
+* Servers and Clients are expected to support the standard [Control Frames](https://tools.ietf.org/html/rfc6455#section-5.5): [Close](https://tools.ietf.org/html/rfc6455#section-5.5.1), [Ping](https://tools.ietf.org/html/rfc6455#section-5.5.2), and [Pong](https://tools.ietf.org/html/rfc6455#section-5.5.3)
+
 An example workflow for receiving notifications via websockets is shown below:
 
 <img src="subscription-websocket-flow.svg" alt="Diagram showing a workflow for websocket subscriptions" style="float:none;" />
