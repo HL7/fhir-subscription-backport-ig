@@ -24,6 +24,11 @@ The goal of publishing this guide is to define a standard method of back-porting
     * Subscriptions
     * Notifications
   * [Workflow](workflow.html)
+  * [Notifications](notifications.html)
+    * Handshake
+    * Heartbeat
+    * Event Notification
+    * Query Status
   * [Channels](channels.html)
     * REST-Hook (http/s POST)
     * Websockets

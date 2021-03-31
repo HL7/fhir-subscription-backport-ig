@@ -51,6 +51,7 @@ menu:
     Components: components.html
     Workflow: workflow.html
     Channels: channels.html
+    Notifications: notifications.html
     Payload Types: payloads.html
     Conformance: conformance.html
     Handling Errors: errors.html
