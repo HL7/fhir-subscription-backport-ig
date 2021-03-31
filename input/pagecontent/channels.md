@@ -22,9 +22,7 @@ An example workflow for establishing a <code>rest-hook</code> subscription is sh
 
 ##### Security Notes
 
-HTTP is neither a secure nor an encrypted channel. It is strongly recommended that production implementations refuse requests to send notifications to URLs using the HTTP protocol (use HTTPS instead).
-
-HTTP does not provide endpoint verification. It is strongly recommended that implementations refuse requests to send notifications to URLs using the HTTP protocol (use HTTPS instead).
+HTTP is neither a secure nor an encrypted channel, nor does it provide endpoint verification. It is strongly recommended that implementations refuse requests to send notifications to URLs using the HTTP protocol (use HTTPS instead).
 
 #### Websockets 
 
