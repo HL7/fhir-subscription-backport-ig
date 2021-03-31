@@ -68,3 +68,32 @@ Description:   "This operation is used to return the current list of R5 Subscrip
 * parameter[1].max           = "1"
 * parameter[1].documentation = "The operation returns a Parameters resource compliant with the \"backport-subscription-topic-list\" profile, representing supported SubscriptionTopics for the server by their canonical URLs."
 * parameter[1].type          = #Parameters
+
+Instance:      OperationBackportSubscriptionGetWsBindingToken
+InstanceOf:    OperationDefinition
+Usage:         #definition
+Title:         "Backport Subscription Get WS Binding Token"
+Description:   "This operation is used to get a token for a websocket client to use in order to bind to one or more subscriptions."
+* id            = "backport-subscription-get-ws-binding-token"
+* name          = "R5SubscriptionGetWsBindingToken"
+* description   = "This operation is used to get a token for a websocket client to use in order to bind to one or more subscriptions."
+* insert OperationCommon
+* system        = false
+* type          = true
+* instance      = true
+* code          = #get-ws-binding-token
+* resource[0]   = #Subscription
+* parameter[0].name          = #ids
+* parameter[0].use           = #in
+* parameter[0].min           = 0
+* parameter[0].max           = "*"
+* parameter[0].documentation = "At the Resource level, one or more parameters containing one or more FHIR ids of Subscriptions to get tokens for. In the absense of any specified ids, the server returns tokens for all Subscriptions available to the caller with a channel-type of websocket. At the Instance level, this parameter is ignored."
+* parameter[0].type          = #id
+* parameter[1].name          = #return
+* parameter[1].use           = #out
+* parameter[1].min           = 1
+* parameter[1].max           = "1"
+* parameter[1].documentation = "The returned Parameters MUST include a valueString named \"token\" and a valueDateTime named \"expiration\". The returned Parameters MAY include a valueString named \"subscriptions\" with a comma-delimited list of subscriptions covered by this token.
+
+Note: as this is the only out parameter, it is a resource, and it has the name 'return', the result of this operation is returned directly as a resource"
+* parameter[1].type          = #Parameters
