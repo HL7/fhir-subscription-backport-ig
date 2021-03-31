@@ -9,7 +9,7 @@ A workflow for creating a subscription is below:
 
 1. Server implements the core functionality required for subscriptions (see [Conformance](conformance.html)).
 1. Server implements one or more `SubscriptionTopics`.  Topic implementation is specific to each defined topic, and will vary between implementations.
-1. Client asks the server for the list of supported `SubscriptionTopics`, via the [Subscription/$topic-list](OperationDefinition-Backport-subscriptiontopic-list.html) operation.
+1. Client asks the server for the list of supported `SubscriptionTopics`, via the [Subscription/$topic-list](OperationDefinition-backport-subscriptiontopic-list.html) operation.
 1. Server responds with a [Canonical URLs](StructureDefinition-backport-subscription-topic-canonical-urls.html) Parameters resource.
 1. Client ensures that the endpoint is prepared (if applicable - see [Channels](channels.html)).
 1. Client requests a Subscription (e.g., via `POST`, `PUT`, etc.).

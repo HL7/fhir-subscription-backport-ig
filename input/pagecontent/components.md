@@ -31,7 +31,7 @@ In FHIR R5, the `SubscriptionTopic` resource is used to define conceptual or com
 
 In order to limit the scope of this Implementation Guide, a definition of `SubscriptionTopic` is not provided.  Since topics are only referenced by their canonical URL, servers using FHIR R4 have no need to implement any of the functionality around topics themselves. E.g., even though the definition itself will not be representable in R4, a canonical URL for an R5 `SubscriptionTopic` can be used.
 
-In order to support discovery of which topics a server supports (a key feature of R5 subscriptions), the [Subscription/$topic-list](OperationDefinition-Backport-subscriptiontopic-list.html) operation has been defined.
+In order to support discovery of which topics a server supports (a key feature of R5 subscriptions), the [Subscription/$topic-list](OperationDefinition-backport-subscriptiontopic-list.html) operation has been defined.
 
 ### Subscriptions
 

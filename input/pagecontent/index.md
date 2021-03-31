@@ -51,8 +51,8 @@ The goal of publishing this guide is to define a standard method of back-porting
   * Profile: Subscription Status - [Parameters](StructureDefinition-backport-subscriptionstatus.html)
 
 * Operations
-  * Operation: [$status](OperationDefinition-Backport-subscription-status.html)
-  * Operation: [$topic-list](OperationDefinition-Backport-subscriptiontopic-list.html)
+  * Operation: [$status](OperationDefinition-backport-subscription-status.html)
+  * Operation: [$topic-list](OperationDefinition-backport-subscriptiontopic-list.html)
 
 * Value Sets and Code Systems
   * Subscription Contents
