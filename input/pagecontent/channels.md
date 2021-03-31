@@ -117,4 +117,4 @@ An example workflow for receiving notification via FHIR messaging is shown below
 
 ##### Security Notes
 
-Servers MAY require that the end-point is white-listed prior to allowing these kinds of subscriptions. Additionally, servers MAY impose authorization/authentication requirements for server to server communication (e.g., certificate pinning, etc.).
+Servers MAY require that the end-point is allow-listed prior to allowing these kinds of subscriptions. Additionally, servers MAY impose authorization/authentication requirements for server to server communication (e.g., certificate pinning, etc.).
