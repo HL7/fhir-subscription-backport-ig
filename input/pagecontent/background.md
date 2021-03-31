@@ -23,7 +23,33 @@ More than a year of focused work resulted in a new design for Subscriptions in F
 1. Changing the `Subscription` resource to add clarity and flexibility.
 1. Restructuring notifications by adding a new `Bundle` type.
 
-The result of the work has been overwhelmingly positive - changes to the mechanism address the issues identified and retain all of the existing functionality.  However, many implementers are concerned that both publication and adoption of FHIR R5 are both in the future.
+The implementer response to these changes has been overwhelmingly positive - changes to the mechanism address the issues identified and retain all of the existing functionality.  However, many implementers are concerned that both publication and adoption of FHIR R5 are both in the future.
+
+### Boundaries and Relationships
+
+#### Relation to FHIRcast
+
+[FHIRcast](http://fhircast.org) is a framework for user-activity synchronization across applications.  FHIRcast and Subscription are both conceptually based [W3 WebSub](https://www.w3.org/TR/websub/), and while the mechanics of two projects look similar, they are fundamentally different projects used to address different use cases.  In particular:
+
+1. What Is Communicated
+    * FHIRcast is primarily concerned with context syncrhonization.
+    * Subscriptions are focused on content synchonization.
+
+1. User Interaction
+    * FHIRcast is designed to be used by multiple applications perhaps with the same user and typically on the same device.
+    * Subscriptions are designed to be used by multiple distinct systems, often outside of a user workflow.
+
+1. Session Duration
+    * FHIRcast is designed around short-lived sessions.
+    * Subscriptions are intented to be long-lived resources.
+
+1. Event Frequency
+    * FHIRcast sends only single-event notifications.
+    * Subscriptions allow servers to batch multiple notifications in high-frequency scenarios.
+
+#### Relation to FHIR Messaging
+
+FHIR [Messaging](http://hl7.org/fhir/messaging.html) is a message-based protocol which can be used for communication. When combining Messaging and Subscriptions, complete notifications are wrapped into Messaging Bundles.  More details are provided on the [channels page](channels.html#fhir-messaging).
 
 ### This IG
 

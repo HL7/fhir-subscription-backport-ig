@@ -23,6 +23,7 @@ The goal of publishing this guide is to define a standard method of back-porting
     * Subscription Topics
     * Subscriptions
     * Notifications
+  * [Workflow](workflow.html)
   * [Notifications](notifications.html)
     * Handshake
     * Heartbeat
@@ -38,7 +39,6 @@ The goal of publishing this guide is to define a standard method of back-porting
     * Id Only
     * Full Resource
   * [Conformance](conformance.html)
-  * [Workflow](workflow.html)
   * [Handling Errors](errors.html)
  
 * [Safety and Security](safety_security.html)
@@ -56,8 +56,9 @@ The goal of publishing this guide is to define a standard method of back-porting
   * Profile: Subscription Status - [Parameters](StructureDefinition-backport-subscriptionstatus.html)
 
 * Operations
-  * Operation: [$status](OperationDefinition-Backport-subscription-status.html)
-  * Operation: [$topic-list](OperationDefinition-Backport-subscriptiontopic-list.html)
+  * Operation: [$get-ws-binding-token](OperationDefinition-backport-subscription-get-ws-binding-token.html)
+  * Operation: [$status](OperationDefinition-backport-subscription-status.html)
+  * Operation: [$topic-list](OperationDefinition-backport-subscriptiontopic-list.html)
 
 * Value Sets and Code Systems
   * Subscription Contents
