@@ -5,6 +5,7 @@ RuleSet:       OperationCommon
 * publisher           = "HL7 International - FHIR Infrastructure Work Group"
 * contact[0].telecom[0].system = #url
 * contact[0].telecom[0].value  = "https://hl7.org/Special/committees/fiwg/index.cfm"
+* affectsState        = false
 * version             = "0.1.1"
 * kind                = #operation
 * extension[0].url          = "http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm"
@@ -18,20 +19,20 @@ InstanceOf:    OperationDefinition
 Usage:         #definition
 Title:         "Backport Subscription Status Operation"
 Description:   "This operation is used to return the current status information about one or more backported R5-Style Subscriptions in R4."
-* id            = "Backport-subscription-status"
+* id            = "backport-subscription-status"
 * name          = "R5SubscriptionStatus"
 * description   = "This operation is used to return the current status information about one or more backported R5-Style Subscriptions in R4."
 * insert OperationCommon
 * system        = false
 * type          = true
-* instance      = false
+* instance      = true
 * code          = #status
 * resource[0]   = #Subscription
 * parameter[0].name          = #ids
 * parameter[0].use           = #in
 * parameter[0].min           = 0
 * parameter[0].max           = "*"
-* parameter[0].documentation = "At the Resource level, one or more parameters containing one or more comma-delimited FHIR ids of Subscriptions to get status information for.  In the absense of any specified ids, the server returns the status for all Subscriptions available to the caller.  At the Instance level, this parameter is ignored."
+* parameter[0].documentation = "At the Resource level, one or more parameters containing one or more comma-delimited FHIR ids of Subscriptions to get status information for.  In the absence of any specified ids, the server returns the status for all Subscriptions available to the caller.  At the Instance level, this parameter is ignored."
 * parameter[0].type          = #id
 * parameter[1].name          = #return
 * parameter[1].use           = #out
@@ -46,7 +47,7 @@ InstanceOf:    OperationDefinition
 Usage:         #definition
 Title:         "Backport Subscription Topic List Operation"
 Description:   "This operation is used to return the current list of R5 SubscriptionTopics in a Backported-R4 environment."
-* id            = "Backport-subscriptiontopic-list"
+* id            = "backport-subscriptiontopic-list"
 * name          = "R5SubscriptionTopicList"
 * description   = "This operation is used to return the current list of R5 SubscriptionTopics in a Backported-R4 environment."
 * insert OperationCommon

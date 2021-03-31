@@ -23,6 +23,7 @@ The goal of publishing this guide is to define a standard method of back-porting
     * Subscription Topics
     * Subscriptions
     * Notifications
+  * [Workflow](workflow.html)
   * [Channels](channels.html)
     * REST-Hook (http/s POST)
     * Websockets
@@ -33,7 +34,6 @@ The goal of publishing this guide is to define a standard method of back-porting
     * Id Only
     * Full Resource
   * [Conformance](conformance.html)
-  * [Workflow](workflow.html)
   * [Handling Errors](errors.html)
  
 * [Safety and Security](safety_security.html)
@@ -52,8 +52,8 @@ The goal of publishing this guide is to define a standard method of back-porting
 
 * Operations
   * Operation: [$get-ws-binding-token](OperationDefinition-backport-subscription-get-ws-binding-token.html)
-  * Operation: [$status](OperationDefinition-Backport-subscription-status.html)
-  * Operation: [$topic-list](OperationDefinition-Backport-subscriptiontopic-list.html)
+  * Operation: [$status](OperationDefinition-backport-subscription-status.html)
+  * Operation: [$topic-list](OperationDefinition-backport-subscriptiontopic-list.html)
 
 * Value Sets and Code Systems
   * Subscription Contents

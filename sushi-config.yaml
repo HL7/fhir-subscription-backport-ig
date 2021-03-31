@@ -49,10 +49,10 @@ menu:
   Specification:
     Actors: actors.html
     Components: components.html
+    Workflow: workflow.html
     Channels: channels.html
     Payload Types: payloads.html
     Conformance: conformance.html
-    Workflow: workflow.html
     Handling Errors: errors.html
   Safety and Security: safety_security.html
   Artifacts:
@@ -63,8 +63,6 @@ menu:
     Value Sets: artifacts.html#5
     Examples: artifacts.html#7
   Downloads: downloads.html
-  Support:
-    FHIR Spec: http://hl7.org/fhir/R4/index.html
 
 # ╭───────────────────────────────────────package-list.json────────────────────────────────────────╮
 # │  To use a provided ig-data/package-list.json file, delete the "history" property below.        │
