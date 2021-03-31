@@ -9,7 +9,7 @@ To convey an event notification, the server POSTs a `Bundle` to the client's nom
 
 When a `Subscription` is created for a REST Hook channel type, the server SHALL set initial status to `requested`, pending verification of the nominated endpoint URL. After a successful `handshake` notification has been sent and accepted, the server SHALL update the status to `active`. Any errors in the initial `handshake` SHALL result in the status being changed to `error`.
 
-An example workflow for establishing a <code>rest-hook</code> subscription is included below.
+An example workflow for establishing a <code>rest-hook</code> subscription is shown below.
 
 <img src="subscription-rest-hook-flow.svg" alt="Diagram showing a workflow for rest-hook subscriptions" style="float:none;" />
 
