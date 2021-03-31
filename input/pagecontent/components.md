@@ -1,30 +1,35 @@
 
 The subscription mechanism is composed of three parts:
 
-* Subscription Topics
-  * Define the **data** and **change** used to trigger notifications
-  * Define the **filters** allowed to clients
-  * Always referenced by canonical URL
-* Subscriptions
-  * Describe a client's request to be notified about events defined by a `SubscriptionTopic`
-  * Set **filters** on events (as defined in the referenced `SubscriptionTopic`)
-  * Describe the `channel` and `endpoint` used to send notifications
-  * Describe the **payload** included in notifications (MIME type, content level, etc.)
-* Notification Bundles
-  * Describe the contents of a notification
-  * Contain zero or more notification **payloads**
-
-Definitionally, a `Subscription` requires the a `SubscriptionTopic` - without a resource describing the change of interest, a `Subscription` has no meaning and will not trigger any client notifications.
-
-While active, a `Subscription` relies on both [Bundle](http://hl7.org/fhir/bundle.html) and [Parameters](http://hl7.org/fhir/parameters.html) for sending notifications.
-
-When using the `Subscription` resource, the FHIR server combines the roles of publisher and information distributer. Some arrangements of the 'publish and subscribe' pattern describe separate agents for the two roles. This specification makes no recommendations towards the internal architecture of server implementations.
+* [Subscription Topic](#subscription-topics)
+  * What is it?
+    * Defines the **data** and **change** used to trigger notifications
+    * Defines the **filters** allowed to clients
+    * Always referenced by canonical URL
+  * How is it defined?
+    * Implicitly defined in R4 (use canonical URLs)
+* [Subscription](#subscriptions)
+  * What is it?
+    * Describes a request to be notified about events defined by a `SubscriptionTopic`
+      * Canonical URL link to a `SubscriptionTopic`
+      * Set **filters** on events (as allowed in the referenced `SubscriptionTopic`)
+    * Describe the `channel` and `endpoint` used to send notifications
+    * Describe the **payload** included in notifications (MIME type, content level, etc.)
+  * How is it defined?
+    * Uses the existing R4 [Subscription](http://hl7.org/fhir/subscription.html) resource with extensions
+* [Notification Bundle](#subscription-notifications)
+  * What is it?
+    * Describes the contents of a notification
+    * Contains zero or more notification **payloads**
+  * How is it defined?
+    * Uses the existing R4 [Bundle](http://hl7.org/fhir/bundle.html) resource (with type of `history`)
+    * Uses the R4 [Parameters](http://hl7.org/fhir/parameters.html) resource to convey subscription information
 
 ### Subscription Topics
 
 In FHIR R5, the `SubscriptionTopic` resource is used to define conceptual or computable events for `Subscription` resources. Conceptually, subscription topics specify: a type of **data** (e.g., `Observation`, `Condition`, etc.), a type of **change** (e.g., create, delete, update, etc.), and a set of allowed **filters**.
 
-In order to limit the scope of this Implementation Guide, `SubscriptionTopic` definitions are not defined here.  Since topics are always referenced by their canonical URL, servers using FHIR R4 have no need to implement any of the functionality around topics themselves.
+In order to limit the scope of this Implementation Guide, a definition of `SubscriptionTopic` is not provided.  Since topics are only referenced by their canonical URL, servers using FHIR R4 have no need to implement any of the functionality around topics themselves. E.g., even though the definition itself will not be representable in R4, a canonical URL for an R5 `SubscriptionTopic` can be used.
 
 In order to support discovery of which topics a server supports (a key feature of R5 subscriptions), the [Subscription/$topic-list](OperationDefinition-Backport-subscriptiontopic-list.html) operation has been defined.
 

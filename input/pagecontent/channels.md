@@ -3,13 +3,13 @@ In FHIR R5, there are four channel types which were common enough to be defined 
 
 #### REST-Hook
 
-When a `Subscription` is created for a REST Hook channel type, the server SHALL set initial status to `requested`, pending verification of the nominated endpoint URL. After a successful `handshake` notification has been sent and accepted, the server SHALL update the status to `active`. Any errors in the initial `handshake` SHALL result in the status being changed to `error`.
-
 To receive notifications via HTTP/S POST, a client should request a subscription with the channel type of `rest-hook` and set the endpoint to the appropriate client URL. Note that this URL must be accessible by the hosting server.
 
 To convey an event notification, the server POSTs a `Bundle` to the client's nominated endpoint URL per the format requests in the Subscription. The `content-type` of the POST SHALL match the `contentType` requested during creation of the Subscription. Each `Subscription.header` value SHALL be conveyed as an HTTP request header.
 
-An example workflow for establishing a <code>rest-hook</code> subscription is show below.
+When a `Subscription` is created for a REST Hook channel type, the server SHALL set initial status to `requested`, pending verification of the nominated endpoint URL. After a successful `handshake` notification has been sent and accepted, the server SHALL update the status to `active`. Any errors in the initial `handshake` SHALL result in the status being changed to `error`.
+
+An example workflow for establishing a <code>rest-hook</code> subscription is shown below.
 
 <img src="subscription-rest-hook-flow.svg" alt="Diagram showing a workflow for rest-hook subscriptions" style="float:none;" />
 
