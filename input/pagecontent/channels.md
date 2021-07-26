@@ -41,7 +41,7 @@ An example workflow for receiving notifications via websockets is shown below:
 1. Server responds with a success code and creates the subscription.
 1. Client requests FHIR server's [CapabilityStatement](http://hl7.org/fhir/capabilitystatement.html) to find the server's websocket URL via the [websocket extension](http://hl7.org/fhir/extension-capabilitystatement-websocket.html).
 1. Server returns its `CapabilityStatement`.
-1. Client connects to the server via websockets (`ws://` or `wss://`).
+1. Client connects to the server via websockets (`wss://` preferred).
 1. Client requests a websocket binding token, by invoking the `$get-ws-binding-token` operation via REST. Note: this call is intended to be repeated as necessary (e.g., prior to a token expiring, a client should request a new one).
 1. Server returns `Parameters` with a `token` and an `expiration`.
 1. Client sends a `bind-with-token` message via websockets, with the token provided by the server. Note: this operation can be repeated concurrently for multiple subscriptions, and serially for continued operation over a single websocket connection.
