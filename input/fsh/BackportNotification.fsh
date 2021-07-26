@@ -102,6 +102,30 @@ Description: "Codes to represent error states on subscriptions."
 * codes from system BackportNotificationErrorCodeSystem
 
 
+Instance:    BackportStatusHandshakeNotification
+InstanceOf:  BackportSubscriptionStatus
+Usage:       #inline
+* id = "b0bf7154-6967-4f32-b0b5-d994dff0e4d2"
+* parameter[subscription].valueReference.reference         = "https://example.org/fhir/r4/Subscription/admission"
+* parameter[topic].valueCanonical                          = "http://hl7.org/SubscriptionTopic/admission"
+* parameter[status].valueCode                              = #active
+* parameter[type].valueCode                                = #handshake
+* parameter[eventsSinceSubscriptionStart].valueUnsignedInt = 0
+* parameter[eventsInNotification].valueUnsignedInt         = 0
+
+
+Instance:    BackportStatusHeartbeatNotification
+InstanceOf:  BackportSubscriptionStatus
+Usage:       #inline
+* id = "2ec7c86b-421a-462d-a1a8-64bdb289c965"
+* parameter[subscription].valueReference.reference         = "https://example.org/fhir/r4/Subscription/admission"
+* parameter[topic].valueCanonical                          = "http://hl7.org/SubscriptionTopic/admission"
+* parameter[status].valueCode                              = #active
+* parameter[type].valueCode                                = #heartbeat
+* parameter[eventsSinceSubscriptionStart].valueUnsignedInt = 309
+* parameter[eventsInNotification].valueUnsignedInt         = 0
+
+
 Instance:    BackportStatusEventNotification
 InstanceOf:  BackportSubscriptionStatus
 Usage:       #inline
@@ -137,6 +161,36 @@ Description: "Example of a backported notification with status content."
 * parameter[type].valueCode                                = #event-notification
 * parameter[eventsSinceSubscriptionStart].valueUnsignedInt = 310
 * parameter[eventsInNotification].valueUnsignedInt         = 1
+
+
+Instance:    BackportNotificationExampleHandshake
+InstanceOf:  BackportSubscriptionNotification
+Usage:       #example
+Title:       "Backported Notification: Handshake"
+Description: "Example of a backported notification of type: 'handshake'."
+* id        = "notification-handshake"
+* type      = #history
+* timestamp = "2020-05-29T11:44:13.1882432-05:00"
+* entry[subscriptionStatus].fullUrl  = "urn:uuid:b0bf7154-6967-4f32-b0b5-d994dff0e4d2"
+* entry[subscriptionStatus].resource = BackportStatusHandshakeNotification
+* entry[subscriptionStatus].request.method = #GET
+* entry[subscriptionStatus].request.url = "https://example.org/fhir/r4/Subscription/admission/$status"
+* entry[subscriptionStatus].response.status = "200"
+
+
+Instance:    BackportNotificationExampleHeartbeat
+InstanceOf:  BackportSubscriptionNotification
+Usage:       #example
+Title:       "Backported Notification: Heartbeat"
+Description: "Example of a backported notification of type: 'heartbeat'."
+* id        = "notification-heartbeat"
+* type      = #history
+* timestamp = "2020-05-29T11:44:13.1882432-05:00"
+* entry[subscriptionStatus].fullUrl  = "urn:uuid:2ec7c86b-421a-462d-a1a8-64bdb289c965"
+* entry[subscriptionStatus].resource = BackportStatusHeartbeatNotification
+* entry[subscriptionStatus].request.method = #GET
+* entry[subscriptionStatus].request.url = "https://example.org/fhir/r4/Subscription/admission/$status"
+* entry[subscriptionStatus].response.status = "200"
 
 
 Instance:    BackportNotificationExampleEmpty
