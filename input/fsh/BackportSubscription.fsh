@@ -4,9 +4,10 @@ Id:          backport-subscription
 Title:       "Backported R5 Subscription"
 Description: "Profile on the R4 Subscription resource to enable R5-style topic-based subscriptions in FHIR R4."
 * ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
-* extension contains BackportTopicCanonical named subscriptionTopic 1..1
-* extension[BackportTopicCanonical] SU MS
-* criteria.extension contains BackportAdditionalCriteria named additionalCriteria 0..*
+* criteria 1..1
+* criteria.extension 0..*
+* criteria.extension contains BackportFilterCriteria named filterCriteria 0..*
+* criteria.extension[BackportFilterCriteria] MS SU
 * channel.payload 1..1
 * channel.payload.extension contains BackportPayloadContent named content 1..1
 * channel.payload.extension[BackportPayloadContent] MS SU
@@ -15,18 +16,10 @@ Description: "Profile on the R4 Subscription resource to enable R5-style topic-b
 * channel.extension contains BackportNotificationUrlLocation named notificationUrlLocation 0..1
 * channel.extension contains BackportMaxCount named maxCount 0..1
 
-Extension:   BackportTopicCanonical
-Id:          backport-topic-canonical
-Title:       "Backport R5 Subscription Topic Canonical"
-Description: "Canonical reference to the subscription topic being subscribed to."
-* ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
-* value[x] only uri
-* valueUri 1..1 MS
-
-Extension:   BackportAdditionalCriteria
-Id:          backport-additional-criteria
-Title:       "Backported R5 Additional Criteria"
-Description: "Criteria for additional resource types."
+Extension:   BackportFilterCriteria
+Id:          backport-filter-criteria
+Title:       "Backported R5 FilterBy Criteria"
+Description: "Criteria for topic-based filtering (filter-by)."
 * ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
 * value[x] only string
 
@@ -106,11 +99,11 @@ Usage:       #example
 Title:       "Backported Subscription: Admission"
 Description: "Example of a backported R5 admissions subscription in R4."
 * id       = "subscription-admission"
-* extension[subscriptionTopic].valueUri                = "http://hl7.org/SubscriptionTopic/admission"
 * status   = #active
 * end      = "2020-12-31T12:00:00Z"
 * reason   = "Example Backported Subscription for Patient Admission"
-* criteria = "Encounter?patient=Patient/123"
+* criteria = "http://hl7.org/SubscriptionTopic/admission"
+* criteria.extension[filterCriteria].valueString       = "Encounter?patient=Patient/123"
 * channel.type                                         = #rest-hook
 * channel.endpoint                                     = "https://example.org/Endpoints/eae3806a-f7fb-4e3f-a14d-c4c58ca9c038"
 * channel.extension[heartbeatPeriod].valueUnsignedInt  = 86400
@@ -127,13 +120,13 @@ Usage:       #example
 Title:       "Backported Subscription: Multi-Resource"
 Description: "Example of a backported R5 subscription in R4 with multiple resources."
 * id       = "subscription-multi-resource"
-* extension[subscriptionTopic].valueUri                = "http://example.org/fhir/SubscriptionTopic/PatientEncounterObservation"
 * status   = #active
 * end      = "2020-12-31T12:00:00Z"
 * reason   = "Example Backported Subscription for Multiple Resources"
-* criteria = "Patient?id=Patient/123"
-* criteria.extension[additionalCriteria].valueString   = "Encounter?patient=Patient/123"
-* criteria.extension[additionalCriteria].valueString   = "Observation?subject=Patient/123"
+* criteria = "http://hl7.org/SubscriptionTopic/admission"
+* criteria.extension[filterCriteria].valueString       = "Patient?id=Patient/123"
+* criteria.extension[filterCriteria].valueString       = "Encounter?patient=Patient/123"
+* criteria.extension[filterCriteria].valueString       = "Observation?subject=Patient/123"
 * channel.type                                         = #rest-hook
 * channel.endpoint                                     = "https://example.org/Endpoints/d7dcc004-808d-452b-8030-3a3a13cd871d"
 * channel.extension[heartbeatPeriod].valueUnsignedInt  = 86400
