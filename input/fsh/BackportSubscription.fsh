@@ -15,6 +15,15 @@ Description: "Profile on the R4 Subscription resource to enable R5-style topic-b
 * channel.extension contains BackportTimeout named timeout 0..1
 * channel.extension contains BackportMaxCount named maxCount 0..1
 
+Extension:   BackportChannelType
+Id:          backport-channel-type
+Title:       "Backported R5 Additional Channel Types"
+Description: "Additional channel types not defined in FHIR R4."
+* ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
+* ^context[0].type = #element
+* ^context[0].expression = "Subscription.channelType"
+* value[x] only Coding
+
 Extension:   BackportFilterCriteria
 Id:          backport-filter-criteria
 Title:       "Backported R5 FilterBy Criteria"
@@ -95,7 +104,6 @@ Description: "Example of a backported R5 admissions subscription in R4."
 * channel.extension[maxCount].valuePositiveInt         = 20
 * channel.payload                                      = #application/fhir+json
 * channel.payload.extension[content].valueCode         = #id-only
-* channel.header[0]                                    = "Authorization: Bearer secret-token-abc-123"
 
 Instance:    BackportSubscriptionExampleMultiResource
 InstanceOf:  BackportSubscription
@@ -117,4 +125,3 @@ Description: "Example of a backported R5 subscription in R4 with multiple resour
 * channel.extension[maxCount].valuePositiveInt         = 20
 * channel.payload                                      = #application/fhir+json
 * channel.payload.extension[content].valueCode         = #id-only
-* channel.header[0]                                    = "Authorization: Bearer secret-token-abc-123"
