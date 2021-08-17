@@ -107,16 +107,26 @@ Description:   "This operation is used to get a token for a websocket client to 
 * code          = #get-ws-binding-token
 * resource[0]   = #Subscription
 * parameter[+].name          = #ids
+* parameter[=].type          = #id
 * parameter[=].use           = #in
 * parameter[=].min           = 0
 * parameter[=].max           = "*"
 * parameter[=].documentation = "At the Resource level, one or more parameters containing one or more FHIR ids of Subscriptions to get tokens for. In the absense of any specified ids, the server returns tokens for all Subscriptions available to the caller with a channel-type of websocket. At the Instance level, this parameter is ignored."
-* parameter[=].type          = #id
-* parameter[+].name          = #return
+* parameter[+].name          = #token
+* parameter[=].type          = #string
 * parameter[=].use           = #out
 * parameter[=].min           = 1
 * parameter[=].max           = "1"
-* parameter[=].documentation = "The returned Parameters MUST include a valueString named \"token\" and a valueDateTime named \"expiration\". The returned Parameters MAY include a valueString named \"subscriptions\" with a comma-delimited list of subscriptions covered by this token.
-
-Note: as this is the only out parameter, it is a resource, and it has the name 'return', the result of this operation is returned directly as a resource"
-* parameter[=].type          = #Parameters
+* parameter[=].documentation = "An access token that a client may use to show authorization during websocket connections."
+* parameter[+].name          = #expiration
+* parameter[=].type          = #dateTime
+* parameter[=].use           = #out
+* parameter[=].min           = 1
+* parameter[=].max           = "1"
+* parameter[=].documentation = "The date and time this token is valid until."
+* parameter[+].name          = #subscriptions
+* parameter[=].type          = #string
+* parameter[=].use           = #out
+* parameter[=].min           = 0
+* parameter[=].max           = "*"
+* parameter[=].documentation = "The subscriptions this token is valid for."
