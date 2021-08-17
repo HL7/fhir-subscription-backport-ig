@@ -5,9 +5,9 @@ As described in [Topic-Based Subscription Components](components.html#subscripti
 The notification bundle has a profile defined in this IG, see [Backported R5 Subscription Notification Bundle](StructureDefinition-backport-subscription-notification.html).
 
 For detailed information about the `SubscriptionStatus` resource, please see the HL7 FHIR website:
-* [SubscriptionStatus Resource](http://hl7.org/fhir/subscriptionstatus.html)
-* [Notification Types](http://hl7.org/fhir/subscriptionstatus.html#notification-types)
-* [Notifications and Errors](http://hl7.org/fhir/subscriptionstatus.html#errors)
+* [SubscriptionStatus Resource](http://hl7.org/fhir/R4/subscriptionstatus.html)
+* [Notification Types](http://hl7.org/fhir/R4/subscriptionstatus.html#notification-types)
+* [Notifications and Errors](http://hl7.org/fhir/R4/subscriptionstatus.html#errors)
 
 ### Event Notifications and What to Include
 

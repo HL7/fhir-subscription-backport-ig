@@ -14,10 +14,54 @@ RuleSet:       OperationCommon
 * extension[1].valueCode    = #trial-use
 
 
+Instance:      OperationBackportSubscriptionEvents
+InstanceOf:    OperationDefinition
+Usage:         #definition
+Title:         "Subscription Events Operation"
+Description:   "This operation is used to return historical events in the backported R5-Style Subscriptions."
+* id            = "backport-subscription-events"
+* name          = "R5SubscriptionEvents"
+* description   = "This operation is used to search for and return events which  notifications backported R5-Style Subscriptions in R4."
+* insert OperationCommon
+* system        = false
+* type          = false
+* instance      = true
+* code          = #events
+* resource[0]   = #Subscription
+
+* parameter[+].name          = #eventsSinceNumber
+* parameter[=].use           = #in
+* parameter[=].min           = 0
+* parameter[=].max           = "1"
+* parameter[=].documentation = "The starting event number, inclusive of this event (lower bound)."
+* parameter[=].type          = #string
+
+* parameter[+].name          = #eventsUntilNumber
+* parameter[=].use           = #in
+* parameter[=].min           = 0
+* parameter[=].max           = "1"
+* parameter[=].documentation = "The ending event number, inclusive of this event (upper bound)."
+* parameter[=].type          = #string
+
+* parameter[+].name          = #content
+* parameter[=].use           = #in
+* parameter[=].min           = 0
+* parameter[=].max           = "1"
+* parameter[=].documentation = "Requested content style of returned data. Codes from backport-content-value-set (e.g., empty, id-only, full-resource). This is a hint to the server what a client would prefer, and MAY be ignored."
+* parameter[=].type          = #code
+
+* parameter[+].name          = #return
+* parameter[=].use           = #out
+* parameter[=].min           = 1
+* parameter[=].max           = "1"
+* parameter[=].documentation = "The bundle type is \"history\". The operation returns a notification bundle, with the first entry being a SubscriptionStatus resource."
+* parameter[=].type          = #Bundle
+
+
 Instance:      OperationBackportSubscriptionStatus
 InstanceOf:    OperationDefinition
 Usage:         #definition
-Title:         "Backport Subscription Status Operation"
+Title:         "Subscription Status Operation"
 Description:   "This operation is used to return the current status information about one or more backported R5-Style Subscriptions in R4."
 * id            = "backport-subscription-status"
 * name          = "R5SubscriptionStatus"
@@ -28,30 +72,30 @@ Description:   "This operation is used to return the current status information 
 * instance      = true
 * code          = #status
 * resource[0]   = #Subscription
-* parameter[0].name          = #ids
-* parameter[0].use           = #in
-* parameter[0].min           = 0
-* parameter[0].max           = "*"
-* parameter[0].documentation = "At the Resource level, one or more parameters containing one or more comma-delimited FHIR ids of Subscriptions to get status information for.  In the absence of any specified ids, the server returns the status for all Subscriptions available to the caller.  At the Instance level, this parameter is ignored."
-* parameter[0].type          = #id
-* parameter[1].name          = #status
-* parameter[1].use           = #in
-* parameter[1].min           = 0
-* parameter[1].max           = "*"
-* parameter[1].documentation = "At the Resource level, a comma-delimited list of Subscription statuses to filter by (e.g., active). In the absence of any specified status values, the server does not filter contents based on the status.  At the Instance level, this parameter is ignored."
-* parameter[1].type          = #id
-* parameter[2].name          = #return
-* parameter[2].use           = #out
-* parameter[2].min           = 1
-* parameter[2].max           = "1"
-* parameter[2].documentation = "The bundle type is \"searchset\". The operation returns a bundle containing one or more Parameters resources, compliant with \"backport-subscriptionstatus\", one per Subscription being queried."
-* parameter[2].type          = #Bundle
+* parameter[+].name          = #ids
+* parameter[=].use           = #in
+* parameter[=].min           = 0
+* parameter[=].max           = "*"
+* parameter[=].documentation = "At the Resource level, one or more parameters containing one or more comma-delimited FHIR ids of Subscriptions to get status information for.  In the absence of any specified ids, the server returns the status for all Subscriptions available to the caller.  At the Instance level, this parameter is ignored."
+* parameter[=].type          = #id
+* parameter[+].name          = #status
+* parameter[=].use           = #in
+* parameter[=].min           = 0
+* parameter[=].max           = "*"
+* parameter[=].documentation = "At the Resource level, a comma-delimited list of Subscription statuses to filter by (e.g., active). In the absence of any specified status values, the server does not filter contents based on the status.  At the Instance level, this parameter is ignored."
+* parameter[=].type          = #id
+* parameter[+].name          = #return
+* parameter[=].use           = #out
+* parameter[=].min           = 1
+* parameter[=].max           = "1"
+* parameter[=].documentation = "The bundle type is \"searchset\". The operation returns a bundle containing one or more SubscriptionStatus resources, one per Subscription being queried."
+* parameter[=].type          = #Bundle
 
 
 Instance:      OperationBackportSubscriptionGetWsBindingToken
 InstanceOf:    OperationDefinition
 Usage:         #definition
-Title:         "Backport Subscription Get WS Binding Token"
+Title:         "Get WS Binding Token for Subscription Operation"
 Description:   "This operation is used to get a token for a websocket client to use in order to bind to one or more subscriptions."
 * id            = "backport-subscription-get-ws-binding-token"
 * name          = "R5SubscriptionGetWsBindingToken"
@@ -62,17 +106,17 @@ Description:   "This operation is used to get a token for a websocket client to 
 * instance      = true
 * code          = #get-ws-binding-token
 * resource[0]   = #Subscription
-* parameter[0].name          = #ids
-* parameter[0].use           = #in
-* parameter[0].min           = 0
-* parameter[0].max           = "*"
-* parameter[0].documentation = "At the Resource level, one or more parameters containing one or more FHIR ids of Subscriptions to get tokens for. In the absense of any specified ids, the server returns tokens for all Subscriptions available to the caller with a channel-type of websocket. At the Instance level, this parameter is ignored."
-* parameter[0].type          = #id
-* parameter[1].name          = #return
-* parameter[1].use           = #out
-* parameter[1].min           = 1
-* parameter[1].max           = "1"
-* parameter[1].documentation = "The returned Parameters MUST include a valueString named \"token\" and a valueDateTime named \"expiration\". The returned Parameters MAY include a valueString named \"subscriptions\" with a comma-delimited list of subscriptions covered by this token.
+* parameter[+].name          = #ids
+* parameter[=].use           = #in
+* parameter[=].min           = 0
+* parameter[=].max           = "*"
+* parameter[=].documentation = "At the Resource level, one or more parameters containing one or more FHIR ids of Subscriptions to get tokens for. In the absense of any specified ids, the server returns tokens for all Subscriptions available to the caller with a channel-type of websocket. At the Instance level, this parameter is ignored."
+* parameter[=].type          = #id
+* parameter[+].name          = #return
+* parameter[=].use           = #out
+* parameter[=].min           = 1
+* parameter[=].max           = "1"
+* parameter[=].documentation = "The returned Parameters MUST include a valueString named \"token\" and a valueDateTime named \"expiration\". The returned Parameters MAY include a valueString named \"subscriptions\" with a comma-delimited list of subscriptions covered by this token.
 
 Note: as this is the only out parameter, it is a resource, and it has the name 'return', the result of this operation is returned directly as a resource"
-* parameter[1].type          = #Parameters
+* parameter[=].type          = #Parameters

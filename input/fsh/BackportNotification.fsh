@@ -13,59 +13,61 @@ Description: "Profile on the R4 Bundle resource to enable R5-style topic-based s
 * entry contains subscriptionStatus 1..1 MS
 * entry[subscriptionStatus].resource 1..1 MS
 * entry[subscriptionStatus].resource only SubscriptionStatus
-* entry.extension contains BackportNotificationFocusResource named focusResource 0..*
-* entry.extension[BackportNotificationFocusResource] MS SU
-* entry.extension contains BackportNotificationIncludedResource named includedResource 0..*
-* entry.extension[BackportNotificationIncludedResource] MS SU
+// * entry.extension contains BackportNotificationFocusResource named focusResource 0..*
+// * entry.extension[BackportNotificationFocusResource] MS SU
+// * entry.extension contains BackportNotificationIncludedResource named includedResource 0..*
+// * entry.extension[BackportNotificationIncludedResource] MS SU
 * obeys backport-notification-bundle-1
 
 Invariant:   backport-notification-bundle-1
-Description: "A notification bundle MUST have the BackportSubscriptionStatus as the first entry"
+Description: "A notification bundle MUST have a SubscriptionStatus as the first entry"
 Expression:  "entry.first().resource.is(SubscriptionStatus)"
 // Expression:  "(entry.first().resource.is(Parameters)) and (entry.first().resource.conformsTo(backport-subscription-status))"
 Severity:    #error
 XPath:       "f:entry[1]/f:resource/f:SubscriptionStatus"
 
-Extension:   BackportNotificationFocusResource
-Id:          subscription-notification-focus-resource
-Title:       "Subscription Notification Focus Resource"
-Description: "Tagging for Bundle entries to indicate a resource is the focus of a specific notification."
-* ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
-* ^context[0].type = #element
-* ^context[0].expression = "Bundle.entry"
-* value[x] only string
+// 2021.08.17 - removed for now - comparing to changes for SubscriptionStatus
+// Extension:   BackportNotificationFocusResource
+// Id:          subscription-notification-focus-resource
+// Title:       "Subscription Notification Focus Resource"
+// Description: "Tagging for Bundle entries to indicate a resource is the focus of a specific notification."
+// * ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
+// // * ^context[0].type = #element
+// // * ^context[0].expression = "Bundle.entry"
+// * value[x] only string
 
-Extension:   BackportNotificationIncludedResource
-Id:          subscription-notification-included-resource
-Title:       "Subscription Notification Included Resource"
-Description: "Tagging for Bundle entries to indicate a resource is included because of a specific notification."
-* ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
-* ^context[0].type = #element
-* ^context[0].expression = "Bundle.entry"
-* value[x] only string
+// 2021.08.17 - removed for now - comparing to changes for SubscriptionStatus
+// Extension:   BackportNotificationIncludedResource
+// Id:          subscription-notification-included-resource
+// Title:       "Subscription Notification Included Resource"
+// Description: "Tagging for Bundle entries to indicate a resource is included because of a specific notification."
+// * ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
+// // * ^context[0].type = #element
+// // * ^context[0].expression = "Bundle.entry"
+// * value[x] only string
 
 CodeSystem:  BackportNotificationTypeCodeSystem
 Id:          backport-notification-type-code-system
 Title:       "R5 Subscription Notification Type Code System"
-Description: "Codes to represent types of notification bundles."
+Description: "!!NOTE!! This has been added to R4B and will be removed when CI builds are available."
 * ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
 * #handshake          "Handshake"           "The notification is being sent as part of the setup or verification of a communications channel."
 * #heartbeat          "Heartbeat"           "The notification is being sent because there has not been a notification generated over an extended period of time."
 * #event-notification "Event Notification"  "The notification is being sent due to an event for the subscriber."
 * #query-status       "Query Status"        "The notification is being sent due to a client request or query for Subscription status."
+* #query-event        "Query Event"         "The notification is being sent due to a client request or query for Subscription events."
 
 ValueSet:    BackportNotificationTypeValueSet
 Id:          backport-notification-type-value-set
 Title:       "R5 Subscription Notification Type Value Set"
-Description: "Codes to represent types of notification bundles."
+Description: "!!NOTE!! This has been added to R4B and will be removed when CI builds are available."
 * ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
 * codes from system BackportNotificationTypeCodeSystem
-
 
 CodeSystem:  BackportNotificationErrorCodeSystem
 Id:          backport-notification-error-code-system
 Title:       "R5 Subscription Error Code System"
-Description: "Codes to represent error states on subscriptions."
+Description: "!!NOTE!! This has been added to R4B and will be removed when CI builds are available."
 * ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
 * #unreachable          "Unreachable"       "The subscription endpoint is currently unreachable."
 * #certificate-error    "Certificate Error" "The subscription endpoint has an invalid certificate."
@@ -76,61 +78,60 @@ Description: "Codes to represent error states on subscriptions."
 ValueSet:    BackportNotificationErrorValueSet
 Id:          backport-notification-error-value-set
 Title:       "R5 Subscription Error Codes Value Set"
-Description: "Codes to represent error states on subscriptions."
+Description: "!!NOTE!! This has been added to R4B and will be removed when CI builds are available."
 * ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
 * codes from system BackportNotificationErrorCodeSystem
 
 
 Instance:    BackportStatusHandshakeNotification
-InstanceOf:  BackportSubscriptionStatus
+InstanceOf:  SubscriptionStatus
 Usage:       #inline
 * id = "b0bf7154-6967-4f32-b0b5-d994dff0e4d2"
 * subscription.reference       = "https://example.org/fhir/r4/Subscription/admission"
 * topic                        = "http://hl7.org/SubscriptionTopic/admission"
 * status                       = #active
 * type                         = #handshake
-* eventsSinceSubscriptionStart = 0
+* eventsSinceSubscriptionStart = "0"
 * eventsInNotification         = 0
 
 
 Instance:    BackportStatusHeartbeatNotification
-InstanceOf:  BackportSubscriptionStatus
+InstanceOf:  SubscriptionStatus
 Usage:       #inline
 * id = "2ec7c86b-421a-462d-a1a8-64bdb289c965"
 * subscription.reference       = "https://example.org/fhir/r4/Subscription/admission"
 * topic                        = "http://hl7.org/SubscriptionTopic/admission"
 * status                       = #active
 * type                         = #heartbeat
-* eventsSinceSubscriptionStart = 309
+* eventsSinceSubscriptionStart = "2"
 * eventsInNotification         = 0
 
 
 Instance:    BackportStatusEventNotification
-InstanceOf:  BackportSubscriptionStatus
+InstanceOf:  SubscriptionStatus
 Usage:       #inline
 * id = "b21e4fae-ce73-45cb-8e37-1e203362b2ae"
 * subscription.reference       = "https://example.org/fhir/r4/Subscription/admission"
 * topic                        = "http://hl7.org/SubscriptionTopic/admission"
 * status                       = #active
 * type                         = #event-notification
-* eventsSinceSubscriptionStart = 310
+* eventsSinceSubscriptionStart = "2"
 * eventsInNotification         = 1
 
-
 Instance:    BackportStatusErrorNotification
-InstanceOf:  BackportSubscriptionStatus
+InstanceOf:  SubscriptionStatus
 Usage:       #inline
 * id = "2efd9e8b-e894-4460-97f1-1d0c09daeb10"
 * subscription.reference       = "https://example.org/fhir/r4/Subscription/admission"
 * topic                        = "http://hl7.org/SubscriptionTopic/admission"
 * status                       = #error
 * type                         = #query-status
-* eventsSinceSubscriptionStart = 315
-* eventsInNotification         = BackportNotificationErrorCodeSystem#unreachable
+* eventsSinceSubscriptionStart = "10"
+* error                        = BackportNotificationErrorCodeSystem#unreachable
 
 
 Instance:    BackportNotificationStatusExample
-InstanceOf:  BackportSubscriptionStatus
+InstanceOf:  SubscriptionStatus
 Title:       "Backported Notification: Status"
 Description: "Example of a backported notification with status content."
 * id       = "notification-status"
@@ -138,7 +139,7 @@ Description: "Example of a backported notification with status content."
 * topic                        = "http://hl7.org/SubscriptionTopic/admission"
 * status                       = #active
 * type                         = #event-notification
-* eventsSinceSubscriptionStart = 310
+* eventsSinceSubscriptionStart = "2"
 * eventsInNotification         = 1
 
 
@@ -200,6 +201,9 @@ Description: "Example of a backported notification with 'id-only' content."
 * entry[subscriptionStatus].request.method = #GET
 * entry[subscriptionStatus].request.url = "https://example.org/fhir/r4/Subscription/admission/$status"
 * entry[subscriptionStatus].response.status = "200"
+* entry[subscriptionStatus].resource.notificationEvent[+].eventNumber = "2"
+* entry[subscriptionStatus].resource.notificationEvent[=].timestamp   = "2020-05-29T11:44:13.1882432-05:00"
+* entry[subscriptionStatus].resource.notificationEvent[=].focus.reference = "https://example.org/fhir/r4/Encounter/551683b3-1477-41d1-b58e-32fe8b0047b0"
 * entry[1].fullUrl = "https://example.org/fhir/r4/Encounter/551683b3-1477-41d1-b58e-32fe8b0047b0"
 * entry[1].request.method = #POST
 * entry[1].request.url    = "Encounter"
@@ -210,10 +214,10 @@ InstanceOf:  Patient
 Usage:       #inline
 * id               = "46db3334-dbf5-43f3-868f-93ae0883cce1"
 * active           = true
-* name[0].use      = #usual
-* name[0].text     = "Example Patient"
-* name[0].family   = "Patient"
-* name[0].given[0] = "Example"
+* name[+].use      = #usual
+* name[=].text     = "Example Patient"
+* name[=].family   = "Patient"
+* name[=].given[0] = "Example"
 
 Instance:    BackportNotificationEncounter
 InstanceOf:  Encounter
@@ -237,7 +241,10 @@ Description: "Example of a backported notification with 'full-resource' content.
 * entry[subscriptionStatus].request.method = #GET
 * entry[subscriptionStatus].request.url = "https://example.org/fhir/r4/Subscription/admission/$status"
 * entry[subscriptionStatus].response.status = "200"
-* entry[1].extension[focusResource].valueString = "310"
+* entry[subscriptionStatus].resource.notificationEvent[+].eventNumber = "2"
+* entry[subscriptionStatus].resource.notificationEvent[=].timestamp   = "2020-05-29T11:44:13.1882432-05:00"
+* entry[subscriptionStatus].resource.notificationEvent[=].focus.reference  = "https://example.org/fhir/r4/Encounter/551683b3-1477-41d1-b58e-32fe8b0047b0"
+// * entry[1].extension[focusResource].valueString = "310"
 * entry[1].fullUrl  = "https://example.org/fhir/r4/Encounter/551683b3-1477-41d1-b58e-32fe8b0047b0"
 * entry[1].resource = BackportNotificationEncounter
 * entry[1].request.method = #POST
@@ -257,13 +264,17 @@ Description: "Example of a backported notification with 'full-resource' content 
 * entry[subscriptionStatus].request.method = #GET
 * entry[subscriptionStatus].request.url = "https://example.org/fhir/r4/Subscription/admission/$status"
 * entry[subscriptionStatus].response.status = "200"
-* entry[1].extension[focusResource].valueString = "310"
+* entry[subscriptionStatus].resource.notificationEvent[+].eventNumber = "2"
+* entry[subscriptionStatus].resource.notificationEvent[=].timestamp   = "2020-05-29T11:44:13.1882432-05:00"
+* entry[subscriptionStatus].resource.notificationEvent[=].focus.reference = "https://example.org/fhir/r4/Encounter/551683b3-1477-41d1-b58e-32fe8b0047b0"
+* entry[subscriptionStatus].resource.notificationEvent[=].additionalContext[+].reference = "https://example.org/fhir/r4/Patient/46db3334-dbf5-43f3-868f-93ae0883cce1"
+// * entry[1].extension[focusResource].valueString = "310"
 * entry[1].fullUrl  = "https://example.org/fhir/r4/Encounter/551683b3-1477-41d1-b58e-32fe8b0047b0"
 * entry[1].resource = BackportNotificationEncounter
 * entry[1].request.method = #POST
 * entry[1].request.url    = "Encounter"
 * entry[1].response.status = "201"
-* entry[2].extension[includedResource].valueString = "310"
+// * entry[2].extension[includedResource].valueString = "310"
 * entry[2].fullUrl  = "https://example.org/fhir/r4/Patient/46db3334-dbf5-43f3-868f-93ae0883cce1"
 * entry[2].resource = BackportNotificationPatient
 * entry[2].request.method = #GET
