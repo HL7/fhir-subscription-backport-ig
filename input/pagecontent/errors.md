@@ -36,3 +36,9 @@ In the above sequence, the subscriber is aware that the `heartbeatPeriod` has el
 ### Recovering from Errors
 
 Clients are responsible for devising an appropriate method for recovering from errors.  Often, this process will include a series or batch of requests that allow a client to know the current state.  For example, an application may need to query all relevant resources for a patient in order to ensure nothing has been missed.  Once an application has returned to a functional state, it should request the subscription is reactivated by updating the `status` to either `requested` or `active` as appropriate.
+
+#### Using the $events operation
+
+Servers MAY choose to support the `$events` operation, as defined in this IG.  The `$events` operation allows clients to request events which have occurred in the past.  Servers which implement the operation MAY use implementation-specific criteria to restrict availability of events (e.g., most recent 10 events, events within the past 30 days, etc.).
+
+During a recovery process, clients MAY try to retrieve missing events via the `$events` operation, which should allow processing to continue as normal.
