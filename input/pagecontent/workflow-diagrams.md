@@ -11,8 +11,8 @@ sequenceDiagram
   S->S: 
   Note over S: Implement one or more<br/>SubscriptionTopics
 
-  C->>S: GET Subscription/$topic-list
-  S-->>C: Parameters listing supported<br/>SubscriptionTopics
+  C->>S: GET .../SubscriptionTopic/
+  S-->>C: Bundle with supported<br/>SubscriptionTopic resources
 
   C->E: Create/Configure/Initialize<br/>Endpoint
   

@@ -1,41 +1,26 @@
 ### Notifications
 
-As described in [Components](components.html#subscription-notifications), **all** notifications use the same structure: a [Bundle](http://hl7.org/fhir/bundle.html), with the `type` of `history`, and a [Parameters](http://hl7.org/fhir/parameters.html) as the first `entry` that contains information about the subscription and notification.
+As described in [Topic-Based Subscription Components](components.html#subscription-notifications), **all** notifications use the same structure: a [Bundle](http://hl7.org/fhir/bundle.html), with the `type` of `history`, and a [SubscriptionStatus](http://hl7.org/fhir/subscriptionstatus.html) as the first `entry` that contains information about the subscription and notification.
 
 The notification bundle has a profile defined in this IG, see [Backported R5 Subscription Notification Bundle](StructureDefinition-backport-subscription-notification.html).
 
-The `Parameters` used to communicate information about a subscription and notification also has a profile defined in this IG, see [Backported R5 Subscription Notification Status](StructureDefinition-backport-subscriptionstatus.html).
+For detailed information about the `SubscriptionStatus` resource, please see the HL7 FHIR website:
+* [SubscriptionStatus Resource](http://hl7.org/fhir/R4/subscriptionstatus.html)
+* [Notification Types](http://hl7.org/fhir/R4/subscriptionstatus.html#notification-types)
+* [Notifications and Errors](http://hl7.org/fhir/R4/subscriptionstatus.html#errors)
 
-Each type of notification message is described below:
+### Event Notifications and What to Include
 
-#### Handshake
+In addition to the `SubscriptionStatus` resource, each notification MAY include additional resources or references to resources (URLs or ids).  The notification shape SHALL be based on the definitions from the `SubscriptionTopic` relevant to the notification:
 
-A `handshake` notification is used to verify a communication channel.  While not required, if a handshake message is sent, it SHALL only be used as the first message when establishing or re-establishing communication (e.g., testing a channel to resume communication).
+#### Focus Resource
 
-Handshake bundles can be identified by looking in the notification bundle, at the notification status parameters: `Bundle.entry[0].resource.parameter:type` of `handshake`.
+Each topic trigger defines a resource type that is the focus for notifications.  For example: [SubscriptionTopic.resourceTrigger.resource](http://hl7.org/fhir/subscriptiontopic-definitions.html#SubscriptionTopic.resourceTrigger.resource) and [SubscriptionTopic.eventTrigger.resource](http://hl7.org/fhir/subscriptiontopic-definitions.html#SubscriptionTopic.eventTrigger.resource).
 
-A handshake notification SHALL NOT contain any events (`eventsInNotification` SHALL be `0`).
+#### Additional Resources
 
-#### Heartbeat
+Servers MAY choose to include additional resources with notifications that may be of interest to clients.  Servers SHALL conform to the paylod configuration of the subscription when adding additional resources (e.g., if the subscription is `id-only`, then only ids of additional resources may be provided; if the subscription is `full-resource`, then full resources should be provided).
 
-A `heartbeat` notification is used by a server to both ensure a communications channel is still valid, and communicate that to a client.  Servers and Clients negotiate the use and timing of heartbeat messages when creating or updating a Subscription (see [Backport R5 Subscription Heartbeat Period](StructureDefinition-backport-heartbeat-period.html)).
+In order to aid servers in determining which resources may be of interest to clients, subscription topics can define a list of included resources (see [SubscriptionTopic.notificationShape.include](http://hl7.org/fhir/subscriptiontopic-definitions.html#SubscriptionTopic.notificationShape.include)).  Included resources are matches based on the type of focus resource specified.
 
-Heartbeat bundles can be identified by looking in the notification bundle, at the notification status parameters: `Bundle.entry[0].resource.parameter:type` of `heartbeat`.
-
-A heartbeat notification SHALL NOT contain any events (`eventsInNotification` SHALL be `0`).
-
-#### Event Notification
-
-The `event-notification` type is used for event notifications.  It is the mechanism for a Server to notify a Client that an event of interest has occured.
-
-Event Notification bundles can be identified by looking in the notification bundle, at the notification status parameters: `Bundle.entry[0].resource.parameter:type` of `event-notification`.
-
-An event notification SHALL be used to communicate one or more events of interest (`eventsInNotification` SHALL be greater than `0`).  Note however, that the notification bundle may or may not contain any additional resources or URLs (as specified by the [payload content](StructureDefinition-backport-payload-content.html)).
-
-#### Query Status
-
-The `query-status` type is used when a Client requests the current status of a Subscription.  It is used to provide status information *only*.
-
-Query Status bundles can be identified by looking in the notification bundle, at the notification status parameters: `Bundle.entry[0].resource.parameter:type` of `query-status`.
-
-A query status bundle SHALL NOT contain any events which have not already been attempted. A Server MAY include events which have been sent or failed to send, at the Server's discretion (e.g., most recent 5 events, etc.).
+Note that the include list MAY contain resources that do not exist in a particular context (e.g., an Encounter with no Observations) or that a user may not be authorized to access (e.g., an Observation tagged as sensitive that cannot be shared with the owner of a subscription).  Servers SHOULD attempt to provide the resources described in the topic, however clients SHALL expect that any resource beyond the focus resource are not guaranteed to be present.
