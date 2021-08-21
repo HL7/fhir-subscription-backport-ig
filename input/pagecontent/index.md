@@ -29,6 +29,7 @@ The goal of publishing this guide is to define a standard method of back-porting
     * Heartbeat
     * Event Notification
     * Query Status
+    * Query Event
   * [Channels](channels.html)
     * REST-Hook (http/s POST)
     * Websockets
@@ -44,21 +45,19 @@ The goal of publishing this guide is to define a standard method of back-porting
 * [Safety and Security](safety_security.html)
 
 * Profiles and Extensions
-  * Profile: [Subscription Topic URL Parameters](StructureDefinition-backport-subscription-topic-canonical-urls.html)
   * Profile: [Subscription](StructureDefinition-backport-subscription.html)
-    * Extension: [Backport Topic Canonical](StructureDefinition-backport-topic-canonical.html)
+    * Extension: [Backport Channel Type](StructureDefinition-backport-channel-type.html)
+    * Extension: [Backport Filter Criteria](StructureDefinition-backport-filter-criteria.html)
     * Extension: [Backport Heartbeat Period](StructureDefinition-backport-heartbeat-period.html)
     * Extension: [Backport Timeout](StructureDefinition-backport-timeout.html)
-    * Extension: [Backport Notification URL Location](StructureDefinition-backport-notification-url-location.html)
     * Extension: [Backport Notification Max Count](StructureDefinition-backport-max-count.html)
     * Extension: [Backport Payload Content](StructureDefinition-backport-payload-content.html)
   * Profile: Notification [Bundle](StructureDefinition-backport-subscription-notification.html)
-  * Profile: Subscription Status - [Parameters](StructureDefinition-backport-subscriptionstatus.html)
 
 * Operations
   * Operation: [$get-ws-binding-token](OperationDefinition-backport-subscription-get-ws-binding-token.html)
   * Operation: [$status](OperationDefinition-backport-subscription-status.html)
-  * Operation: [$topic-list](OperationDefinition-backport-subscriptiontopic-list.html)
+  * Operation: [$events](OperationDefinition-backport-subscription-events.html)
 
 * Value Sets and Code Systems
   * Subscription Contents
