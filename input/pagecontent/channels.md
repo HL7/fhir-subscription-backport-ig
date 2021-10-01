@@ -66,15 +66,18 @@ An example workflow for receiving notifications via websockets is shown below:
 
 1. Client creates a Subscription with the `channelType` set to `websocket`.
 1. Server responds with a success code and creates the subscription.
-1. Client requests FHIR server's [CapabilityStatement](http://hl7.org/fhir/capabilitystatement.html) to find the server's websocket URL via the [websocket extension](http://hl7.org/fhir/extension-capabilitystatement-websocket.html).
-1. Server returns its `CapabilityStatement`.
-1. Client connects to the server via websockets (`wss://` preferred).
 1. Client requests a websocket binding token, by invoking the `$get-ws-binding-token` operation via REST. Note: this call is intended to be repeated as necessary (e.g., prior to a token expiring, a client should request a new one).
-1. Server returns `Parameters` with a `token` and an `expiration`.
+1. Server returns `Parameters` with a `token`,`expiration`, and `websocket-url`.
+1. Client connects to the server via websockets, via the returned `websocket-url` (`wss://` preferred).
 1. Client sends a `bind-with-token` message via websockets, with the token provided by the server. Note: this operation can be repeated concurrently for multiple subscriptions, and serially for continued operation over a single websocket connection.
 1. Server sends one or more `handshake` messages via websockets (one per Subscription included in the token). Note: some servers may additionally send one or more `event-notification` messages at this time (e.g., all messages since last connected, last 'n' messages, etc.). Clients are expected to handle either flow.
 1. Server may send notifications of type `heartbeat` at any time.
 1. Server may send notifications of type `event-notification` at any time.
+1. If the token is expiring soon and the Client wishes to continue receiving notifications, it should invoke the `$get-ws-binding-token` operation via REST.
+1. Server returns `Parameters` with a new `token`, `expiration`, and `websocket-url`.
+1. If the `websocket-url` is different from the existing connection, the Client establishes a new connection to the Client Endpoint.
+1. Client sends a `bind-with-token` message via websockets, with the token provided by the server. Note: this operation can be repeated concurrently for multiple subscriptions, and serially for continued operation over a single websocket connection.
+1. Server sends one or more `handshake` messages via websockets (one per Subscription included in the token). Note: some servers may additionally send one or more `event-notification` messages at this time (e.g., all messages since last connected, last 'n' messages, etc.). Clients are expected to handle either flow.
 1. Either the server or the client may close the websocket connection.
 
 Note: all notifications sent from the server SHALL be in the MIME type specified by the Subscription ([Subscription.channel.payload](http://hl7.org/fhir/subscription-definitions.html#Subscription.channel.payload)).

@@ -130,3 +130,9 @@ Description:   "This operation is used to get a token for a websocket client to 
 * parameter[=].min           = 0
 * parameter[=].max           = "*"
 * parameter[=].documentation = "The subscriptions this token is valid for."
+* parameter[+].name          = #websocket-url
+* parameter[=].type          = #url
+* parameter[=].use           = #out
+* parameter[=].min           = 1
+* parameter[=].max           = "1"
+* parameter[=].documentation = "The URL the client should use to connect to Websockets."
