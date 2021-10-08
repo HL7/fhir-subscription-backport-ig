@@ -1,5 +1,5 @@
 
-The subscription mechanism is composed of three parts:
+The FHIR Topic-Based Subscription Model is composed of three parts:
 
 * [Subscription Topic](#subscription-topics)
   * What is it?
