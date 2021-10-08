@@ -53,15 +53,16 @@
 <page key="artifacts" name="Artifacts Summary"/>
 <page key="background" name="Background"/>
 <page key="channels" name="Channels"/>
-<page key="components" name="Components"/>
 <page key="conformance" name="Conformance"/>
 <page key="downloads" name="Downloads"/>
-<page key="errors" name="Errors"/>
+<page key="errors" name="Handling Errors"/>
 <page key="index" name="Home"/>
 <page key="notifications" name="Notifications"/>
-<page key="payloads" name="Payloads"/>
-<page key="safety_security" name="Safety Security"/>
+<page key="payloads" name="Payload Types"/>
+<page key="safety_security" name="Safety and Security"/>
+<page key="specification" name="Specification"/>
 <page key="toc" name="Table of Contents"/>
+<page key="components" name="Topic-Based Subscription Components"/>
 <page key="workflow" name="Workflow"/>
-<page key="workflow-diagrams" name="Workflow Diagrams"/>
+<page deprecated="true" key="workflow-diagrams" name="Workflow Diagrams"/>
 </specification>

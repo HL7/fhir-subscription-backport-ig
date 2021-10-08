@@ -40,11 +40,40 @@ copyrightYear: 2020+
 releaseLabel: ballot
 jurisdiction: http://unstats.un.org/unsd/methods/m49/m49.htm#001 "World"
 
+pages:
+  index.md:
+    title: Home
+  background.md:
+    title: Background
+  specification.md:
+    title: Specification
+    actors.md:
+      title: Actors
+    components.md:
+      title: Topic-Based Subscription Components 
+    workflow.md:
+      title: Workflow
+    channels.md:
+      title: Channels
+    notifications.md:
+      title: Notifications
+    payloads.md:
+      title: Payload Types
+    conformance.md:
+      title: Conformance
+    errors.md:
+      title: Handling Errors
+  safety_security.md:
+    title: Safety and Security
+  downloads.md:
+    title: Downloads
+
 # ╭────────────────────────────────────────────menu.xml────────────────────────────────────────────╮
 # │  To use a provided ig-data/input/includes/menu.xml file, delete the "menu" property below.     │
 # ╰────────────────────────────────────────────────────────────────────────────────────────────────╯
 menu:
-  IG Home: index.html
+  Contents: toc.html
+  Home: index.html
   Background: background.html
   Specification:
     Actors: actors.html

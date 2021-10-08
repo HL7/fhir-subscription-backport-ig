@@ -5,7 +5,10 @@ This section gives an overview of the workflow for both Servers and Clients to w
 
 A workflow for creating a subscription is below:
 
-<img src="workflow-01.svg" alt="Diagram showing a basic subscription workflow" style="float:none;" />
+<figure>
+  {% include workflow-general.svg %}
+  <figcaption>Sequence diagram of creating a FHIR Subscription</figcaption>
+</figure>
 
 1. Server implements the core functionality required for subscriptions (see [Conformance](conformance.html)).
 1. Server implements one or more [SubscriptionTopic](http://hl7.org/fhir/R4/subscriptiontopic.html) resources.  Implementation is specific to each topic, and will vary between servers.

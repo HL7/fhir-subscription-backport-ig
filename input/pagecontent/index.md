@@ -71,3 +71,38 @@ The goal of publishing this guide is to define a standard method of back-porting
     * [Value Set](ValueSet-backport-notification-url-location-value-set.html)
 
 * [Downloads](downloads.html)
+
+### Authors and Contributors
+
+| **Role** | **Name** | **Organization** |
+| -------- | -------- | ---------------- |
+| Author | Gino Canessa | Microsoft |
+| Contributor | Eric Haas | Health eData |
+| Contributor | Josh Mandel | Microsoft / SMART Health IT |
+| Contributor | Adam Strickland | Epic |
+| Contributor | Jason Vogt | Meditech |
+| FHIR Infrastructure Co-chair | Rick Geimer | Lantana Consulting Group |
+| FHIR Infrastructure Co-chair | Josh Mandel | Microsoft / SMART Health IT |
+| FHIR Infrastructure Co-chair | Lloyd McKenzie | HL7 Canada / Gevity |
+| FHIR Infrastructure Co-chair | Yunwei Wang | MITRE Corporation |
+{: .grid }
+
+The authors gratefully acknowledge the many contributions from numerous users and facilitators who helped shape, mature, debug, and advance Topic-Based Subscriptions:
+
+Avery Allen,
+Steve Atwood,
+Grahame Grieve,
+Bas van den Heuvel,
+Spencer LaGesse,
+Brett Marquard,
+John Moehrke,
+Vassil Peytchev,
+Pascal Pfiffner,
+David Pyke,
+René Spronk,
+Jenni Syed,
+Isaac Vetter,
+and
+Julie Winters
+
+The authors apologize if they have omitted any contributor from this list.

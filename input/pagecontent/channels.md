@@ -41,14 +41,20 @@ When a `Subscription` is created for a REST Hook channel type, the server SHALL 
 
 An example workflow for establishing a <code>rest-hook</code> subscription is shown below.
 
-<img src="subscription-rest-hook-flow.svg" alt="Diagram showing a workflow for rest-hook subscriptions" style="float:none;" />
+<figure>
+  {% include channel-rest-hook.svg %}
+  <figcaption>Diagram showing a possible workflow for rest-hook subscriptions</figcaption>
+</figure>
+
 
 1. Client creates a `Subscription` with the `channelType` set to `rest-hook`.
 1. Server responds with a success code and creates the subscription with a state of `requested`.
 1. Server performs an HTTP POST to the requested endpoint with a `handshake` notification.
 1. Client Endpoint accepts the POST and returns a success HTTP code (e.g., `200`).
 1. Server may send notifications of type `heartbeat` at any time.
+1. Endpoints should respond with appropriate HTTP status codes (e.g., `200`).
 1. Server may send notifications of type `event-notificaiton` at any time.
+1. Endpoints should respond with appropriate HTTP status codes (e.g., `200`).
 
 ##### Security Notes
 
@@ -62,7 +68,10 @@ A client can declare its intention to receive notifications via Web Sockets by r
 
 An example workflow for receiving notifications via websockets is shown below:
 
-<img src="subscription-websocket-flow.svg" alt="Diagram showing a workflow for websocket subscriptions" style="float:none;" />
+<figure>
+  {% include channel-websocket.svg %}
+  <figcaption>Diagram showing a possible workflow for websocket subscriptions</figcaption>
+</figure>
 
 1. Client creates a Subscription with the `channelType` set to `websocket`.
 1. Server responds with a success code and creates the subscription.
@@ -114,11 +123,17 @@ The [payload content](StructureDefinition-backport-payload-content.html) field S
 
 An example workflow for receiving notifications via email is shown below:
 
-<img src="subscription-email-flow.svg" alt="Diagram showing a workflow for email subscriptions" style="float:none;" />
+<figure>
+  {% include channel-email.svg %}
+  <figcaption>Diagram showing a possible workflow for email subscriptions</figcaption>
+</figure>
+
 
 1. Client creates a Subscription with the channelType set to `email`.
-1. Server responds with a success code and creates the subscription with a state of either `requested` or `active`.
-1. Optional: Server sends a email message to the requested endpoint with a `handshake` notification. If the subscription was set to `requested`, it should be updated to `active` after successfully sending the email (pending additional steps such as user confirmation, etc.).
+1. Server may respond with a success code and create the subscription with a state of `active`.
+1. Server may respond with a success code and create the subscription with a state of `requested`.
+1. Server sends an initial message via the specified email server (e.g., verify the request, opt-out instructions, etc.).
+1. Email Server responds with a channel appropriate response code (e.g., `250: OK`).
 1. Server may send notifications of type `heartbeat` at any time.
 1. Server may send notifications of type `event-notification` at any time.
 
