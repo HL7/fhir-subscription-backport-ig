@@ -23,8 +23,9 @@ The FHIR Topic-Based Subscription Model is composed of three parts:
     * Describes the contents of a notification
     * Contains zero or more notification **payloads**
   * How is it defined?
-    * The R4 4.0.0 (or later) [Bundle](http://hl7.org/fhir/bundle.html) resource, type of `history`
-    * The R4 4.1.0 (or later) [SubscriptionStatus](http://hl7.org/fhir/subscriptionstatus.html) resource
+    * The R4 4.0.0 (or later) [Bundle](http://hl7.org/fhir/bundle.html) resource, type of `history`,
+    * one the R4 4.1.0 (or later) [SubscriptionStatus](http://hl7.org/fhir/subscriptionstatus.html) resource,
+    * zero or more additional entries, either URLs (ids) or resources with full contents.
 
 ### Subscription Topics
 
