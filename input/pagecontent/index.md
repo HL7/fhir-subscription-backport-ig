@@ -81,20 +81,18 @@ The goal of publishing this guide is to define a standard method of back-porting
 | Contributor | Josh Mandel | Microsoft / SMART Health IT |
 | Contributor | Adam Strickland | Epic |
 | Contributor | Jason Vogt | Meditech |
-| FHIR Infrastructure Co-chair | Rick Geimer | Lantana Consulting Group |
-| FHIR Infrastructure Co-chair | Josh Mandel | Microsoft / SMART Health IT |
-| FHIR Infrastructure Co-chair | Lloyd McKenzie | HL7 Canada / Gevity |
-| FHIR Infrastructure Co-chair | Yunwei Wang | MITRE Corporation |
 {: .grid }
 
 The authors gratefully acknowledge the many contributions from numerous users and facilitators who helped shape, mature, debug, and advance Topic-Based Subscriptions:
 
 Avery Allen,
 Steve Atwood,
+Rick Geimer,
 Grahame Grieve,
 Bas van den Heuvel,
 Spencer LaGesse,
 Brett Marquard,
+Lloyd McKenzie,
 John Moehrke,
 Vassil Peytchev,
 Pascal Pfiffner,

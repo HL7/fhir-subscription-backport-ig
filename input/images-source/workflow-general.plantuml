@@ -8,32 +8,25 @@ autonumber
 participant "FHIR Server" as S
 participant Client      as C
 
-== Server Implementation (precondition) ==
+group Server Implementation
+  S -\\ S: Implement core Subscription functionality
+  |||
+  S -\\ S: Implement topics and advertise via\n""SubscriptionTopic"" resources
+end
 
-note right of S
-  **1** Implement core Subscription functionality
-end note
+group Client Implementation
+else Client Topic Discovery
+  C->>S: Search for a supported ""SubscriptionTopic"", e.g.:\n""GET .../SubscriptionTopic?[params]""
+  return ""Bundle"" with matching\n""SubscriptionTopic"" resources
 
-note right of S
-  **2** Implement one or more ""SubscriptionTopic"" resources
-end note
+else Client Subscription Request
+  create Endpoint as E
+  C->E: Create, configure, or initialize\nthe necessary Endpoint
+  C->>S: Create a Subscription, e.g.:\n""POST .../Subscription""
+  |||
+end
 
-== Finding a Topic ==
-
-autonumber 3
-
-C->>S: Search for a supported ""SubscriptionTopic"", e.g.:\n""GET .../SubscriptionTopic?[params]""
-return ""Bundle"" with matching\n""SubscriptionTopic"" resources
-
-== Negotiating a Subscription ==
-
-create Endpoint as E
-
-C->E: Create, configure, or initialize\nthe necessary Endpoint
-C->>S: Create a Subscription, e.g.:\n""POST .../Subscription""
-|||
-
-group Accepting or Rejecting 
+group Server Accepting or Rejecting a Subscription
 else Valid Subscription, without Handshake
   S-->>C: Success: status = ""active""
   note right of S: Send notifications...

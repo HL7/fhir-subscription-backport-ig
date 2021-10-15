@@ -21,7 +21,7 @@ Title:         "Subscription Events Operation"
 Description:   "This operation is used to return historical events in the backported R5-Style Subscriptions."
 * id            = "backport-subscription-events"
 * name          = "R5SubscriptionEvents"
-* description   = "This operation is used to search for and return events which  notifications backported R5-Style Subscriptions in R4."
+* description   = "This operation is used to search for and return notifications that have been previously triggered by a topic-based Subscription in R4."
 * insert OperationCommon
 * system        = false
 * type          = false
@@ -54,7 +54,7 @@ Description:   "This operation is used to return historical events in the backpo
 * parameter[=].use           = #out
 * parameter[=].min           = 1
 * parameter[=].max           = "1"
-* parameter[=].documentation = "The bundle type is \"history\". The operation returns a notification bundle, with the first entry being a SubscriptionStatus resource."
+* parameter[=].documentation = "The operation returns a valid notification bundle, with the first entry being a SubscriptionStatus resource. The bundle type is \"history\"."
 * parameter[=].type          = #Bundle
 
 
@@ -65,30 +65,33 @@ Title:         "Subscription Status Operation"
 Description:   "This operation is used to return the current status information about one or more backported R5-Style Subscriptions in R4."
 * id            = "backport-subscription-status"
 * name          = "R5SubscriptionStatus"
-* description   = "This operation is used to return the current status information about one or more backported R5-Style Subscriptions in R4."
+* description   = "This operation is used to return the current status information about one or more topic-based Subscriptions in R4."
 * insert OperationCommon
 * system        = false
 * type          = true
 * instance      = true
 * code          = #status
 * resource[0]   = #Subscription
+
 * parameter[+].name          = #ids
 * parameter[=].use           = #in
 * parameter[=].min           = 0
 * parameter[=].max           = "*"
-* parameter[=].documentation = "At the Resource level, one or more parameters containing one or more comma-delimited FHIR ids of Subscriptions to get status information for.  In the absence of any specified ids, the server returns the status for all Subscriptions available to the caller.  At the Instance level, this parameter is ignored."
-* parameter[=].type          = #id
+* parameter[=].documentation = "At the Instance level, this parameter is ignored.  At the Resource level, one or more parameters containing a FHIR id for a Subscriptions to get status information for. In the absence of any specified ids, the server returns the status for all Subscriptions available to the caller. Multiple values are joined via OR (e.g., \"id1\" OR \"id2\")."
+* parameter[=].type          = #token
+
 * parameter[+].name          = #status
 * parameter[=].use           = #in
 * parameter[=].min           = 0
 * parameter[=].max           = "*"
-* parameter[=].documentation = "At the Resource level, a comma-delimited list of Subscription statuses to filter by (e.g., active). In the absence of any specified status values, the server does not filter contents based on the status.  At the Instance level, this parameter is ignored."
+* parameter[=].documentation = "At the Instance level, this parameter is ignored. At the Resource level, a Subscription status to filter by (e.g., \"active\"). In the absence of any specified status values, the server does not filter contents based on the status. Multiple values are joined via OR (e.g., \"error\" OR \"off\")."
 * parameter[=].type          = #id
+
 * parameter[+].name          = #return
 * parameter[=].use           = #out
 * parameter[=].min           = 1
 * parameter[=].max           = "1"
-* parameter[=].documentation = "The bundle type is \"searchset\". The operation returns a bundle containing one or more SubscriptionStatus resources, one per Subscription being queried."
+* parameter[=].documentation = "The operation returns a bundle containing one or more SubscriptionStatus resources, one per Subscription being queried. The Bundle type is \"searchset\"."
 * parameter[=].type          = #Bundle
 
 
