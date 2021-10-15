@@ -77,7 +77,7 @@ Description:   "This operation is used to return the current status information 
 * parameter[=].use           = #in
 * parameter[=].min           = 0
 * parameter[=].max           = "*"
-* parameter[=].documentation = "At the Instance level, this parameter is ignored.  At the Resource level, one or more parameters containing a FHIR id for a Subscriptions to get status information for. In the absence of any specified ids, the server returns the status for all Subscriptions available to the caller. Multiple values are joined via OR (e.g., \"id1\" OR \"id2\")."
+* parameter[=].documentation = "At the Instance level, this parameter is ignored.  At the Resource level, one or more parameters containing a FHIR id for a Subscription to get status information for. In the absence of any specified ids, the server returns the status for all Subscriptions available to the caller. Multiple values are joined via OR (e.g., \"id1\" OR \"id2\")."
 * parameter[=].type          = #token
 
 * parameter[+].name          = #status
@@ -109,30 +109,35 @@ Description:   "This operation is used to get a token for a websocket client to 
 * instance      = true
 * code          = #get-ws-binding-token
 * resource[0]   = #Subscription
+
 * parameter[+].name          = #ids
 * parameter[=].type          = #id
 * parameter[=].use           = #in
 * parameter[=].min           = 0
 * parameter[=].max           = "*"
-* parameter[=].documentation = "At the Resource level, one or more parameters containing one or more FHIR ids of Subscriptions to get tokens for. In the absense of any specified ids, the server returns tokens for all Subscriptions available to the caller with a channel-type of websocket. At the Instance level, this parameter is ignored."
+* parameter[=].documentation = "At the Instance level, this parameter is ignored. At the Resource level, one or more parameters containing a FHIR id for a Subscription to get a token for. In the absense of any specified ids, the server may either return a token for all Subscriptions available to the caller with a channel-type of websocket or fail the request."
+
 * parameter[+].name          = #token
 * parameter[=].type          = #string
 * parameter[=].use           = #out
 * parameter[=].min           = 1
 * parameter[=].max           = "1"
-* parameter[=].documentation = "An access token that a client may use to show authorization during websocket connections."
+* parameter[=].documentation = "An access token that a client may use to show authorization during a websocket connection."
+
 * parameter[+].name          = #expiration
 * parameter[=].type          = #dateTime
 * parameter[=].use           = #out
 * parameter[=].min           = 1
 * parameter[=].max           = "1"
 * parameter[=].documentation = "The date and time this token is valid until."
+
 * parameter[+].name          = #subscriptions
 * parameter[=].type          = #string
 * parameter[=].use           = #out
 * parameter[=].min           = 0
 * parameter[=].max           = "*"
 * parameter[=].documentation = "The subscriptions this token is valid for."
+
 * parameter[+].name          = #websocket-url
 * parameter[=].type          = #url
 * parameter[=].use           = #out
