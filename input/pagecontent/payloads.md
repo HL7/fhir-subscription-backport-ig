@@ -4,6 +4,12 @@ There are three options available when specifying the contents of a Notification
 
 When deciding which payload type to request, systems SHOULD consider both ease of processing and security of PHI. To mitigate the risk of information leakage, systems SHOULD use the minimum level of detail consistent with the use case. In practice, `id-only` provides a good balance between security and performance for many real-world scenarios.
 
+<figure>
+  {% include payload-comparison.svg %}
+  <figcaption>Diagram showing the different round-trips based on payload types</figcaption>
+</figure>
+
+
 If a server will not honor a payload type (e.g., will not send `full-resource` over HTTP), it SHOULD reject the Subscription request, but the server MAY accept the subscription with modifications.
 
 #### Empty

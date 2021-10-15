@@ -78,14 +78,14 @@ Description:   "This operation is used to return the current status information 
 * parameter[=].min           = 0
 * parameter[=].max           = "*"
 * parameter[=].documentation = "At the Instance level, this parameter is ignored.  At the Resource level, one or more parameters containing a FHIR id for a Subscription to get status information for. In the absence of any specified ids, the server returns the status for all Subscriptions available to the caller. Multiple values are joined via OR (e.g., \"id1\" OR \"id2\")."
-* parameter[=].type          = #token
+* parameter[=].type          = #id
 
 * parameter[+].name          = #status
 * parameter[=].use           = #in
 * parameter[=].min           = 0
 * parameter[=].max           = "*"
 * parameter[=].documentation = "At the Instance level, this parameter is ignored. At the Resource level, a Subscription status to filter by (e.g., \"active\"). In the absence of any specified status values, the server does not filter contents based on the status. Multiple values are joined via OR (e.g., \"error\" OR \"off\")."
-* parameter[=].type          = #id
+* parameter[=].type          = #code
 
 * parameter[+].name          = #return
 * parameter[=].use           = #out
