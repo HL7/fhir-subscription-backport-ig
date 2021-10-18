@@ -1,0 +1,53 @@
+@startuml
+skinparam NoteTextAlignment left
+skinparam Padding 2
+skinparam ParticipantPadding 50
+skinparam LifelineStrategy solid
+
+participant "FHIR Server" as S
+participant Subscirber    as C
+
+group Normal Operation
+  ...
+  S -> C: ""event-notification""\nevent number: **25**
+  return ""200: OK""
+  ...
+  S -> C: ""event-notification""\nevent number: **26**
+  return ""200: OK""
+  ...
+end
+
+note left of C
+  Heartbeat timeout elapses
+  without a notification...
+end note
+
+group Check Subscription Status
+  C -> S: ""GET .../Subscription/<id>/$status""
+  return ""SubscriptionStatus""\n""state: **error**""\n""eventsSinceSubscriptionStart: **28**""
+end
+
+group Recovery Process
+else via FHIR REST
+  C -> S: FHIR Search
+  return ""Bundle"" with matching resources
+  ...
+else via ""$events""
+  C -> S: ""$events"":\nEvents newer than **26**
+  return ""Bundle"" with matching events
+  ...
+
+end
+
+group Re-enable Subscription
+  C -> S:Update Subscription\n""state: active""
+  return ""200: OK""
+end
+
+group Resume Normal Operation
+  S -> C: ""event-notification""\nevent number: **29**
+  return ""200: OK""
+  ...
+end
+
+@enduml

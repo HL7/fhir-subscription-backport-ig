@@ -43,8 +43,6 @@ jurisdiction: http://unstats.un.org/unsd/methods/m49/m49.htm#001 "World"
 pages:
   index.md:
     title: Home
-  background.md:
-    title: Background
   specification.md:
     title: Specification
     actors.md:
@@ -74,7 +72,6 @@ pages:
 menu:
   Contents: toc.html
   Home: index.html
-  Background: background.html
   Specification:
     Actors: actors.html
     Topic-Based Subscription Components: components.html

@@ -51,7 +51,7 @@
 <page key="actors" name="Actors"/>
 <page deprecated="true" key="actors_and_operations" name="Actors and Operations"/>
 <page key="artifacts" name="Artifacts Summary"/>
-<page key="background" name="Background"/>
+<page deprecated="true" key="background" name="Background"/>
 <page key="channels" name="Channels"/>
 <page key="conformance" name="Conformance"/>
 <page key="downloads" name="Downloads"/>

@@ -1,0 +1,46 @@
+@startuml
+skinparam NoteTextAlignment left
+skinparam Padding 2
+skinparam ParticipantPadding 50
+skinparam LifelineStrategy solid
+
+participant "FHIR Server" as S
+participant Subscirber    as C
+
+group Normal Operation
+  ...
+  S -> C: ""event-notification""\nevent number: **21**
+  return ""200: OK""
+  ...
+  S -> C: ""event-notification""\nevent number: **23**
+  return ""200: OK""
+end
+
+note left of C
+  Subscriber determines event **22** is missing
+end note
+
+group Recovery Process
+else via FHIR REST
+  C -> S: FHIR Search
+  return ""Bundle"" with matching resources
+  ...
+else via ""$events""
+  C -> S: ""$events"":\nEvents newer than **21**
+  return ""Bundle"" with matching events
+  ...
+
+end
+
+group Re-enable Subscription
+  C -> S:Update Subscription\n""state: active""
+  return ""200: OK""
+end
+
+group Resume Normal Operation
+  S -> C: ""event-notification""\nevent number: **24**
+  return ""200: OK""
+  ...
+end
+
+@enduml
