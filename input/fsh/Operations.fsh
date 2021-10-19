@@ -73,7 +73,7 @@ Description:   "This operation is used to return the current status information 
 * code          = #status
 * resource[0]   = #Subscription
 
-* parameter[+].name          = #ids
+* parameter[+].name          = #id
 * parameter[=].use           = #in
 * parameter[=].min           = 0
 * parameter[=].max           = "*"
@@ -110,7 +110,7 @@ Description:   "This operation is used to get a token for a websocket client to 
 * code          = #get-ws-binding-token
 * resource[0]   = #Subscription
 
-* parameter[+].name          = #ids
+* parameter[+].name          = #id
 * parameter[=].type          = #id
 * parameter[=].use           = #in
 * parameter[=].min           = 0
@@ -131,7 +131,7 @@ Description:   "This operation is used to get a token for a websocket client to 
 * parameter[=].max           = "1"
 * parameter[=].documentation = "The date and time this token is valid until."
 
-* parameter[+].name          = #subscriptions
+* parameter[+].name          = #subscription
 * parameter[=].type          = #string
 * parameter[=].use           = #out
 * parameter[=].min           = 0

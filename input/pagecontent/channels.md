@@ -151,7 +151,10 @@ The FHIR server hosting the subscription (server) will send FHIR messages to the
 
 An example workflow for receiving notification via FHIR messaging is shown below:
 
-<img src="subscription-message-flow.svg" alt="Diagram showing a workflow for FHIR messaging subscriptions" style="float:none;" />
+<figure>
+  {% include channel-messaging.svg %}
+  <figcaption>Diagram showing a possible workflow for FHIR Messaging subscriptions</figcaption>
+</figure>
 
 1. Client creates a Subscription with the channelType set to `message`.
 1. Server responds with a success code and creates the subscription with a state of `requested`.
