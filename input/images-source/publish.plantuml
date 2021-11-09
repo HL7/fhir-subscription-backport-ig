@@ -1,0 +1,28 @@
+@startuml
+skinparam NoteTextAlignment left
+skinparam Padding 2
+skinparam ParticipantPadding 40
+skinparam LifelineStrategy solid
+autonumber
+
+participant "Originator 1" as O1
+participant "Originator 2" as O2
+participant "FHIR Facade"  as S
+participant "External Endpoint" as E
+
+E -> S : Subscribe:\n""rest-hook""\n""http://example.com/endpoint""
+return OK
+
+O1 -> S : POST ""$publish""\n""event-notification: abc""
+return OK
+
+S -> E : POST: ""http://example.com/endpoint""\n""event-notification""
+return OK
+
+O2 -> S : POST ""$publish""\n""event-notification: abc""
+return OK
+
+S -> E : POST: ""http://example.com/endpoint""\n""event-notification""
+return OK
+
+@enduml
