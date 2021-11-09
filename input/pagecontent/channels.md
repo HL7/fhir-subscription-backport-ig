@@ -95,7 +95,7 @@ Note: all notifications sent from the server SHALL be in the MIME type specified
 
 WebSocket security poses several challenges specific to the channel. When implementing websockets for notifications, please keep in mind the following list of some areas of concern:
 
-* Authentication of WebSockets is not generically interoperable with JWT or other 'Authentication header' protocols - WS and WSS do NOT allow for the required headers.
+* Authentication of WebSockets is not generically interoperable with JWT or other 'Authentication header' protocols - the [JavaScript WebSocket API](https://html.spec.whatwg.org/multipage/web-sockets.html#network) does not include the ability to include them.
 * Given client limitations on concurrent WebSocket connections (commonly 6), it is recommended that a single connection be able to authenticate to multiple Subscription resources.
 * Unlike HTTP/S requests, WebSockets can be long-lived. Because of this, the case of revoking access of an active connection must be considered.
 
