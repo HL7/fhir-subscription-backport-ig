@@ -143,7 +143,7 @@ Email (SMTP) is not a secure channel. Implementers must ensure that any messages
 
 #### FHIR Messaging
 
-There are times when it is desireable to use Subscriptions as a communication channel between FHIR servers. This can be accomplished using a `Subscription` with the channel type of `message`.
+There are times when it is desireable to use Subscriptions as a communication channel between FHIR servers that are connected via Messaging instead of REST. This can be accomplished using a `Subscription` with the channel type of `message`.
 
 To receive notifications via messaging, a client should request a subscription with the channel type of `message` and set the endpoint to the destination FHIR server base URL. Note that this URL must be accessible by the hosting server.
 

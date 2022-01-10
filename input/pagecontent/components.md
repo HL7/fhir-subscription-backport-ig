@@ -67,7 +67,7 @@ Since notifications use `history` type Bundles, notifications need to comply wit
 
 #### Scoping Responsibilities
 
-Unless otherwise specified by a server implementation and channel, the Subscriptions Framework does not involve guaranteed  delivery of notifications. While the Subscriptions Framework is able to support such mechanisms, defining them are beyond the scope of the standard or this guide.
+Unless otherwise specified by a server implementation and channel, the Subscriptions Framework does not involve guaranteed delivery of notifications. While the Subscriptions Framework is able to support such mechanisms, defining them are beyond the scope of the standard or this guide.
 
 Servers SHOULD detect errors and take appropriate action where possible.  In general, this boundary is when the notification is delivered.  For example, during a REST-hook notification, the subscription server can detect errors up until the REST endpoint returns a HTTP status code (e.g., 200).  This does not imply that a client successfully processed (or even received) a notification - simply that the server has sent the notification successfully.
 

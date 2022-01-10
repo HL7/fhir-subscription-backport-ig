@@ -14,6 +14,8 @@ Description: "Profile on the R4 Subscription resource to enable R5-style topic-b
 * channel.extension contains BackportHeartbeatPeriod named heartbeatPeriod 0..1
 * channel.extension contains BackportTimeout named timeout 0..1
 * channel.extension contains BackportMaxCount named maxCount 0..1
+* channel.type.extension contains BackportChannelType named customChannelType 0..1
+* channel.type.extension[BackportChannelType] MS SU
 
 Extension:   BackportChannelType
 Id:          backport-channel-type
@@ -21,7 +23,7 @@ Title:       "Backported R5 Additional Channel Types"
 Description: "Additional channel types not defined in FHIR R4."
 * ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
 * ^context[0].type = #element
-* ^context[0].expression = "Subscription.channelType"
+* ^context[0].expression = "Subscription.channel.type"
 * value[x] only Coding
 
 Extension:   BackportFilterCriteria
