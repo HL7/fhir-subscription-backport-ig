@@ -16,9 +16,13 @@ A workflow for creating a subscription is below:
 1. Server responds with a [searchset Bundle](http://hl7.org/fhir/R4/bundle.html#searchset).
 1. Client ensures that the endpoint is prepared (if applicable - see [Channels](channels.html)).
 1. Client requests a [Subscription](http://hl7.org/fhir/R4/subscription.html) (e.g., via `POST`, `PUT`, etc.).
-1. Server MAY accept the [Subscription](http://hl7.org/fhir/R4/subscription.html) request (e.g., supported channel and payload).
+1. Server MAY accept the [Subscription](http://hl7.org/fhir/R4/subscription.html) request and mark it `active` (e.g., supported channel and payload, no handshake required).
+1. Server MAY accept the [Subscription](http://hl7.org/fhir/R4/subscription.html) request and mark it `requested` (e.g., supported channel and payload, handshake required).
+1. Server sends a `handshake` bundle to the endpoint.
+1. If the Endpoint responds appropriately, per the channel requirements (e.g., in REST an HTTP Success code such as 200), the Server updates the subscription to `active`.
+1. Server MAY accept the [Subscription](http://hl7.org/fhir/R4/subscription.html) request and mark it `requested` (e.g., supported channel and payload, handshake required).
+1. Server sends a `handshake` bundle to the endpoint.
+1. If the `handshake` fails (e.g., connection failure, bad response, etc.), the Server updates the subscription to `error`.
 1. Server MAY reject the [Subscription](http://hl7.org/fhir/R4/subscription.html) request (e.g., unsupported channel type).
-1. If applicable, the server MAY send a `handshake` to the endpoint.
-1. If the Server sends a `handshake`, the endpoint should respond appropriately.
 
 Once the subscription is active, notifications will be sent according to the [Channel](channels.html).  Note that error states may occur, see [Handling Errors](errors.html) for more information.

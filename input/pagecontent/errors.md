@@ -33,7 +33,7 @@ In the above sequence, the subscriber tracks the `eventsSinceSubscriptionStart` 
 The diagram below show how a subscriber can use the `heartbeatPeriod` on a `Subscription` to determine errors which prevent notifications from reaching the endpoint.
 
 <figure>
-  {% include error-missing-event.svg %}
+  {% include error-no-communication.svg %}
   <figcaption>Diagram showing broken communication detection and recovery workflow</figcaption>
 </figure>
 

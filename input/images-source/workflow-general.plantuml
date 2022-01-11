@@ -37,7 +37,7 @@ else Valid Subscription, with Handshake Success
   E-->>S: Success, e.g.:\n""200: OK""
   note right of S
     Update Subscription:
-    ""Subscription.status: error""
+    ""Subscription.status: active""
   end note
   note right of S: Send notifications...
   ...

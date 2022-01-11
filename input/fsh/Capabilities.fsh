@@ -36,6 +36,4 @@ Description:   "CapabilityStatement describing the minimal required capabilities
 * rest[=].resource[=].interaction[+].code = #update
 * rest[=].resource[=].interaction[+].code = #delete
 * rest[=].resource[=].operation[+].name       = "$status"
-* rest[=].resource[=].operation[=].definition = "http://hl7.org/fhir/uv/subscriptions-backport/OperationDefinition/backport-subscription-status"
-* rest[=].resource[+].type                = #SubscriptionTopic
-* rest[=].resource[=].interaction[+].code = #read
+* rest[=].resource[=].operation[=].definition = "http://hl7.org/fhir/uv/subscriptions-backport/OperationDefinition/OperationBackportSubscriptionStatus"
