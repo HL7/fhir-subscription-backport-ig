@@ -2,6 +2,7 @@
 <specification xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ballotUrl="http://hl7.org/fhir/uv/subscriptions-backport/2021Jan" ciUrl="http://build.fhir.org/ig/HL7/fhir-subscription-backport-ig" defaultVersion="0.1.0" defaultWorkgroup="" gitUrl="https://github.com/HL7/fhir-subscription-backport-ig" url="http://hl7.org/fhir/uv/subscriptions-backport">
 <version code="current" url="http://build.fhir.org/ig/HL7/fhir-subscription-backport-ig"/>
 <version code="0.1.0" url="http://hl7.org/fhir/uv/subscriptions-backport/2021Jan"/>
+<version code="1.0.0" deprecated="true" url="http://hl7.org/fhir/uv/subscriptions-backport/2021Jan"/>
 <version code="0.0.1" deprecated="true"/>
 <version code="0.1" deprecated="true"/>
 <artifactPageExtension value="-definitions"/>
@@ -39,10 +40,10 @@
 <artifact id="Subscription/subscription-multi-resource" key="Subscription-subscription-multi-resource" name="Backported Subscription: Multi-Resource"/>
 <artifact id="OperationDefinition/backport-subscription-get-ws-binding-token" key="OperationDefinition-backport-subscription-get-ws-binding-token" name="Get WS Binding Token for Subscription Operation"/>
 <artifact id="CapabilityStatement/backport-subscription-server" key="CapabilityStatement-backport-subscription-server" name="Minimal Backport Subscription Server Capability Statement"/>
-<artifact id="CodeSystem/backport-notification-error-code-system" key="CodeSystem-backport-notification-error-code-system" name="R5 Subscription Error Code System"/>
-<artifact id="ValueSet/backport-notification-error-value-set" key="ValueSet-backport-notification-error-value-set" name="R5 Subscription Error Codes Value Set"/>
-<artifact id="CodeSystem/backport-notification-type-code-system" key="CodeSystem-backport-notification-type-code-system" name="R5 Subscription Notification Type Code System"/>
-<artifact id="ValueSet/backport-notification-type-value-set" key="ValueSet-backport-notification-type-value-set" name="R5 Subscription Notification Type Value Set"/>
+<artifact deprecated="true" id="CodeSystem/backport-notification-error-code-system" key="CodeSystem-backport-notification-error-code-system" name="R5 Subscription Error Code System"/>
+<artifact deprecated="true" id="ValueSet/backport-notification-error-value-set" key="ValueSet-backport-notification-error-value-set" name="R5 Subscription Error Codes Value Set"/>
+<artifact deprecated="true" id="CodeSystem/backport-notification-type-code-system" key="CodeSystem-backport-notification-type-code-system" name="R5 Subscription Notification Type Code System"/>
+<artifact deprecated="true" id="ValueSet/backport-notification-type-value-set" key="ValueSet-backport-notification-type-value-set" name="R5 Subscription Notification Type Value Set"/>
 <artifact id="OperationDefinition/backport-subscription-events" key="OperationDefinition-backport-subscription-events" name="Subscription Events Operation"/>
 <artifact id="OperationDefinition/backport-subscription-status" key="OperationDefinition-backport-subscription-status" name="Subscription Status Operation"/>
 <page key="NA" name="(NA)"/>

@@ -46,41 +46,41 @@ XPath:       "f:entry[1]/f:resource/f:SubscriptionStatus"
 // // * ^context[0].expression = "Bundle.entry"
 // * value[x] only string
 
-CodeSystem:  BackportNotificationTypeCodeSystem
-Id:          backport-notification-type-code-system
-Title:       "R5 Subscription Notification Type Code System"
-Description: "!!NOTE!! This has been added to R4B and will be removed when CI builds are available."
-* ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
-* #handshake          "Handshake"           "The notification is being sent as part of the setup or verification of a communications channel."
-* #heartbeat          "Heartbeat"           "The notification is being sent because there has not been a notification generated over an extended period of time."
-* #event-notification "Event Notification"  "The notification is being sent due to an event for the subscriber."
-* #query-status       "Query Status"        "The notification is being sent due to a client request or query for Subscription status."
-* #query-event        "Query Event"         "The notification is being sent due to a client request or query for Subscription events."
+// CodeSystem:  BackportNotificationTypeCodeSystem
+// Id:          backport-notification-type-code-system
+// Title:       "R5 Subscription Notification Type Code System"
+// Description: "!!NOTE!! This has been added to R4B and will be removed when CI builds are available."
+// * ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
+// * #handshake          "Handshake"           "The notification is being sent as part of the setup or verification of a communications channel."
+// * #heartbeat          "Heartbeat"           "The notification is being sent because there has not been a notification generated over an extended period of time."
+// * #event-notification "Event Notification"  "The notification is being sent due to an event for the subscriber."
+// * #query-status       "Query Status"        "The notification is being sent due to a client request or query for Subscription status."
+// * #query-event        "Query Event"         "The notification is being sent due to a client request or query for Subscription events."
 
-ValueSet:    BackportNotificationTypeValueSet
-Id:          backport-notification-type-value-set
-Title:       "R5 Subscription Notification Type Value Set"
-Description: "!!NOTE!! This has been added to R4B and will be removed when CI builds are available."
-* ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
-* codes from system BackportNotificationTypeCodeSystem
+// ValueSet:    BackportNotificationTypeValueSet
+// Id:          backport-notification-type-value-set
+// Title:       "R5 Subscription Notification Type Value Set"
+// Description: "!!NOTE!! This has been added to R4B and will be removed when CI builds are available."
+// * ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
+// * codes from system BackportNotificationTypeCodeSystem
 
-CodeSystem:  BackportNotificationErrorCodeSystem
-Id:          backport-notification-error-code-system
-Title:       "R5 Subscription Error Code System"
-Description: "!!NOTE!! This has been added to R4B and will be removed when CI builds are available."
-* ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
-* #unreachable          "Unreachable"       "The subscription endpoint is currently unreachable."
-* #certificate-error    "Certificate Error" "The subscription endpoint has an invalid certificate."
-* #timeout              "Timeout"           "An attempt to send a notification has timed out."
-* #processing           "Processing Error"  "An error occurred while processing the event or notification."
-* #unathorized          "Unauthorized"      "The server has determined the endpoint is not authorized to receive notifications."
+// CodeSystem:  BackportNotificationErrorCodeSystem
+// Id:          backport-notification-error-code-system
+// Title:       "R5 Subscription Error Code System"
+// Description: "!!NOTE!! This has been added to R4B and will be removed when CI builds are available."
+// * ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
+// * #unreachable          "Unreachable"       "The subscription endpoint is currently unreachable."
+// * #certificate-error    "Certificate Error" "The subscription endpoint has an invalid certificate."
+// * #timeout              "Timeout"           "An attempt to send a notification has timed out."
+// * #processing           "Processing Error"  "An error occurred while processing the event or notification."
+// * #unathorized          "Unauthorized"      "The server has determined the endpoint is not authorized to receive notifications."
 
-ValueSet:    BackportNotificationErrorValueSet
-Id:          backport-notification-error-value-set
-Title:       "R5 Subscription Error Codes Value Set"
-Description: "!!NOTE!! This has been added to R4B and will be removed when CI builds are available."
-* ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
-* codes from system BackportNotificationErrorCodeSystem
+// ValueSet:    BackportNotificationErrorValueSet
+// Id:          backport-notification-error-value-set
+// Title:       "R5 Subscription Error Codes Value Set"
+// Description: "!!NOTE!! This has been added to R4B and will be removed when CI builds are available."
+// * ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
+// * codes from system BackportNotificationErrorCodeSystem
 
 
 Instance:    BackportStatusHandshakeNotification
@@ -127,7 +127,8 @@ Usage:       #inline
 * status                       = #error
 * type                         = #query-status
 * eventsSinceSubscriptionStart = "10"
-* error                        = BackportNotificationErrorCodeSystem#unreachable
+* error                        = http://hl7.org/fhir/CodeSystem/subscription-error#no-response
+// * error                        = BackportNotificationErrorCodeSystem#unreachable
 
 
 Instance:    BackportNotificationStatusExample
