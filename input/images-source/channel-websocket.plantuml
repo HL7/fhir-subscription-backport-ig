@@ -21,7 +21,7 @@ else Client binds via initial token
 
   C->E: Connect\n""wss://example.org/fhirR4ws""
 
-  C->E: ""bind-with-token: token-abc""
+  C->E: ""bind-with-token token-abc""
   return Bundle:\n""            Bundle.type: history""\n""SubscriptionStatus.type: handshake""
 
 else Sever sends heartbeat
