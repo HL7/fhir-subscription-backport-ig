@@ -10,7 +10,8 @@
       "desc": "Continuous Integration Build (latest in version control)",
       "path": "http://build.fhir.org/ig/HL7/fhir-subscription-backport-ig",
       "status": "ci-build",
-      "current": true
+      "current": true,
+      "fhirversion": "4.3.0-snapshot1"
     },
     {
       "version": "0.1.0",
@@ -20,6 +21,15 @@
       "status": "ballot",
       "sequence": "STU 1",
       "fhirversion": "4.0.1"
+    },
+    {
+      "version": "1.0.0",
+      "date": "2020-12-09",
+      "desc": "Draft Publication",
+      "path": "http://hl7.org/fhir/uv/subscriptions-backport/2021Jan",
+      "status": "ballot",
+      "sequence": "STU 1",
+      "fhirversion": "4.3.0-snapshot1"
     }
   ]
 }

@@ -10,7 +10,7 @@ participant "Client"                    as C
 participant "Client Endpoint\n(HTTP/S)" as E
 
 group Subscription Negotiation
-  C->>S: Create Subscription\n""channelType: rest-hook""
+  C->>S: Create Subscription\n""channel.type: rest-hook""
   return Success\n""Subscription.status: requested""
 
   S->>E: HTTP POST - Handshake\n""Bundle:""\n""            Bundle.type: history""\n""SubscriptionStatus.type: handshake""

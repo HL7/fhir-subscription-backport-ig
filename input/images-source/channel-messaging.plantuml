@@ -10,7 +10,7 @@ participant "Client"                    as C
 participant "Client FHIR Server\nREST Endpoint" as E
 
 group Subscription Negotiation
-  C->S: Create Subscription\n""channelType: message""
+  C->S: Create Subscription\n""channel.type: message""
   return Success\n""Subscription.status: requested""
 
   S->>E: POST ""$process-message"" (handshake)\n""Bundle:""\n""  Bundle.type: message""\n""  entry[1]: Bundle: subscription-notification""\n""    SubscriptionStatus.type: handshake""

@@ -92,7 +92,6 @@ Usage:       #inline
 * status                       = #active
 * type                         = #handshake
 * eventsSinceSubscriptionStart = "0"
-* eventsInNotification         = 0
 
 
 Instance:    BackportStatusHeartbeatNotification
@@ -104,7 +103,6 @@ Usage:       #inline
 * status                       = #active
 * type                         = #heartbeat
 * eventsSinceSubscriptionStart = "2"
-* eventsInNotification         = 0
 
 
 Instance:    BackportStatusEventNotification
@@ -116,7 +114,6 @@ Usage:       #inline
 * status                       = #active
 * type                         = #event-notification
 * eventsSinceSubscriptionStart = "2"
-* eventsInNotification         = 1
 
 Instance:    BackportStatusErrorNotification
 InstanceOf:  SubscriptionStatus
@@ -141,7 +138,6 @@ Description: "Example of a backported notification with status content."
 * status                       = #active
 * type                         = #event-notification
 * eventsSinceSubscriptionStart = "2"
-* eventsInNotification         = 1
 
 
 Instance:    BackportNotificationExampleHandshake

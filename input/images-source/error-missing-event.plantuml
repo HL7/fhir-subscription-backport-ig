@@ -9,38 +9,33 @@ participant Subscriber    as C
 
 group Normal Operation
   ...
-  S -> C: ""event-notification""\nevent number: **21**
+  S -> C: Notification ""Bundle""\n""type: **event-notification**""\n""eventsSinceSubscriptionStart:  **21**""\n""notificationEvent.eventNumber: **21**""\n
   return ""200: OK""
   ...
-  S -> C: ""event-notification""\nevent number: **23**
+  S -> C: Notification ""Bundle""\n""type: **event-notification**""\n""eventsSinceSubscriptionStart:  **23**""\n""notificationEvent.eventNumber: **23**""\n
   return ""200: OK""
+  ...
 end
 
 note left of C
   Subscriber determines event **22** is missing
 end note
 
-group Recovery Process
-else via FHIR REST
-  C -> S: FHIR Search
-  return ""Bundle"" with matching resources
+group Subscriber Recovery Process
   ...
-else via ""$events""
-  C -> S: ""$events"":\nEvents newer than **21**
-  return ""Bundle"" with matching events
+  C <-> S: FHIR API calls...
   ...
-
 end
 
 group Re-enable Subscription
-  C -> S:Update Subscription\n""state: active""
-  return ""200: OK""
-end
-
-group Resume Normal Operation
-  S -> C: ""event-notification""\nevent number: **24**
+  C -> S:Update Subscription\n""status: requested""
   return ""200: OK""
   ...
 end
 
+group Resume Normal Operation
+  S -> C: Notification ""Bundle""\n""type: **event-notification**""\n""eventsSinceSubscriptionStart:  **24**""\n""notificationEvent.eventNumber: **24**""\n
+  return ""200: OK""
+  ...
+end
 @enduml

@@ -11,7 +11,7 @@ participant "Email Server\n(SMTP/S, Direct)" as E
 
 
 group Negotiating a Subscription
-  C->S: Create Subscription\n""channelType: email""
+  C->S: Create Subscription\n""channel.type: email""
 else Without handshake
   S-->C: Success\n""Subscription.status: active""
   |||

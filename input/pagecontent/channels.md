@@ -1,5 +1,5 @@
 
-In FHIR R5, there are four channel types which were common enough to be defined in the specification (additional channel types can be defined externally).  In this Implementation Guide, we define those same channel types; additional channel definitions may be defined by other implementations or Implementation Guides.
+In FHIR R5, there are four channel types which were common enough to be defined in the specification, along with the ability to define additional channel types externally.  In this Implementation Guide, we define those same channel types and include the ability to define additional channel by other implementations or Implementation Guides.
 
 #### Deciding On Channel Type
 
@@ -15,7 +15,7 @@ Websockets are unique in the pre-defined channel types in being the only channel
 
 ##### Email
 
-The Email channel is the only channel that could contest REST in non-FHIR implementations.  That said, Email communication is often high-latency and is typically used for communication to individuals - not applications.  Email channels are particularly useful in the context of these non-application use cases, such as public health notifications.  For example, if a public health agency does not have the ability or desire to build a custom RESTful solution (e.g., creating and maintaining an endpoint to receive notifications, as well as software to consume those notifications), it is straightforward to map notifications to email addresses or aliases.
+The Email channel is the only channel that could contest REST in popularity of non-FHIR implementations.  That said, Email communication is often high-latency and is typically used for communication to individuals - not applications.  Email channels are particularly useful in the context of these non-application use cases, such as public health notifications.  For example, if a public health agency does not have the ability or desire to build a custom RESTful solution (e.g., creating and maintaining an endpoint to receive notifications, as well as software to consume those notifications), it is straightforward to map notifications to email addresses or aliases.
 
 ##### FHIR Messaging
 
@@ -34,7 +34,7 @@ To receive notifications via HTTP/S POST, a client should request a subscription
 
 To convey an event notification, the server POSTs a `Bundle` to the client's nominated endpoint URL per the format requests in the Subscription:
 * The `content-type` of the POST SHALL match the MIME type on the Subscription ([Subscription.channel.payload](http://hl7.org/fhir/subscription-definitions.html#Subscription.channel.payload)).
-* Each [Subscription.header](http://hl7.org/fhir/subscription-definitions.html#Subscription.channel.header) value SHALL be conveyed as an HTTP request header.
+* Each [Subscription.channel.header](http://hl7.org/fhir/subscription-definitions.html#Subscription.channel.header) value SHALL be conveyed as an HTTP request header.
 * The bundle SHALL comply with the [Backported R5 Notification Bundle Profile](StructureDefinition-backport-subscription-notification.html).
 
 When a `Subscription` is created for a REST Hook channel type, the server SHALL set initial status to `requested`, pending verification of the nominated endpoint URL. After a successful `handshake` notification has been sent and accepted, the server SHALL update the status to `active`. Any errors in the initial `handshake` SHALL result in the status being changed to `error`.
@@ -47,7 +47,7 @@ An example workflow for establishing a <code>rest-hook</code> subscription is sh
 </figure>
 
 
-1. Client creates a `Subscription` with the `channelType` set to `rest-hook`.
+1. Client creates a `Subscription` with the `channel.type` set to `rest-hook`.
 1. Server responds with a success code and creates the subscription with a state of `requested`.
 1. Server performs an HTTP POST to the requested endpoint with a `handshake` notification.
 1. Client Endpoint accepts the POST and returns a success HTTP code (e.g., `200`).
@@ -73,7 +73,7 @@ An example workflow for receiving notifications via websockets is shown below:
   <figcaption>Diagram showing a possible workflow for websocket subscriptions</figcaption>
 </figure>
 
-1. Client creates a Subscription with the `channelType` set to `websocket`.
+1. Client creates a Subscription with the `channel.type` set to `websocket`.
 1. Server responds with a success code and creates the subscription.
 1. Client requests a websocket binding token, by invoking the `$get-ws-binding-token` operation via REST. Note: this call is intended to be repeated as necessary (e.g., prior to a token expiring, a client should request a new one).
 1. Server returns `Parameters` with a `token`,`expiration`, and `websocket-url`.
@@ -89,7 +89,11 @@ An example workflow for receiving notifications via websockets is shown below:
 1. Server sends one or more `handshake` messages via websockets (one per Subscription included in the token). Note: some servers may additionally send one or more `event-notification` messages at this time (e.g., all messages since last connected, last 'n' messages, etc.). Clients are expected to handle either flow.
 1. Either the server or the client may close the websocket connection.
 
-Note: all notifications sent from the server SHALL be in the MIME type specified by the Subscription ([Subscription.channel.payload](http://hl7.org/fhir/subscription-definitions.html#Subscription.channel.payload)).
+Notes:
+
+* Notifications sent from the server SHALL be in the MIME Type specified by the [Subscription.channel.payload](http://hl7.org/fhir/subscription-definitions.html#Subscription.channel.payload), however, if notifications are requested for multiple subscriptions with different MIME types, the server MAY choose to send all notifications in a single MIME type.
+* Notifications SHALL conform to the content level specified by the `http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-payload-content` extension.
+* When receiving notifications, a connected websocket client has no responsibilities beyond reading the message (e.g., there is no acknowledgement message).
 
 ##### Security Notes
 
@@ -129,7 +133,7 @@ An example workflow for receiving notifications via email is shown below:
 </figure>
 
 
-1. Client creates a Subscription with the channelType set to `email`.
+1. Client creates a Subscription with the `channel.type` set to `email`.
 1. Server may respond with a success code and create the subscription with a state of `active`.
 1. Server may respond with a success code and create the subscription with a state of `requested`.
 1. Server sends an initial message via the specified email server (e.g., verify the request, opt-out instructions, etc.).
@@ -142,6 +146,10 @@ An example workflow for receiving notifications via email is shown below:
 Email (SMTP) is not a secure channel. Implementers must ensure that any messages containing PHI have been secured according to their policy requirements (e.g., use of a system such as [Direct](http://directproject.org/)).
 
 #### FHIR Messaging
+
+{:.stu-note}
+Warning: This section is considered draft; feedback from topic authors is requested to refine the message-based channel.
+
 
 There are times when it is desireable to use Subscriptions as a communication channel between FHIR servers that are connected via Messaging instead of REST. This can be accomplished using a `Subscription` with the channel type of `message`.
 
@@ -156,7 +164,7 @@ An example workflow for receiving notification via FHIR messaging is shown below
   <figcaption>Diagram showing a possible workflow for FHIR Messaging subscriptions</figcaption>
 </figure>
 
-1. Client creates a Subscription with the channelType set to `message`.
+1. Client creates a Subscription with the `channel.type` set to `message`.
 1. Server responds with a success code and creates the subscription with a state of `requested`.
 1. Server sends a FHIR Message to the requested endpoint with a `handshake` notification.
 1. Client Endpoint accepts the Message and returns success.

@@ -5,9 +5,9 @@ As described in [Topic-Based Subscription Components](components.html#subscripti
 The notification bundle has a profile defined in this IG, see [Backported R5 Subscription Notification Bundle](StructureDefinition-backport-subscription-notification.html).
 
 For detailed information about the `SubscriptionStatus` resource, please see the HL7 FHIR website:
-* [SubscriptionStatus Resource](http://hl7.org/fhir/R4/subscriptionstatus.html)
-* [Notification Types](http://hl7.org/fhir/R4/subscriptionstatus.html#notification-types)
-* [Notifications and Errors](http://hl7.org/fhir/R4/subscriptionstatus.html#errors)
+* [SubscriptionStatus Resource](http://hl7.org/fhir/subscriptionstatus.html)
+* [Notification Types](http://hl7.org/fhir/subscriptionstatus.html#notification-types)
+* [Notifications and Errors](http://hl7.org/fhir/subscriptionstatus.html#errors)
 
 ### Event Notifications and What to Include
 
@@ -19,7 +19,7 @@ Each topic trigger defines a resource type that is the focus for notifications. 
 
 #### Additional Resources
 
-Servers MAY choose to include additional resources with notifications that may be of interest to clients.  Servers SHALL conform to the paylod configuration of the subscription when adding additional resources (e.g., if the subscription is `id-only`, then only ids of additional resources may be provided; if the subscription is `full-resource`, then full resources should be provided).
+Servers MAY choose to include additional resources with notifications that may be of interest to clients.  Servers SHALL conform to the payload configuration of the subscription when adding additional resources (e.g., if the subscription is `id-only`, then only ids of additional resources may be provided; if the subscription is `full-resource`, then full resources should be provided).
 
 In order to aid servers in determining which resources may be of interest to clients, subscription topics can define a list of included resources (see [SubscriptionTopic.notificationShape.include](http://hl7.org/fhir/subscriptiontopic-definitions.html#SubscriptionTopic.notificationShape.include)).  Included resources are matches based on the type of focus resource specified.
 

@@ -10,7 +10,7 @@ participant "Client"                    as C
 participant "FHIR Server\nWebsocket Endpoint" as E
 
 group Subscription Negotiation
-  C->S: Create Subscription\n""channelType: websocket""
+  C->S: Create Subscription\n""channel.type: websocket""
   return Success\n""Subscription.status: active""
 end
 

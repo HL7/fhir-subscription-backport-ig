@@ -8,6 +8,7 @@
       "type": "shell",
       "command": "./_genonce.sh",
       "windows": {
+        // "command": "sushi"
         "command": ".\\_genonce.bat"
       },
       "options": {

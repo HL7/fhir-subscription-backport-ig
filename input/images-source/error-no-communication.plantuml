@@ -9,10 +9,10 @@ participant Subscriber    as C
 
 group Normal Operation
   ...
-  S -> C: ""event-notification""\nevent number: **25**
+  S -> C: Notification ""Bundle""\n""type: **event-notification**""\n""eventsSinceSubscriptionStart:  **25**""\n""notificationEvent.eventNumber: **25**""\n
   return ""200: OK""
   ...
-  S -> C: ""event-notification""\nevent number: **26**
+  S -> C: Notification ""Bundle""\n""type: **event-notification**""\n""eventsSinceSubscriptionStart:  **26**""\n""notificationEvent.eventNumber: **26**""\n
   return ""200: OK""
   ...
 end
@@ -24,30 +24,24 @@ end note
 
 group Check Subscription Status
   C -> S: ""GET .../Subscription/<id>/$status""
-  return ""SubscriptionStatus""\n""state: **error**""\n""eventsSinceSubscriptionStart: **28**""
+  return ""SubscriptionStatus""\n""status: **error**""\n""eventsSinceSubscriptionStart: **28**""
 end
 
 group Recovery Process
-else via FHIR REST
-  C -> S: FHIR Search
-  return ""Bundle"" with matching resources
   ...
-else via ""$events""
-  C -> S: ""$events"":\nEvents newer than **26**
-  return ""Bundle"" with matching events
+  C <-> S: FHIR API calls...
   ...
-
 end
 
 group Re-enable Subscription
-  C -> S:Update Subscription\n""state: active""
-  return ""200: OK""
-end
-
-group Resume Normal Operation
-  S -> C: ""event-notification""\nevent number: **29**
+  C -> S:Update Subscription\n""status: requested""
   return ""200: OK""
   ...
 end
 
+group Resume Normal Operation
+  S -> C: Notification ""Bundle""\n""type: **event-notification**""\n""eventsSinceSubscriptionStart:  **29**""\n""notificationEvent.eventNumber: **29**""\n
+  return ""200: OK""
+  ...
+end
 @enduml
