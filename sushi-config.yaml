@@ -89,8 +89,8 @@ menu:
     Extensions: artifacts.html#4
     Value Sets: artifacts.html#5
     Examples: artifacts.html#7
-  Downloads: downloads.html
   Support:
+    Downloads: downloads.html
     Known Implementations: https://confluence.hl7.org/display/FHIRI/FHIR+Subscriptions
 
 # ╭───────────────────────────────────────package-list.json────────────────────────────────────────╮
