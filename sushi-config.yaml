@@ -85,10 +85,11 @@ menu:
   Artifacts:
     Capability Statements: artifacts.html#1
     Operations: artifacts.html#2
-    Profiles: artifacts.html#3
-    Extensions: artifacts.html#4
-    Value Sets: artifacts.html#5
-    Examples: artifacts.html#7
+    Search Parameters: artifacts.html#3
+    Profiles: artifacts.html#4
+    Extensions: artifacts.html#5
+    Value Sets: artifacts.html#6
+    Examples: artifacts.html#8
   Support:
     Downloads: downloads.html
     Known Implementations: https://confluence.hl7.org/display/FHIRI/FHIR+Subscriptions
