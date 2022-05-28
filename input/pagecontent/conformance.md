@@ -3,8 +3,14 @@ This page defines how CapabilityStatements are used and the expectations for man
 
 Note that the conformance verbs - SHALL, SHOULD, MAY - used in this guide are defined by the [FHIR Conformance Rules](http://hl7.org/fhir/conformance-rules.html).
 
-### Conformance Artifacts
+In order to claim conformance with this guide, a server:
+* SHALL support the `Subscription` resource (read/write).
+* SHALL support the `$status` operation on the `Subscription` resource.
+* SHALL support the `SubscriptionTopic` resource (read/search).
+* SHALL support at least one channel type, and SHOULD include one from this guide
+* SHALL support at least one Payload Type
 
+### Conformance Artifacts
 FHIR Servers claiming conformance to this Implementation Guide must conform to the expectations described in the [Server CapabilityStatement](CapabilityStatement-backport-subscription-server.html).
 
 Some options of the Subscriptions Framework are not easily expressed in a `CapabilityStatement`.  In addition to the basic support in the CapabilityStatement (e.g., resources, interactions, and operations), a conformant server SHALL support at least one [Payload Type](payloads.html) and SHOULD support one [Channel Type](channels.html) listed in this IG.
