@@ -4,7 +4,7 @@ Id:          backport-subscription
 Title:       "Backported R5 Subscription"
 Description: "Profile on the R4 Subscription resource to enable R5-style topic-based subscriptions in FHIR R4."
 * ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
-* criteria 1..1
+* criteria 1..1 MS
 * criteria.extension 0..*
 * criteria.extension contains BackportFilterCriteria named filterCriteria 0..*
 * criteria.extension[BackportFilterCriteria] MS SU
