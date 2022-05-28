@@ -132,6 +132,7 @@ Description: "Example of a backported R5 subscription in R4 with multiple resour
 Instance: Subscription-topic
 InstanceOf: SearchParameter
 Title: "Search by Canonical URL used in a topic-based subscription"
+Usage: #definition
 * url = "http://hl7.org/fhir/uv/subscriptions-backport/SearchParameter/Subscription-topic"
 * name = "SubscriptionTopicSearchParameter"
 * status = #draft
@@ -147,6 +148,7 @@ Title: "Search by Canonical URL used in a topic-based subscription"
 Instance: Subscription-filter-criteria
 InstanceOf: SearchParameter
 Title: "Search by the filtering criteria used to narrow a topic-based subscription topic"
+Usage: #definition
 * url = "http://hl7.org/fhir/uv/subscriptions-backport/SearchParameter/Subscription-filter-criteria"
 * name = "SubscriptionFilterCriteriaSearchParameter"
 * status = #draft
@@ -161,6 +163,7 @@ Title: "Search by the filtering criteria used to narrow a topic-based subscripti
 Instance: Subscription-custom-channel
 InstanceOf: SearchParameter
 Title: "Search by custom channel types used for notifications"
+Usage: #definition
 * url = "http://hl7.org/fhir/uv/subscriptions-backport/SearchParameter/Subscription-custom-channel"
 * name = "SubscriptionCustomChannelSearchParameter"
 * status = #draft
@@ -175,6 +178,7 @@ Title: "Search by custom channel types used for notifications"
 Instance: Subscription-payload-type
 InstanceOf: SearchParameter
 Title: "Search by payload types used for notifications"
+Usage: #definition
 * url = "http://hl7.org/fhir/uv/subscriptions-backport/SearchParameter/Subscription-payload-type"
 * name = "SubscriptionPayloadTypeSearchParameter"
 * status = #draft
