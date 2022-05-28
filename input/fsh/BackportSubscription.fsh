@@ -127,3 +127,61 @@ Description: "Example of a backported R5 subscription in R4 with multiple resour
 * channel.extension[maxCount].valuePositiveInt         = 20
 * channel.payload                                      = #application/fhir+json
 * channel.payload.extension[content].valueCode         = #id-only
+
+
+Instance: Subscription-topic
+InstanceOf: SearchParameter
+Title: "Search by Canonical URL used in a topic-based subscription"
+* url = "http://hl7.org/fhir/uv/subscriptions-backport/SearchParameter/Subscription-topic"
+* name = "SubscriptionTopicSearchParameter"
+* status = #draft
+* experimental = true
+* description = "This SearchParameter enables query of subscriptions by canonical topic-url."
+* code = #topic
+* base[0] = #Subscription
+* type = #uri
+* expression = "Subscription.criteria"
+* xpath = "f:Subscription/f:criteria"
+* xpathUsage = #normal
+
+Instance: Subscription-filter-criteria
+InstanceOf: SearchParameter
+Title: "Search by the filtering criteria used to narrow a topic-based subscription topic"
+* url = "http://hl7.org/fhir/uv/subscriptions-backport/SearchParameter/Subscription-filter-criteria"
+* name = "SubscriptionFilterCriteriaSearchParameter"
+* status = #draft
+* experimental = true
+* description = "This SearchParameter enables query of subscriptions by filter criteria."
+* code = #filter-criteria
+* base[0] = #Subscription
+* type = #string
+* expression = "(extension('http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-filter-criteria').value as string)"
+* xpathUsage = #normal
+
+Instance: Subscription-custom-channel
+InstanceOf: SearchParameter
+Title: "Search by custom channel types used for notifications"
+* url = "http://hl7.org/fhir/uv/subscriptions-backport/SearchParameter/Subscription-custom-channel"
+* name = "SubscriptionCustomChannelSearchParameter"
+* status = #draft
+* experimental = true
+* description = "This SearchParameter enables query of subscriptions by additional channel type."
+* code = #custom-channel
+* base[0] = #Subscription
+* type = #string
+* expression = "(extension('http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-channel-type').value as Coding)"
+* xpathUsage = #normal
+
+Instance: Subscription-payload-type
+InstanceOf: SearchParameter
+Title: "Search by payload types used for notifications"
+* url = "http://hl7.org/fhir/uv/subscriptions-backport/SearchParameter/Subscription-payload-type"
+* name = "SubscriptionPayloadTypeSearchParameter"
+* status = #draft
+* experimental = true
+* description = "This SearchParameter enables query of subscriptions by payload type."
+* code = #payload-type
+* base[0] = #Subscription
+* type = #string
+* expression = "(extension('http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-payload-content').value as Code)"
+* xpathUsage = #normal
