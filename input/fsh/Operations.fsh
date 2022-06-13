@@ -14,7 +14,7 @@ RuleSet:       OperationCommon
 * extension[1].valueCode    = #trial-use
 
 
-Instance:      OperationBackportSubscriptionEvents
+Instance:      backport-subscription-events
 InstanceOf:    OperationDefinition
 Usage:         #definition
 Title:         "Subscription Events Operation"
@@ -58,7 +58,7 @@ Description:   "This operation is used to return historical events in the backpo
 * parameter[=].type          = #Bundle
 
 
-Instance:      OperationBackportSubscriptionStatus
+Instance:      backport-subscription-status
 InstanceOf:    OperationDefinition
 Usage:         #definition
 Title:         "Subscription Status Operation"
@@ -95,7 +95,7 @@ Description:   "This operation is used to return the current status information 
 * parameter[=].type          = #Bundle
 
 
-Instance:      OperationBackportSubscriptionGetWsBindingToken
+Instance:      backport-subscription-get-ws-binding-token
 InstanceOf:    OperationDefinition
 Usage:         #definition
 Title:         "Get WS Binding Token for Subscription Operation"

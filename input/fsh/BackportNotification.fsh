@@ -124,7 +124,7 @@ Usage:       #inline
 * status                       = #error
 * type                         = #query-status
 * eventsSinceSubscriptionStart = "10"
-* error                        = http://hl7.org/fhir/CodeSystem/subscription-error#no-response
+* error                        = http://terminology.hl7.org/CodeSystem/subscription-error#no-response
 // * error                        = BackportNotificationErrorCodeSystem#unreachable
 
 

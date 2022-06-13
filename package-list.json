@@ -11,7 +11,7 @@
       "path": "http://build.fhir.org/ig/HL7/fhir-subscription-backport-ig",
       "status": "ci-build",
       "current": true,
-      "fhirversion": "4.3.0-snapshot1"
+      "fhirversion": "4.3.0"
     },
     {
       "version": "0.1.0",
@@ -29,7 +29,7 @@
       "path": "http://hl7.org/fhir/uv/subscriptions-backport/2021Jan",
       "status": "ballot",
       "sequence": "STU 1",
-      "fhirversion": "4.3.0-snapshot1"
+      "fhirversion": "4.3.0"
     }
   ]
 }

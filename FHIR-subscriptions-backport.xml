@@ -44,6 +44,10 @@
 <artifact deprecated="true" id="ValueSet/backport-notification-error-value-set" key="ValueSet-backport-notification-error-value-set" name="R5 Subscription Error Codes Value Set"/>
 <artifact deprecated="true" id="CodeSystem/backport-notification-type-code-system" key="CodeSystem-backport-notification-type-code-system" name="R5 Subscription Notification Type Code System"/>
 <artifact deprecated="true" id="ValueSet/backport-notification-type-value-set" key="ValueSet-backport-notification-type-value-set" name="R5 Subscription Notification Type Value Set"/>
+<artifact id="SearchParameter/Subscription-topic" key="SearchParameter-Subscription-topic" name="Search by Canonical URL used in a topic-based subscription"/>
+<artifact id="SearchParameter/Subscription-custom-channel" key="SearchParameter-Subscription-custom-channel" name="Search by custom channel types used for notifications"/>
+<artifact id="SearchParameter/Subscription-payload-type" key="SearchParameter-Subscription-payload-type" name="Search by payload types used for notifications"/>
+<artifact id="SearchParameter/Subscription-filter-criteria" key="SearchParameter-Subscription-filter-criteria" name="Search by the filtering criteria used to narrow a topic-based subscription topic"/>
 <artifact id="OperationDefinition/backport-subscription-events" key="OperationDefinition-backport-subscription-events" name="Subscription Events Operation"/>
 <artifact id="OperationDefinition/backport-subscription-status" key="OperationDefinition-backport-subscription-status" name="Subscription Status Operation"/>
 <page key="NA" name="(NA)"/>
