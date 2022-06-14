@@ -40,6 +40,7 @@ Id:          backport-content-code-system
 Title:       "Backported R5 Subscription Content Code System"
 Description: "Codes to represent how much resource content to send in the notification payload."
 * ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
+* ^caseSensitive = true
 * #empty         "Empty"         "No resource content is transacted in the notification payload."
 * #id-only       "Id Only"       "Only the resource id is transacted in the notification payload."
 * #full-resource "Full Resource" "The entire resource is transacted in the notification payload."
@@ -128,6 +129,25 @@ Description: "Example of a backported R5 subscription in R4 with multiple resour
 * channel.payload                                      = #application/fhir+json
 * channel.payload.extension[content].valueCode         = #id-only
 
+Instance:    BackportSubscriptionExampleCustomChannel
+InstanceOf:  BackportSubscription
+Usage:       #example
+Title:       "Backported Subscription: Custom Channel"
+Description: "Example of a backported R5 subscription in R4 with a custom channel."
+* id       = "subscription-zulip"
+* status   = #active
+* end      = "2020-12-31T12:00:00Z"
+* reason   = "Example Backported Subscription for Patient Admission via Zulip"
+* criteria = "http://hl7.org/SubscriptionTopic/admission"
+* criteria.extension[filterCriteria].valueString        = "Encounter?patient=Patient/123"
+* channel.type                                          = #rest-hook
+* channel.type.extension[customChannelType].valueCoding = http://fhir-extensions.zulip.org/subscription-channel-type#zulip "Zulip Notification Channel"
+* channel.endpoint                                      = "https://example.org/Endpoints/eae3806a-f7fb-4e3f-a14d-c4c58ca9c038"
+* channel.extension[heartbeatPeriod].valueUnsignedInt   = 86400
+* channel.extension[timeout].valueUnsignedInt           = 60
+* channel.extension[maxCount].valuePositiveInt          = 20
+* channel.payload                                       = #application/fhir+json
+* channel.payload.extension[content].valueCode          = #id-only
 
 Instance: Subscription-topic
 InstanceOf: SearchParameter

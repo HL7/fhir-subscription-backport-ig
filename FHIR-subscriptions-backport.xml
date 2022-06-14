@@ -13,6 +13,7 @@
 <artifact id="StructureDefinition/backport-payload-content" key="StructureDefinition-backport-payload-content" name="Backport R5 Subscription Payload Content Information"/>
 <artifact id="StructureDefinition/backport-timeout" key="StructureDefinition-backport-timeout" name="Backport R5 Subscription Timeout"/>
 <artifact deprecated="true" id="StructureDefinition/backport-topic-canonical" key="StructureDefinition-backport-topic-canonical" name="Backport R5 Subscription Topic Canonical"/>
+<artifact id="CapabilityStatement/backport-subscription-server" key="CapabilityStatement-backport-subscription-server" name="Backport Subscription Server Capability Statement"/>
 <artifact deprecated="true" id="OperationDefinition/Backport-subscription-status" key="OperationDefinition-Backport-subscription-status" name="Backport Subscription Status Operation"/>
 <artifact deprecated="true" id="OperationDefinition/Backport-subscriptiontopic-list" key="OperationDefinition-Backport-subscriptiontopic-list" name="Backport Subscription Topic List Operation"/>
 <artifact id="Bundle/notification-empty" key="Bundle-notification-empty" name="Backported Notification: Empty"/>
@@ -37,9 +38,9 @@
 <artifact deprecated="true" id="StructureDefinition/backport-subscription-topic-canonical-urls" key="StructureDefinition-backport-subscription-topic-canonical-urls" name="Backported R5 SubscriptionTopic Canonical URL Parameters"/>
 <artifact deprecated="true" id="Parameters/topic-list-single" key="Parameters-topic-list-single" name="Backported Subscription Topic List"/>
 <artifact id="Subscription/subscription-admission" key="Subscription-subscription-admission" name="Backported Subscription: Admission"/>
+<artifact id="Subscription/subscription-zulip" key="Subscription-subscription-zulip" name="Backported Subscription: Custom Channel"/>
 <artifact id="Subscription/subscription-multi-resource" key="Subscription-subscription-multi-resource" name="Backported Subscription: Multi-Resource"/>
 <artifact id="OperationDefinition/backport-subscription-get-ws-binding-token" key="OperationDefinition-backport-subscription-get-ws-binding-token" name="Get WS Binding Token for Subscription Operation"/>
-<artifact id="CapabilityStatement/backport-subscription-server" key="CapabilityStatement-backport-subscription-server" name="Minimal Backport Subscription Server Capability Statement"/>
 <artifact deprecated="true" id="CodeSystem/backport-notification-error-code-system" key="CodeSystem-backport-notification-error-code-system" name="R5 Subscription Error Code System"/>
 <artifact deprecated="true" id="ValueSet/backport-notification-error-value-set" key="ValueSet-backport-notification-error-value-set" name="R5 Subscription Error Codes Value Set"/>
 <artifact deprecated="true" id="CodeSystem/backport-notification-type-code-system" key="CodeSystem-backport-notification-type-code-system" name="R5 Subscription Notification Type Code System"/>
