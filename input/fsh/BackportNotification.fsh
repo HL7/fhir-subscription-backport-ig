@@ -138,6 +138,8 @@ Description: "Example of a backported notification with status content."
 * status                       = #active
 * type                         = #event-notification
 * eventsSinceSubscriptionStart = "2"
+* notificationEvent[+].eventNumber = "2"
+* notificationEvent[=].timestamp   = "2020-05-29T11:44:13.1882432-05:00"
 
 
 Instance:    BackportNotificationExampleHandshake
@@ -180,6 +182,8 @@ Description: "Example of a backported notification with 'empty' content."
 * timestamp = "2020-05-29T11:44:13.1882432-05:00"
 * entry[subscriptionStatus].fullUrl  = "urn:uuid:b21e4fae-ce73-45cb-8e37-1e203362b2ae"
 * entry[subscriptionStatus].resource = BackportStatusEventNotification
+* entry[subscriptionStatus].resource.notificationEvent[+].eventNumber = "2"
+* entry[subscriptionStatus].resource.notificationEvent[=].timestamp   = "2020-05-29T11:44:13.1882432-05:00"
 * entry[subscriptionStatus].request.method = #GET
 * entry[subscriptionStatus].request.url = "https://example.org/fhir/r4/Subscription/admission/$status"
 * entry[subscriptionStatus].response.status = "200"
