@@ -141,7 +141,7 @@ Description: "Example of a backported R5 subscription in R4 with a custom channe
 * criteria = "http://hl7.org/SubscriptionTopic/admission"
 * criteria.extension[filterCriteria].valueString        = "Encounter?patient=Patient/123"
 * channel.type                                          = #rest-hook
-* channel.type.extension[customChannelType].valueCoding = http://fhir-extensions.zulip.org/subscription-channel-type#zulip "Zulip Notification Channel"
+* channel.type.extension[customChannelType].valueCoding = http://exampe.org/subscription-channel-type#zulip "Zulip Notification Channel"
 * channel.endpoint                                      = "https://example.org/Endpoints/eae3806a-f7fb-4e3f-a14d-c4c58ca9c038"
 * channel.extension[heartbeatPeriod].valueUnsignedInt   = 86400
 * channel.extension[timeout].valueUnsignedInt           = 60
