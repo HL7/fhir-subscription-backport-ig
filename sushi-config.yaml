@@ -36,6 +36,7 @@ fhirVersion: 4.3.0
 parameters:
   show-inherited-invariants: false
   usage-stats-opt-out: true
+  shownav: 'true'
 copyrightYear: 2020+
 releaseLabel: ballot
 jurisdiction: http://unstats.un.org/unsd/methods/m49/m49.htm#001 "World"
