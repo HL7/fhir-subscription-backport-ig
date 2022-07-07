@@ -22,7 +22,7 @@ publisher:
 contact:
   - name: HL7 FHIR Infrastructure WG
     telecom:
-      - system: other
+      - system: url
         value: https://hl7.org/Special/committees/fiwg
   - name: Gino Canessa
     telecom:
