@@ -18,8 +18,12 @@ title: "Subscriptions R5 Backport"
 status: draft
 publisher:
   name: HL7 FHIR Infrastructure WG
-  url: https://hl7.org/Special/committees/fiwg/index.cfm
+  url: https://hl7.org/Special/committees/fiwg
 contact:
+  - name: HL7 FHIR Infrastructure WG
+    telecom:
+      - system: other
+        value: https://hl7.org/Special/committees/fiwg
   - name: Gino Canessa
     telecom:
       - system: email
