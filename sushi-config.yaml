@@ -42,7 +42,7 @@ parameters:
   usage-stats-opt-out: true
   shownav: 'true'
 copyrightYear: 2020+
-releaseLabel: ballot
+releaseLabel: Standard for Trial Use
 jurisdiction: http://unstats.un.org/unsd/methods/m49/m49.htm#001 "World"
 
 pages:
