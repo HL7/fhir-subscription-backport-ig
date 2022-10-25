@@ -2,8 +2,8 @@ Profile:     BackportSubscription
 Parent:      Subscription
 Id:          backport-subscription
 Title:       "Backported R5 Subscription"
-Description: "Profile on the R4 Subscription resource to enable R5-style topic-based subscriptions in FHIR R4."
-* ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
+Description: "Profile on the R4 Subscription resource to enable R5-style topic-based subscriptions in FHIR R4 or R4B."
+* insert StructureJurisdiction
 * criteria 1..1 MS
 * criteria.extension 0..*
 * criteria.extension contains BackportFilterCriteria named filterCriteria 0..*
@@ -20,8 +20,8 @@ Description: "Profile on the R4 Subscription resource to enable R5-style topic-b
 Extension:   BackportChannelType
 Id:          backport-channel-type
 Title:       "Backported R5 Additional Channel Types"
-Description: "Additional channel types not defined in FHIR R4."
-* ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
+Description: "Additional channel types not defined before FHIR R5."
+* insert StructureJurisdiction
 * ^context[0].type = #element
 * ^context[0].expression = "Subscription.channel.type"
 * value[x] only Coding
@@ -30,7 +30,7 @@ Extension:   BackportFilterCriteria
 Id:          backport-filter-criteria
 Title:       "Backported R5 FilterBy Criteria"
 Description: "Criteria for topic-based filtering (filter-by)."
-* ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
+* insert StructureJurisdiction
 * ^context[0].type = #element
 * ^context[0].expression = "Subscription.criteria"
 * value[x] only string
@@ -39,7 +39,7 @@ CodeSystem:  BackportContentCodeSystem
 Id:          backport-content-code-system
 Title:       "Backported R5 Subscription Content Code System"
 Description: "Codes to represent how much resource content to send in the notification payload."
-* ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
+* insert StructureJurisdiction
 * ^caseSensitive = true
 * #empty         "Empty"         "No resource content is transacted in the notification payload."
 * #id-only       "Id Only"       "Only the resource id is transacted in the notification payload."
@@ -49,14 +49,14 @@ ValueSet:    BackportContentValueSet
 Id:          backport-content-value-set
 Title:       "Backported R5 Subscription Content Value Set"
 Description: "Codes to represent how much resource content to send in the notification payload."
-* ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
+* insert StructureJurisdiction
 * codes from system BackportContentCodeSystem
 
 Extension:   BackportPayloadContent
 Id:          backport-payload-content
 Title:       "Backport R5 Subscription Payload Content Information"
 Description: "How much of the resource content to deliver in the notification payload. The choices are an empty payload, only the resource id, or the full resource content."
-* ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
+* insert StructureJurisdiction
 * ^context[0].type = #element
 * ^context[0].expression = "Subscription.channel.payload"
 * value[x] only code
@@ -66,7 +66,7 @@ Extension:   BackportHeartbeatPeriod
 Id:          backport-heartbeat-period
 Title:       "Backport R5 Subscription Heartbeat Period"
 Description: "Interval in seconds to send 'heartbeat' notifications."
-* ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
+* insert StructureJurisdiction
 * ^context[0].type = #element
 * ^context[0].expression = "Subscription.channel"
 * value[x] only unsignedInt
@@ -75,7 +75,7 @@ Extension:   BackportTimeout
 Id:          backport-timeout
 Title:       "Backport R5 Subscription Timeout"
 Description: "Timeout in seconds to attempt notification delivery."
-* ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
+* insert StructureJurisdiction
 * ^context[0].type = #element
 * ^context[0].expression = "Subscription.channel"
 * value[x] only unsignedInt
@@ -84,7 +84,7 @@ Extension:   BackportMaxCount
 Id:          backport-max-count
 Title:       "Backported R5 Subscription MaxCount"
 Description: "Maximum number of triggering resources included in notification bundles."
-* ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
+* insert StructureJurisdiction
 * ^context[0].type = #element
 * ^context[0].expression = "Subscription.channel"
 * value[x] only positiveInt
@@ -93,15 +93,15 @@ Instance:    BackportSubscriptionExampleAdmission
 InstanceOf:  BackportSubscription
 Usage:       #example
 Title:       "Backported Subscription: Admission"
-Description: "Example of a backported R5 admissions subscription in R4."
+Description: "Example of a backported R5 admissions subscription."
 * id       = "subscription-admission"
 * status   = #active
 * end      = "2020-12-31T12:00:00Z"
 * reason   = "Example Backported Subscription for Patient Admission"
-* criteria = "http://hl7.org/SubscriptionTopic/admission"
+* criteria = $admissionTopic
 * criteria.extension[filterCriteria].valueString       = "Encounter?patient=Patient/123"
 * channel.type                                         = #rest-hook
-* channel.endpoint                                     = "https://example.org/Endpoints/eae3806a-f7fb-4e3f-a14d-c4c58ca9c038"
+* channel.endpoint                                     = $webHookEndpoint
 * channel.extension[heartbeatPeriod].valueUnsignedInt  = 86400
 * channel.extension[timeout].valueUnsignedInt          = 60
 * channel.extension[maxCount].valuePositiveInt         = 20
@@ -112,17 +112,17 @@ Instance:    BackportSubscriptionExampleMultiResource
 InstanceOf:  BackportSubscription
 Usage:       #example
 Title:       "Backported Subscription: Multi-Resource"
-Description: "Example of a backported R5 subscription in R4 with multiple resources."
+Description: "Example of a backported R5 subscription with multiple resources."
 * id       = "subscription-multi-resource"
 * status   = #active
 * end      = "2020-12-31T12:00:00Z"
 * reason   = "Example Backported Subscription for Multiple Resources"
-* criteria = "http://hl7.org/SubscriptionTopic/admission"
+* criteria = $admissionTopic
 * criteria.extension[filterCriteria].valueString       = "Patient?id=Patient/123"
 * criteria.extension[filterCriteria].valueString       = "Encounter?patient=Patient/123"
 * criteria.extension[filterCriteria].valueString       = "Observation?subject=Patient/123"
 * channel.type                                         = #rest-hook
-* channel.endpoint                                     = "https://example.org/Endpoints/d7dcc004-808d-452b-8030-3a3a13cd871d"
+* channel.endpoint                                     = $webHookEndpoint
 * channel.extension[heartbeatPeriod].valueUnsignedInt  = 86400
 * channel.extension[timeout].valueUnsignedInt          = 60
 * channel.extension[maxCount].valuePositiveInt         = 20
@@ -138,11 +138,11 @@ Description: "Example of a backported R5 subscription in R4 with a custom channe
 * status   = #active
 * end      = "2020-12-31T12:00:00Z"
 * reason   = "Example Backported Subscription for Patient Admission via Zulip"
-* criteria = "http://hl7.org/SubscriptionTopic/admission"
+* criteria = $admissionTopic
 * criteria.extension[filterCriteria].valueString        = "Encounter?patient=Patient/123"
 * channel.type                                          = #rest-hook
 * channel.type.extension[customChannelType].valueCoding = http://example.org/subscription-channel-type#zulip "Zulip Notification Channel"
-* channel.endpoint                                      = "https://example.org/Endpoints/eae3806a-f7fb-4e3f-a14d-c4c58ca9c038"
+* channel.endpoint                                      = $zulipEndpoint
 * channel.extension[heartbeatPeriod].valueUnsignedInt   = 86400
 * channel.extension[timeout].valueUnsignedInt           = 60
 * channel.extension[maxCount].valuePositiveInt          = 20
@@ -153,6 +153,7 @@ Instance: Subscription-topic
 InstanceOf: SearchParameter
 Title: "Search by Canonical URL used in a topic-based subscription"
 Usage: #definition
+* insert ResourceJurisdiction
 * url = "http://hl7.org/fhir/uv/subscriptions-backport/SearchParameter/Subscription-topic"
 * name = "SubscriptionTopicSearchParameter"
 * status = #draft
@@ -169,6 +170,7 @@ Instance: Subscription-filter-criteria
 InstanceOf: SearchParameter
 Title: "Search by the filtering criteria used to narrow a topic-based subscription topic"
 Usage: #definition
+* insert ResourceJurisdiction
 * url = "http://hl7.org/fhir/uv/subscriptions-backport/SearchParameter/Subscription-filter-criteria"
 * name = "SubscriptionFilterCriteriaSearchParameter"
 * status = #draft
@@ -184,6 +186,7 @@ Instance: Subscription-custom-channel
 InstanceOf: SearchParameter
 Title: "Search by custom channel types used for notifications"
 Usage: #definition
+* insert ResourceJurisdiction
 * url = "http://hl7.org/fhir/uv/subscriptions-backport/SearchParameter/Subscription-custom-channel"
 * name = "SubscriptionCustomChannelSearchParameter"
 * status = #draft
@@ -199,6 +202,7 @@ Instance: Subscription-payload-type
 InstanceOf: SearchParameter
 Title: "Search by payload types used for notifications"
 Usage: #definition
+* insert ResourceJurisdiction
 * url = "http://hl7.org/fhir/uv/subscriptions-backport/SearchParameter/Subscription-payload-type"
 * name = "SubscriptionPayloadTypeSearchParameter"
 * status = #draft

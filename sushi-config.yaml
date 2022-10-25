@@ -41,6 +41,17 @@ parameters:
   show-inherited-invariants: false
   usage-stats-opt-out: true
   shownav: 'true'
+  r4-exclusion:
+    - http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-subscription-notification
+    - SubscriptionStatus/notification-status
+    - Bundle/notification-multi-resource
+    - Bundle/notification-full-resource
+    - Bundle/notification-id-only
+    - Bundle/notification-heartbeat
+    - Bundle/notification-handshake
+    - Bundle/notification-error
+    - Bundle/notification-empty
+    - CapabilityStatement/backport-subscription-server
 copyrightYear: 2020+
 releaseLabel: Standard for Trial Use
 jurisdiction: http://unstats.un.org/unsd/methods/m49/m49.htm#001 "World"
@@ -98,6 +109,7 @@ menu:
   Support:
     Downloads: downloads.html
     Known Implementations: https://confluence.hl7.org/display/FHIRI/FHIR+Subscriptions
+
 
 # ╭───────────────────────────────────────package-list.json────────────────────────────────────────╮
 # │  To use a provided ig-data/package-list.json file, delete the "history" property below.        │

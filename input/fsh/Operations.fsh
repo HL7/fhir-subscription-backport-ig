@@ -1,19 +1,3 @@
-RuleSet:       OperationCommon
-* jurisdiction        = http://unstats.un.org/unsd/methods/m49/m49.htm#001
-* status              = #active
-* date                = "2020-11-30"
-* publisher           = "HL7 International - FHIR Infrastructure Work Group"
-* contact[0].telecom[0].system = #url
-* contact[0].telecom[0].value  = "https://hl7.org/Special/committees/fiwg/index.cfm"
-* affectsState        = false
-* version             = "0.1.1"
-* kind                = #operation
-* extension[0].url          = "http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm"
-* extension[0].valueInteger = 0
-* extension[1].url          = "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status"
-* extension[1].valueCode    = #trial-use
-
-
 Instance:      backport-subscription-events
 InstanceOf:    OperationDefinition
 Usage:         #definition
@@ -54,7 +38,7 @@ Description:   "This operation is used to return historical events in the backpo
 * parameter[=].use           = #out
 * parameter[=].min           = 1
 * parameter[=].max           = "1"
-* parameter[=].documentation = "The operation returns a valid notification bundle, with the first entry being a SubscriptionStatus resource. The bundle type is \"history\"."
+* parameter[=].documentation = "The operation returns a valid notification bundle, with the first entry being the subscription status information resource. The bundle type is \"history\"."
 * parameter[=].type          = #Bundle
 
 
@@ -91,7 +75,7 @@ Description:   "This operation is used to return the current status information 
 * parameter[=].use           = #out
 * parameter[=].min           = 1
 * parameter[=].max           = "1"
-* parameter[=].documentation = "The operation returns a bundle containing one or more SubscriptionStatus resources, one per Subscription being queried. The Bundle type is \"searchset\"."
+* parameter[=].documentation = "The operation returns a bundle containing one or more subscription status resources, one per Subscription being queried. The Bundle type is \"searchset\"."
 * parameter[=].type          = #Bundle
 
 
