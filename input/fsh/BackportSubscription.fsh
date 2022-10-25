@@ -1,8 +1,8 @@
 Profile:     BackportSubscription
 Parent:      Subscription
 Id:          backport-subscription
-Title:       "Backported R5 Subscription"
-Description: "Profile on the R4 Subscription resource to enable R5-style topic-based subscriptions in FHIR R4 or R4B."
+Title:       "R4/B Topic-Based Subscription"
+Description: "Profile on the Subscription resource to enable R5-style topic-based subscriptions in FHIR R4 or R4B."
 * insert StructureJurisdiction
 * criteria 1..1 MS
 * criteria.extension 0..*
@@ -93,11 +93,11 @@ Instance:    BackportSubscriptionExampleAdmission
 InstanceOf:  BackportSubscription
 Usage:       #example
 Title:       "Backported Subscription: Admission"
-Description: "Example of a backported R5 admissions subscription."
+Description: "R4/B Example of a topic-based 'admission' subscription."
 * id       = "subscription-admission"
 * status   = #active
 * end      = "2020-12-31T12:00:00Z"
-* reason   = "Example Backported Subscription for Patient Admission"
+* reason   = "R4/B Example Topic-Based Subscription for Patient Admission"
 * criteria = $admissionTopic
 * criteria.extension[filterCriteria].valueString       = "Encounter?patient=Patient/123"
 * channel.type                                         = #rest-hook
@@ -112,11 +112,11 @@ Instance:    BackportSubscriptionExampleMultiResource
 InstanceOf:  BackportSubscription
 Usage:       #example
 Title:       "Backported Subscription: Multi-Resource"
-Description: "Example of a backported R5 subscription with multiple resources."
+Description: "R4/B Example of a topic-based subscription with additional context resources."
 * id       = "subscription-multi-resource"
 * status   = #active
 * end      = "2020-12-31T12:00:00Z"
-* reason   = "Example Backported Subscription for Multiple Resources"
+* reason   = "R4/B Example Topic-Based Subscription for Multiple Resources"
 * criteria = $admissionTopic
 * criteria.extension[filterCriteria].valueString       = "Patient?id=Patient/123"
 * criteria.extension[filterCriteria].valueString       = "Encounter?patient=Patient/123"
@@ -133,11 +133,11 @@ Instance:    BackportSubscriptionExampleCustomChannel
 InstanceOf:  BackportSubscription
 Usage:       #example
 Title:       "Backported Subscription: Custom Channel"
-Description: "Example of a backported R5 subscription in R4 with a custom channel."
+Description: "R4/B Example of a topic-based subscription using a custom channel."
 * id       = "subscription-zulip"
 * status   = #active
 * end      = "2020-12-31T12:00:00Z"
-* reason   = "Example Backported Subscription for Patient Admission via Zulip"
+* reason   = "R4/B Example Topic-Based Subscription for Patient Admission via Zulip"
 * criteria = $admissionTopic
 * criteria.extension[filterCriteria].valueString        = "Encounter?patient=Patient/123"
 * channel.type                                          = #rest-hook

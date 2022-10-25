@@ -45,7 +45,7 @@ RuleSet: SupportOperation (name, canonical, expectation)
 Instance:      CapabilitySubscriptionServer
 InstanceOf:    CapabilityStatement
 Usage:         #definition
-Title:         "R4B Backport Subscription Server Capability Statement"
+Title:         "R4B Topic-Based Subscription Server Capability Statement"
 Description:   "CapabilityStatement describing the minimal required capabilities of a FHIR Server supporting backported R5 Subscriptions in R4B."
 * insert ResourceCommonR4B
 * id            = "backport-subscription-server"
@@ -87,7 +87,7 @@ Description:   "CapabilityStatement describing the minimal required capabilities
 Instance:      CapabilitySubscriptionServerR4
 InstanceOf:    CapabilityStatement
 Usage:         #definition
-Title:         "R4 Backport Subscription Server Capability Statement"
+Title:         "R4 Topic-Based Subscription Server Capability Statement"
 Description:   "CapabilityStatement describing the minimal required capabilities of a FHIR Server supporting backported R5 Subscriptions in R4."
 * insert ResourceCommonR4
 * id            = "backport-subscription-server-r4"

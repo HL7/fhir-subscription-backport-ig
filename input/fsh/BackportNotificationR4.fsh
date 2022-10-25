@@ -1,7 +1,7 @@
 Profile:     BackportSubscriptionNotificationR4
 Parent:      Bundle
 Id:          backport-subscription-notification-r4
-Title:       "Backported R5 Subscription Notification Bundle in R4"
+Title:       "R4 Topic-Based Subscription Notification Bundle"
 Description: "Profile on the R4 Bundle resource to enable R5-style topic-based subscription notifications in FHIR R4."
 * insert StructureCommonR4
 * type = #history
@@ -145,9 +145,9 @@ RuleSet: AddParameterStatusEventContext(additionalContext)
 Instance:    BackportNotificationStatusExampleR4
 InstanceOf:  BackportSubscriptionStatusR4
 Usage:       #example
-Title:       "R4 Backported Notification: Status"
-Description: "Example of a backported notification with status content in R4."
-* id       = "notification-status-r4"
+Title:       "R4 Notification: Status"
+Description: "R4 Example of a topic-based subscription notification with status content."
+* id       = "r4-notification-status"
 * parameter[subscription].name = "subscription"
 * parameter[subscription].valueReference.reference = $admissionSub
 * parameter[topic].name = "topic"
@@ -168,9 +168,9 @@ Description: "Example of a backported notification with status content in R4."
 Instance:    BackportNotificationExampleHandshakeR4
 InstanceOf:  BackportSubscriptionNotificationR4
 Usage:       #example
-Title:       "R4 Backported Notification: Handshake"
-Description: "Example of a backported notification of type: 'handshake' in R4."
-* id        = "notification-handshake-r4"
+Title:       "R4 Notification: Handshake"
+Description: "R4 Example of a topic-based subscription `handshake` notification."
+* id        = "r4-notification-handshake"
 * timestamp = "2020-05-29T11:44:13.1882432-05:00"
 * insert AddParameterStatus(63c28e8a-f402-43e4-beb2-75b1c0f6833f, #requested, #handshake, 0)
 
@@ -178,9 +178,9 @@ Description: "Example of a backported notification of type: 'handshake' in R4."
 Instance:    BackportNotificationExampleHeartbeatR4
 InstanceOf:  BackportSubscriptionNotificationR4
 Usage:       #example
-Title:       "R4 Backported Notification: Heartbeat"
-Description: "Example of a backported notification of type: 'heartbeat' in R4."
-* id        = "notification-heartbeat-r4"
+Title:       "R4 Notification: Heartbeat"
+Description: "R4 Example of a topic-based subscription `heartbeat` notification."
+* id        = "r4-notification-heartbeat"
 * timestamp = "2020-05-29T11:44:13.1882432-05:00"
 * insert AddParameterStatus(385b23bd-6d03-462e-894d-a0694045d65c, #active, #heartbeat, 2)
 
@@ -188,9 +188,9 @@ Description: "Example of a backported notification of type: 'heartbeat' in R4."
 Instance:    BackportNotificationExampleEmptyR4
 InstanceOf:  BackportSubscriptionNotificationR4
 Usage:       #example
-Title:       "R4 Backported Notification: Empty"
-Description: "Example of a backported notification with 'empty' content in R4."
-* id        = "notification-empty-r4"
+Title:       "R4 Notification: Empty"
+Description: "R4 Example of a topic-based subscription event notification with `empty` content."
+* id        = "r4-notification-empty"
 * timestamp = "2020-05-29T11:44:13.1882432-05:00"
 * insert AddParameterStatus(9e41ff6d-5be6-4e6a-8b85-abd4e7f58400, #active, #event-notification, 2)
 
@@ -198,9 +198,9 @@ Description: "Example of a backported notification with 'empty' content in R4."
 Instance:    BackportNotificationExampleIdOnlyR4
 InstanceOf:  BackportSubscriptionNotificationR4
 Usage:       #example
-Title:       "R4 Backported Notification: Id Only"
-Description: "Example of a backported notification with 'id-only' content in R4."
-* id        = "notification-id-only-r4"
+Title:       "R4 Notification: Id Only"
+Description: "R4 Example of a topic-based subscription event notification with `id-only` content."
+* id        = "r4-notification-id-only"
 * timestamp = "2020-05-29T11:44:13.1882432-05:00"
 * insert AddParameterStatus(292d3c72-edc1-4d8a-afaa-d85e19c7f563, #active, #event-notification, 2)
 * insert AddParameterStatusFirstEvent(2)
@@ -214,9 +214,9 @@ Description: "Example of a backported notification with 'id-only' content in R4.
 Instance:    BackportNotificationExampleFullResourceR4
 InstanceOf:  BackportSubscriptionNotificationR4
 Usage:       #example
-Title:       "R4 Backported Notification: Full Resource"
-Description: "Example of a backported notification with 'full-resource' content in R4."
-* id        = "notification-full-resource-r4"
+Title:       "R4 Notification: Full Resource"
+Description: "R4 Example of a topic-based subscription event notification with `full-resource` content."
+* id        = "r4-notification-full-resource"
 * timestamp = "2020-05-29T11:44:13.1882432-05:00"
 * insert AddParameterStatus(2d5afc69-6ef2-420f-a8d1-8500c99eb96c, #active, #event-notification, 2)
 * insert AddParameterStatusFirstEvent(2)
@@ -231,9 +231,9 @@ Description: "Example of a backported notification with 'full-resource' content 
 Instance:    BackportNotificationExampleMultiResourceR4
 InstanceOf:  BackportSubscriptionNotificationR4
 Usage:       #example
-Title:       "R4 Backported Notification: Multiple Resources"
-Description: "Example of a backported notification with 'full-resource' content and a related resource in R4."
-* id        = "notification-multi-resource-r4"
+Title:       "R4 Notification: Multiple Resources"
+Description: "R4 Example of a topic-based subscription event notification with `full-resource` content and a related resource."
+* id        = "r4-notification-multi-resource"
 * timestamp = "2020-05-29T11:44:13.1882432-05:00"
 * insert AddParameterStatus(7bd91d26-c951-4520-9ac6-67f41bfbe897, #active, #event-notification, 2)
 * insert AddParameterStatusFirstEvent(2)
@@ -254,9 +254,9 @@ Description: "Example of a backported notification with 'full-resource' content 
 Instance:    BackportNotificationExampleErrorR4
 InstanceOf:  BackportSubscriptionNotificationR4
 Usage:       #example
-Title:       "R4 Backported Notification: Error"
-Description: "Example of a backported notification with an error state in R4."
-* id        = "notification-error-r4"
+Title:       "R4 Notification: Error"
+Description: "R4 Example of a topic-based subscription query-status response with an error state."
+* id        = "r4-notification-error"
 * timestamp = "2020-05-29T11:44:13.1882432-05:00"
 * insert AddParameterStatus(7bd91d26-c951-4520-9ac6-67f41bfbe897, #error, #query-status, 3)
 * insert AddParameterStatusError(http://terminology.hl7.org/CodeSystem/subscription-error, #no-response)

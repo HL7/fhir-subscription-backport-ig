@@ -43,14 +43,14 @@ parameters:
   shownav: 'true'
   r4-exclusion:
     - http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-subscription-notification
-    - SubscriptionStatus/notification-status
-    - Bundle/notification-multi-resource
-    - Bundle/notification-full-resource
-    - Bundle/notification-id-only
-    - Bundle/notification-heartbeat
-    - Bundle/notification-handshake
-    - Bundle/notification-error
-    - Bundle/notification-empty
+    - SubscriptionStatus/r4b-notification-status
+    - Bundle/r4b-notification-multi-resource
+    - Bundle/r4b-notification-full-resource
+    - Bundle/r4b-notification-id-only
+    - Bundle/r4b-notification-heartbeat
+    - Bundle/r4b-notification-handshake
+    - Bundle/r4b-notification-error
+    - Bundle/r4b-notification-empty
     - CapabilityStatement/backport-subscription-server
 copyrightYear: 2020+
 releaseLabel: Standard for Trial Use
