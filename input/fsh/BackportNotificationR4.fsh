@@ -12,7 +12,7 @@ Description: "Profile on the R4 Bundle resource to enable R5-style topic-based s
 * entry ^slicing.description = "Slice based on resource"
 * entry contains subscriptionStatus 1..1 MS
 * entry[subscriptionStatus].resource 1..1 MS
-* entry[subscriptionStatus].resource only Parameters
+* entry[subscriptionStatus].resource only BackportSubscriptionStatusR4
 * obeys backport-notification-bundle-r4-1
 
 Invariant:   backport-notification-bundle-r4-1
