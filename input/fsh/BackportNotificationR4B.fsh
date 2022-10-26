@@ -41,7 +41,7 @@ RuleSet: AddSubscriptionStatus(id, status, type, sinceStart)
 * entry[0].response.status = "200"
 
 RuleSet: AddSubscriptionStatusError(vs, code)
-* entry[0].resource.error[+] = {vs}#{code}
+* entry[0].resource.error[+] = {vs}{code}
 
 RuleSet: AddSubscriptionStatusFirstEvent(eventNumber)
 * entry[0].resource.notificationEvent[+].eventNumber  = "{eventNumber}"
@@ -97,7 +97,7 @@ Description: "R4B Example of a topic-based subscription event notification with 
 * id        = "r4b-notification-empty"
 * timestamp = "2020-05-29T11:44:13.1882432-05:00"
 * insert AddSubscriptionStatus(fbc7cb79-0502-4797-993c-399766271260, #active, #event-notification, 2)
-
+* insert AddSubscriptionStatusFirstEvent(2)
 
 Instance:    BackportNotificationExampleIdOnly
 InstanceOf:  BackportSubscriptionNotification

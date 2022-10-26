@@ -17,7 +17,8 @@ Description: "Profile on the R4 Bundle resource to enable R5-style topic-based s
 
 Invariant:   backport-notification-bundle-r4-1
 Description: "A notification bundle MUST have a Parameters as the first entry"
-Expression:  "(entry.first().resource.is(Parameters)) and (entry.first().resource.conformsTo(backport-subscription-status-r4))"
+Expression:  "(entry.first().resource.is(Parameters))"
+// Expression:  "(entry.first().resource.is(Parameters)) and (entry.first().resource.conformsTo(backport-subscription-status-r4))"
 Severity:    #error
 XPath:       "f:entry[1]/f:resource/f:Parameters"
 
@@ -124,7 +125,7 @@ RuleSet: AddParameterStatus(id, status, type, sinceStart)
 
 RuleSet: AddParameterStatusError(vs, code)
 * entry[0].resource.parameter[error].name = "error"
-* entry[0].resource.parameter[error].valueCodeableConcept = {vs}#{code}
+* entry[0].resource.parameter[error].valueCodeableConcept = {vs}{code}
 
 RuleSet: AddParameterStatusFirstEvent(eventNumber)
 * entry[0].resource.parameter[notificationEvent].name = "notification-event"
@@ -193,7 +194,7 @@ Description: "R4 Example of a topic-based subscription event notification with `
 * id        = "r4-notification-empty"
 * timestamp = "2020-05-29T11:44:13.1882432-05:00"
 * insert AddParameterStatus(9e41ff6d-5be6-4e6a-8b85-abd4e7f58400, #active, #event-notification, 2)
-
+* insert AddParameterStatusFirstEvent(2)
 
 Instance:    BackportNotificationExampleIdOnlyR4
 InstanceOf:  BackportSubscriptionNotificationR4

@@ -40,7 +40,8 @@ Id:          backport-content-code-system
 Title:       "Backported R5 Subscription Content Code System"
 Description: "Codes to represent how much resource content to send in the notification payload."
 * insert StructureJurisdiction
-* ^caseSensitive = true
+* ^caseSensitive  = true
+* ^experimental   = false
 * #empty         "Empty"         "No resource content is transacted in the notification payload."
 * #id-only       "Id Only"       "Only the resource id is transacted in the notification payload."
 * #full-resource "Full Resource" "The entire resource is transacted in the notification payload."
@@ -50,6 +51,7 @@ Id:          backport-content-value-set
 Title:       "Backported R5 Subscription Content Value Set"
 Description: "Codes to represent how much resource content to send in the notification payload."
 * insert StructureJurisdiction
+* ^experimental   = false
 * codes from system BackportContentCodeSystem
 
 Extension:   BackportPayloadContent
