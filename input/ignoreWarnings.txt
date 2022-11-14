@@ -1,9 +1,13 @@
 == Suppressed Messages ==
 # Additional entries in notification bundles are expected
-INFORMATION: Bundle/notification-full-resource: Bundle.entry[1]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-subscription-notification
-INFORMATION: Bundle/notification-id-only: Bundle.entry[1]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-subscription-notification
-INFORMATION: Bundle/notification-multi-resource: Bundle.entry[1]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-subscription-notification
-INFORMATION: Bundle/notification-multi-resource: Bundle.entry[2]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-subscription-notification
+INFORMATION: Bundle/r4-notification-full-resource: Bundle.entry[1]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-subscription-notification-r4
+INFORMATION: Bundle/r4-notification-id-only: Bundle.entry[1]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-subscription-notification-r4
+INFORMATION: Bundle/r4-notification-multi-resource: Bundle.entry[1]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-subscription-notification-r4
+INFORMATION: Bundle/r4-notification-multi-resource: Bundle.entry[2]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-subscription-notification-r4
+INFORMATION: Bundle/r4b-notification-full-resource: Bundle.entry[1]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-subscription-notification
+INFORMATION: Bundle/r4b-notification-id-only: Bundle.entry[1]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-subscription-notification
+INFORMATION: Bundle/r4b-notification-multi-resource: Bundle.entry[1]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-subscription-notification
+INFORMATION: Bundle/r4b-notification-multi-resource: Bundle.entry[2]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-subscription-notification
 
 # Example code system is used as Example
 Code System URI 'http://example.org/subscription-channel-type' is unknown so the code cannot be validated
