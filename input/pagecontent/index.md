@@ -1,4 +1,4 @@
-The Subscription R5 Backport Implementation Guide enables servers running verions of FHIR earlier than R5 to implement a subset of R5 Subscriptions in a standardized way.
+The Subscription R5 Backport Implementation Guide enables servers running versions of FHIR earlier than R5 to implement a subset of R5 Subscriptions in a standardized way.
 
 ### About This Guide
 
@@ -23,19 +23,29 @@ The above approach works well for some use cases, but has issues which prevent i
 
 Some of the issues would be addressable with modifications to the existing `Subscription` resource, but the FHIR Infrastructure Work Group felt that more extensive changes were needed, and so started a redesign of Subscriptions for R5.
 
-### Topic-Based Subscriptions - R5 and Later
+### Topic-Based Subscriptions - FHIR R5 and Later
 
 More than a year of focused work resulted in a new design for Subscriptions in FHIR.  The redesign focused on three main areas:
 
-1. Moving to a topic-based model, with the defintion of a `SubscriptionTopic` resource.
+1. Moving to a topic-based model, with the definition of a `SubscriptionTopic` resource.
 1. Changing the `Subscription` resource to add clarity and flexibility.
 1. Restructuring notifications by adding a new `Bundle` type.
 
 The implementer response to these changes has been positive - changes to the mechanism address the issues identified and retain all of the existing functionality.  However, many of the changes cannot be made to the FHIR specifications until the release of R5.  Implementers have expressed concern that the publication and adoption of FHIR R5 are too far in the future.
 
-### Topic-Based Subscriptions - R4B and Later
+### Topic-Based Subscriptions - FHIR R4B and Later
+
+With the publication of [FHIR R4B](https://hl7.org/fhir/R4B/), there was an opportunity to add some of the models designed for FHIR R5 into a FHIR R4-series.  Wherever possible, both those additions and this guide tries to align with FHIR R5 to lower implementer burden, however some differences are unavoidable.
+
+In the context of FHIR R4B, this guide bridges the gap between what could be added in a [minor release](https://hl7.org/fhir/versions.html#versions) and the changes made in R5.
 
 In order to provide topic-based subscription support in FHIR R4, this Implementation Guide supplements additions made to FHIR R4B to support the new topic-based subscriptions model.  Wherever possible, this guide tries to align with FHIR R5 to lower implementer burden, however some differences are unavoidable.
+
+### Topic-Based Subscriptions - FHIR R4
+
+In order to provide topic-based subscription support in FHIR R4, this Implementation Guide defines FHIR artifacts (e.g., Operations, Extensions, Profiles, etc.) to extend the existing subscription functionality present in R4.  Due to practical constraints, some functionality has been left out-of-scope for FHIR R4 support.
+
+More information can be found on the [Topic-Based Subscription Components](components.html) page.
 
 ### Boundaries and Relationships
 
@@ -44,8 +54,8 @@ In order to provide topic-based subscription support in FHIR R4, this Implementa
 [FHIRcast](http://fhircast.org) is a framework for user-activity synchronization across applications.  FHIRcast and Subscriptions are both conceptually based [W3 WebSub](https://www.w3.org/TR/websub/), and while the mechanics of two projects look similar they are fundamentally different projects used to address different use cases.  In particular:
 
 1. What Is Communicated
-    * FHIRcast is primarily concerned with context syncrhonization.
-    * Subscriptions are focused on content synchonization.
+    * FHIRcast is primarily concerned with context synchronization.
+    * Subscriptions are focused on content synchronization.
 
 1. User Interaction
     * FHIRcast is designed to be used by multiple applications perhaps with the same user and typically on the same device.
@@ -53,7 +63,7 @@ In order to provide topic-based subscription support in FHIR R4, this Implementa
 
 1. Session Duration
     * FHIRcast is designed around short-lived sessions.
-    * Subscriptions are intented to be long-lived resources.
+    * Subscriptions are intended to be long-lived resources.
 
 1. Event Frequency
     * FHIRcast sends only single-event notifications.
@@ -96,3 +106,7 @@ and
 Julie Winters
 
 The authors apologize if they have omitted any contributor from this list.
+
+### Intellectual Property Statements
+
+{% include ip-statements.xhtml %}

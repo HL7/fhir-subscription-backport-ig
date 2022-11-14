@@ -12,7 +12,7 @@
 # ╰────────────────────────────────────────────────────────────────────────────────────────────────╯
 id: hl7.fhir.uv.subscriptions-backport
 canonical: http://hl7.org/fhir/uv/subscriptions-backport
-version: 1.0.0
+version: 1.1.0
 name: SubscriptionsR5Backport
 title: "Subscriptions R5 Backport"
 status: draft
@@ -33,7 +33,7 @@ contact:
       - system: email
         value: mailto:ehaas@healthedatainc.com
 description: The Subscription R5 Backport Implementation Guide enables servers running
-  verions of FHIR earlier than R5 to implement a subset of R5 Subscriptions in a
+  versions of FHIR earlier than R5 to implement a subset of R5 Subscriptions in a
   standardized way.
 license: CC0-1.0
 fhirVersion: 4.3.0
@@ -41,6 +41,17 @@ parameters:
   show-inherited-invariants: false
   usage-stats-opt-out: true
   shownav: 'true'
+  r4-exclusion:
+    - http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-subscription-notification
+    - SubscriptionStatus/r4b-notification-status
+    - Bundle/r4b-notification-multi-resource
+    - Bundle/r4b-notification-full-resource
+    - Bundle/r4b-notification-id-only
+    - Bundle/r4b-notification-heartbeat
+    - Bundle/r4b-notification-handshake
+    - Bundle/r4b-notification-error
+    - Bundle/r4b-notification-empty
+    - CapabilityStatement/backport-subscription-server
 copyrightYear: 2020+
 releaseLabel: Standard for Trial Use
 jurisdiction: http://unstats.un.org/unsd/methods/m49/m49.htm#001 "World"
@@ -98,6 +109,7 @@ menu:
   Support:
     Downloads: downloads.html
     Known Implementations: https://confluence.hl7.org/display/FHIRI/FHIR+Subscriptions
+
 
 # ╭───────────────────────────────────────package-list.json────────────────────────────────────────╮
 # │  To use a provided ig-data/package-list.json file, delete the "history" property below.        │
