@@ -53,7 +53,7 @@ An example workflow for establishing a <code>rest-hook</code> subscription is sh
 1. Client Endpoint accepts the POST and returns a success HTTP code (e.g., `200`).
 1. Server may send notifications of type `heartbeat` at any time.
 1. Endpoints should respond with appropriate HTTP status codes (e.g., `200`).
-1. Server may send notifications of type `event-notificaiton` at any time.
+1. Server may send notifications of type `event-notification` at any time.
 1. Endpoints should respond with appropriate HTTP status codes (e.g., `200`).
 
 ##### Security Notes

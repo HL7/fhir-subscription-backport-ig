@@ -11,7 +11,7 @@ Error handling as a Server is intended to be simple.  A server is not expected t
 A server MAY:
 * Continue to send `heartbeat` messages (with an `error` status set).
 
-Disovering the error state and recovering from it are responsibilites of the subscriber.  This includes resetting the `Subscription` to an `active` or `requested` status - a client is responsible for requesting re-activation of a subscription.  Note: this is important because a subscriber must make the determiniation of how to recover from an error state; if a server arbitrarily resets a subscription, a subscriber may not be aware of missing notifications.
+Discovering the error state and recovering from it are responsibilities of the subscriber.  This includes resetting the `Subscription` to an `active` or `requested` status - a client is responsible for requesting re-activation of a subscription.  Note: this is important because a subscriber must make the determination of how to recover from an error state; if a server arbitrarily resets a subscription, a subscriber may not be aware of missing notifications.
 
 ### Detecting Errors as a Subscriber
 

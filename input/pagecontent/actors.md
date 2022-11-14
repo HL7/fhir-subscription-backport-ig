@@ -11,7 +11,7 @@ Note that when using subscriptions, the FHIR server combines the roles of publis
 
 ### Client
 
-**Client** refers to the FHIR application or applications acting as subscriber. This includes the responsibilites of acting as a FHIR client (to create a Subscription) and receiving notifications on a supported channel.
+**Client** refers to the FHIR application or applications acting as subscriber. This includes the responsibilities of acting as a FHIR client (to create a Subscription) and receiving notifications on a supported channel.
 
 ### Endpoint
 

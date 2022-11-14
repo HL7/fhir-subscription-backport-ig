@@ -11,7 +11,7 @@ In order to claim conformance with this guide, a server:
 * SHALL support at least one Payload Type
 
 ### Conformance Artifacts
-FHIR Servers claiming conformance to this Implementation Guide must conform to the expectations described in the [Server CapabilityStatement](CapabilityStatement-backport-subscription-server.html).
+FHIR Servers claiming conformance to this Implementation Guide must conform to the expectations described in the Capability Statement appropriate to the implemented FHIR version.  For FHIR R4B, [R4B Server CapabilityStatement](CapabilityStatement-backport-subscription-server.html), and for FHIR R4, [R4 Server CapabilityStatement](CapabilityStatement-backport-subscription-server-r4.html).
 
 Some options of the Subscriptions Framework are not easily expressed in a `CapabilityStatement`.  In addition to the basic support in the CapabilityStatement (e.g., resources, interactions, and operations), a conformant server SHALL support at least one [Payload Type](payloads.html) and SHOULD support one [Channel Type](channels.html) listed in this IG.
 
@@ -41,19 +41,19 @@ Clients supporting this guide MAY support this extension, as necessary for their
 
 
 #### backport-filter-criteria
-The [backport-filter-critiera](StructureDefinition-backport-filter-criteria.html) extension is used to describe the actual filters used in a specific instance of a subscription.
+The [backport-filter-criteria](StructureDefinition-backport-filter-criteria.html) extension is used to describe the actual filters used in a specific instance of a subscription.
 
 ##### Server Support
 Servers supporting this guide SHALL be able to read values in this extension and SHALL be able to apply filters as described by any Subscription Topics the server advertises support for.
 
-If a server is capable of supporting filter critiera in general but unable to support criteria requested in a subscription, the server SHALL reject the subscription.
+If a server is capable of supporting filter criteria in general but unable to support criteria requested in a subscription, the server SHALL reject the subscription.
 
 ##### Client Support
 Clients supporting this guide SHALL be able to write values in this extension.
 
 
 #### backport-payload-content
-The [backport-payload-content](StructureDefinition-backport-payload-content.html) extension is used to decribe the amount of detail included in notification payloads.
+The [backport-payload-content](StructureDefinition-backport-payload-content.html) extension is used to describe the amount of detail included in notification payloads.
 
 ##### Server Support
 Servers supporting this guide SHALL be able to read values from this extension.  A server SHALL reject the subscription request if a client asks for a content level the server does not intend to support (e.g., does not meet security requirements).  Servers SHALL include information in notifications as described in this guide based on this value.

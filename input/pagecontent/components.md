@@ -8,7 +8,8 @@ The FHIR Topic-Based Subscription Model is composed of three parts:
     * Defines the **shape** of the notification
     * Always referenced by canonical URL
   * How is it defined?
-    * The R4B 4.3.0 (or later) [SubscriptionTopic](http://hl7.org/fhir/subscriptiontopic.html) resource
+    * FHIR R4: [out of scope](#subscription-topics-in-r4)
+    * FHIR R4B: [SubscriptionTopic](http://hl7.org/fhir/R4B/subscriptiontopic.html) resource
 * [Subscription](#subscriptions)
   * What is it?
     * Describes a request to be notified about events defined by a `SubscriptionTopic`
@@ -17,25 +18,39 @@ The FHIR Topic-Based Subscription Model is composed of three parts:
     * Describe the `channel` and `endpoint` used to send notifications
     * Describe the **payload** included in notifications (MIME type, content level, etc.)
   * How is it defined?
-    * The R4 4.0.0 (or later) [Subscription](http://hl7.org/fhir/subscription.html) resource, plus extensions
+    * FHIR R4: A [Subscription](http://hl7.org/fhir/R4/subscription.html) resource with extensions
+    * FHIR R4B: A [Subscription](http://hl7.org/fhir/R4B/subscription.html) resource with extensions
 * [Notification Bundle](#subscription-notifications)
   * What is it?
     * Describes the contents of a notification
     * Contains zero or more notification **payloads**
   * How is it defined?
-    * An R4 4.0.0 (or later) [Bundle](http://hl7.org/fhir/bundle.html) resource, type of `history`,
-    * an R4B 4.3.0 (or later) [SubscriptionStatus](http://hl7.org/fhir/subscriptionstatus.html) resource, and
-    * zero or more additional entries, either URLs (ids) or resources with full contents.
+    * FHIR R4:
+      * A [Bundle](http://hl7.org/fhir/R4/bundle.html) resource with type `history`,
+      * a [Parameters](http://hl7.org/fhir/R4/parameters.html) resource using the [Backport SubscriptionStatus Profile](StructureDefinition-backport-subscription-status-r4.html), and
+      * zero or more additional entries, with either URLs or resources representing contents.
+    * FHIR R4B:
+      * A [Bundle](http://hl7.org/fhir/R4B/bundle.html) resource with type `history`,
+      * a [SubscriptionStatus](http://hl7.org/fhir/subscriptionstatus.html) resource, and
+      * zero or more additional entries, with either URLs or resources representing contents.
 
 ### Subscription Topics
 
-The `SubscriptionTopic` resource is used to define conceptual or computable events for `Subscription` resources. Conceptually, subscription topics specify an event or change in data that is used to trigger a notification.  Topic definitions also include the boundaries around what a Subscription can filter for and additional resources that MAY be included with notifications.
+In FHIR R4B and later, the `SubscriptionTopic` resource is used to define conceptual or computable events for `Subscription` resources. Conceptually, subscription topics specify an event or change in data that is used to trigger a notification.  Topic definitions also include the boundaries around what a Subscription can filter for and additional resources that MAY be included with notifications.
 
 For example, a topic may define that notifications should be sent when an `Encounter` is created or updated to have the specific value of `status=in-progress`.  The topic may also specify that filters may only be applied to the Patient (`Encounter.subject` where subject is a Patient) referenced by the Encounter, and that notifications may include the relevant Patient resource.
 
-In order to support this functionality in R4, the [SubscriptionTopic](http://hl7.org/fhir/subscriptiontopic.html) resource has been added as to FHIR version 4.3.0.  Detailed information about the resource can be found on the HL7 FHIR website.
+Detailed information about the [SubscriptionTopic](http://hl7.org/fhir/subscriptiontopic.html) resource can be found on the HL7 FHIR website.
 
 In order to make subscription topics more widely available, support for `SubscriptionTopic` resources is available via the [FHIR Registry](http://registry.fhir.org).
+
+#### Subscription Topics in R4
+
+`SubscriptionTopic` resources contain information that is difficult to model without an appropriate resource to start from.  There was an attempt to profile the `Basic` resource with extensions, but the complexity resulted in very low usability.  Combined with use-case evaluation indicated that the most urgent and likely support of topic-based subscriptions would be relying on pre-defined topics with fixed canonical URLs (e.g., topics defined by an Implementation Guide), it was decided to leave topic definitions out-of-scope in R4.
+
+By leaving subscription topics out-of-scope, FHIR R4 servers are not able to support custom topics submitted by clients.  If that support is required, a server may choose to expose a limited R4B endpoint to enable such support.
+
+Implementers adding server-side support for topic-based subscriptions are encouraged (but not required) to use the R4B or R5 definitions internally, in order to ease the transition to future versions.
 
 ### Subscriptions
 
@@ -47,11 +62,19 @@ In order to support topic-based subscriptions in R4, this guide defines several 
 
 In order to link a `Subscription` to a `SubscriptionTopic` and prevent any confusion between the R4 query-based and topic-based implementations, the link to a `SubscriptionTopic` is specified in the `Subscription.criteria` field.  For more details, please see the [Subscription Profile](StructureDefinition-backport-subscription.html) in this guide.
 
+#### Subscriptions and FHIR Versions
+
+Note that subscription notifications, by default, are made using the same FHIR version as the server.  The `Subscription.channel.payload` element can be used to specify a different FHIR version, using syntax and values defined by the [MIME Type Parameter](https://hl7.org/fhir/versioning.html#mt-version).  Servers SHALL look for this parameter during subscription negotiation and SHALL not accept requests for notification FHIR versions it cannot support (servers MAY reject or coerce, according to their policies).
+
+For example, a request for notifications encoded as `application/fhir+json; fhirVersion=4.3` explicitly asks for notifications conforming to the FHIR R4B notification format, while a request for `application/fhir+json; fhirVersion=4.0` explicitly asks for notifications conformant to FHIR R4.  This mechanism allows for more flexibility during upgrades, ensuring that servers and clients can continue to operate across version changes.
+
+More information about the differences in notifications can be found on the [Notifications](notifications.html) page.
+
 #### Accepting Subscription Requests
 
 When a FHIR Server accepts a request to create a `Subscription`, the server is indicating to the client that the server:
-* is capable of detecting when events covered by the requestion SubscriptionTopic occur, and
-* is willing to make a simple best effort attempt at delivering a notification for each occurance of a matching event.
+* is capable of detecting when events covered by the requested SubscriptionTopic occur, and
+* is willing to make a simple best effort attempt at delivering a notification for each occurrence of a matching event.
 
 When processing a request for a `Subscription`, following are *some* checks that a server SHOULD validate:
 * that the `SubscriptionTopic` is valid and implemented by the server
@@ -63,11 +86,15 @@ When processing a request for a `Subscription`, following are *some* checks that
 
 ### Subscription Notifications
 
-In FHIR R5, a new type of `Bundle` has been introduced, which uses the new `SubscriptionStatus` resource to convey status information in notifications.  For FHIR R4, notifications are instead based on a [history Bundle](http://hl7.org/fhir/bundle.html#history), and a [SubscriptionStatus](http://hl7.org/fhir/subscriptionstatus.html) resource is used to convey related meta-information (e.g., which subscription the notification is for).
+In FHIR R5, a new type of `Bundle` has been introduced, which uses the new `SubscriptionStatus` resource to convey status information in notifications.  Support for earlier FHIR versions has been designed to offer similar functionality and serialized data.
+
+In both FHIR R4 and R4B, notifications are based on a [history Bundle](http://hl7.org/fhir/bundle.html#history).  The first entry always contains `SubscriptionStatus` information, encoded as either a [Parameters](http://hl7.org/fhir/R4/parameters.html) resource using the [Backport SubscriptionStatus Profile](StructureDefinition-backport-subscription-status-r4.html) in FHIR R4 or a [SubscriptionStatus](http://hl7.org/fhir/subscriptionstatus.html) resource in FHIR R4B.
 
 Note that since notifications use `history` type Bundles, all notifications need to comply with the requirements for that bundle type.  Specifically, there are two invariants on Bundle (`bdl-3` and `bdl-4`) that require a `Bundle.entry.request` element for *every* `Bundle.entry`.
 * For the status resource (`entry[0]`), the request SHALL be filled out to match a request to the `$status` operation.
 * For additional entries, the request SHOULD be filled out in a way that makes sense given the subscription (e.g., a `POST` or `PUT` operation on the resource, etc.).  However, a server MAY choose to simply include a `GET` to the relevant resource instead.
+
+Detailed information about notifications, including the differences between FHIR R4 and R4B, can be found on the [Notifications](notifications.html) page.
 
 #### Scoping Responsibilities
 
@@ -80,3 +107,8 @@ Therefore, clients SHOULD be aware of some limitations regarding delivery. In pa
 * Some notifications might be delivered multiple times.
 
 In order to mitigate the impact from the above issues, the Subscriptions Framework includes mechanisms to detect both scenarios.  Details can be found on the [Errors Page](errors.html).
+
+
+#### Cross Version Analysis
+
+{% include cross-version-analysis.xhtml %}

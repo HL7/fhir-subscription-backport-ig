@@ -1,13 +1,16 @@
 ### Notifications
 
-As described in [Topic-Based Subscription Components](components.html#subscription-notifications), **all** notifications use the same structure: a [Bundle](http://hl7.org/fhir/bundle.html), with the `type` of `history`, and a [SubscriptionStatus](http://hl7.org/fhir/subscriptionstatus.html) as the first `entry` that contains information about the subscription and notification.
+As described in [Topic-Based Subscription Components](components.html#subscription-notifications), **all** notifications are enclosed in a [Bundle](http://hl7.org/fhir/bundle.html) with the `type` of `history`.  Additionally, the first `entry` of the bundle SHALL be the `SubscriptionStatus` information, encoded as either a [Parameters](http://hl7.org/fhir/R4/parameters.html) resource using the [Backport SubscriptionStatus Profile](StructureDefinition-backport-subscription-status-r4.html) in FHIR R4 or a [SubscriptionStatus](http://hl7.org/fhir/subscriptionstatus.html) resource in FHIR R4B.
 
-The notification bundle has a profile defined in this IG, see [Backported R5 Subscription Notification Bundle](StructureDefinition-backport-subscription-notification.html).
+The notification bundle has a profile defined in this IG for each FHIR version: [R4 Topic-Based Subscription Notification Bundle](StructureDefinition-backport-subscription-notification-r4.html) and [R4B Topic-Based Subscription Notification Bundle](StructureDefinition-backport-subscription-notification.html).
 
-For detailed information about the `SubscriptionStatus` resource, please see the HL7 FHIR website:
+
+For detailed information about the R4B `SubscriptionStatus` resource, please see the HL7 FHIR website:
 * [SubscriptionStatus Resource](http://hl7.org/fhir/subscriptionstatus.html)
 * [Notification Types](http://hl7.org/fhir/subscriptionstatus.html#notification-types)
 * [Notifications and Errors](http://hl7.org/fhir/subscriptionstatus.html#errors)
+
+
 
 ### The history bundle type
 
@@ -19,7 +22,7 @@ Note that since notifications use `history` type Bundles, all notifications need
 
 ### Event Notifications and What to Include
 
-In addition to the `SubscriptionStatus` resource, each notification MAY include additional resources or references to resources (URLs or ids).  The notification shape SHALL be based on the definitions from the `SubscriptionTopic` relevant to the notification:
+In addition to the Subscription Status information, each notification MAY include additional resources or references to resources (URLs or ids).  The notification shape SHALL be based on the definitions from the `SubscriptionTopic` relevant to the notification:
 
 #### Focus Resource
 

@@ -22,7 +22,7 @@ When populating the `SubscriptionStatus.notificationEvent` structure for a notif
 
 When the content type is `empty`, notification bundles SHALL not contain `Bundle.entry` elements other than the `SubscriptionStatus` for the notification.
 
-From a security perspective, `empty` payloads expose the lowest risk, since they contain no PHI. The trade-off is that clients need to perform queries against the server in order to discover what events have occured, costing bot client and server additional time, data transfer, and processing.
+From a security perspective, `empty` payloads expose the lowest risk, since they contain no PHI. The trade-off is that clients need to perform queries against the server in order to discover what events have occurred, costing bot client and server additional time, data transfer, and processing.
 
 #### Id Only
 
@@ -32,7 +32,7 @@ When the content type is `id-only`, notification bundles SHALL include reference
 
 Additionally, notification bundles MAY contain, in addition to the `SubscriptionStatus` used to convey status information, at least one `Bundle.entry` for each resource relevant to the notification. For example, a notification for a topic based on `Encounter` MAY include a reference to the `Encounter` and MAY also include additional resources deemed relevant (e.g., the linked `Patient`).
 
-Each `Bundle.entry` for `id-only` notification SHALL contain a relevant resource URL in the `fullUrl` and `request` elements, as is requred for `history` bundles.
+Each `Bundle.entry` for `id-only` notification SHALL contain a relevant resource URL in the `fullUrl` and `request` elements, as is required for `history` bundles.
 
 From a security perspective, `id-only` payloads have a low risk of exposing PHI. While there is no PHI directly in the payload, some links to resources can be considered PHI. For example, if a system contains `Medication` resources using `RxNorm` codes as ids (e.g., `Medication/RX10359383`), a notification including a reference to that medication would communicate the patient has some interaction with `ciprofloxacin 500 mg 24-hour extended release tablets`.
 
@@ -44,4 +44,4 @@ When the content type is `full-resource`, notification bundles SHALL include ref
 
 Notification bundles for `full-resource` subscriptions SHALL contain, in addition to the `SubscriptionStatus`, at least one `Bundle.entry` for each resource relevant to the notification. For example, a notification for a topic based on the Encounter resource SHALL include an Encounter and MAY include additional resources deemed relevant (e.g., the referenced Patient). Each `Bundle.entry` for a full-resource notification SHALL contain a relevant resource in the `entry.resource` element. If a server cannot include the resource contents due to an issue with a specific notification, the server SHALL populate the `entry.request` and/or `entry.response` elements.
 
-From a security perspecitve, `full-resource` payloads should only be used when the channel is secure - notifications *will* contain PHI.
+From a security perspective, `full-resource` payloads should only be used when the channel is secure - notifications *will* contain PHI.
