@@ -1,10 +1,10 @@
 {
   "package-id" : "hl7.fhir.uv.subscriptions-backport",
   "version" : "1.1.0",
-  "path" : "http://hl7.org/fhir/uv/subscriptions-backport",
+  "path" : "http://hl7.org/fhir/uv/subscriptions-backport/STU1.1",
   "status" : "trial-use",
   "sequence" : "STU 1.1",
-  "desc" : "STU1 release",
+  "desc" : "STU1.1 - Added explicit support for R4, in addition to R4B.",
   "ci-build" : "http://build.fhir.org/ig/HL7/fhir-subscription-backport-ig/",
   "milestone": true
 }
