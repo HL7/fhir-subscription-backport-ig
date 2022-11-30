@@ -4,18 +4,35 @@ Id:          backport-subscription
 Title:       "R4/B Topic-Based Subscription"
 Description: "Profile on the Subscription resource to enable R5-style topic-based subscriptions in FHIR R4 or R4B."
 * insert StructureJurisdiction
-* criteria 1..1 MS
+* criteria 1..1 MS 
+* criteria ^short = "Canonical URL for the topic used to generate events"
+* criteria ^definition = "When using topic-based subscriptions, the primary criteria is always the topic, indicated by its canonical URL."
 * criteria.extension 0..*
 * criteria.extension contains BackportFilterCriteria named filterCriteria 0..*
 * criteria.extension[BackportFilterCriteria] MS SU
+* criteria.extension[BackportFilterCriteria] ^short      = "Filtering critiera applied to events"
+* criteria.extension[BackportFilterCriteria] ^definition = "Search-style filters to be applied to narrow the subscription topic stream. Keys can be either search parameters appropriate to the filtering resource or keys defined within the subscription topic."
+* criteria.extension[BackportFilterCriteria] ^comment    = "When multiple filters are applied, evaluates to true if all the conditions are met; otherwise it returns false. (i.e., logical AND)."
 * channel.payload 1..1
 * channel.payload.extension contains BackportPayloadContent named content 1..1
 * channel.payload.extension[BackportPayloadContent] MS SU
+* channel.payload.extension[BackportPayloadContent] ^short      = "Notification content level"
+* channel.payload.extension[BackportPayloadContent] ^definition = "How much of the resource content to deliver in the notification payload. The choices are an empty payload, only the resource id, or the full resource content."
+* channel.payload.extension[BackportPayloadContent] ^comment    = "Sending the payload has obvious security implications. The server is responsible for ensuring that the content is appropriately secured."
 * channel.extension contains BackportHeartbeatPeriod named heartbeatPeriod 0..1
+* channel.extension[BackportHeartbeatPeriod] ^short      = "Interval in seconds to send 'heartbeat' notification"
+* channel.extension[BackportHeartbeatPeriod] ^definition = "If present, a 'hearbeat' notification (keepalive) is sent via this channel with an the interval period equal to this elements integer value in seconds. If not present, a heartbeat notification is not sent."
 * channel.extension contains BackportTimeout named timeout 0..1
+* channel.extension[BackportTimeout] ^short      = "Timeout in seconds to attempt notification delivery"
+* channel.extension[BackportTimeout] ^definition = "If present, the maximum amount of time a server will allow before failing a notification attempt."
 * channel.extension contains BackportMaxCount named maxCount 0..1
+* channel.extension[BackportMaxCount] ^short      = "Maximum number of triggering resources included in notification bundles"
+* channel.extension[BackportMaxCount] ^definition = "If present, the maximum number of triggering resources that will be included in a notification bundle (e.g., a server will not include more than this number of trigger resources in a single notification). Note that this is not a strict limit on the number of entries in a bundle, as dependent resources can be included."
 * channel.type.extension contains BackportChannelType named customChannelType 0..1
 * channel.type.extension[BackportChannelType] MS SU
+* channel.type.extension[BackportChannelType] ^short      = "Extended channel type for notifications"
+* channel.type.extension[BackportChannelType] ^definition = "The type of channel to send notifications on."
+* channel.type.extension[BackportChannelType] ^comment    = "This extension allows for the use of additional channel types that were not defined in the FHIR R4 subscription definition."
 
 Extension:   BackportChannelType
 Id:          backport-channel-type
@@ -25,6 +42,9 @@ Description: "Additional channel types not defined before FHIR R5."
 * ^context[0].type = #element
 * ^context[0].expression = "Subscription.channel.type"
 * value[x] only Coding
+* value[x] ^short      = "Extended channel type for notifications"
+* value[x] ^definition = "The type of channel to send notifications on."
+* value[x] ^comment    = "This extension allows for the use of additional channel types that were not defined in the FHIR R4 subscription definition."
 
 Extension:   BackportFilterCriteria
 Id:          backport-filter-criteria
@@ -34,6 +54,9 @@ Description: "Criteria for topic-based filtering (filter-by)."
 * ^context[0].type = #element
 * ^context[0].expression = "Subscription.criteria"
 * value[x] only string
+* value[x] ^short      = "Filtering critiera applied to events"
+* value[x] ^definition = "Search-style filters to be applied to narrow the subscription topic stream. Keys can be either search parameters appropriate to the filtering resource or keys defined within the subscription topic."
+* value[x] ^comment    = "When multiple filters are applied, evaluates to true if all the conditions are met; otherwise it returns false. (i.e., logical AND)."
 
 CodeSystem:  BackportContentCodeSystem
 Id:          backport-content-code-system
@@ -63,6 +86,9 @@ Description: "How much of the resource content to deliver in the notification pa
 * ^context[0].expression = "Subscription.channel.payload"
 * value[x] only code
 * valueCode from BackportContentValueSet
+* value[x] ^short      = "Notification content level"
+* value[x] ^definition = "How much of the resource content to deliver in the notification payload. The choices are an empty payload, only the resource id, or the full resource content."
+* value[x] ^comment    = "Sending the payload has obvious security implications. The server is responsible for ensuring that the content is appropriately secured."
 
 Extension:   BackportHeartbeatPeriod
 Id:          backport-heartbeat-period
@@ -72,6 +98,8 @@ Description: "Interval in seconds to send 'heartbeat' notifications."
 * ^context[0].type = #element
 * ^context[0].expression = "Subscription.channel"
 * value[x] only unsignedInt
+* value[x] ^short      = "Interval in seconds to send 'heartbeat' notification"
+* value[x] ^definition = "If present, a 'hearbeat' notification (keepalive) is sent via this channel with an the interval period equal to this elements integer value in seconds. If not present, a heartbeat notification is not sent."
 
 Extension:   BackportTimeout
 Id:          backport-timeout
@@ -81,6 +109,8 @@ Description: "Timeout in seconds to attempt notification delivery."
 * ^context[0].type = #element
 * ^context[0].expression = "Subscription.channel"
 * value[x] only unsignedInt
+* value[x] ^short      = "Timeout in seconds to attempt notification delivery"
+* value[x] ^definition = "If present, the maximum amount of time a server will allow before failing a notification attempt."
 
 Extension:   BackportMaxCount
 Id:          backport-max-count
@@ -90,6 +120,8 @@ Description: "Maximum number of triggering resources included in notification bu
 * ^context[0].type = #element
 * ^context[0].expression = "Subscription.channel"
 * value[x] only positiveInt
+* value[x] ^short      = "Maximum number of triggering resources included in notification bundles"
+* value[x] ^definition = "If present, the maximum number of triggering resources that will be included in a notification bundle (e.g., a server will not include more than this number of trigger resources in a single notification). Note that this is not a strict limit on the number of entries in a bundle, as dependent resources can be included."
 
 Instance:    BackportSubscriptionExampleAdmission
 InstanceOf:  BackportSubscription

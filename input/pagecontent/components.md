@@ -48,7 +48,9 @@ In order to make subscription topics more widely available, support for `Subscri
 
 `SubscriptionTopic` resources contain information that is difficult to model without an appropriate resource to start from.  There was an attempt to profile the `Basic` resource with extensions, but the complexity resulted in very low usability.  Combined with use-case evaluation indicated that the most urgent and likely support of topic-based subscriptions would be relying on pre-defined topics with fixed canonical URLs (e.g., topics defined by an Implementation Guide), it was decided to leave topic definitions out-of-scope in R4.
 
-By leaving subscription topics out-of-scope, FHIR R4 servers are not able to support custom topics submitted by clients.  If that support is required, a server may choose to expose a limited R4B endpoint to enable such support.
+In order to allow for discovery of supported subscription topics, this guide defines the [CapabilityStatement SubscriptionTopic Canonical](StructureDefinition-capabilitystatement-subscriptiontopic.html) extension.  The extension allows server implementers to advertise the canonical URLs of topics available to clients and allows clients to see the list of supported topics on a server.  The extension is expected to appear, if supported, on the `Subscription` resource entry.  Note that servers are NOT required to advertise supported topics via this extension.  Supported topics can also be advertised, for example, by the `CapabilityStatement.instantiates` or `CapabilityStatement.implementationGuide` elements of a CapabilityStatement, as defined by another Implementation Guide.  Finally, FHIR R4 servers MAY choose to leave topic discovery completely out-of-band and part of other steps, such as registration or integration.
+
+Full definitions of subscription topics are considered out-of-scope for FHIR R4 implementations.  Since the full topic definitions are out-of-scope, FHIR R4 servers are not able to support custom topics submitted by clients.  If that functionality is required, a server may choose to expose a limited R4B endpoint to enable such support.
 
 Implementers adding server-side support for topic-based subscriptions are encouraged (but not required) to use the R4B or R5 definitions internally, in order to ease the transition to future versions.
 
@@ -56,11 +58,30 @@ Implementers adding server-side support for topic-based subscriptions are encour
 
 The `Subscription` resource is used to request notifications for a specific client about a specific topic. Conceptually, a subscription is a concrete request for a single client to receive notifications per a single topic.
 
-For example, a subscription may ask for notifications based on an 'Encounter in-progress' topic, such as the one briefly described as an example in [Subscription Topics](#subscription-topics).  The subscription requires a link to the canonical URL of the topic, such as `http://server.example.org/fhir/subscriptiontopics/encounter-in-progress`, information about the channel, such as requesting notifications via `rest-hook` to the endpoint at `http://client.example.org/notification-endpoint/abc`), and payload configuration, such as requesting that bundles are encoded as `application/fhir+json` and include only identifiers (`id-only`).  Additionally, a subscription sets the filters which are applied to determine when notifications should be sent, such as indicating that only notifications for `Patient/123` should be sent.
+For example, a subscription may ask for notifications based on an 'Encounter in-progress' topic, such as the one briefly described as an example in [Subscription Topics](#subscription-topics).  The subscription requires a link to the canonical URL of the topic, such as `http://server.example.org/fhir/subscriptiontopics/encounter-in-progress`, information about the channel, such as requesting notifications via `rest-hook` to the endpoint at `http://client.example.org/notification-endpoint/abc`), and payload configuration, such as requesting that bundles are encoded as `application/fhir+json` and include only identifiers (`id-only`).  Additionally, a subscription sets the filters which are applied to determine when notifications should be sent, such as indicating that only notifications for `Patient/123` should be sent.  More details about filters can be found in the [Subscription Filters](#subscription-filters) section.
 
 In order to support topic-based subscriptions in R4, this guide defines several extensions for use on the [R4 Subscription](http://hl7.org/fhir/subscription.html) resource.  A list of extensions defined by this guide can be found on the [Artifacts](artifacts.html#3) page. Note that the future FHIR R5 publication may define capabilities included in this specification as cross-version extensions. Since the FHIR R5 is currently under development, there are no guarantees these extensions will meet the requirements of this guide. In order to promote widespread compatibility, cross version extensions SHOULD NOT be used on R4 subscriptions to describe any elements also described by this guide
 
 In order to link a `Subscription` to a `SubscriptionTopic` and prevent any confusion between the R4 query-based and topic-based implementations, the link to a `SubscriptionTopic` is specified in the `Subscription.criteria` field.  For more details, please see the [Subscription Profile](StructureDefinition-backport-subscription.html) in this guide.
+
+
+#### Subscription Filters
+
+While Subscription Topics are responsible for declaring the triggers for notifications (e.g., a new observation has been created, a medication dispense has occurred, etc.), the subscription itself MAY contain filters to further refine results.  For example, a topic could trigger all new observations, while a filter could indicate interest in only lab results or observations relating to a specific patient.
+
+Information about defining filters can be found on the [R4B SubscriptionTopicResource](https://hl7.org/fhir/R4B/subscriptiontopic.html#filters).
+
+In FHIR R5, the usage of filters matches the definition structure - i.e., elements for the `resourceType`, `filterParameter`, `modifier`, and `value`.  However, modeling that number of elements in extensions is cumbersome and a relevant syntax already exists.  The [R5 FilterBy Criteria](StructureDefinition-backport-filter-criteria.html) extension contains filter information, formatted according to the search syntax defined by the FHIR core specification.
+
+In filter criteria strings, a `filterParameter`, as defined by the relevant `SubscriptionTopic` is used in the place of a search parameter.  A server MAY support search parameters not listed by a topic definition (e.g., if filtering is applied to a `Patient`, the server can honor filters for `Patient.name` even if the topic does not expose them), however topic authors are encouraged to explicitly list any parameters for best interoperability.
+
+The valid formats for criteria are: 
+* `[filterParameter]=[value]`
+* `[filterParameter]:[modifier]=[value]`
+* `[resourceType].[filterParameter]=[value]`
+* `[resourceType].[filterParameter]:[modifier]=[value]`
+
+Note that `resourceType` is only necessary for disambiguation in the case where there are filter parameters with the same code exposed for multiple resources available for filtering within a specific topic.  Even in the cases where this is true (e.g., hoisting existing search parameters), it is preferable for the topic definition to assign unique names for simplicity.
 
 #### Subscriptions and FHIR Versions
 

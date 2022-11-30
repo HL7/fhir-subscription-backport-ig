@@ -109,10 +109,10 @@ Description: "R4B Example of a topic-based subscription event notification with 
 * insert AddSubscriptionStatus(3dd3c88d-1f7c-40ce-bf41-6b0d8186c311, #active, #event-notification, 2)
 * insert AddSubscriptionStatusFirstEvent(2)
 * insert AddSubscriptionStatusEventFocus($notificationEncounter1)
-* entry[1].fullUrl = $notificationEncounter1
-* entry[1].request.method = #POST
-* entry[1].request.url    = "Encounter"
-* entry[1].response.status = "201"
+// * entry[1].fullUrl = $notificationEncounter1
+// * entry[1].request.method = #POST
+// * entry[1].request.url    = "Encounter"
+// * entry[1].response.status = "201"
 
 
 Instance:    BackportNotificationExampleFullResource

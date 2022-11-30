@@ -112,3 +112,13 @@ Description:   "CapabilityStatement describing the minimal required capabilities
 * insert SupportOperation($status, http://hl7.org/fhir/uv/subscriptions-backport/OperationDefinition/backport-subscription-status, #SHALL)
 * insert SupportOperation($events, http://hl7.org/fhir/uv/subscriptions-backport/OperationDefinition/backport-subscription-events, #MAY)
 * insert SupportOperation($get-ws-binding-token, http://hl7.org/fhir/uv/subscriptions-backport/OperationDefinition/backport-subscription-get-ws-binding-token, #MAY)
+
+
+Extension:   CapabilityStatementSubscriptionTopic
+Id:          capabilitystatement-subscriptiontopic-canonical
+Title:       "CapabilityStatement SubscriptionTopic Canonical"
+Description: "Extension used to advertise supported SubscriptionTopic canonical URLs in a CapabilityStatement."
+* insert StructureJurisdiction
+* ^context[0].type = #element
+* ^context[0].expression = "CapabilityStatement.rest.resource"
+* value[x] only canonical

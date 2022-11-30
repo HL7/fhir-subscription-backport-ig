@@ -1,0 +1,2 @@
+
+This Bundle provides an example of an `error` notification.  This `Bundle` is typical of what may be posted to a notification endpoint (e.g., a listening HTTP server, etc.) in the event of a processing error on the server.

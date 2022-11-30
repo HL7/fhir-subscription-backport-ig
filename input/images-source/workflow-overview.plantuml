@@ -1,0 +1,23 @@
+@startuml
+skinparam NoteTextAlignment left
+skinparam Padding 2
+skinparam ParticipantPadding 50
+skinparam LifelineStrategy solid
+
+split
+  |Server|
+  -[hidden]->
+  :Implement Topics;
+  :Subscription Negotiation;
+  :Send Notifications;
+  kill
+split again
+  |Client|
+  -[hidden]->
+  :Topic Discovery;
+  :Request a Subscription;
+  :Receive Notifications;
+  kill
+end split
+
+@enduml

@@ -5,20 +5,32 @@ skinparam ParticipantPadding 50
 skinparam LifelineStrategy solid
 autonumber
 
-participant "FHIR Server" as S
-participant Client      as C
+participant "FHIR R4 Server" as S
+participant Client as C
 
 group Server Implementation
   S -\\ S: Implement core Subscription functionality
   |||
-  S -\\ S: Implement topics and advertise via\n""SubscriptionTopic"" resources
+  S -\\ S: Implement topics and optionally advertise
 end
 
-group Client Implementation
-else Client Topic Discovery
-  C->>S: Search for a supported ""SubscriptionTopic"", e.g.:\n""GET .../SubscriptionTopic?[params]""
-  return ""Bundle"" with matching\n""SubscriptionTopic"" resources
+group Client Topic Discovery
+else CapabilityStatement with Extension Discovery
+  C->>S: Search for a supported ""SubscriptionTopic""\ncanonical URL in a ""CapabilityStatement"", e.g.:\n""GET .../CapabilityStatement""
+  return ""CapabilityStatement"" with topic canonical URLs\nin ""rest.resource[subscription].extension[""\n"".../capabilitystatement-subscriptiontopic-canonical]""
 
+else CapabilityStatement with Instantiates Discovery
+  C->>S: Search for a known IG ""CapabilityStatement""\ninstantiated in a server ""CapabilityStatement""
+  return ""CapabilityStatement"" with IG capability canonical URLs\nin the ""instantiates"" element
+
+else CapabilityStatement with Implementation Guide Discovery
+  C->>S: Search for a known IG canonical\nlisted in a server ""CapabilityStatement""
+  return ""CapabilityStatement"" with IG canonical URLs\nin the ""implementationGuide"" element
+
+  |||
+end
+
+group Client Topic Discovery
 else Client Subscription Request
   create Endpoint as E
   C->E: Create, configure, or initialize\nthe necessary Endpoint
