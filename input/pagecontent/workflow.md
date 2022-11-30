@@ -49,7 +49,7 @@ Once the subscription is active, notifications will be sent according to the [Ch
 
 1. Server implements the core functionality required for subscriptions (see [Conformance](conformance.html)).
 1. Server implements one or more subscription topics.  Implementation is specific to each topic, and will vary between servers.
-1. *Optional* Client attempts topic discovery via the [CapabilityStatement SubscriptionTopic Canonical](StructureDefinition-capabilitystatement-subscriptiontopic.html) extension.
+1. *Optional* Client attempts topic discovery via the [CapabilityStatement SubscriptionTopic Canonical](StructureDefinition-capabilitystatement-subscriptiontopic-canonical.html) extension.
 1. Server responds with its `CapabilityStatement`.
 1. *Optional* Client attempts topic discovery via the `CapabilityStatement.instantiates` element.
 1. Server responds with its `CapabilityStatement`.
