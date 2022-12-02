@@ -60,8 +60,8 @@ RuleSet:       OperationCommon
 * status              = #active
 * date                = "2020-11-30"
 * publisher           = "HL7 International - FHIR Infrastructure Work Group"
-* contact[0].telecom[0].system = #url
-* contact[0].telecom[0].value  = "https://hl7.org/Special/committees/fiwg/index.cfm"
+// * contact[0].telecom[0].system = #url
+// * contact[0].telecom[0].value  = "https://hl7.org/Special/committees/fiwg/index.cfm"
 * affectsState        = false
 * version             = "0.1.1"
 * kind                = #operation
