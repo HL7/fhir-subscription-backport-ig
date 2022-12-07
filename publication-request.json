@@ -5,6 +5,5 @@
   "status" : "trial-use",
   "sequence" : "STU 1.1",
   "desc" : "STU1.1 - Added explicit support for R4, in addition to R4B.",
-  "ci-build" : "http://build.fhir.org/ig/HL7/fhir-subscription-backport-ig/",
   "milestone": true
 }
