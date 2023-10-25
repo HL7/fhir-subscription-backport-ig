@@ -28,6 +28,16 @@ RuleSet: ResourceCommonR4B
 * fhirVersion = #4.3.0
 
 
+// The path is either the name of a resource or path to an element
+RuleSet: ExtensionContext(path)
+* ^context[+].type = #element
+* ^context[=].expression = "{path}"
+
+// The strings defined for short and definition should not be quoted, and any comma must be escaped with a backslash.
+RuleSet: ExtensionDefinition(path, short, definition)
+* extension[{path}] ^short = {short}
+* extension[{path}] ^definition = {definition}
+
 // Patient for use in notifications
 Alias: $notificationPatient    = https://example.org/fhir/Patient/1599eb66-431a-447c-a3de-6897fe9ae9a1
 

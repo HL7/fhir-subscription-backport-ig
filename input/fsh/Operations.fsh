@@ -128,3 +128,41 @@ Description:   "This operation is used to get a token for a websocket client to 
 * parameter[=].min           = 1
 * parameter[=].max           = "1"
 * parameter[=].documentation = "The URL the client should use to connect to Websockets."
+
+
+Instance:      subscription-resend
+InstanceOf:    OperationDefinition
+Usage:         #definition
+Title:         "Subscription Resend Operation"
+Description:   "This operation is used to re-send historical events previously triggered in a Subscription."
+* id            = "subscription-resend"
+* name          = "SubscriptionResend"
+* description   = "This operation is used to request that a server resends matching notifications for a subscription."
+* comment       = "Note that this operation is expected to run asynchronously, and the server may choose to return a 202 Accepted response immediately, or may choose to wait until the resend operation has completed before returning a response."
+* insert OperationCommon
+* system        = false
+* type          = false
+* instance      = true
+* code          = #resend
+* resource[0]   = #Subscription
+
+* parameter[+].name          = #eventsSinceNumber
+* parameter[=].use           = #in
+* parameter[=].min           = 0
+* parameter[=].max           = "1"
+* parameter[=].documentation = "The starting event number, inclusive of this event (lower bound)."
+* parameter[=].type          = #string
+
+* parameter[+].name          = #eventsUntilNumber
+* parameter[=].use           = #in
+* parameter[=].min           = 0
+* parameter[=].max           = "1"
+* parameter[=].documentation = "The ending event number, inclusive of this event (upper bound)."
+* parameter[=].type          = #string
+
+* parameter[+].name          = #return
+* parameter[=].use           = #out
+* parameter[=].min           = 1
+* parameter[=].max           = "1"
+* parameter[=].documentation = "An OperationOutcome containing information relating to the server's acceptance of the resend request."
+* parameter[=].type          = #OperationOutcome
