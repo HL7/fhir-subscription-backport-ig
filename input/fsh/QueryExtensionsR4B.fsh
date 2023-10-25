@@ -4,6 +4,7 @@ Title:       "FHIR query to retrieve data about a notification"
 Description: "A FHIR query fragment and related context information that can be used to retrieve resources related to a notification."
 * insert StructureJurisdiction
 * insert ExtensionContext(SubscriptionStatus.notificationEvent)
+* insert ExtensionContext(SubscriptionTopic.notificationShape)
 * extension contains
     queryType 0..1 MS and
     query 1..1 MS
@@ -20,6 +21,17 @@ Description: "A FHIR query fragment and related context information that can be 
 
 // Questions:
 // - How do we describe/relate/restrict queries in topics?
-//      e.g., do we list them in a topic?  If so, how do we split out things like _include?
+//      e.g., do we list them in a topic?  
+//      If so, how do we split out things like _include?
+//      If not, how does a server implemter know what queries are expected?
 // - How are queries restricted / filtered?  I do not think we can use *only* token-based restrictions in core FHIR.
-//      e.g., in example Coverage?_include=Coverage:payor:Organization&_include=Coverage:payor:Patient
+//      e.g., in example 
+//Coverage?_include=Coverage:payor:Organization
+//  &_include=Coverage:payor:Patient 
+// what filters are automatically applied and how do we make this compatible with existing filter mechanisms?
+
+// Shared screen: https://meet.jit.si/fhir
+
+// Please sign-in: https://bit.ly/fhiri
+// (google sheet - if you cannot access, just ask)
+// Name is there if you have been to FHIR-I, otherwise add at the bottom please!
