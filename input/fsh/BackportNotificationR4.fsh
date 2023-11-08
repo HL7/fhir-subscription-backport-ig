@@ -96,6 +96,8 @@ Description:  "Profile on Parameters for topic-based subscription notifications 
     and eventTimestamp 0..1 MS
     and eventFocus 0..1 MS
     and eventAdditionalContext 0..* MS
+    and authType 0..1 MS
+    and authValue 0..1 MS
 * parameter[notificationEvent].part[eventNumber] ^short = "Parameter containing the event number"
 * parameter[notificationEvent].part[eventNumber].name = "event-number" (exactly)
 * parameter[notificationEvent].part[eventNumber].name ^short = "Slice discriminator: the event number"
@@ -124,6 +126,20 @@ Description:  "Profile on Parameters for topic-based subscription notifications 
 * parameter[notificationEvent].part[eventAdditionalContext].value[x] only Reference
 * parameter[notificationEvent].part[eventAdditionalContext].value[x] ^short      = "Additional context for this event"
 * parameter[notificationEvent].part[eventAdditionalContext].value[x] ^definition = "Additional context information for this event. Generally, this will contain references to additional resources included with the event (e.g., the Patient relevant to an Encounter), however it MAY refer to non-FHIR objects."
+* parameter[notificationEvent].part[authType] ^short = "Parameter containing the authorization hint type."
+* parameter[notificationEvent].part[authType].name = "authorization-type" (exactly)
+* parameter[notificationEvent].part[authType].name ^short = "Slice discriminator: the authorization hint type"
+* parameter[notificationEvent].part[authType].value[x] 0..1 MS
+* parameter[notificationEvent].part[authType].value[x] only Coding
+* parameter[notificationEvent].part[authType].value[x] ^short      = "Authorization Hint Type"
+* parameter[notificationEvent].part[authType].value[x] ^definition = "Used by clients to determine what kind of authorization is appropriate in this context."
+* parameter[notificationEvent].part[authValue] ^short = "Parameter containing the authorization hint value."
+* parameter[notificationEvent].part[authValue].name = "authorization-value" (exactly)
+* parameter[notificationEvent].part[authValue].name ^short = "Slice discriminator: the authorization hint value"
+* parameter[notificationEvent].part[authValue].value[x] 0..1 MS
+* parameter[notificationEvent].part[authValue].value[x] only string
+* parameter[notificationEvent].part[authValue].value[x] ^short      = "Authorization Hint Value"
+* parameter[notificationEvent].part[authValue].value[x] ^definition = "A value related to the authorization (e.g., a token)."
 * parameter[error] ^short = "Parameter containing errors on the subscription"
 * parameter[error].name = "error" (exactly)
 * parameter[error].name ^short = "Slice discriminator: errors on the subscription"
@@ -240,6 +256,22 @@ Description: "R4 Example of a topic-based subscription event notification with `
 * insert AddParameterStatus(9e41ff6d-5be6-4e6a-8b85-abd4e7f58400, #active, #event-notification, 2)
 * insert AddParameterStatusFirstEvent(2)
 
+Instance:    BackportNotificationExampleEmptyWithAuthR4
+InstanceOf:  BackportSubscriptionNotificationR4
+Usage:       #example
+Title:       "R4 Notification: Empty with Authoriztion"
+Description: "R4 Example of a topic-based subscription event notification with `empty` content."
+* id        = "r4-notification-empty-with-auth"
+* timestamp = "2020-05-29T11:44:13.1882432-05:00"
+* insert AddParameterStatus(7b8ccdfd-b799-480c-84a5-1d1381513edf, #active, #event-notification, 2)
+* insert AddParameterStatusFirstEvent(2)
+* entry[0].resource.parameter[notificationEvent].name = "notification-event"
+* entry[0].resource.parameter[notificationEvent].part[authType].name = "authorization-type"
+* entry[0].resource.parameter[notificationEvent].part[authType].valueCoding = http://example.org/auth#authorization_base "OAuth request token"
+* entry[0].resource.parameter[notificationEvent].part[authValue].name = "authorization-value"
+* entry[0].resource.parameter[notificationEvent].part[authValue].valueString = "ZGFhNDFjY2MtZGFmMi00YjZkLThiNDYtN2JlZDk1MWEyYzk2"
+
+
 Instance:    BackportNotificationExampleIdOnlyR4
 InstanceOf:  BackportSubscriptionNotificationR4
 Usage:       #example
@@ -254,6 +286,22 @@ Description: "R4 Example of a topic-based subscription event notification with `
 // * entry[1].request.method = #POST
 // * entry[1].request.url    = "Encounter"
 // * entry[1].response.status = "201"
+
+Instance:    BackportNotificationExampleIdOnlyWithAuthR4
+InstanceOf:  BackportSubscriptionNotificationR4
+Usage:       #example
+Title:       "R4 Notification: Id Only with Authorization"
+Description: "R4 Example of a topic-based subscription event notification with `id-only` content with authorization."
+* id        = "r4-notification-id-only-with-auth"
+* timestamp = "2020-05-29T11:44:13.1882432-05:00"
+* insert AddParameterStatus(292d3c72-edc1-4d8a-afaa-d85e19c7f563, #active, #event-notification, 2)
+* insert AddParameterStatusFirstEvent(2)
+* insert AddParameterStatusEventFocus($notificationEncounter1)
+* entry[0].resource.parameter[notificationEvent].name = "notification-event"
+* entry[0].resource.parameter[notificationEvent].part[authType].name = "authorization-type"
+* entry[0].resource.parameter[notificationEvent].part[authType].valueCoding = http://example.org/auth#authorization_base "OAuth request token"
+* entry[0].resource.parameter[notificationEvent].part[authValue].name = "authorization-value"
+* entry[0].resource.parameter[notificationEvent].part[authValue].valueString = "ZGFhNDFjY2MtZGFmMi00YjZkLThiNDYtN2JlZDk1MWEyYzk2"
 
 
 Instance:    BackportNotificationExampleFullResourceR4

@@ -1,10 +1,13 @@
+
+### General Considerations
+
 Applications are responsible for following [FHIR security guidance](http://hl7.org/fhir/security.html). Some recommendations specific to subscriptions are provided below.
 
 A subscription is a request for future event notifications. As with any client-initiated interaction, a `Subscription` could request information a client is not allowed to see. Applications SHALL enforce authorization in accordance with their policy requirements. Applications SHOULD take a subscription's topic and filters into account when authorizing the creation of a `Subscription`, and SHOULD ensure that authorization is (still) in place when sending any event notifications.
 
 When sending an event notification, applications can adopt various strategies to ensure that authorization is still in place. Some strategies may provide imperfect assurance (e.g., a server might rely on signed tokens with some pre-specified lifetime as evidence of authorization). In addition to these strategies, servers can mitigate the risk of disclosing sensitive information by limiting the payload types it supports (e.g., by prohibiting certain clients from requesting `full-resource` notification payloads and relying instead on `id-only` payloads).
 
-`Subscription` resources are not intended to be secure storage for secrets (e.g., OAuth access tokens, etc.). Implementers MAY use their judgement on including limited-use secrets (e.g., a token supplied in Subscription.header to verify that a message is from the desired source).
+`Subscription` resources are not intended to be secure storage for secrets (e.g., OAuth access tokens, etc.). Implementers MAY use their judgement on including limited-use secrets (e.g., a token supplied in the notification HTTP POST headers to verify that a message is from the desired source).
 
 Each notification sent by the application could reveal information about the application and subscriber relationship, as well as sensitive administrative or clinical information. Applications are responsible for ensuring appropriate security is employed for each channel they support. The `Subscription` resource does not address these concerns directly; it is assumed that these are administered by other configuration processes. For instance, an application might maintain a allow-list of acceptable endpoints or trusted certificate authorities for rest-hook channels.
 
@@ -13,3 +16,10 @@ Some topic and server implementation combinations may trigger internal notificat
 Subscribers should ensure an appropriate process to validate incoming messages. For example, if the `full-resource` content type is used, clients should provide a header or some other secret to the server so that messages can be verified prior to being used for health decisions. Using content types of `empty` or `id-only` can mitigate this risk, as resources must be retrieved from a trusted location prior to use.
 
 Subscribers should be aware of, and protect against, the possibility of being used as part of an attack on a FHIR server. For example, a malicious client may send a large volume of fake notifications with `empty` notifications, which would cause the subscriber to send many (potentially expensive) queries to a server.
+
+### Authorization within Notifications
+
+It can be appropriate for a server to include authorization information alongside notifications.  This information could be used to inform a recipient about how authorization should be done when resolving resources from a request (e.g., when querying based on an `empty` notification or retrieving resources based on an `id-only` notification).
+
+Depending on the channel used, notifications MAY or MAY NOT be secure from third parties.  Implementers SHOULD ensure that any authorization information included complies with security best practiced (e.g., providing a token exchanged during an OAuth workflow, along with other data such as a client authentication token, for an access token.)
+

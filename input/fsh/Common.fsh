@@ -5,6 +5,9 @@ Alias: $admissionSubStatus = https://example.org/fhir/Subscription/admission/$st
 Alias: $webHookEndpoint = https://example.org/Endpoints/d7dcc004-808d-452b-8030-3a3a13cd871d
 Alias: $zulipEndpoint = https://example.org/Endpoints/ZulipForwarder
 
+Alias: $authorizationHintExt = http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/notification-authorization-hint
+
+
 RuleSet: StructureJurisdiction
 * ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
 
@@ -26,6 +29,17 @@ RuleSet: ResourceCommonR4
 RuleSet: ResourceCommonR4B
 * jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
 * fhirVersion = #4.3.0
+
+
+// The path is either the name of a resource or path to an element
+RuleSet: ExtensionContext(path)
+* ^context[+].type = #element
+* ^context[=].expression = "{path}"
+
+// The strings defined for short and definition should not be quoted, and any comma must be escaped with a backslash.
+RuleSet: ExtensionDefinition(path, short, definition)
+* extension[{path}] ^short = {short}
+* extension[{path}] ^definition = {definition}
 
 
 // Patient for use in notifications

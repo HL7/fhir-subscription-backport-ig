@@ -15,10 +15,10 @@ canonical: http://hl7.org/fhir/uv/subscriptions-backport
 version: 1.1.0
 name: SubscriptionsR5Backport
 title: "Subscriptions R5 Backport"
-status: draft
+status: active
 publisher:
-  name: HL7 FHIR Infrastructure WG
-  url: https://hl7.org/Special/committees/fiwg
+  name: HL7 International / FHIR Infrastructure
+  url: http://www.hl7.org/Special/committees/fiwg
 contact:
   - name: Gino Canessa
     telecom:
@@ -34,6 +34,8 @@ description: The Subscription R5 Backport Implementation Guide enables servers r
 license: CC0-1.0
 fhirVersion: 4.3.0
 parameters:
+  apply-wg: true
+  default-wg: true
   show-inherited-invariants: false
   usage-stats-opt-out: true
   shownav: 'true'
@@ -43,11 +45,29 @@ parameters:
     - Bundle/r4b-notification-multi-resource
     - Bundle/r4b-notification-full-resource
     - Bundle/r4b-notification-id-only
+    - Bundle/r4b-notification-id-only-with-auth
     - Bundle/r4b-notification-heartbeat
     - Bundle/r4b-notification-handshake
     - Bundle/r4b-notification-error
     - Bundle/r4b-notification-empty
+    - Bundle/r4b-notification-empty-with-auth
     - CapabilityStatement/backport-subscription-server
+  r4b-exclusion:
+    - Bundle/r4-notification-multi-resource
+    - Bundle/r4-notification-full-resource
+    - Bundle/r4-notification-id-only
+    - Bundle/r4-notification-id-only-with-auth
+    - Bundle/r4-notification-heartbeat
+    - Bundle/r4-notification-handshake
+    - Bundle/r4-notification-error
+    - Bundle/r4-notification-empty
+    - Bundle/r4-notification-empty-with-auth
+    - CapabilityStatement/backport-subscription-server-r4
+extension:
+  - url: http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status
+    valueCode: trial-use
+  - url: http://hl7.org/fhir/StructureDefinition/structuredefinition-wg
+    valueCode: fhir
 copyrightYear: 2020+
 releaseLabel: Standard for Trial Use
 jurisdiction: http://unstats.un.org/unsd/methods/m49/m49.htm#001 "World"
@@ -77,6 +97,8 @@ pages:
     title: Safety and Security
   downloads.md:
     title: Downloads
+  ig_changelog.md:
+    title: Change Log
 
 # ╭────────────────────────────────────────────menu.xml────────────────────────────────────────────╮
 # │  To use a provided ig-data/input/includes/menu.xml file, delete the "menu" property below.     │
@@ -104,6 +126,7 @@ menu:
     Examples: artifacts.html#8
   Support:
     Downloads: downloads.html
+    Change Log: ig_changelog.html
     Known Implementations: https://confluence.hl7.org/display/FHIRI/FHIR+Subscriptions
 
 

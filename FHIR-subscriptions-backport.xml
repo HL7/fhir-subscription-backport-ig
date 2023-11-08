@@ -9,6 +9,7 @@
 <artifactPageExtension value="-definitions"/>
 <artifactPageExtension value="-examples"/>
 <artifactPageExtension value="-mappings"/>
+<artifact id="StructureDefinition/notification-authorization-hint" key="StructureDefinition-notification-authorization-hint" name="Authorization information relevant to a notification"/>
 <artifact id="StructureDefinition/backport-heartbeat-period" key="StructureDefinition-backport-heartbeat-period" name="Backport R5 Subscription Heartbeat Period"/>
 <artifact deprecated="true" id="StructureDefinition/backport-notification-url-location" key="StructureDefinition-backport-notification-url-location" name="Backport R5 Subscription Notification URL Location"/>
 <artifact id="StructureDefinition/backport-payload-content" key="StructureDefinition-backport-payload-content" name="Backport R5 Subscription Payload Content Information"/>
@@ -43,22 +44,26 @@
 <artifact id="StructureDefinition/backport-subscription-status-r4" key="StructureDefinition-backport-subscription-status-r4" name="R4 Backported R5 SubscriptionStatus"/>
 <artifact id="CapabilityStatement/r4-capabilitystatement-example-server" key="CapabilityStatement-r4-capabilitystatement-example-server" name="R4 CapabilityStatement: Server Example"/>
 <artifact id="Bundle/r4-notification-empty" key="Bundle-r4-notification-empty" name="R4 Notification: Empty"/>
+<artifact id="Bundle/r4-notification-empty-with-auth" key="Bundle-r4-notification-empty-with-auth" name="R4 Notification: Empty with Authoriztion"/>
 <artifact id="Bundle/r4-notification-error" key="Bundle-r4-notification-error" name="R4 Notification: Error"/>
 <artifact id="Bundle/r4-notification-full-resource" key="Bundle-r4-notification-full-resource" name="R4 Notification: Full Resource"/>
 <artifact id="Bundle/r4-notification-handshake" key="Bundle-r4-notification-handshake" name="R4 Notification: Handshake"/>
 <artifact id="Bundle/r4-notification-heartbeat" key="Bundle-r4-notification-heartbeat" name="R4 Notification: Heartbeat"/>
 <artifact id="Bundle/r4-notification-id-only" key="Bundle-r4-notification-id-only" name="R4 Notification: Id Only"/>
+<artifact id="Bundle/r4-notification-id-only-with-auth" key="Bundle-r4-notification-id-only-with-auth" name="R4 Notification: Id Only with Authorization"/>
 <artifact id="Bundle/r4-notification-multi-resource" key="Bundle-r4-notification-multi-resource" name="R4 Notification: Multiple Resources"/>
 <artifact id="Parameters/r4-notification-status" key="Parameters-r4-notification-status" name="R4 Notification: Status"/>
 <artifact id="StructureDefinition/backport-subscription-notification-r4" key="StructureDefinition-backport-subscription-notification-r4" name="R4 Topic-Based Subscription Notification Bundle"/>
 <artifact id="CapabilityStatement/backport-subscription-server-r4" key="CapabilityStatement-backport-subscription-server-r4" name="R4 Topic-Based Subscription Server Capability Statement"/>
 <artifact id="StructureDefinition/backport-subscription" key="StructureDefinition-backport-subscription" name="R4/B Topic-Based Subscription"/>
 <artifact id="Bundle/r4b-notification-empty" key="Bundle-r4b-notification-empty" name="R4B Notification: Empty"/>
+<artifact id="Bundle/r4b-notification-empty-with-auth" key="Bundle-r4b-notification-empty-with-auth" name="R4B Notification: Empty with Authorization Hint"/>
 <artifact id="Bundle/r4b-notification-error" key="Bundle-r4b-notification-error" name="R4B Notification: Error"/>
 <artifact id="Bundle/r4b-notification-full-resource" key="Bundle-r4b-notification-full-resource" name="R4B Notification: Full Resource"/>
 <artifact id="Bundle/r4b-notification-handshake" key="Bundle-r4b-notification-handshake" name="R4B Notification: Handshake"/>
 <artifact id="Bundle/r4b-notification-heartbeat" key="Bundle-r4b-notification-heartbeat" name="R4B Notification: Heartbeat"/>
 <artifact id="Bundle/r4b-notification-id-only" key="Bundle-r4b-notification-id-only" name="R4B Notification: Id Only"/>
+<artifact id="Bundle/r4b-notification-id-only-with-auth" key="Bundle-r4b-notification-id-only-with-auth" name="R4B Notification: Id Only with Authorization Hint"/>
 <artifact id="Bundle/r4b-notification-multi-resource" key="Bundle-r4b-notification-multi-resource" name="R4B Notification: Multiple Resources"/>
 <artifact id="SubscriptionStatus/r4b-notification-status" key="SubscriptionStatus-r4b-notification-status" name="R4B Notification: Status"/>
 <artifact id="StructureDefinition/backport-subscription-notification" key="StructureDefinition-backport-subscription-notification" name="R4B Topic-Based Subscription Notification Bundle"/>
@@ -80,6 +85,7 @@
 <page deprecated="true" key="actors_and_operations" name="Actors and Operations"/>
 <page key="artifacts" name="Artifacts Summary"/>
 <page deprecated="true" key="background" name="Background"/>
+<page key="ig_changelog" name="Change Log"/>
 <page key="channels" name="Channels"/>
 <page key="conformance" name="Conformance"/>
 <page key="downloads" name="Downloads"/>

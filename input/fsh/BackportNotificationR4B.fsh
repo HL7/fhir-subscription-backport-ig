@@ -99,6 +99,23 @@ Description: "R4B Example of a topic-based subscription event notification with 
 * insert AddSubscriptionStatus(fbc7cb79-0502-4797-993c-399766271260, #active, #event-notification, 2)
 * insert AddSubscriptionStatusFirstEvent(2)
 
+
+Instance:    BackportNotificationExampleEmptyWithAuth
+InstanceOf:  BackportSubscriptionNotification
+Usage:       #example
+Title:       "R4B Notification: Empty with Authorization Hint"
+Description: "R4B Example of a topic-based subscription event notification with `empty` content and authorization."
+* id        = "r4b-notification-empty-with-auth"
+* timestamp = "2020-05-29T11:44:13.1882432-05:00"
+* insert AddSubscriptionStatus(3e2a2ad3-cb42-4a69-a4d5-df28f181d2b9, #active, #event-notification, 2)
+* insert AddSubscriptionStatusFirstEvent(2)
+* entry[0].resource.notificationEvent[0].extension[0].url = $authorizationHintExt
+* entry[0].resource.notificationEvent[0].extension[0].extension[+].url = "type"
+* entry[0].resource.notificationEvent[0].extension[0].extension[=].valueCoding = http://example.org/auth#authorization_base "OAuth request token"
+* entry[0].resource.notificationEvent[0].extension[0].extension[+].url = "value"
+* entry[0].resource.notificationEvent[0].extension[0].extension[=].valueString = "ZGFhNDFjY2MtZGFmMi00YjZkLThiNDYtN2JlZDk1MWEyYzk2"
+
+
 Instance:    BackportNotificationExampleIdOnly
 InstanceOf:  BackportSubscriptionNotification
 Usage:       #example
@@ -113,6 +130,22 @@ Description: "R4B Example of a topic-based subscription event notification with 
 // * entry[1].request.method = #POST
 // * entry[1].request.url    = "Encounter"
 // * entry[1].response.status = "201"
+
+Instance:    BackportNotificationExampleIdOnlyWithAuth
+InstanceOf:  BackportSubscriptionNotification
+Usage:       #example
+Title:       "R4B Notification: Id Only with Authorization Hint"
+Description: "R4B Example of a topic-based subscription event notification with `id-only` content and authorization."
+* id        = "r4b-notification-id-only-with-auth"
+* timestamp = "2020-05-29T11:44:13.1882432-05:00"
+* insert AddSubscriptionStatus(3dd3c88d-1f7c-40ce-bf41-6b0d8186c311, #active, #event-notification, 2)
+* insert AddSubscriptionStatusFirstEvent(2)
+* insert AddSubscriptionStatusEventFocus($notificationEncounter1)
+* entry[0].resource.notificationEvent[0].extension[0].url = $authorizationHintExt
+* entry[0].resource.notificationEvent[0].extension[0].extension[+].url = "type"
+* entry[0].resource.notificationEvent[0].extension[0].extension[=].valueCoding = http://example.org/auth#authorization_base "OAuth request token"
+* entry[0].resource.notificationEvent[0].extension[0].extension[+].url = "value"
+* entry[0].resource.notificationEvent[0].extension[0].extension[=].valueString = "ZGFhNDFjY2MtZGFmMi00YjZkLThiNDYtN2JlZDk1MWEyYzk2"
 
 
 Instance:    BackportNotificationExampleFullResource
