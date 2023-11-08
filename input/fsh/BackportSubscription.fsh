@@ -228,7 +228,7 @@ Usage: #definition
 * description = "This SearchParameter enables query of subscriptions by additional channel type."
 * code = #custom-channel
 * base[0] = #Subscription
-* type = #string
+* type = #token
 * expression = "(extension('http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-channel-type').value as Coding)"
 * xpathUsage = #normal
 
@@ -244,6 +244,6 @@ Usage: #definition
 * description = "This SearchParameter enables query of subscriptions by payload type."
 * code = #payload-type
 * base[0] = #Subscription
-* type = #string
+* type = #token
 * expression = "(extension('http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-payload-content').value as Code)"
 * xpathUsage = #normal

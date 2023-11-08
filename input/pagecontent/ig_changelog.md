@@ -1,6 +1,9 @@
 ### STU 1.2.0
 
 * Addition of authorization hint extension and content to the Safety and Security page.
+* Fix search parameter types for R4:
+    * `http://hl7.org/fhir/uv/subscriptions-backport/SearchParameter/Subscription-custom-channel` : `string` to `token`
+    * `http://hl7.org/fhir/uv/subscriptions-backport/SearchParameter/Subscription-payload-type` : `string` to `token`
 * Various TCs (e.g., typos)
 
 ### STU 1.1.0
