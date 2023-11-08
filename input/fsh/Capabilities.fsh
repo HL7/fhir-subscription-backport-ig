@@ -116,7 +116,7 @@ Description:   "CapabilityStatement describing the minimal required capabilities
 * description   = "CapabilityStatement describing the required and optional capabilities of a FHIR Server supporting backported R5 Subscriptions in R4."
 * text.div      = "<div xmlns=\"http://www.w3.org/1999/xhtml\"><h3 id=\"resource-details\">FHIR RESTful Capabilities by Resource/Profile:</h3><h4>Summary</h4><table class=\"grid\"><thead><tr><th>Resource Type</th><th>Supported Profiles</th><th>Supported Searches</th><th>Supported <code>_includes</code></th><th>Supported <code>_revincludes</code></th><th>Supported Operations</th></tr></thead><tbody><tr><td><a href=\"#subscription\">Subscription</a></td><td><a href=\"StructureDefinition-backport-subscription.html\">Backported R5 Subscription</a></td><td>url, status</td><td>-</td><td>-</td><td>$status, $events, $get-ws-binding-token</td></tr></tbody></table><h4 class=\"no_toc\" id=\"subscription\">Subscription</h4><p>Conformance Expectation: <strong>SHALL</strong></p><p>Supported Profiles:</p><ul><li><strong>SHALL</strong> support: <a href=\"StructureDefinition-backport-subscription.html\">Backported R5 Subscription</a></li></ul><p>Operation Summary:</p><ul><li><strong>SHALL</strong> support the <a href=\"OperationDefinition-backport-subscription-status.html\">$status</a> operation</li><li><strong>MAY</strong> support the <a href=\"OperationDefinition-backport-subscription-events.html\">$events</a> operation , <a href=\"OperationDefinition-backport-subscription-get-ws-binding-token.html\">$get-ws-binding-token</a> operation</li></ul><p>Fetch and Search Criteria:</p><ul><li>A Server <strong>SHALL</strong> be capable of returning a Subscription resource using: <code class=\"highlighter-rouge\">GET [base]/Subscription/[id]</code></li><li>A Server <strong>SHOULD</strong> be capable of creating a Subscription resource using either: <code class=\"highlighter-rouge\">POST [base]/Subscription</code> or <code class=\"highlighter-rouge\">PUT [base]/Subscription/[id]</code></li><li>A Server <strong>SHOULD</strong> be capable of modifying a Subscription resource using either: <code class=\"highlighter-rouge\">PUT [base]/Subscription/[id]</code> or <code class=\"highlighter-rouge\">PATCH [base]/Subscription/[id]</code></li><li>A Server <strong>SHOULD</strong> be capable of deleting a Subscription resource using: <code class=\"highlighter-rouge\">DELETE [base]/Subscription/[id]</code></li><li>A Server <strong>SHOULD</strong> be capable of searching for Subscription resources using: <code class=\"highlighter-rouge\">GET [base]/Subscription/?[parameters]</code></li></ul><p>Search Parameter Summary:</p><table class=\"grid\"><thead><tr><th>Conformance</th><th>Parameter</th><th>Type</th></tr></thead><tbody><tr><td><strong>SHOULD</strong></td><td><a href=\"http://hl7.org/fhir/subscription.html#search\">url</a></td><td>uri</td></tr><tr><td><strong>SHOULD</strong></td><td><a href=\"http://hl7.org/fhir/subscription.html#search\">status</a></td><td>token</td></tr></tbody></table><hr/></div>"
 * text.status   = #generated
-* implementationGuide = "http://hl7.org/fhir/uv/subscriptions-backport/ImplementationGuide/hl7.fhir.uv.subscriptions-backport"
+* implementationGuide[+] = "http://hl7.org/fhir/uv/subscriptions-backport/ImplementationGuide/hl7.fhir.uv.subscriptions-backport"
 * insert CapabilityCommon
 * rest[+].mode  = #server
 * rest[=].mode.extension[http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation].valueCode = #SHALL
@@ -132,6 +132,13 @@ Description:   "CapabilityStatement describing the minimal required capabilities
 * insert SupportOperation($status, http://hl7.org/fhir/uv/subscriptions-backport/OperationDefinition/backport-subscription-status, #SHALL)
 * insert SupportOperation($events, http://hl7.org/fhir/uv/subscriptions-backport/OperationDefinition/backport-subscription-events, #MAY)
 * insert SupportOperation($get-ws-binding-token, http://hl7.org/fhir/uv/subscriptions-backport/OperationDefinition/backport-subscription-get-ws-binding-token, #MAY)
+
+* insert SupportResource(Basic, #SHOULD)
+* insert SupportInteraction(#read, #SHOULD)
+* insert SupportInteraction(#create, #MAY)
+* insert SupportInteraction(#update, #MAY)
+* insert SupportInteraction(#delete, #MAY)
+* insert SupportSearchParam(code, http://hl7.org/fhir/SearchParameter/clinical-code, #token, #SHOULD)
 
 
 Extension:   CapabilityStatementSubscriptionTopic
@@ -190,3 +197,10 @@ Description:  "R4 example of a CapabilityStatement advertising support for topic
 * insert SupportInteractionNoExp(#create)
 * insert SupportInteractionNoExp(#update)
 * insert SupportInteractionNoExp(#delete)
+
+* insert SupportResourceNoExp(Basic)
+* insert SupportInteractionNoExp(#read)
+* insert SupportInteractionNoExp(#create)
+* insert SupportInteractionNoExp(#update)
+* insert SupportInteractionNoExp(#delete)
+* insert SupportSearchParam(code, http://hl7.org/fhir/SearchParameter/clinical-code, #token, #SHOULD)

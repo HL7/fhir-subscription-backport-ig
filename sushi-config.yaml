@@ -12,10 +12,13 @@
 # ╰────────────────────────────────────────────────────────────────────────────────────────────────╯
 id: hl7.fhir.uv.subscriptions-backport
 canonical: http://hl7.org/fhir/uv/subscriptions-backport
-version: 1.1.0
 name: SubscriptionsR5Backport
 title: "Subscriptions R5 Backport"
 status: active
+version: 1.2.0-cibuild
+#releaseLabel: CI-Build #ci-build|draft|qa-preview|ballot|trial-use|release|update|normative+trial-use
+releaseLabel: Standard for Trial Use
+
 publisher:
   name: HL7 International / FHIR Infrastructure
   url: http://www.hl7.org/Special/committees/fiwg
@@ -52,6 +55,7 @@ parameters:
     - Bundle/r4b-notification-empty
     - Bundle/r4b-notification-empty-with-auth
     - CapabilityStatement/backport-subscription-server
+    - SubscriptionTopic/r4b-encounter-complete
   r4b-exclusion:
     - Bundle/r4-notification-multi-resource
     - Bundle/r4-notification-full-resource
@@ -63,14 +67,22 @@ parameters:
     - Bundle/r4-notification-empty
     - Bundle/r4-notification-empty-with-auth
     - CapabilityStatement/backport-subscription-server-r4
+    - Basic/r4-encounter-complete
 extension:
   - url: http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status
     valueCode: trial-use
   - url: http://hl7.org/fhir/StructureDefinition/structuredefinition-wg
     valueCode: fhir
 copyrightYear: 2020+
-releaseLabel: Standard for Trial Use
 jurisdiction: http://unstats.un.org/unsd/methods/m49/m49.htm#001 "World"
+
+# The dependencies property corresponds to IG.dependsOn. The key is the
+# package id and the value is the version (or dev/current). For advanced
+# use cases, the value can be an object with keys for id, uri, and version.
+#
+dependencies:
+  #hl7.fhir.extensions.r5: 4.0.1
+  hl7.fhir.uv.extensions.r4: 1.0.0
 
 pages:
   index.md:

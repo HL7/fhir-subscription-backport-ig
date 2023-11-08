@@ -4,6 +4,7 @@
 * Fix search parameter types for R4:
     * `http://hl7.org/fhir/uv/subscriptions-backport/SearchParameter/Subscription-custom-channel` : `string` to `token`
     * `http://hl7.org/fhir/uv/subscriptions-backport/SearchParameter/Subscription-payload-type` : `string` to `token`
+* Added `Basic` representation as *recommended* R4 representation of `SubscriptionTopic` resources.
 * Various TCs (e.g., typos)
 
 ### STU 1.1.0
