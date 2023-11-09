@@ -11,8 +11,7 @@ For detailed information about the R4B `SubscriptionStatus` resource, please see
 * [Notifications and Errors](http://hl7.org/fhir/subscriptionstatus.html#errors)
 
 
-
-### The history bundle type
+### Bundle Type Considerations
 
 In FHIR R5, a new type of `Bundle` has been introduced, which uses the new `SubscriptionStatus` resource to convey status information in notifications.  For FHIR R4, notifications are instead based on a [history Bundle](http://hl7.org/fhir/bundle.html#history), and a [SubscriptionStatus](http://hl7.org/fhir/subscriptionstatus.html) resource is used to convey related meta-information (e.g., which subscription the notification is for).
 
@@ -22,7 +21,9 @@ Note that since notifications use `history` type Bundles, all notifications need
 
 ### Event Notifications and What to Include
 
-In addition to the Subscription Status information, each notification MAY include additional resources or references to resources (URLs or ids).  The notification shape SHALL be based on the definitions from the `SubscriptionTopic` relevant to the notification:
+What information is included in a notification depends on the level of information being provided (see [Payloads](payloads.html)).
+
+In addition to general Subscription status information, each notification MAY include additional resources or references to resources (URLs or ids).  The notification shape SHALL be based on the definitions from the `SubscriptionTopic` relevant to the notification:
 
 #### Focus Resource
 

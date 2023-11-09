@@ -1,11 +1,18 @@
 ### STU 1.2.0
 
-* Addition of authorization hint extension and content to the Safety and Security page.
-* Fix search parameter types for R4:
+* [FHIR-41917](https://jira.hl7.org/browse/FHIR-41917): Clarify where the id is in the id-only Notification Profile
+    * Added clarifying text to the [Payloads Page](payloads.html)
+    * Added reference to payloads from then [Notifications Page](notifications.html)
+* [FHIR-43081](https://jira.hl7.org/browse/FHIR-43081): Add authorization information to notifications
+    * Addition of authorization hint extension and content to the [Safety and Security page](safety_security.html).
+* [FHIR-43072](https://jira.hl7.org/browse/FHIR-43072): Incorrect search parameter type
     * `http://hl7.org/fhir/uv/subscriptions-backport/SearchParameter/Subscription-custom-channel` : `string` to `token`
     * `http://hl7.org/fhir/uv/subscriptions-backport/SearchParameter/Subscription-payload-type` : `string` to `token`
-* Added `Basic` representation as *recommended* R4 representation of `SubscriptionTopic` resources.
+* [FHIR-38803](https://jira.hl7.org/browse/FHIR-38803): the subscriptions backport should describe how to do notifications in R4 as well as or instead of R4B
+    * Added `Basic` representation as *recommended* R4 representation of `SubscriptionTopic` resources.
 * Various TCs (e.g., typos)
+    * [FHIR-41024](https://jira.hl7.org/browse/FHIR-41024): 2.3.3 Workflow for R4 includes a subsection referencing R4B
+* Added change log.
 
 ### STU 1.1.0
 
