@@ -1,5 +1,7 @@
 ### STU 1.2.0
 
+* [FHIR-43082](https://jira.hl7.org/browse/FHIR-43082): Add operation to resend events
+    * Added [Backport Subscription Resend Operation](OperationDefinition-backport-subscription-resend.html)
 * [FHIR-41917](https://jira.hl7.org/browse/FHIR-41917): Clarify where the id is in the id-only Notification Profile
     * Added clarifying text to the [Payloads Page](payloads.html)
     * Added reference to payloads from then [Notifications Page](notifications.html)

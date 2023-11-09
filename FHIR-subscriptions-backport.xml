@@ -79,6 +79,7 @@
 <artifact id="SearchParameter/Subscription-payload-type" key="SearchParameter-Subscription-payload-type" name="Search by payload types used for notifications"/>
 <artifact id="SearchParameter/Subscription-filter-criteria" key="SearchParameter-Subscription-filter-criteria" name="Search by the filtering criteria used to narrow a topic-based subscription topic"/>
 <artifact id="OperationDefinition/backport-subscription-events" key="OperationDefinition-backport-subscription-events" name="Subscription Events Operation"/>
+<artifact id="OperationDefinition/backport-subscription-resend" key="OperationDefinition-backport-subscription-resend" name="Subscription Resend Operation"/>
 <artifact id="OperationDefinition/backport-subscription-status" key="OperationDefinition-backport-subscription-status" name="Subscription Status Operation"/>
 <page key="NA" name="(NA)"/>
 <page key="many" name="(many)"/>

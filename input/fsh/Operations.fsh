@@ -42,6 +42,59 @@ Description:   "This operation is used to return historical events in the backpo
 * parameter[=].type          = #Bundle
 
 
+Instance:      backport-subscription-resend
+InstanceOf:    OperationDefinition
+Usage:         #definition
+Title:         "Subscription Resend Operation"
+Description:   "This operation is used to resend historical events in the backported R5-Style Subscriptions."
+* id            = "backport-subscription-resend"
+* name          = "SubscriptionResend"
+* description   = "This operation is used to resend notifications that have been previously triggered by a topic-based Subscription in R4."
+* insert OperationCommon
+* system        = false
+* type          = false
+* instance      = true
+* code          = #resend
+* resource[0]   = #Subscription
+
+* parameter[+].name          = #eventsSinceNumber
+* parameter[=].use           = #in
+* parameter[=].min           = 0
+* parameter[=].max           = "1"
+* parameter[=].documentation = "The starting event number, inclusive of this event (lower bound)."
+* parameter[=].type          = #string
+
+* parameter[+].name          = #eventsUntilNumber
+* parameter[=].use           = #in
+* parameter[=].min           = 0
+* parameter[=].max           = "1"
+* parameter[=].documentation = "The ending event number, inclusive of this event (upper bound)."
+* parameter[=].type          = #string
+
+* parameter[+].name          = #eventsSinceInstant
+* parameter[=].use           = #in
+* parameter[=].min           = 0
+* parameter[=].max           = "1"
+* parameter[=].documentation = "The starting event date/time, inclusive of this instant (lower bound)."
+* parameter[=].type          = #instant
+
+* parameter[+].name          = #eventsUntilInstant
+* parameter[=].use           = #in
+* parameter[=].min           = 0
+* parameter[=].max           = "1"
+* parameter[=].documentation = "The ending event date/time, inclusive of this instant (upper bound)."
+* parameter[=].type          = #instant
+
+
+* parameter[+].name          = #return
+* parameter[=].use           = #out
+* parameter[=].min           = 1
+* parameter[=].max           = "1"
+* parameter[=].documentation = "Outcome of this request."
+* parameter[=].type          = #OperationOutcome
+
+
+
 Instance:      backport-subscription-status
 InstanceOf:    OperationDefinition
 Usage:         #definition
