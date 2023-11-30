@@ -47,8 +47,10 @@ parameters:
     - SubscriptionStatus/r4b-notification-status
     - Bundle/r4b-notification-multi-resource
     - Bundle/r4b-notification-full-resource
+    - Bundle/r4b-notification-full-resource-with-query
     - Bundle/r4b-notification-id-only
     - Bundle/r4b-notification-id-only-with-auth
+    - Bundle/r4b-notification-id-only-with-query
     - Bundle/r4b-notification-heartbeat
     - Bundle/r4b-notification-handshake
     - Bundle/r4b-notification-error
@@ -56,11 +58,14 @@ parameters:
     - Bundle/r4b-notification-empty-with-auth
     - CapabilityStatement/backport-subscription-server
     - SubscriptionTopic/r4b-encounter-complete
+    # - StructureDefinition/backport-related-query
   r4b-exclusion:
     - Bundle/r4-notification-multi-resource
     - Bundle/r4-notification-full-resource
+    - Bundle/r4-notification-full-resource-with-query
     - Bundle/r4-notification-id-only
     - Bundle/r4-notification-id-only-with-auth
+    - Bundle/r4-notification-id-only-with-query
     - Bundle/r4-notification-heartbeat
     - Bundle/r4-notification-handshake
     - Bundle/r4-notification-error

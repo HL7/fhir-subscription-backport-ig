@@ -213,7 +213,7 @@ Usage: #definition
 * code = #filter-criteria
 * base[0] = #Subscription
 * type = #string
-* expression = "(extension('http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-filter-criteria').value as string)"
+* expression = "extension('http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-filter-criteria').value.ofType(string)"
 * xpathUsage = #normal
 
 Instance: Subscription-custom-channel
@@ -229,7 +229,7 @@ Usage: #definition
 * code = #custom-channel
 * base[0] = #Subscription
 * type = #token
-* expression = "(extension('http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-channel-type').value as Coding)"
+* expression = "extension('http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-channel-type').value.ofType(Coding)"
 * xpathUsage = #normal
 
 Instance: Subscription-payload-type
@@ -245,5 +245,5 @@ Usage: #definition
 * code = #payload-type
 * base[0] = #Subscription
 * type = #token
-* expression = "(extension('http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-payload-content').value as Code)"
+* expression = "extension('http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-payload-content').value.ofType(Code)"
 * xpathUsage = #normal

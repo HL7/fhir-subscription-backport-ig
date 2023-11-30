@@ -36,3 +36,47 @@ Servers MAY choose to include additional resources with notifications that may b
 In order to aid servers in determining which resources may be of interest to clients, subscription topics can define a list of included resources (see [SubscriptionTopic.notificationShape.include](http://hl7.org/fhir/subscriptiontopic-definitions.html#SubscriptionTopic.notificationShape.include)).  Included resources are matches based on the type of focus resource specified.
 
 Note that the include list MAY contain resources that do not exist in a particular context (e.g., an Encounter with no Observations) or that a user may not be authorized to access (e.g., an Observation tagged as sensitive that cannot be shared with the owner of a subscription).  Servers SHOULD attempt to provide the resources described in the topic, however clients SHALL expect that any resource beyond the focus resource are not guaranteed to be present.
+
+### Notified Pull
+
+#### Use Cases
+
+##### Time Shifted Services
+
+One presented use case is centered around a referral workflow.  The scenario is that some facility (A) is sending a referral to another facility (B) for some sort of patient service.  While Facility A knows the information that Facility B needs, Facility A does not know *when* Facility B will be performing services.  If there is a time gap (e.g., services at Facility B are running six months out), it is better for Facility B to resolve information at the time of service instead of at the time of referral.
+
+<figure>
+  {% include time-shifted-services.svg %}
+  <figcaption>Workflow for referral service with a significant time delay</figcaption>
+</figure>
+
+
+##### Unstandardized Queries
+
+Another use case for a 'notified pull' mechanism is a continuation of the `id-only` return data.  Specifically, in cases where the data necessary is not well-standardized, it is unreasonable to expect the referring facility to be able to construct the queries necessary to retrieve the data.  For example, in the United States, there is no standardized query to retrieve the current insurance coverage information for a patient.  The the process for retrieving that information is vendor-specific and it is unreasonable to expect a referring facility to be able to construct the queries necessary to retrieve it.
+
+<figure>
+  {% include unstandardized-query.svg %}
+  <figcaption>Workflow showing how an unstandardized query can be used</figcaption>
+</figure>
+
+#### Adding Queries to Notifications
+
+In both Use Cases described above, there are two pieces of information a subscriber needs in order to successfully use the provided queries: the URL for the query and coded information describing the query.
+
+In this guide, the query and coded information are paired together as a `string` and a `Coding` respectively.  There are two places that need to contain this data: the topic definition and the notification itself.
+
+##### FHIR R4
+
+In FHIR R4, the topic definition is represented as a `Basic` resource that uses cross-version extensions to contain the information from a later-defined `SubscriptionTopic` resource (e.g., the FHIR R5 `SubscriptionTopic`).  Until FHIR R6 is published, there is no stable cross-version extension available to represent this data.  As such, this guide defines the [backport-related-query](StructureDefinition-backport-related-query.html) extension to represent the query and coded information.
+
+Regarding notifications in FHIR R4, the information normally contained in a `SubscriptionStatus` resource, including details about notification events, is represented by a `Parameters` resource.  A `related-query` part was added to the [backport-subscription-status-r4](Backported R5 SubscriptionStatus.html) profile, inside the `notification-event` part.
+
+For examples, please see [Backported SubscriptionTopic: R4 Encounter Complete](Basic-r4-encounter-complete.html), [R4 Notification: Id Only with Related Query](Bundle-r4-notification-id-only-with-query.html), or [R4 Notification: Full Resource with related query](Bundle-r4-notification-full-resource-with-query.html).
+
+
+##### FHIR R4B and Later
+
+In FHIR R4B and later, topic and notification information are represented in the `SubscriptionTopic` and `SubscriptionStatus` resources respectively.  Until FHIR R6 is published, there are no stable cross-version extension available to represent the elements needed for related-query data.  As such, this guide defines the [backport-related-query](StructureDefinition-backport-related-query.html) extension to represent the query and coded information.  The extension is usable on both `SubscriptionStatus.notificationEvent` and `SubscriptionTopic.notificationShape`.
+
+For examples, please see [Backported SubscriptionTopic: R4B Encounter Complete](SubscriptionTopic-r4b-encounter-complete.html), [R4B Notification: Id Only with Query](Bundle-r4b-notification-id-only-with-query.html), or [R4B Notification: Full Resource with Query](Bundle-r4b-notification-full-resource-with-query.html).

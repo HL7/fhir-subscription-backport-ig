@@ -28,7 +28,7 @@ To summarize, in an `empty` notification:
 * the status contains one or more `notificationEvent` entries, but no `focus` or `additionalContext`, and
 * the bundle does not contain any additional entries.
 
-For examples, see [Bundle-r4-notification-empty](Bundle-r4-notification-empty.html) and [Bundle-r4b-notification-empty](Bundle-r4b-notification-empty).
+For examples, see [Bundle-r4-notification-empty](Bundle-r4-notification-empty.html) and [Bundle-r4b-notification-empty](Bundle-r4b-notification-empty.html).
 
 #### Id Only
 

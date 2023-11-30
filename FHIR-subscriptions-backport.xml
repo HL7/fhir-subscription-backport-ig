@@ -17,7 +17,6 @@
 <artifact deprecated="true" id="StructureDefinition/backport-topic-canonical" key="StructureDefinition-backport-topic-canonical" name="Backport R5 Subscription Topic Canonical"/>
 <artifact deprecated="true" id="OperationDefinition/Backport-subscription-status" key="OperationDefinition-Backport-subscription-status" name="Backport Subscription Status Operation"/>
 <artifact deprecated="true" id="OperationDefinition/Backport-subscriptiontopic-list" key="OperationDefinition-Backport-subscriptiontopic-list" name="Backport Subscription Topic List Operation"/>
-<artifact id="Basic/r4-encounter-complete" key="Basic-r4-encounter-complete" name="BackportSubscriptionTopicExampleEncounterCompleteR4"/>
 <artifact deprecated="true" id="Bundle/notification-empty" key="Bundle-notification-empty" name="Backported Notification: Empty"/>
 <artifact deprecated="true" id="Bundle/notification-error" key="Bundle-notification-error" name="Backported Notification: Error"/>
 <artifact deprecated="true" id="Bundle/notification-full-resource" key="Bundle-notification-full-resource" name="Backported Notification: Full Resource"/>
@@ -40,6 +39,7 @@
 <artifact id="Subscription/subscription-admission" key="Subscription-subscription-admission" name="Backported Subscription: Admission"/>
 <artifact id="Subscription/subscription-zulip" key="Subscription-subscription-zulip" name="Backported Subscription: Custom Channel"/>
 <artifact id="Subscription/subscription-multi-resource" key="Subscription-subscription-multi-resource" name="Backported Subscription: Multi-Resource"/>
+<artifact id="Basic/r4-encounter-complete" key="Basic-r4-encounter-complete" name="Backported SubscriptionTopic: R4 Encounter Complete"/>
 <artifact id="SubscriptionTopic/r4b-encounter-complete" key="SubscriptionTopic-r4b-encounter-complete" name="Backported SubscriptionTopic: R4B Encounter Complete"/>
 <artifact id="StructureDefinition/capabilitystatement-subscriptiontopic-canonical" key="StructureDefinition-capabilitystatement-subscriptiontopic-canonical" name="CapabilityStatement SubscriptionTopic Canonical"/>
 <artifact id="OperationDefinition/backport-subscription-get-ws-binding-token" key="OperationDefinition-backport-subscription-get-ws-binding-token" name="Get WS Binding Token for Subscription Operation"/>
@@ -49,10 +49,12 @@
 <artifact id="Bundle/r4-notification-empty-with-auth" key="Bundle-r4-notification-empty-with-auth" name="R4 Notification: Empty with Authoriztion"/>
 <artifact id="Bundle/r4-notification-error" key="Bundle-r4-notification-error" name="R4 Notification: Error"/>
 <artifact id="Bundle/r4-notification-full-resource" key="Bundle-r4-notification-full-resource" name="R4 Notification: Full Resource"/>
+<artifact id="Bundle/r4-notification-full-resource-with-query" key="Bundle-r4-notification-full-resource-with-query" name="R4 Notification: Full Resource with related query"/>
 <artifact id="Bundle/r4-notification-handshake" key="Bundle-r4-notification-handshake" name="R4 Notification: Handshake"/>
 <artifact id="Bundle/r4-notification-heartbeat" key="Bundle-r4-notification-heartbeat" name="R4 Notification: Heartbeat"/>
 <artifact id="Bundle/r4-notification-id-only" key="Bundle-r4-notification-id-only" name="R4 Notification: Id Only"/>
 <artifact id="Bundle/r4-notification-id-only-with-auth" key="Bundle-r4-notification-id-only-with-auth" name="R4 Notification: Id Only with Authorization"/>
+<artifact id="Bundle/r4-notification-id-only-with-query" key="Bundle-r4-notification-id-only-with-query" name="R4 Notification: Id Only with Related Query"/>
 <artifact id="Bundle/r4-notification-multi-resource" key="Bundle-r4-notification-multi-resource" name="R4 Notification: Multiple Resources"/>
 <artifact id="Parameters/r4-notification-status" key="Parameters-r4-notification-status" name="R4 Notification: Status"/>
 <artifact id="StructureDefinition/backport-subscription-notification-r4" key="StructureDefinition-backport-subscription-notification-r4" name="R4 Topic-Based Subscription Notification Bundle"/>
@@ -62,10 +64,12 @@
 <artifact id="Bundle/r4b-notification-empty-with-auth" key="Bundle-r4b-notification-empty-with-auth" name="R4B Notification: Empty with Authorization Hint"/>
 <artifact id="Bundle/r4b-notification-error" key="Bundle-r4b-notification-error" name="R4B Notification: Error"/>
 <artifact id="Bundle/r4b-notification-full-resource" key="Bundle-r4b-notification-full-resource" name="R4B Notification: Full Resource"/>
+<artifact id="Bundle/r4b-notification-full-resource-with-query" key="Bundle-r4b-notification-full-resource-with-query" name="R4B Notification: Full Resource with Query"/>
 <artifact id="Bundle/r4b-notification-handshake" key="Bundle-r4b-notification-handshake" name="R4B Notification: Handshake"/>
 <artifact id="Bundle/r4b-notification-heartbeat" key="Bundle-r4b-notification-heartbeat" name="R4B Notification: Heartbeat"/>
 <artifact id="Bundle/r4b-notification-id-only" key="Bundle-r4b-notification-id-only" name="R4B Notification: Id Only"/>
 <artifact id="Bundle/r4b-notification-id-only-with-auth" key="Bundle-r4b-notification-id-only-with-auth" name="R4B Notification: Id Only with Authorization Hint"/>
+<artifact id="Bundle/r4b-notification-id-only-with-query" key="Bundle-r4b-notification-id-only-with-query" name="R4B Notification: Id Only with Query"/>
 <artifact id="Bundle/r4b-notification-multi-resource" key="Bundle-r4b-notification-multi-resource" name="R4B Notification: Multiple Resources"/>
 <artifact id="SubscriptionStatus/r4b-notification-status" key="SubscriptionStatus-r4b-notification-status" name="R4B Notification: Status"/>
 <artifact id="StructureDefinition/backport-subscription-notification" key="StructureDefinition-backport-subscription-notification" name="R4B Topic-Based Subscription Notification Bundle"/>
@@ -74,6 +78,7 @@
 <artifact deprecated="true" id="ValueSet/backport-notification-error-value-set" key="ValueSet-backport-notification-error-value-set" name="R5 Subscription Error Codes Value Set"/>
 <artifact deprecated="true" id="CodeSystem/backport-notification-type-code-system" key="CodeSystem-backport-notification-type-code-system" name="R5 Subscription Notification Type Code System"/>
 <artifact deprecated="true" id="ValueSet/backport-notification-type-value-set" key="ValueSet-backport-notification-type-value-set" name="R5 Subscription Notification Type Value Set"/>
+<artifact id="StructureDefinition/backport-related-query" key="StructureDefinition-backport-related-query" name="Related query information"/>
 <artifact id="SearchParameter/Subscription-topic" key="SearchParameter-Subscription-topic" name="Search by Canonical URL used in a topic-based subscription"/>
 <artifact id="SearchParameter/Subscription-custom-channel" key="SearchParameter-Subscription-custom-channel" name="Search by custom channel types used for notifications"/>
 <artifact id="SearchParameter/Subscription-payload-type" key="SearchParameter-Subscription-payload-type" name="Search by payload types used for notifications"/>

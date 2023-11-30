@@ -138,7 +138,7 @@ Title:       "R4B Notification: Id Only with Authorization Hint"
 Description: "R4B Example of a topic-based subscription event notification with `id-only` content and authorization."
 * id        = "r4b-notification-id-only-with-auth"
 * timestamp = "2020-05-29T11:44:13.1882432-05:00"
-* insert AddSubscriptionStatus(3dd3c88d-1f7c-40ce-bf41-6b0d8186c311, #active, #event-notification, 2)
+* insert AddSubscriptionStatus(565fc524-5653-40d1-9617-a28a9bd36e9e, #active, #event-notification, 2)
 * insert AddSubscriptionStatusFirstEvent(2)
 * insert AddSubscriptionStatusEventFocus($notificationEncounter1)
 * entry[0].resource.notificationEvent[0].extension[0].url = $authorizationHintExt
@@ -146,6 +146,23 @@ Description: "R4B Example of a topic-based subscription event notification with 
 * entry[0].resource.notificationEvent[0].extension[0].extension[=].valueCoding = http://example.org/auth#authorization_base "OAuth request token"
 * entry[0].resource.notificationEvent[0].extension[0].extension[+].url = "value"
 * entry[0].resource.notificationEvent[0].extension[0].extension[=].valueString = "ZGFhNDFjY2MtZGFmMi00YjZkLThiNDYtN2JlZDk1MWEyYzk2"
+
+
+Instance:    BackportNotificationExampleIdOnlyWithQuery
+InstanceOf:  BackportSubscriptionNotification
+Usage:       #example
+Title:       "R4B Notification: Id Only with Query"
+Description: "R4B Example of a topic-based subscription event notification with `id-only` content and a related query."
+* id        = "r4b-notification-id-only-with-query"
+* timestamp = "2020-05-29T11:44:13.1882432-05:00"
+* insert AddSubscriptionStatus(f774b0ba-d86c-4360-9d49-f3b1561c83cc, #active, #event-notification, 2)
+* insert AddSubscriptionStatusFirstEvent(2)
+* insert AddSubscriptionStatusEventFocus($notificationEncounter1)
+* entry[0].resource.notificationEvent[0].extension[0].url = $relatedQueryExt
+* entry[0].resource.notificationEvent[0].extension[0].extension[+].url = "queryType"
+* entry[0].resource.notificationEvent[0].extension[0].extension[=].valueCoding = http://example.org/query-types#example "Example query"
+* entry[0].resource.notificationEvent[0].extension[0].extension[+].url = "query"
+* entry[0].resource.notificationEvent[0].extension[0].extension[=].valueString = "http://example.org/fhir/$example?patient=$notificationPatientId"
 
 
 Instance:    BackportNotificationExampleFullResource
@@ -158,6 +175,32 @@ Description: "R4B Example of a topic-based subscription event notification with 
 * insert AddSubscriptionStatus(120e93df-a9ab-4b01-b0e2-6660338e5927, #active, #event-notification, 2)
 * insert AddSubscriptionStatusFirstEvent(2)
 * insert AddSubscriptionStatusEventFocus($notificationEncounter1)
+* entry[1].fullUrl  = $notificationEncounter1
+* entry[1].resource = BackportNotificationEncounter
+* entry[1].request.method = #POST
+* entry[1].request.url    = "Encounter"
+* entry[1].response.status = "201"
+
+Instance:    BackportNotificationExampleFullResourceWithQuery
+InstanceOf:  BackportSubscriptionNotification
+Usage:       #example
+Title:       "R4B Notification: Full Resource with Query"
+Description: "R4B Example of a topic-based subscription event notification with `full-resource` content."
+* id        = "r4b-notification-full-resource-with-query"
+* timestamp = "2020-05-29T11:44:13.1882432-05:00"
+* insert AddSubscriptionStatus(1aa43532-94b7-4463-8049-338045636f7b, #active, #event-notification, 2)
+* insert AddSubscriptionStatusFirstEvent(2)
+* insert AddSubscriptionStatusEventFocus($notificationEncounter1)
+* entry[0].resource.notificationEvent[0].extension[0].url = $relatedQueryExt
+* entry[0].resource.notificationEvent[0].extension[0].extension[+].url = "queryType"
+* entry[0].resource.notificationEvent[0].extension[0].extension[=].valueCoding = http://example.org/query-types#example "Example query"
+* entry[0].resource.notificationEvent[0].extension[0].extension[+].url = "query"
+* entry[0].resource.notificationEvent[0].extension[0].extension[=].valueString = "http://example.org/fhir/$example?patient=$notificationPatientId"
+* entry[0].resource.notificationEvent[0].extension[1].url = $relatedQueryExt
+* entry[0].resource.notificationEvent[0].extension[1].extension[+].url = "queryType"
+* entry[0].resource.notificationEvent[0].extension[1].extension[=].valueCoding = http://example.org/query-types#prescribed "Prescribed medications"
+* entry[0].resource.notificationEvent[0].extension[1].extension[+].url = "query"
+* entry[0].resource.notificationEvent[0].extension[1].extension[=].valueString = "http://example.org/fhir/MedicationRequest?patient=$notificationPatientId&encounter=$notificationEncounter1Id"
 * entry[1].fullUrl  = $notificationEncounter1
 * entry[1].resource = BackportNotificationEncounter
 * entry[1].request.method = #POST

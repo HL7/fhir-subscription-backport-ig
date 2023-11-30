@@ -43,13 +43,19 @@ Description: "R4B example of a subscription topic for completed encounters."
 * notificationShape[=].include[+] = "Encounter:diagnosis"
 * notificationShape[=].include[+] = "Encounter:observation"
 * notificationShape[=].include[+] = "Encounter:location"
+* notificationShape[=].extension[+].url = $relatedQueryExt
+* notificationShape[=].extension[=].extension[+].url = "queryType"
+* notificationShape[=].extension[=].extension[=].valueCoding = http://example.org/query-types#prescribed "Prescribed medications"
+* notificationShape[=].extension[=].extension[+].url = "query"
+* notificationShape[=].extension[=].extension[=].valueString = "http://example.org/fhir/Encounter/[id]/$prescribed-medications"
 
 
 Alias: $fhir-types = http://hl7.org/fhir/fhir-types
 
-Instance: BackportSubscriptionTopicExampleEncounterCompleteR4
+Instance:   BackportSubscriptionTopicExampleEncounterCompleteR4
 InstanceOf: Basic
-Usage: #example
+Usage:      #example
+Title:      "Backported SubscriptionTopic: R4 Encounter Complete"
 * id = "r4-encounter-complete"
 * modifierExtension[+].url = "http://hl7.org/fhir/5.0/StructureDefinition/extension-SubscriptionTopic.status"
 * modifierExtension[=].valueCode = #draft
@@ -134,5 +140,10 @@ Usage: #example
 * extension[=].extension[=].valueString = "Encounter:location"
 * extension[=].extension[+].url = "revInclude"
 * extension[=].extension[=].valueString = "Encounter:subject"
+* extension[=].extension[+].url = $relatedQueryExt
+* extension[=].extension[=].extension[+].url = "queryType"
+* extension[=].extension[=].extension[=].valueCoding = http://example.org/query-types#prescribed "Prescribed medications"
+* extension[=].extension[=].extension[+].url = "query"
+* extension[=].extension[=].extension[=].valueString = "http://example.org/fhir/Encounter/[id]/$prescribed-medications"
 * extension[=].url = "http://hl7.org/fhir/5.0/StructureDefinition/extension-SubscriptionTopic.notificationShape"
 * code = $fhir-types#SubscriptionTopic

@@ -7,6 +7,8 @@ Alias: $zulipEndpoint = https://example.org/Endpoints/ZulipForwarder
 
 Alias: $authorizationHintExt = http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/notification-authorization-hint
 
+Alias: $relatedQueryExt = http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-related-query
+
 
 RuleSet: StructureJurisdiction
 * ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
@@ -44,6 +46,7 @@ RuleSet: ExtensionDefinition(path, short, definition)
 
 // Patient for use in notifications
 Alias: $notificationPatient    = https://example.org/fhir/Patient/1599eb66-431a-447c-a3de-6897fe9ae9a1
+Alias: $notificationPatientId  = 1599eb66-431a-447c-a3de-6897fe9ae9a1
 
 Instance:    BackportNotificationPatient
 InstanceOf:  Patient
@@ -57,7 +60,8 @@ Usage:       #inline
 
 
 // Encounter for use in notifications
-Alias: $notificationEncounter1 = https://example.org/fhir/Encounter/86009987-eabe-42bf-8c02-b112b18cb616
+Alias: $notificationEncounter1   = https://example.org/fhir/Encounter/86009987-eabe-42bf-8c02-b112b18cb616
+Alias: $notificationEncounter1Id = 86009987-eabe-42bf-8c02-b112b18cb616
 
 Instance:    BackportNotificationEncounter
 InstanceOf:  Encounter
