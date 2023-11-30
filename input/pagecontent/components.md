@@ -8,7 +8,7 @@ The FHIR Topic-Based Subscription Model is composed of three parts:
     * Defines the **shape** of the notification
     * Always referenced by canonical URL
   * How is it defined?
-    * FHIR R4: [out of scope](#subscription-topics-in-r4)
+    * FHIR R4: [Basic or out of scope](#subscription-topics-in-r4)
     * FHIR R4B: [SubscriptionTopic](http://hl7.org/fhir/R4B/subscriptiontopic.html) resource
 * [Subscription](#subscriptions)
   * What is it?
@@ -46,11 +46,11 @@ In order to make subscription topics more widely available, support for `Subscri
 
 #### Subscription Topics in R4
 
-`SubscriptionTopic` resources contain information that is difficult to model without an appropriate resource to start from.  There was an attempt to profile the `Basic` resource with extensions, but the complexity resulted in very low usability.  Combined with use-case evaluation indicated that the most urgent and likely support of topic-based subscriptions would be relying on pre-defined topics with fixed canonical URLs (e.g., topics defined by an Implementation Guide), it was decided to leave topic definitions out-of-scope in R4.
+`SubscriptionTopic` resources contain information that is difficult to model without an appropriate resource to start from.  Representation is possible by using a later-defined version of the resource (e.g., from FHIR R5), cross-version extensions, and the `Basic` resource type.  Earlier versions of this guide left topics out of scope while this model was being developed, but today tooling will do the conversion automatically.
 
-In order to allow for discovery of supported subscription topics, this guide defines the [CapabilityStatement SubscriptionTopic Canonical](StructureDefinition-capabilitystatement-subscriptiontopic-canonical.html) extension.  The extension allows server implementers to advertise the canonical URLs of topics available to clients and allows clients to see the list of supported topics on a server.  The extension is expected to appear, if supported, on the `Subscription` resource entry.  Note that servers are NOT required to advertise supported topics via this extension.  Supported topics can also be advertised, for example, by the `CapabilityStatement.instantiates` or `CapabilityStatement.implementationGuide` elements of a CapabilityStatement, as defined by another Implementation Guide.  Finally, FHIR R4 servers MAY choose to leave topic discovery completely out-of-band and part of other steps, such as registration or integration.
+In order to allow for discovery of supported subscription topics, this guide defines the [CapabilityStatement SubscriptionTopic Canonical](StructureDefinition-capabilitystatement-subscriptiontopic-canonical.html) extension.  The extension allows server implementers to advertise the canonical URLs of topics available to clients and allows clients to see the list of supported topics on a server.  The extension is expected to appear, if supported, on the `Subscription` resource entry.  Note that servers are NOT required to advertise supported topics via this extension.  Supported topics can also be advertised, for example, by the `CapabilityStatement.instantiates` or `CapabilityStatement.implementationGuide` elements of a CapabilityStatement, as defined by another Implementation Guide.  If a server supports `Basic`-wrapped versions of topics, they can be discovered by querying for `Basic` resources that have the `code` of `http://hl7.org/fhir/fhir-types|SubscriptionTopic`.  Finally, FHIR R4 servers MAY choose to leave topic discovery completely out-of-band and part of other steps, such as registration or integration.
 
-Full definitions of subscription topics are considered out-of-scope for FHIR R4 implementations.  Since the full topic definitions are out-of-scope, FHIR R4 servers are not able to support custom topics submitted by clients.  If that functionality is required, a server may choose to expose a limited R4B endpoint to enable such support.
+Note that supporting `Basic` versions of topics is NOT required by this guide, and FHIR R4 servers are not required to support any form of custom topics (i.e., only supporting topics that are added by developers).  If that functionality is desired, a server may choose to expose `Basic` versions of topics or a limited R4B endpoint to enable such support.
 
 Implementers adding server-side support for topic-based subscriptions are encouraged (but not required) to use the R4B or R5 definitions internally, in order to ease the transition to future versions.
 

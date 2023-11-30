@@ -1,0 +1,27 @@
+@startuml
+skinparam NoteTextAlignment left
+skinparam Padding 2
+skinparam ParticipantPadding 50
+skinparam LifelineStrategy solid
+
+participant "Referring Facility (A)" as A
+participant "Servicing Facility (B)" as B
+
+A -> B: Patient needs service
+return Will Schedule
+
+note left of B
+  Contacting Patient...
+  Scheduling...
+  ...Service is imminent
+end note
+
+B -> A: Authorization Request
+return Authorized
+
+...
+
+B -> A: Queries for information
+return Current Patient Data
+
+@enduml

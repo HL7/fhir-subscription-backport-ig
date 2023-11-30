@@ -73,6 +73,9 @@ More information can be found on the [Topic-Based Subscription Components](compo
 
 FHIR [Messaging](http://hl7.org/fhir/messaging.html) is a message-based protocol which can be used for communication. When combining Messaging and Subscriptions, complete notifications are wrapped into Messaging Bundles.  More details are provided on the [channels page](channels.html#fhir-messaging).
 
+### Change Log
+
+A [Change log](ig_changelog.html) is provided to highlight differences between versions.
 
 ### Authors and Contributors
 
@@ -89,8 +92,10 @@ The authors gratefully acknowledge the many contributions from numerous users an
 
 Avery Allen,
 Steve Atwood,
+Brian Swinkels,
 Rick Geimer,
 Grahame Grieve,
+Alexander Henket,
 Bas van den Heuvel,
 Spencer LaGesse,
 Brett Marquard,
@@ -101,6 +106,7 @@ Pascal Pfiffner,
 David Pyke,
 René Spronk,
 Jenni Syed,
+Cooper Thompson,
 Isaac Vetter,
 and
 Julie Winters

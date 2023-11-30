@@ -96,6 +96,9 @@ Description:  "Profile on Parameters for topic-based subscription notifications 
     and eventTimestamp 0..1 MS
     and eventFocus 0..1 MS
     and eventAdditionalContext 0..* MS
+    and eventRelatedQuery 0..* MS
+    and authType 0..1 MS
+    and authValue 0..1 MS
 * parameter[notificationEvent].part[eventNumber] ^short = "Parameter containing the event number"
 * parameter[notificationEvent].part[eventNumber].name = "event-number" (exactly)
 * parameter[notificationEvent].part[eventNumber].name ^short = "Slice discriminator: the event number"
@@ -124,6 +127,43 @@ Description:  "Profile on Parameters for topic-based subscription notifications 
 * parameter[notificationEvent].part[eventAdditionalContext].value[x] only Reference
 * parameter[notificationEvent].part[eventAdditionalContext].value[x] ^short      = "Additional context for this event"
 * parameter[notificationEvent].part[eventAdditionalContext].value[x] ^definition = "Additional context information for this event. Generally, this will contain references to additional resources included with the event (e.g., the Patient relevant to an Encounter), however it MAY refer to non-FHIR objects."
+* parameter[notificationEvent].part[eventRelatedQuery] ^short = "Parameter containing related query information for this event"
+* parameter[notificationEvent].part[eventRelatedQuery].name = "related-query" (exactly)
+* parameter[notificationEvent].part[eventRelatedQuery].name ^short = "Slice discriminator: related query information for this event"
+* parameter[notificationEvent].part[eventRelatedQuery].part ^slicing.discriminator.type = #value
+* parameter[notificationEvent].part[eventRelatedQuery].part ^slicing.discriminator.path = "name"
+* parameter[notificationEvent].part[eventRelatedQuery].part ^slicing.rules = #open
+* parameter[notificationEvent].part[eventRelatedQuery].part ^slicing.ordered = false
+* parameter[notificationEvent].part[eventRelatedQuery].part ^slicing.description = "Slice on related query part name"
+* parameter[notificationEvent].part[eventRelatedQuery].part
+    contains queryType 0..1 MS
+    and query 1..1 MS
+* parameter[notificationEvent].part[eventRelatedQuery].part[queryType] ^short = "Parameter containing the query type"
+* parameter[notificationEvent].part[eventRelatedQuery].part[queryType].name = "query-type" (exactly)
+* parameter[notificationEvent].part[eventRelatedQuery].part[queryType].name ^short = "Slice discriminator: the query type"
+* parameter[notificationEvent].part[eventRelatedQuery].part[queryType].value[x] 0..1 MS
+* parameter[notificationEvent].part[eventRelatedQuery].part[queryType].value[x] only Coding
+* parameter[notificationEvent].part[eventRelatedQuery].part[queryType].value[x] ^short      = "Query Type"
+* parameter[notificationEvent].part[eventRelatedQuery].part[queryType].value[x] ^definition = "The type of information this query can be used to retrieve."
+* parameter[notificationEvent].part[eventRelatedQuery].part[query] ^short = "Parameter containing the query"
+* parameter[notificationEvent].part[eventRelatedQuery].part[query].name = "query" (exactly)
+* parameter[notificationEvent].part[eventRelatedQuery].part[query].name ^short = "Slice discriminator: the query"
+* parameter[notificationEvent].part[eventRelatedQuery].part[query].value[x] 1..1 MS
+* parameter[notificationEvent].part[eventRelatedQuery].part[query].value[x] only string
+* parameter[notificationEvent].part[authType] ^short = "Parameter containing the authorization hint type."
+* parameter[notificationEvent].part[authType].name = "authorization-type" (exactly)
+* parameter[notificationEvent].part[authType].name ^short = "Slice discriminator: the authorization hint type"
+* parameter[notificationEvent].part[authType].value[x] 0..1 MS
+* parameter[notificationEvent].part[authType].value[x] only Coding
+* parameter[notificationEvent].part[authType].value[x] ^short      = "Authorization Hint Type"
+* parameter[notificationEvent].part[authType].value[x] ^definition = "Used by clients to determine what kind of authorization is appropriate in this context."
+* parameter[notificationEvent].part[authValue] ^short = "Parameter containing the authorization hint value."
+* parameter[notificationEvent].part[authValue].name = "authorization-value" (exactly)
+* parameter[notificationEvent].part[authValue].name ^short = "Slice discriminator: the authorization hint value"
+* parameter[notificationEvent].part[authValue].value[x] 0..1 MS
+* parameter[notificationEvent].part[authValue].value[x] only string
+* parameter[notificationEvent].part[authValue].value[x] ^short      = "Authorization Hint Value"
+* parameter[notificationEvent].part[authValue].value[x] ^definition = "A value related to the authorization (e.g., a token)."
 * parameter[error] ^short = "Parameter containing errors on the subscription"
 * parameter[error].name = "error" (exactly)
 * parameter[error].name ^short = "Slice discriminator: errors on the subscription"
@@ -240,6 +280,22 @@ Description: "R4 Example of a topic-based subscription event notification with `
 * insert AddParameterStatus(9e41ff6d-5be6-4e6a-8b85-abd4e7f58400, #active, #event-notification, 2)
 * insert AddParameterStatusFirstEvent(2)
 
+Instance:    BackportNotificationExampleEmptyWithAuthR4
+InstanceOf:  BackportSubscriptionNotificationR4
+Usage:       #example
+Title:       "R4 Notification: Empty with Authoriztion"
+Description: "R4 Example of a topic-based subscription event notification with `empty` content."
+* id        = "r4-notification-empty-with-auth"
+* timestamp = "2020-05-29T11:44:13.1882432-05:00"
+* insert AddParameterStatus(7b8ccdfd-b799-480c-84a5-1d1381513edf, #active, #event-notification, 2)
+* insert AddParameterStatusFirstEvent(2)
+* entry[0].resource.parameter[notificationEvent].name = "notification-event"
+* entry[0].resource.parameter[notificationEvent].part[authType].name = "authorization-type"
+* entry[0].resource.parameter[notificationEvent].part[authType].valueCoding = http://example.org/auth#authorization_base "OAuth request token"
+* entry[0].resource.parameter[notificationEvent].part[authValue].name = "authorization-value"
+* entry[0].resource.parameter[notificationEvent].part[authValue].valueString = "ZGFhNDFjY2MtZGFmMi00YjZkLThiNDYtN2JlZDk1MWEyYzk2"
+
+
 Instance:    BackportNotificationExampleIdOnlyR4
 InstanceOf:  BackportSubscriptionNotificationR4
 Usage:       #example
@@ -254,6 +310,39 @@ Description: "R4 Example of a topic-based subscription event notification with `
 // * entry[1].request.method = #POST
 // * entry[1].request.url    = "Encounter"
 // * entry[1].response.status = "201"
+
+Instance:    BackportNotificationExampleIdOnlyWithAuthR4
+InstanceOf:  BackportSubscriptionNotificationR4
+Usage:       #example
+Title:       "R4 Notification: Id Only with Authorization"
+Description: "R4 Example of a topic-based subscription event notification with `id-only` content and authorization."
+* id        = "r4-notification-id-only-with-auth"
+* timestamp = "2020-05-29T11:44:13.1882432-05:00"
+* insert AddParameterStatus(d5359778-3cda-46f0-8193-54bd09ad8309, #active, #event-notification, 2)
+* insert AddParameterStatusFirstEvent(2)
+* insert AddParameterStatusEventFocus($notificationEncounter1)
+* entry[0].resource.parameter[notificationEvent].name = "notification-event"
+* entry[0].resource.parameter[notificationEvent].part[authType].name = "authorization-type"
+* entry[0].resource.parameter[notificationEvent].part[authType].valueCoding = http://example.org/auth#authorization_base "OAuth request token"
+* entry[0].resource.parameter[notificationEvent].part[authValue].name = "authorization-value"
+* entry[0].resource.parameter[notificationEvent].part[authValue].valueString = "ZGFhNDFjY2MtZGFmMi00YjZkLThiNDYtN2JlZDk1MWEyYzk2"
+
+Instance:    BackportNotificationExampleIdOnlyWithQueryR4
+InstanceOf:  BackportSubscriptionNotificationR4
+Usage:       #example
+Title:       "R4 Notification: Id Only with Related Query"
+Description: "R4 Example of a topic-based subscription event notification with `id-only` content and related queries."
+* id        = "r4-notification-id-only-with-query"
+* timestamp = "2020-05-29T11:44:13.1882432-05:00"
+* insert AddParameterStatus(20f7e506-69ba-4895-b1f8-044dab538bc4, #active, #event-notification, 2)
+* insert AddParameterStatusFirstEvent(2)
+* insert AddParameterStatusEventFocus($notificationEncounter1)
+* entry[0].resource.parameter[notificationEvent].name = "notification-event"
+* entry[0].resource.parameter[notificationEvent].part[eventRelatedQuery].name = "related-query"
+* entry[0].resource.parameter[notificationEvent].part[eventRelatedQuery].part[queryType].name = "query-type"
+* entry[0].resource.parameter[notificationEvent].part[eventRelatedQuery].part[queryType].valueCoding = http://example.org/query-types#example "Example query"
+* entry[0].resource.parameter[notificationEvent].part[eventRelatedQuery].part[query].name = "query"
+* entry[0].resource.parameter[notificationEvent].part[eventRelatedQuery].part[query].valueString = "http://example.org/fhir/$example?patient=$notificationPatientId"
 
 
 Instance:    BackportNotificationExampleFullResourceR4
@@ -271,6 +360,34 @@ Description: "R4 Example of a topic-based subscription event notification with `
 * entry[1].request.method = #POST
 * entry[1].request.url    = "Encounter"
 * entry[1].response.status = "201"
+
+Instance:    BackportNotificationExampleFullResourceWithQueryR4
+InstanceOf:  BackportSubscriptionNotificationR4
+Usage:       #example
+Title:       "R4 Notification: Full Resource with related query"
+Description: "R4 Example of a topic-based subscription event notification with `full-resource` content and related queries."
+* id        = "r4-notification-full-resource-with-query"
+* timestamp = "2020-05-29T11:44:13.1882432-05:00"
+* insert AddParameterStatus(919ce5d0-d77c-44a7-a397-d8b2a05fd1bf, #active, #event-notification, 2)
+* insert AddParameterStatusFirstEvent(2)
+* insert AddParameterStatusEventFocus($notificationEncounter1)
+* entry[0].resource.parameter[notificationEvent].name = "notification-event"
+* entry[0].resource.parameter[notificationEvent].part[eventRelatedQuery][0].name = "related-query"
+* entry[0].resource.parameter[notificationEvent].part[eventRelatedQuery][0].part[queryType].name = "query-type"
+* entry[0].resource.parameter[notificationEvent].part[eventRelatedQuery][0].part[queryType].valueCoding = http://example.org/query-types#example "Example query"
+* entry[0].resource.parameter[notificationEvent].part[eventRelatedQuery][0].part[query].name = "query"
+* entry[0].resource.parameter[notificationEvent].part[eventRelatedQuery][0].part[query].valueString = "http://example.org/fhir/$example?patient=$notificationPatientId"
+* entry[0].resource.parameter[notificationEvent].part[eventRelatedQuery][1].name = "related-query"
+* entry[0].resource.parameter[notificationEvent].part[eventRelatedQuery][1].part[queryType].name = "query-type"
+* entry[0].resource.parameter[notificationEvent].part[eventRelatedQuery][1].part[queryType].valueCoding = http://example.org/query-types#prescribed "Prescribed medications"
+* entry[0].resource.parameter[notificationEvent].part[eventRelatedQuery][1].part[query].name = "query"
+* entry[0].resource.parameter[notificationEvent].part[eventRelatedQuery][1].part[query].valueString = "http://example.org/fhir/MedicationRequest?patient=$notificationPatientId&encounter=$notificationEncounter1Id"
+* entry[1].fullUrl  = $notificationEncounter1
+* entry[1].resource = BackportNotificationEncounter
+* entry[1].request.method = #POST
+* entry[1].request.url    = "Encounter"
+* entry[1].response.status = "201"
+
 
 
 Instance:    BackportNotificationExampleMultiResourceR4

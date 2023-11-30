@@ -44,7 +44,7 @@ Once the subscription is active, notifications will be sent according to the [Ch
 
 <figure>
   {% include workflow-r4.svg %}
-  <figcaption>Sequence diagram of creating a FHIR Subscription in FHIR R4B</figcaption>
+  <figcaption>Sequence diagram of creating a FHIR Subscription in FHIR R4</figcaption>
 </figure>
 
 1. Server implements the core functionality required for subscriptions (see [Conformance](conformance.html)).
