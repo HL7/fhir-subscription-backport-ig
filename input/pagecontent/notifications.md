@@ -70,7 +70,7 @@ In this guide, the query and coded information are paired together as a `string`
 
 In FHIR R4, the topic definition is represented as a `Basic` resource that uses cross-version extensions to contain the information from a later-defined `SubscriptionTopic` resource (e.g., the FHIR R5 `SubscriptionTopic`).  Until FHIR R6 is published, there is no stable cross-version extension available to represent this data.  As such, this guide defines the [backport-related-query](StructureDefinition-backport-related-query.html) extension to represent the query and coded information.
 
-Regarding notifications in FHIR R4, the information normally contained in a `SubscriptionStatus` resource, including details about notification events, is represented by a `Parameters` resource.  A `related-query` part was added to the [backport-subscription-status-r4](Backported R5 SubscriptionStatus.html) profile, inside the `notification-event` part.
+Regarding notifications in FHIR R4, the information normally contained in a `SubscriptionStatus` resource, including details about notification events, is represented by a `Parameters` resource.  A `related-query` part was added to the [backport-subscription-status-r4](StructureDefinition-backport-subscription-status-r4.html) profile, inside the `notification-event` part.
 
 For examples, please see [Backported SubscriptionTopic: R4 Encounter Complete](Basic-r4-encounter-complete.html), [R4 Notification: Id Only with Related Query](Bundle-r4-notification-id-only-with-query.html), or [R4 Notification: Full Resource with related query](Bundle-r4-notification-full-resource-with-query.html).
 
