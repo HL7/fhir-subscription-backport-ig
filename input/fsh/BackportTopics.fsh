@@ -56,6 +56,7 @@ Instance:   BackportSubscriptionTopicExampleEncounterCompleteR4
 InstanceOf: Basic
 Usage:      #example
 Title:      "Backported SubscriptionTopic: R4 Encounter Complete"
+Description: "R4 example of a basic-wrapped subscription topic for completed encounters."
 * id = "r4-encounter-complete"
 * modifierExtension[+].url = "http://hl7.org/fhir/5.0/StructureDefinition/extension-SubscriptionTopic.status"
 * modifierExtension[=].valueCode = #draft

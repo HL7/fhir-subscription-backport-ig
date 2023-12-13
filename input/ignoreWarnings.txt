@@ -16,16 +16,3 @@ INFORMATION: Bundle/r4b-notification-full-resource: Bundle.entry[1]: This elemen
 INFORMATION: Bundle/r4b-notification-full-resource-with-query: Bundle.entry[1]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-subscription-notification|1.2.0-ballot (this may not be a problem, but you should check that it's not intended to match a slice)
 INFORMATION: Bundle/r4b-notification-multi-resource: Bundle.entry[1]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-subscription-notification|1.2.0-ballot (this may not be a problem, but you should check that it's not intended to match a slice)
 INFORMATION: Bundle/r4b-notification-multi-resource: Bundle.entry[2]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-subscription-notification|1.2.0-ballot (this may not be a problem, but you should check that it's not intended to match a slice)
-
-## Build 1.1.0
-INFORMATION: Bundle/r4-notification-full-resource: Bundle.entry[1]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-subscription-notification-r4|1.1.0
-INFORMATION: Bundle/r4-notification-id-only: Bundle.entry[1]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-subscription-notification-r4|1.1.0
-INFORMATION: Bundle/r4-notification-multi-resource: Bundle.entry[1]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-subscription-notification-r4|1.1.0
-INFORMATION: Bundle/r4-notification-multi-resource: Bundle.entry[2]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-subscription-notification-r4|1.1.0
-INFORMATION: Bundle/r4b-notification-full-resource: Bundle.entry[1]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-subscription-notification|1.1.0
-INFORMATION: Bundle/r4b-notification-id-only: Bundle.entry[1]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-subscription-notification|1.1.0
-INFORMATION: Bundle/r4b-notification-multi-resource: Bundle.entry[1]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-subscription-notification|1.1.0
-INFORMATION: Bundle/r4b-notification-multi-resource: Bundle.entry[2]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-subscription-notification|1.1.0
-
-# Example code system is used as Example
-Code System URI 'http://example.org/subscription-channel-type' is unknown so the code cannot be validated

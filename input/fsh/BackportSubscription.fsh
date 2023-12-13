@@ -192,10 +192,10 @@ Usage: #definition
 * name = "SubscriptionTopicSearchParameter"
 * status = #draft
 * experimental = true
-* description = "This SearchParameter enables query of subscriptions by canonical topic-url."
+* description = "This SearchParameter enables query of subscriptions by canonical topic url."
 * code = #topic
 * base[0] = #Subscription
-* type = #uri
+* type = #string
 * expression = "Subscription.criteria"
 * xpath = "f:Subscription/f:criteria"
 * xpathUsage = #normal
@@ -245,5 +245,5 @@ Usage: #definition
 * code = #payload-type
 * base[0] = #Subscription
 * type = #token
-* expression = "extension('http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-payload-content').value.ofType(Code)"
+* expression = "extension('http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-payload-content').value.ofType(code)"
 * xpathUsage = #normal
