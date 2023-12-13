@@ -15,7 +15,7 @@ canonical: http://hl7.org/fhir/uv/subscriptions-backport
 name: SubscriptionsR5Backport
 title: "Subscriptions R5 Backport"
 status: active
-version: 1.2.0-cibuild
+version: 1.2.0-ballot
 #releaseLabel: CI-Build #ci-build|draft|qa-preview|ballot|trial-use|release|update|normative+trial-use
 releaseLabel: Standard for Trial Use
 
@@ -27,10 +27,6 @@ contact:
     telecom:
       - system: email
         value: mailto:gino.canessa@microsoft.com
-  - name: Eric Haas
-    telecom:
-      - system: email
-        value: mailto:ehaas@healthedatainc.com
 description: The Subscription R5 Backport Implementation Guide enables servers running
   versions of FHIR earlier than R5 to implement a subset of R5 Subscriptions in a
   standardized way.

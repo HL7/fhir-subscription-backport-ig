@@ -10,5 +10,6 @@ The Subscription R5 Backport Implementation Guide enables servers running verion
 
 - code: subscription-backport
 - canonical: http://hl7.org/fhir/uv/subscription-backport
+- Publication Request documentation on [Confluence](https://confluence.hl7.org/display/FHIR/IG+Publication+Request+Documentation)
 
 FHIR&reg; is the registered trademark of HL7 and is used with the permission of HL7. 

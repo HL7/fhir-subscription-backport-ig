@@ -1,0 +1,12 @@
+{
+  "package-id" : "hl7.fhir.uv.subscriptions-backport",
+  "version" : "1.2.0-ballot",
+  "path" : "http://hl7.org/fhir/uv/subscriptions-backport/2024Jan",
+  "mode": "working",
+  "status" : "ballot",
+  "sequence" : "STU 1.2",
+  "desc": "Add notified pull option to notifications.\nAdd operation to resend events.\nClarify where the id is in id-only notifications.\nAdd authorization information to notifications.\nFix incorrect search parameter types.\nAdd definitions and explanations for topics in R4.\nVarious Technical Corrections.",
+  "descmd": "* [FHIR-43275](https://jira.hl7.org/browse/FHIR-43275): Add notified pull option to notifications\n* [FHIR-43082](https://jira.hl7.org/browse/FHIR-43082): Add operation to resend events\n* [FHIR-41917](https://jira.hl7.org/browse/FHIR-41917): Clarify where the id is in the id-only Notification Profile\n* [FHIR-43081](https://jira.hl7.org/browse/FHIR-43081): Add authorization information to notifications\n* [FHIR-43072](https://jira.hl7.org/browse/FHIR-43072): Incorrect search parameter type\n* [FHIR-38803](https://jira.hl7.org/browse/FHIR-38803): the subscriptions backport should describe how to do notifications in R4 as well as or instead of R4B\n* Various TCs (e.g., typos)\n  * [FHIR-41024](https://jira.hl7.org/browse/FHIR-41024): 2.3.3 Workflow for R4 includes a subsection referencing R4B\n  * Fixes to `CapabilityStatement` resources for correctness.\n  * Fixes to FHIRPath expressions in `SearchParameter` resources for correctness.\n* Added change log.",
+  "changes": "ig_changelog.html#stu-120",
+  "first": false
+}
