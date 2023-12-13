@@ -17,7 +17,7 @@ title: "Subscriptions R5 Backport"
 status: active
 version: 1.2.0-ballot
 #releaseLabel: CI-Build #ci-build|draft|qa-preview|ballot|trial-use|release|update|normative+trial-use
-releaseLabel: Standard for Trial Use
+releaseLabel: ballot
 
 publisher:
   name: HL7 International / FHIR Infrastructure
@@ -83,8 +83,10 @@ jurisdiction: http://unstats.un.org/unsd/methods/m49/m49.htm#001 "World"
 #
 dependencies:
   #hl7.fhir.extensions.r5: 4.0.1
+  #hl7.fhir.uv.extensions.r5: 1.0.0
   hl7.fhir.uv.extensions.r4: 1.0.0
   hl7.fhir.uv.tools: current
+  #hl7.fhir.xver-extensions: 0.0.13
 
 pages:
   index.md:
