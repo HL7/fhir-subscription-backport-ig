@@ -32,6 +32,8 @@
   * [FHIR-43916](https://jira.hl7.org/browse/FHIR-43916): Typo (ballot)
   * [FHIR-43859](https://jira.hl7.org/browse/FHIR-43859): Review R5 "in progress" wordage (ballot)
   * [FHIR-43706](https://jira.hl7.org/browse/FHIR-43706): Typos (ballot)
+  * [FHIR-43611](https://jira.hl7.org/browse/FHIR-43611): Typo (ballot)
+  * [FHIR-43606](https://jira.hl7.org/browse/FHIR-43606): Typo (ballot)
 * Added change log.
 
 ### STU 1.1.0
