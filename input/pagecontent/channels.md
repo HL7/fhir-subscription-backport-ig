@@ -143,7 +143,7 @@ An example workflow for receiving notifications via email is shown below:
 
 #### Security Notes
 
-Email (SMTP) is not a secure channel. Implementers must ensure that any messages containing PHI have been secured according to their policy requirements (e.g., use of a system such as [Direct](http://directproject.org/)).
+Email (SMTP) is not a secure channel. Implementers must ensure that any messages containing PHI have been secured according to their policy requirements (e.g., use of a system such as [Direct](https://directtrust.org/)).
 
 ### FHIR Messaging
 
