@@ -33,8 +33,8 @@ For use cases that are not well-met by any of the predefined channels, the Subsc
 To receive notifications via HTTP/S POST, a client should request a subscription with the channel type of `rest-hook` and set the endpoint to the appropriate client URL. Note that this URL must be accessible by the hosting server.
 
 To convey an event notification, the server POSTs a `Bundle` to the client's nominated endpoint URL per the format requests in the Subscription:
-* The `content-type` of the POST SHALL match the MIME type on the Subscription ([Subscription.channel.payload](http://hl7.org/fhir/subscription-definitions.html#Subscription.channel.payload)).
-* Each [Subscription.channel.header](http://hl7.org/fhir/subscription-definitions.html#Subscription.channel.header) value SHALL be conveyed as an HTTP request header.
+* The `content-type` of the POST SHALL match the MIME type on the Subscription ([Subscription.channel.payload](http://hl7.org/fhir/R4/subscription-definitions.html#Subscription.channel.payload)).
+* Each [Subscription.channel.header](http://hl7.org/fhir/R4/subscription-definitions.html#Subscription.channel.header) value SHALL be conveyed as an HTTP request header.
 * The bundle SHALL comply with the [Backported R5 Notification Bundle Profile](StructureDefinition-backport-subscription-notification.html).
 
 When a `Subscription` is created for a REST Hook channel type, the server SHALL set initial status to `requested`, pending verification of the nominated endpoint URL. After a successful `handshake` notification has been sent and accepted, the server SHALL update the status to `active`. Any errors in the initial `handshake` SHALL result in the status being changed to `error`.
@@ -91,7 +91,7 @@ An example workflow for receiving notifications via websockets is shown below:
 
 Notes:
 
-* Notifications sent from the server SHALL be in the MIME Type specified by the [Subscription.channel.payload](http://hl7.org/fhir/subscription-definitions.html#Subscription.channel.payload), however, if notifications are requested for multiple subscriptions with different MIME types, the server MAY choose to send all notifications in a single MIME type.
+* Notifications sent from the server SHALL be in the MIME Type specified by the [Subscription.channel.payload](http://hl7.org/fhir/R4/subscription-definitions.html#Subscription.channel.payload), however, if notifications are requested for multiple subscriptions with different MIME types, the server MAY choose to send all notifications in a single MIME type.
 * Notifications SHALL conform to the content level specified by the `http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-payload-content` extension.
 * When receiving notifications, a connected websocket client has no responsibilities beyond reading the message (e.g., there is no acknowledgement message).
 
@@ -109,14 +109,14 @@ While the primary interface for FHIR servers is the FHIR REST API, notifications
 
 A client can declare its intention to receive notifications via Email by requesting a subscription with the channel type of `email` and setting the endpoint to the appropriate email URI (e.g., `mailto:public_health_notifications@example.org`).
 
-The server will send a new message each time a notification should be sent (e.g., per event or per batch). The server will create a message based on the values present in the [Subscription.channel.payload](http://hl7.org/fhir/subscription-definitions.html#Subscription.channel.payload) and [payload content](StructureDefinition-backport-payload-content.html) fields. If a server cannot honor the requested combination, the server SHOULD reject the Subscription request rather than send unexpected email messages.
+The server will send a new message each time a notification should be sent (e.g., per event or per batch). The server will create a message based on the values present in the [Subscription.channel.payload](http://hl7.org/fhir/R4/subscription-definitions.html#Subscription.channel.payload) and [payload content](StructureDefinition-backport-payload-content.html) fields. If a server cannot honor the requested combination, the server SHOULD reject the Subscription request rather than send unexpected email messages.
 
 The email channel sets two guidelines about content:
 
 * Message Body content SHALL be human readable
 * Message Attachments SHOULD be machine readable
 
-Due to these guidelines, the [Subscription.channel.payload](http://hl7.org/fhir/subscription-definitions.html#Subscription.channel.payload) refers to the content of the body of the message. Attachment type information can be appended as a MIME parameter, for example:
+Due to these guidelines, the [Subscription.channel.payload](http://hl7.org/fhir/R4/subscription-definitions.html#Subscription.channel.payload) refers to the content of the body of the message. Attachment type information can be appended as a MIME parameter, for example:
 
 * text/plain: a plain-text body with no attachment
 * text/html: an HTML body with no attachment

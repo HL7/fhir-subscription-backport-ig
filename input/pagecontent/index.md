@@ -12,7 +12,7 @@ The Subscriptions Framework is a mechanism designed to allow clients to ask for 
 
 ### Query-Defined Subscriptions (DSTU2 - R4)
 
-There is a defined [Subscription](http://hl7.org/fhir/r4/subscription.html) resource in FHIR R4 that has been in place since DSTU2.  In those releases of FHIR, subscriptions are defined by a client dynamically by posting a Subscription resource with a criteria string. The FHIR server must then run a query against that criteria and track the query result-set for each subscription request.  Each time a change to the server's data is made, a server must re-run the query and send notifications to clients if their result-set changes (e.g., a new entry is added or removed).
+There is a defined [Subscription](http://hl7.org/fhir/R4/subscription.html) resource in FHIR R4 that has been in place since DSTU2.  In those releases of FHIR, subscriptions are defined by a client dynamically by posting a Subscription resource with a criteria string. The FHIR server must then run a query against that criteria and track the query result-set for each subscription request.  Each time a change to the server's data is made, a server must re-run the query and send notifications to clients if their result-set changes (e.g., a new entry is added or removed).
 
 The above approach works well for some use cases, but has issues which prevent it from being used in others.  Some of the issues identified include:
 * Difficulty implementing the server-side logic at scale (both in terms of large datasets and many clients).
