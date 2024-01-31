@@ -22,7 +22,7 @@ When populating the `SubscriptionStatus.notificationEvent` structure for a notif
 
 When the content type is `empty`, notification bundles SHALL NOT contain `Bundle.entry` elements other than the `SubscriptionStatus` for the notification.
 
-From a security perspective, `empty` payloads expose the lowest risk, since they contain no PHI. The trade-off is that clients need to perform queries against the server in order to discover what events have occurred, costing bot client and server additional time, data transfer, and processing.
+From a security perspective, `empty` payloads expose the lowest risk, since they contain no PHI. The trade-off is that clients need to perform queries against the server in order to discover what events have occurred, costing both client and server additional time, data transfer, and processing.
 
 To summarize, in an `empty` notification:
 * the status contains one or more `notificationEvent` entries, but no `focus` or `additionalContext`, and
