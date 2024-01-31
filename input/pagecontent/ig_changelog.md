@@ -27,6 +27,7 @@
   * [FHIR-41024](https://jira.hl7.org/browse/FHIR-41024): 2.3.3 Workflow for R4 includes a subsection referencing R4B
   * Fixes to `CapabilityStatement` resources for correctness.
   * Fixes to FHIRPath expressions in `SearchParameter` resources for correctness.
+  * [FHIR-44549](https://jira.hl7.org/browse/FHIR-44549): Various TCs (ballot)
 * Added change log.
 
 ### STU 1.1.0

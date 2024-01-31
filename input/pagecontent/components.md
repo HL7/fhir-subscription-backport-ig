@@ -67,7 +67,7 @@ In order to link a `Subscription` to a `SubscriptionTopic` and prevent any confu
 
 #### Subscription Filters
 
-While Subscription Topics are responsible for declaring the triggers for notifications (e.g., a new observation has been created, a medication dispense has occurred, etc.), the subscription itself MAY contain filters to further refine results.  For example, a topic could trigger all new observations, while a filter could indicate interest in only lab results or observations relating to a specific patient.
+While Subscription Topics are responsible for declaring the triggers for notifications (e.g., a new observation has been created, a medication has been dispensed, etc.), the subscription itself MAY contain filters to further refine results.  For example, a topic could trigger all new observations, while a filter could indicate interest in only lab results or observations relating to a specific patient.
 
 Information about defining filters can be found on the [R4B SubscriptionTopicResource](https://hl7.org/fhir/R4B/subscriptiontopic.html#filters).
 

@@ -1,34 +1,34 @@
 
-In FHIR R5, there are four channel types which were common enough to be defined in the specification, along with the ability to define additional channel types externally.  In this Implementation Guide, we define those same channel types and include the ability to define additional channel by other implementations or Implementation Guides.
+In FHIR R5, there are four channel types which were common enough to be defined in the specification, along with the ability to define additional channel types externally.  In this Implementation Guide, we define those same channel types and include the ability to define additional channels by other implementations or Implementation Guides.
 
-#### Deciding On Channel Type
+### Deciding On Channel Type
 
 Both the FHIR specification and this guide rely on the definitions of a reduced set of channel types.  While the specification allows for additional channel type definitions, the included set attempts to cover the majority of common use cases.  Below is some guidance for implementers to consider when selecting a channel type.
 
-##### REST-Hook
+#### REST-Hook
 
 The FHIR standard makes extensive use of the RESTful model.  Given the popularity of REST and widespread adoption, most implementers should assume REST-hook as the 'default' channel type.  In general, REST-based systems are well-supported (e.g., tooling, infrastructure, documentation, etc.), and will present the lowest bar for implementation.
 
-##### Websocket
+#### Websocket
 
 Websockets are unique in the pre-defined channel types in being the only channel that does not require the client to have an endpoint.  Due to this property, the websocket channel is very useful for clients where creating an endpoint would be difficult or impossible (e.g., mobile clients, web-based clients, etc.).
 
-##### Email
+#### Email
 
 The Email channel is the only channel that could contest REST in popularity of non-FHIR implementations.  That said, Email communication is often high-latency and is typically used for communication to individuals - not applications.  Email channels are particularly useful in the context of these non-application use cases, such as public health notifications.  For example, if a public health agency does not have the ability or desire to build a custom RESTful solution (e.g., creating and maintaining an endpoint to receive notifications, as well as software to consume those notifications), it is straightforward to map notifications to email addresses or aliases.
 
-##### FHIR Messaging
+#### FHIR Messaging
 
 FHIR Messaging is a mechanism defined to allow for non-RESTful communication between FHIR servers and clients.  One common use case is when connectivity is an issue (e.g., remote sites that batch all communications when connections are available).  This channel defines how to integrate topic-based subscriptions with the FHIR Messaging model.
 
-##### Custom Channels
+#### Custom Channels
 
 For use cases that are not well-met by any of the predefined channels, the Subscriptions Framework allows for custom channel definitions.  Some examples of scenarios where custom channels may be applicable include:
 * requirements for reliable (guaranteed) delivery (e.g., message queues)
 * implementations using other communication protocols (e.g., protocols specific to a cloud-based provider)
 * implementations using a non-standard serialization format
 
-#### REST-Hook
+### REST-Hook
 
 To receive notifications via HTTP/S POST, a client should request a subscription with the channel type of `rest-hook` and set the endpoint to the appropriate client URL. Note that this URL must be accessible by the hosting server.
 
@@ -56,11 +56,11 @@ An example workflow for establishing a <code>rest-hook</code> subscription is sh
 1. Server may send notifications of type `event-notification` at any time.
 1. Endpoints should respond with appropriate HTTP status codes (e.g., `200`).
 
-##### Security Notes
+#### Security Notes
 
 HTTP is neither a secure nor an encrypted channel, nor does it provide endpoint verification. It is strongly recommended that implementations refuse requests to send notifications to URLs using the HTTP protocol (use HTTPS instead).
 
-#### Websockets 
+### Websockets 
 
 While the primary interface for FHIR servers is the FHIR REST API, notifications need not occur via REST. Indeed, some subscribers may be unable to expose an outward-facing HTTP server to receive triggered notifications. For example, a pure client-side Web app or mobile app may want to subscribe to a data feed. This can be accomplished using a `websocket` notification channel.
 
@@ -95,7 +95,7 @@ Notes:
 * Notifications SHALL conform to the content level specified by the `http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-payload-content` extension.
 * When receiving notifications, a connected websocket client has no responsibilities beyond reading the message (e.g., there is no acknowledgement message).
 
-##### Security Notes
+#### Security Notes
 
 WebSocket security poses several challenges specific to the channel. When implementing websockets for notifications, please keep in mind the following list of some areas of concern:
 
@@ -103,7 +103,7 @@ WebSocket security poses several challenges specific to the channel. When implem
 * Given client limitations on concurrent WebSocket connections (commonly 6), it is recommended that a single connection be able to authenticate to multiple Subscription resources.
 * Unlike HTTP/S requests, WebSockets can be long-lived. Because of this, the case of revoking access of an active connection must be considered.
 
-#### Email
+### Email
 
 While the primary interface for FHIR servers is the FHIR REST API, notifications need not occur via REST. Indeed, some subscribers may be unable to maintain an outward-facing HTTP server to receive triggered notifications. For example, a public health organization may want to be notified of outbreaks of various illnesses. This can be accomplished using an `email` notification channel.
 
@@ -141,17 +141,17 @@ An example workflow for receiving notifications via email is shown below:
 1. Server may send notifications of type `heartbeat` at any time.
 1. Server may send notifications of type `event-notification` at any time.
 
-##### Security Notes
+#### Security Notes
 
 Email (SMTP) is not a secure channel. Implementers must ensure that any messages containing PHI have been secured according to their policy requirements (e.g., use of a system such as [Direct](http://directproject.org/)).
 
-#### FHIR Messaging
+### FHIR Messaging
 
 {:.stu-note}
 Warning: This section is considered draft; feedback from topic authors is requested to refine the message-based channel.
 
 
-There are times when it is desireable to use Subscriptions as a communication channel between FHIR servers that are connected via Messaging instead of REST. This can be accomplished using a `Subscription` with the channel type of `message`.
+There are times when it is desirable to use Subscriptions as a communication channel between FHIR servers that are connected via Messaging instead of REST. This can be accomplished using a `Subscription` with the channel type of `message`.
 
 To receive notifications via messaging, a client should request a subscription with the channel type of `message` and set the endpoint to the destination FHIR server base URL. Note that this URL must be accessible by the hosting server.
 
@@ -171,6 +171,6 @@ An example workflow for receiving notification via FHIR messaging is shown below
 1. Server may send notifications of type `heartbeat` at any time.
 1. Server may send notifications of type `event-notification` at any time.
 
-##### Security Notes
+#### Security Notes
 
 Servers MAY require that the end-point is allow-listed prior to allowing these kinds of subscriptions. Additionally, servers MAY impose authorization/authentication requirements for server to server communication (e.g., certificate pinning, etc.).

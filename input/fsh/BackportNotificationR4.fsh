@@ -283,7 +283,7 @@ Description: "R4 Example of a topic-based subscription event notification with `
 Instance:    BackportNotificationExampleEmptyWithAuthR4
 InstanceOf:  BackportSubscriptionNotificationR4
 Usage:       #example
-Title:       "R4 Notification: Empty with Authoriztion"
+Title:       "R4 Notification: Empty with Authorization"
 Description: "R4 Example of a topic-based subscription event notification with `empty` content."
 * id        = "r4-notification-empty-with-auth"
 * timestamp = "2020-05-29T11:44:13.1882432-05:00"

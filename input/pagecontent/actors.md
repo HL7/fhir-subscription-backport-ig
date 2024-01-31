@@ -7,11 +7,11 @@ Any FHIR application may support the use of Subscriptions. In this documentation
 
 **Server** refers to the FHIR application or applications acting as the subscription provider. This includes the responsibilities of implementing one or more `SubscriptionTopics`, managing `Subscriptions`, and sending notifications.
 
-Note that when using subscriptions, the FHIR server combines the roles of publisher and information distributer. Some arrangements of the 'publish and subscribe' pattern describe separate agents for the two roles. This specification makes no recommendations towards the internal architecture of server implementations.
+Note that when using subscriptions, the FHIR server combines the roles of publisher and information distributor. Some arrangements of the 'publish and subscribe' pattern describe separate agents for the two roles. This specification makes no recommendations towards the internal architecture of server implementations.
 
 ### Client
 
-**Client** refers to the FHIR application or applications acting as subscriber. This includes the responsibilities of acting as a FHIR client (to create a Subscription) and receiving notifications on a supported channel.
+**Client** refers to the FHIR application or applications acting as the subscriber. This includes the responsibilities of acting as a FHIR client (to create a Subscription) and receiving notifications on a supported channel.
 
 ### Endpoint
 

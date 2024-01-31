@@ -21,5 +21,5 @@ Subscribers should be aware of, and protect against, the possibility of being us
 
 It can be appropriate for a server to include authorization information alongside notifications.  This information could be used to inform a recipient about how authorization should be done when resolving resources from a request (e.g., when querying based on an `empty` notification or retrieving resources based on an `id-only` notification).
 
-Depending on the channel used, notifications MAY or MAY NOT be secure from third parties.  Implementers SHOULD ensure that any authorization information included complies with security best practiced (e.g., providing a token exchanged during an OAuth workflow, along with other data such as a client authentication token, for an access token.)
+Depending on the channel used, notifications MAY or MAY NOT be secure from third parties.  Implementers SHOULD ensure that any authorization information included complies with security best practices (e.g., providing a token exchanged during an OAuth workflow, along with other data such as a client authentication token, for an access token.)
 

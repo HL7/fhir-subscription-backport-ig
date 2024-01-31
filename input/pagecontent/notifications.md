@@ -53,7 +53,7 @@ One presented use case is centered around a referral workflow.  The scenario is 
 
 ##### Unstandardized Queries
 
-Another use case for a 'notified pull' mechanism is a continuation of the `id-only` return data.  Specifically, in cases where the data necessary is not well-standardized, it is unreasonable to expect the referring facility to be able to construct the queries necessary to retrieve the data.  For example, in the United States, there is no standardized query to retrieve the current insurance coverage information for a patient.  The the process for retrieving that information is vendor-specific and it is unreasonable to expect a referring facility to be able to construct the queries necessary to retrieve it.
+Another use case for a 'notified pull' mechanism is a continuation of the `id-only` return data.  Specifically, in cases where the data necessary is not well-standardized, it is unreasonable to expect the referring facility to be able to construct the queries necessary to retrieve the data.  For example, in the United States, there is no standardized query to retrieve the current insurance coverage information for a patient.  The process for retrieving that information is vendor-specific and it is unreasonable to expect a referring facility to be able to construct the queries necessary to retrieve it.
 
 <figure>
   {% include unstandardized-query.svg %}

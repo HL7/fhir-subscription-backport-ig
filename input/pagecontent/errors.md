@@ -3,7 +3,7 @@ Errors can occur at any point in the processing or delivery of a notification. T
 
 ### Handling Errors as a Server
 
-Error handling as a Server is intended to be simple.  A server is not expected to know the best process for every use case of every subscriber, so the focus is on allowing clients to detect there is an issue.  A server SHALL:
+Error handling as a Server is intended to be simple.  A server is not expected to know the best process for every use case of every subscriber, so the focus is on allowing clients to detect that there is an issue.  A server SHALL:
 * Increment the `eventsSinceSubscriptionStart` counter internally.
 * Update the `status` of the subscription internally.
 * Continue to respond to `$status` requests.
@@ -30,7 +30,7 @@ In the above sequence, the subscriber tracks the `eventsSinceSubscriptionStart` 
 
 ### Broken Communication
 
-The diagram below show how a subscriber can use the `heartbeatPeriod` on a `Subscription` to determine errors which prevent notifications from reaching the endpoint.
+The diagram below shows how a subscriber can use the `heartbeatPeriod` on a `Subscription` to determine errors which prevent notifications from reaching the endpoint.
 
 <figure>
   {% include error-no-communication.svg %}
@@ -41,7 +41,7 @@ In the above sequence, the subscriber is aware that the `heartbeatPeriod` has el
 
 ### Recovering from Errors
 
-Clients are responsible for devising an appropriate method for recovering from errors.  Often, this process will include a series or batch of requests that allow a client to know the current state.  For example, an application may need to query all relevant resources for a patient in order to ensure nothing has been missed.  Once an application has returned to a functional state, it should request the subscription is reactivated by updating the `status` to either `requested` or `active` as appropriate.
+Clients are responsible for devising an appropriate method for recovering from errors.  Often, this process will include a series or batch of requests that allow a client to know the current state.  For example, an application may need to query all relevant resources for a patient in order to ensure nothing has been missed.  Once an application has returned to a functional state, it should request that the subscription is reactivated by updating the `status` to either `requested` or `active` as appropriate.
 
 #### Using the $events operation
 
