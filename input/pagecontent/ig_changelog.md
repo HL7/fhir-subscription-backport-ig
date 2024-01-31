@@ -28,6 +28,7 @@
   * Fixes to `CapabilityStatement` resources for correctness.
   * Fixes to FHIRPath expressions in `SearchParameter` resources for correctness.
   * [FHIR-44549](https://jira.hl7.org/browse/FHIR-44549): Various TCs (ballot)
+  * [FHIR-44045](https://jira.hl7.org/browse/FHIR-44045): Conformance language TCs (ballot)
 * Added change log.
 
 ### STU 1.1.0

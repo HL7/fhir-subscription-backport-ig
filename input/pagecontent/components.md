@@ -85,7 +85,7 @@ Note that `resourceType` is only necessary for disambiguation in the case where 
 
 #### Subscriptions and FHIR Versions
 
-Note that subscription notifications, by default, are made using the same FHIR version as the server.  The `Subscription.channel.payload` element can be used to specify a different FHIR version, using syntax and values defined by the [MIME Type Parameter](https://hl7.org/fhir/versioning.html#mt-version).  Servers SHALL look for this parameter during subscription negotiation and SHALL not accept requests for notification FHIR versions it cannot support (servers MAY reject or coerce, according to their policies).
+Note that subscription notifications, by default, are made using the same FHIR version as the server.  The `Subscription.channel.payload` element can be used to specify a different FHIR version, using syntax and values defined by the [MIME Type Parameter](https://hl7.org/fhir/versioning.html#mt-version).  Servers SHALL look for this parameter during subscription negotiation and SHALL NOT accept requests for notification FHIR versions it cannot support (servers MAY reject or coerce, according to their policies).
 
 For example, a request for notifications encoded as `application/fhir+json; fhirVersion=4.3` explicitly asks for notifications conforming to the FHIR R4B notification format, while a request for `application/fhir+json; fhirVersion=4.0` explicitly asks for notifications conformant to FHIR R4.  This mechanism allows for more flexibility during upgrades, ensuring that servers and clients can continue to operate across version changes.
 
