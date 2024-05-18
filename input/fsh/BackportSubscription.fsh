@@ -33,6 +33,7 @@ Description: "Profile on the Subscription resource to enable R5-style topic-base
 * channel.type.extension[BackportChannelType] ^short      = "Extended channel type for notifications"
 * channel.type.extension[BackportChannelType] ^definition = "The type of channel to send notifications on."
 * channel.type.extension[BackportChannelType] ^comment    = "This extension allows for the use of additional channel types that were not defined in the FHIR R4 subscription definition."
+* extension contains ExtensionSubscriptionIdentifier named identifier 0..*
 
 Extension:   ExtensionSubscriptionIdentifier
 Id:          extension-Subscription.identifier

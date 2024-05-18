@@ -83,6 +83,7 @@
 <artifact id="StructureDefinition/backport-related-query" key="StructureDefinition-backport-related-query" name="Related query information"/>
 <artifact id="SearchParameter/Subscription-topic" key="SearchParameter-Subscription-topic" name="Search by Canonical URL used in a topic-based subscription"/>
 <artifact id="SearchParameter/Subscription-custom-channel" key="SearchParameter-Subscription-custom-channel" name="Search by custom channel types used for notifications"/>
+<artifact id="SearchParameter/Subscription-identifier" key="SearchParameter-Subscription-identifier" name="Search by identifier on Subscription"/>
 <artifact id="SearchParameter/Subscription-payload-type" key="SearchParameter-Subscription-payload-type" name="Search by payload types used for notifications"/>
 <artifact id="SearchParameter/Subscription-filter-criteria" key="SearchParameter-Subscription-filter-criteria" name="Search by the filtering criteria used to narrow a topic-based subscription topic"/>
 <artifact id="OperationDefinition/backport-subscription-events" key="OperationDefinition-backport-subscription-events" name="Subscription Events Operation"/>
