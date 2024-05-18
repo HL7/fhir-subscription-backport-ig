@@ -29,6 +29,7 @@
 <artifact id="StructureDefinition/backport-channel-type" key="StructureDefinition-backport-channel-type" name="Backported R5 Additional Channel Types"/>
 <artifact deprecated="true" id="StructureDefinition/backport-additional-criteria" key="StructureDefinition-backport-additional-criteria" name="Backported R5 Additional Criteria"/>
 <artifact id="StructureDefinition/backport-filter-criteria" key="StructureDefinition-backport-filter-criteria" name="Backported R5 FilterBy Criteria"/>
+<artifact id="StructureDefinition/extension-Subscription.identifier" key="StructureDefinition-extension-Subscription.identifier" name="Backported R5 Identifier"/>
 <artifact id="CodeSystem/backport-content-code-system" key="CodeSystem-backport-content-code-system" name="Backported R5 Subscription Content Code System"/>
 <artifact id="ValueSet/backport-content-value-set" key="ValueSet-backport-content-value-set" name="Backported R5 Subscription Content Value Set"/>
 <artifact id="StructureDefinition/backport-max-count" key="StructureDefinition-backport-max-count" name="Backported R5 Subscription MaxCount"/>
