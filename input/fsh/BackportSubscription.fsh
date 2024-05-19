@@ -258,7 +258,7 @@ Usage: #definition
 * code = #identifier
 * base[0] = #Subscription
 * type = #token
-* expression = "extension('http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.identifier').value"
+* expression = "extension('http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.identifier').value.ofType(Identifier)"
 * xpathUsage = #normal
 
 Instance: Subscription-payload-type
