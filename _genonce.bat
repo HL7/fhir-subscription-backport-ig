@@ -14,7 +14,7 @@ SET txoption=
 
 :igpublish
 
-SET JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8 -Xmx2g -Xms1g
+SET JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
 
 IF EXIST "%input_cache_path%\%publisher_jar%" (
 	JAVA -jar "%input_cache_path%\%publisher_jar%" -ig . %txoption% %*
