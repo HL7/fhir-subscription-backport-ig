@@ -152,8 +152,8 @@ Description: "R4/B Example of a topic-based 'admission' subscription."
 * channel.extension[maxCount].valuePositiveInt         = 20
 * channel.payload                                      = #application/fhir+json
 * channel.payload.extension[content].valueCode         = #id-only
-//* extension[extension-Subscription.identifier].valueIdentifier[0].system = "http://example.org"
-//* extension[extension-Subscription.identifier].valueIdentifier[=].value = "abc"
+* extension[extension-Subscription.identifier].valueIdentifier[0].system = "http://example.org"
+* extension[extension-Subscription.identifier].valueIdentifier[=].value = "abc"
 
 Instance:    BackportSubscriptionExampleMultiResource
 InstanceOf:  BackportSubscription

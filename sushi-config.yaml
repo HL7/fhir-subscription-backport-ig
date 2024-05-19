@@ -69,6 +69,8 @@ parameters:
     - Bundle/r4-notification-empty-with-auth
     - CapabilityStatement/backport-subscription-server-r4
     - Basic/r4-encounter-complete
+  special-url:
+   - http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.identifier
 extension:
   - url: http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status
     valueCode: trial-use
@@ -82,6 +84,7 @@ jurisdiction: http://unstats.un.org/unsd/methods/m49/m49.htm#001 "World"
 # use cases, the value can be an object with keys for id, uri, and version.
 #
 dependencies:
+  hl7.fhir.extensions.r5: 4.3.0
   #hl7.fhir.extensions.r5: 4.0.1
   #hl7.fhir.uv.extensions.r5: 1.0.0
   hl7.fhir.uv.extensions.r4: 1.0.0
