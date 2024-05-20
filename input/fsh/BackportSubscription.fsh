@@ -33,17 +33,8 @@ Description: "Profile on the Subscription resource to enable R5-style topic-base
 * channel.type.extension[BackportChannelType] ^short      = "Extended channel type for notifications"
 * channel.type.extension[BackportChannelType] ^definition = "The type of channel to send notifications on."
 * channel.type.extension[BackportChannelType] ^comment    = "This extension allows for the use of additional channel types that were not defined in the FHIR R4 subscription definition."
-* extension contains ExtensionSubscriptionIdentifier named identifier 0..*
+* extension contains http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.identifier named identifier 0..*
 
-Extension:   ExtensionSubscriptionIdentifier
-Id:          extension-Subscription.identifier
-Title:       "Backported R5 Identifier"
-* insert StructureJurisdiction
-* ^url = "http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.identifier"
-* value[x] only Identifier
-* value[x] ^short      = "Identifier for the Subscription"
-* value[x] ^definition = "Identifier for the Subscription"
-* value[x] ^comment    = "This extension allows for the use of Identifiers that were not defined in the FHIR R4 subscription definition."
 
 Extension:   BackportChannelType
 Id:          backport-channel-type
@@ -152,8 +143,8 @@ Description: "R4/B Example of a topic-based 'admission' subscription."
 * channel.extension[maxCount].valuePositiveInt         = 20
 * channel.payload                                      = #application/fhir+json
 * channel.payload.extension[content].valueCode         = #id-only
-* extension[extension-Subscription.identifier].valueIdentifier[0].system = "http://example.org"
-* extension[extension-Subscription.identifier].valueIdentifier[=].value = "abc"
+* extension[http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.identifier].valueIdentifier[0].system = "http://example.org"
+* extension[http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.identifier].valueIdentifier[=].value = "abc"
 
 Instance:    BackportSubscriptionExampleMultiResource
 InstanceOf:  BackportSubscription
