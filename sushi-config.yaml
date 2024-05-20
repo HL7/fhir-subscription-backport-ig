@@ -69,8 +69,6 @@ parameters:
     - Bundle/r4-notification-empty-with-auth
     - CapabilityStatement/backport-subscription-server-r4
     - Basic/r4-encounter-complete
-  special-url:
-   - http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.identifier
 extension:
   - url: http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status
     valueCode: trial-use
