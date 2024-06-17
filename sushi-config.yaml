@@ -82,6 +82,7 @@ jurisdiction: http://unstats.un.org/unsd/methods/m49/m49.htm#001 "World"
 # use cases, the value can be an object with keys for id, uri, and version.
 #
 dependencies:
+  hl7.fhir.extensions.r5: 4.3.0
   #hl7.fhir.extensions.r5: 4.0.1
   #hl7.fhir.uv.extensions.r5: 1.0.0
   hl7.fhir.uv.extensions.r4: 1.0.0
