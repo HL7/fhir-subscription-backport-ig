@@ -47,7 +47,7 @@
 <artifact id="StructureDefinition/backport-subscription-status-r4" key="StructureDefinition-backport-subscription-status-r4" name="R4 Backported R5 SubscriptionStatus"/>
 <artifact id="CapabilityStatement/r4-capabilitystatement-example-server" key="CapabilityStatement-r4-capabilitystatement-example-server" name="R4 CapabilityStatement: Server Example"/>
 <artifact id="Bundle/r4-notification-empty" key="Bundle-r4-notification-empty" name="R4 Notification: Empty"/>
-<artifact id="Bundle/r4-notification-empty-with-auth" key="Bundle-r4-notification-empty-with-auth" name="R4 Notification: Empty with Authoriztion"/>
+<artifact id="Bundle/r4-notification-empty-with-auth" key="Bundle-r4-notification-empty-with-auth" name="R4 Notification: Empty with Authorization"/>
 <artifact id="Bundle/r4-notification-error" key="Bundle-r4-notification-error" name="R4 Notification: Error"/>
 <artifact id="Bundle/r4-notification-full-resource" key="Bundle-r4-notification-full-resource" name="R4 Notification: Full Resource"/>
 <artifact id="Bundle/r4-notification-full-resource-with-query" key="Bundle-r4-notification-full-resource-with-query" name="R4 Notification: Full Resource with related query"/>

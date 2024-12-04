@@ -13,10 +13,10 @@ The workflow for topic-based subscriptions can be broken down into three matched
 |#|Server|Client|
 |--|--|--|
 |1.|Implement Topic-Based Subscriptions|Topic Discovery|
-|2.|Subscription Negotiation|Request a Subscription|
+|2.|Subscription Creation|Request a Subscription|
 |3.|Send Notifications|Receive Notifications|
 
-### Workflow: FHIR R4B
+### Workflow: FHIR R4B - dynamic
 
 <figure>
   {% include workflow-r4b.svg %}
@@ -40,7 +40,7 @@ The workflow for topic-based subscriptions can be broken down into three matched
 
 Once the subscription is active, notifications will be sent according to the [Channel](channels.html).  Note that error states may occur, see [Handling Errors](errors.html) for more information.
 
-### Workflow: FHIR R4
+### Workflow: FHIR R4 - dynamic
 
 <figure>
   {% include workflow-r4.svg %}

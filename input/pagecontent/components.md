@@ -20,6 +20,8 @@ The FHIR Topic-Based Subscription Model is composed of three parts:
   * How is it defined?
     * FHIR R4: A [Subscription](http://hl7.org/fhir/R4/subscription.html) resource with extensions
     * FHIR R4B: A [Subscription](http://hl7.org/fhir/R4B/subscription.html) resource with extensions
+  * How is it managed?
+    * `administrative` vs. `dynamic` subscriptions
 * [Notification Bundle](#subscription-notifications)
   * What is it?
     * Describes the contents of a notification
@@ -90,6 +92,14 @@ Note that subscription notifications, by default, are made using the same FHIR v
 For example, a request for notifications encoded as `application/fhir+json; fhirVersion=4.3` explicitly asks for notifications conforming to the FHIR R4B notification format, while a request for `application/fhir+json; fhirVersion=4.0` explicitly asks for notifications conformant to FHIR R4.  This mechanism allows for more flexibility during upgrades, ensuring that servers and clients can continue to operate across version changes.
 
 More information about the differences in notifications can be found on the [Notifications](notifications.html) page.
+
+#### Managing Subscriptions
+
+We have identified two primary patterns for creating and managing subscriptions: `dynamic` - where a client or subscriber is responsible for creating and managing subscriptions, and `administrative` - where the server or a third party server (e.g., HIE, jurisdictional authority, etc.) is responsible for creating and managing subscriptions.  These patterns are not mutually exclusive, and a server MAY support both.
+
+In the `dynamic` pattern, clients are responsible for creating and managing their own subscriptions.  This pattern is useful when a client is interested in a specific topic and wants to receive notifications.  In this pattern, the client creates a subscription and manages it over time.  The client is responsible for ensuring that the subscription is still valid, the server is still capable of sending notifications, and the general health of the subscription (e.g., checking for missed notifications and taking action to resolve).
+
+In the `administrative` pattern, either the subscription or a third-party server is responsible for creating and managing subscriptions.  This pattern is useful when a server wants to ensure that all clients receive notifications for a specific topic.  In this pattern, the server creates a subscription on behalf of the client and manages it over time.  The server is responsible for ensuring that the subscription is still valid, the client is still capable of receiving notifications, and the general health of the subscription (e.g., checking for missed notifications and taking action to resolve).
 
 #### Accepting Subscription Requests
 

@@ -1,5 +1,8 @@
 ### STU 1.2.0
 
+* [FHIR-43505](https://jira.hl7.org/browse/FHIR-43505): Consider describing administratively created subscriptions
+  * Added note to the `Server` section of the [Actors](actors.html) page.
+  * Added the `Managing Subscriptions` section to the [Components](components.html) page.
 * [FHIR-43275](https://jira.hl7.org/browse/FHIR-43275): Add 'notified pull' option to notifications
   * Added `Notified Pull` section to the [Notifications](notifications.html) page
   * Added `related-query` to [Backport R5 SubscriptionStatus](StructureDefinition-backport-subscription-status-r4.html) profile
