@@ -10,7 +10,7 @@ Description: "Profile on the Subscription resource to enable R5-style topic-base
 * criteria.extension 0..*
 * criteria.extension contains BackportFilterCriteria named filterCriteria 0..*
 * criteria.extension[BackportFilterCriteria] MS SU
-* criteria.extension[BackportFilterCriteria] ^short      = "Filtering critiera applied to events"
+* criteria.extension[BackportFilterCriteria] ^short      = "Filtering criteria applied to events"
 * criteria.extension[BackportFilterCriteria] ^definition = "Search-style filters to be applied to narrow the subscription topic stream. Keys can be either search parameters appropriate to the filtering resource or keys defined within the subscription topic."
 * criteria.extension[BackportFilterCriteria] ^comment    = "When multiple filters are applied, evaluates to true if all the conditions are met; otherwise it returns false. (i.e., logical AND)."
 * channel.payload 1..1
@@ -21,7 +21,7 @@ Description: "Profile on the Subscription resource to enable R5-style topic-base
 * channel.payload.extension[BackportPayloadContent] ^comment    = "Sending the payload has obvious security implications. The server is responsible for ensuring that the content is appropriately secured."
 * channel.extension contains BackportHeartbeatPeriod named heartbeatPeriod 0..1
 * channel.extension[BackportHeartbeatPeriod] ^short      = "Interval in seconds to send 'heartbeat' notification"
-* channel.extension[BackportHeartbeatPeriod] ^definition = "If present, a 'hearbeat' notification (keepalive) is sent via this channel with an the interval period equal to this elements integer value in seconds. If not present, a heartbeat notification is not sent."
+* channel.extension[BackportHeartbeatPeriod] ^definition = "If present, a 'heartbeat' notification (keepalive) is sent via this channel with an the interval period equal to this elements integer value in seconds. If not present, a heartbeat notification is not sent."
 * channel.extension contains BackportTimeout named timeout 0..1
 * channel.extension[BackportTimeout] ^short      = "Timeout in seconds to attempt notification delivery"
 * channel.extension[BackportTimeout] ^definition = "If present, the maximum amount of time a server will allow before failing a notification attempt."
@@ -56,7 +56,7 @@ Description: "Criteria for topic-based filtering (filter-by)."
 * ^context[0].type = #element
 * ^context[0].expression = "Subscription.criteria"
 * value[x] only string
-* value[x] ^short      = "Filtering critiera applied to events"
+* value[x] ^short      = "Filtering criteria applied to events"
 * value[x] ^definition = "Search-style filters to be applied to narrow the subscription topic stream. Keys can be either search parameters appropriate to the filtering resource or keys defined within the subscription topic."
 * value[x] ^comment    = "When multiple filters are applied, evaluates to true if all the conditions are met; otherwise it returns false. (i.e., logical AND)."
 
@@ -101,7 +101,7 @@ Description: "Interval in seconds to send 'heartbeat' notifications."
 * ^context[0].expression = "Subscription.channel"
 * value[x] only unsignedInt
 * value[x] ^short      = "Interval in seconds to send 'heartbeat' notification"
-* value[x] ^definition = "If present, a 'hearbeat' notification (keepalive) is sent via this channel with an the interval period equal to this elements integer value in seconds. If not present, a heartbeat notification is not sent."
+* value[x] ^definition = "If present, a 'heartbeat' notification (keepalive) is sent via this channel with an the interval period equal to this elements integer value in seconds. If not present, a heartbeat notification is not sent."
 
 Extension:   BackportTimeout
 Id:          backport-timeout
