@@ -46,7 +46,6 @@
 <artifact id="Subscription/subscription-admission" key="Subscription-subscription-admission" name="Backported Subscription: Admission"/>
 <artifact id="Subscription/subscription-zulip" key="Subscription-subscription-zulip" name="Backported Subscription: Custom Channel"/>
 <artifact id="Subscription/subscription-multi-resource" key="Subscription-subscription-multi-resource" name="Backported Subscription: Multi-Resource"/>
-<artifact deprecated="true" id="Basic/r4-encounter-complete" key="Basic-r4-encounter-complete" name="Backported SubscriptionTopic: R4 Encounter Complete"/>
 <artifact id="SubscriptionTopic/r4b-encounter-complete" key="SubscriptionTopic-r4b-encounter-complete" name="Backported SubscriptionTopic: R4B Encounter Complete"/>
 <artifact id="StructureDefinition/capabilitystatement-subscriptiontopic-canonical" key="StructureDefinition-capabilitystatement-subscriptiontopic-canonical" name="CapabilityStatement SubscriptionTopic Canonical"/>
 <artifact id="OperationDefinition/backport-subscription-get-ws-binding-token" key="OperationDefinition-backport-subscription-get-ws-binding-token" name="Get WS Binding Token for Subscription Operation"/>
@@ -94,6 +93,7 @@
 <artifact id="OperationDefinition/backport-subscription-events" key="OperationDefinition-backport-subscription-events" name="Subscription Events Operation"/>
 <artifact id="OperationDefinition/backport-subscription-resend" key="OperationDefinition-backport-subscription-resend" name="Subscription Resend Operation"/>
 <artifact id="OperationDefinition/backport-subscription-status" key="OperationDefinition-backport-subscription-status" name="Subscription Status Operation"/>
+<artifact id="Basic/r4-encounter-complete" key="Basic-r4-encounter-complete" name="r4-encounter-complete"/>
 <page key="NA" name="(NA)"/>
 <page key="many" name="(many)"/>
 <page deprecated="true" key="profiles" name="(profiles)"/>
