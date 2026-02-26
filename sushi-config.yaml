@@ -72,7 +72,6 @@ parameters:
   #   - Bundle/r4-notification-empty-with-auth
   #   - Basic/r4-notification-status
   #   - CapabilityStatement/backport-subscription-server-r4
-  #   - Basic/r4-encounter-complete
 extension:
   - url: http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status
     valueCode: trial-use

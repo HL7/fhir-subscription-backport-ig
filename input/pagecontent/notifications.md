@@ -72,7 +72,7 @@ In FHIR R4, the topic definition is represented as a `Basic` resource that uses 
 
 Regarding notifications in FHIR R4, the information normally contained in a `SubscriptionStatus` resource, including details about notification events, is represented by a `Basic` resource with a complex extension.  Related query information can be added as a nested extension within the `notificationEvent` sub-extension of the [backport-subscription-status-r4](StructureDefinition-backport-subscription-status-r4.html) profile.
 
-For examples, please see [Backported SubscriptionTopic: R4 Encounter Complete](Basic-r4-encounter-complete.html), [R4 Notification: Id Only with Related Query](Bundle-r4-notification-id-only-with-query.html), or [R4 Notification: Full Resource with related query](Bundle-r4-notification-full-resource-with-query.html).
+For examples, please see [R4 Notification: Id Only with Related Query](Bundle-r4-notification-id-only-with-query.html) or [R4 Notification: Full Resource with related query](Bundle-r4-notification-full-resource-with-query.html).
 
 
 ##### FHIR R4B and Later

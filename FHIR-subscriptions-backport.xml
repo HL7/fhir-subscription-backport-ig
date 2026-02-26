@@ -42,18 +42,15 @@
 <artifact deprecated="true" id="ValueSet/backport-notification-url-location-value-set" key="ValueSet-backport-notification-url-location-value-set" name="Backported R5 Subscription Notification URL Location Value Set"/>
 <artifact id="StructureDefinition/backport-subscription-status-r4-extension" key="StructureDefinition-backport-subscription-status-r4-extension" name="Backported R5 SubscriptionStatus for R4"/>
 <artifact deprecated="true" id="StructureDefinition/backport-subscription-topic-canonical-urls" key="StructureDefinition-backport-subscription-topic-canonical-urls" name="Backported R5 SubscriptionTopic Canonical URL Parameters"/>
-<artifact id="StructureDefinition/backport-subscription-topic-status-r4" key="StructureDefinition-backport-subscription-topic-status-r4" name="Backported R5 SubscriptionTopic Status for R4"/>
-<artifact id="StructureDefinition/backport-subscription-topic-r4-extension" key="StructureDefinition-backport-subscription-topic-r4-extension" name="Backported R5 SubscriptionTopic for R4"/>
 <artifact deprecated="true" id="Parameters/topic-list-single" key="Parameters-topic-list-single" name="Backported Subscription Topic List"/>
 <artifact id="Subscription/subscription-admission" key="Subscription-subscription-admission" name="Backported Subscription: Admission"/>
 <artifact id="Subscription/subscription-zulip" key="Subscription-subscription-zulip" name="Backported Subscription: Custom Channel"/>
 <artifact id="Subscription/subscription-multi-resource" key="Subscription-subscription-multi-resource" name="Backported Subscription: Multi-Resource"/>
-<artifact id="Basic/r4-encounter-complete" key="Basic-r4-encounter-complete" name="Backported SubscriptionTopic: R4 Encounter Complete"/>
+<artifact deprecated="true" id="Basic/r4-encounter-complete" key="Basic-r4-encounter-complete" name="Backported SubscriptionTopic: R4 Encounter Complete"/>
 <artifact id="SubscriptionTopic/r4b-encounter-complete" key="SubscriptionTopic-r4b-encounter-complete" name="Backported SubscriptionTopic: R4B Encounter Complete"/>
 <artifact id="StructureDefinition/capabilitystatement-subscriptiontopic-canonical" key="StructureDefinition-capabilitystatement-subscriptiontopic-canonical" name="CapabilityStatement SubscriptionTopic Canonical"/>
 <artifact id="OperationDefinition/backport-subscription-get-ws-binding-token" key="OperationDefinition-backport-subscription-get-ws-binding-token" name="Get WS Binding Token for Subscription Operation"/>
 <artifact id="StructureDefinition/backport-subscription-status-r4" key="StructureDefinition-backport-subscription-status-r4" name="R4 Backported R5 SubscriptionStatus"/>
-<artifact id="StructureDefinition/backport-subscription-topic-r4" key="StructureDefinition-backport-subscription-topic-r4" name="R4 Backported R5 SubscriptionTopic"/>
 <artifact id="CapabilityStatement/r4-capabilitystatement-example-server" key="CapabilityStatement-r4-capabilitystatement-example-server" name="R4 CapabilityStatement: Server Example"/>
 <artifact id="Bundle/r4-notification-empty" key="Bundle-r4-notification-empty" name="R4 Notification: Empty"/>
 <artifact id="Bundle/r4-notification-empty-with-auth" key="Bundle-r4-notification-empty-with-auth" name="R4 Notification: Empty with Authorization"/>
