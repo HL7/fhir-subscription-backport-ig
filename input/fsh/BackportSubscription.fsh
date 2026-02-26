@@ -42,7 +42,6 @@ Description: "Profile on the Subscription resource to enable R5-style topic-base
 * channel.type.extension[BackportChannelType] ^short      = "Extended channel type for notifications"
 * channel.type.extension[BackportChannelType] ^definition = "The type of channel to send notifications on."
 * channel.type.extension[BackportChannelType] ^comment    = "This extension allows for the use of additional channel types that were not defined in the FHIR R4 subscription definition."
-* extension contains http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.identifier named identifier 0..*
 
 
 Extension:   BackportTopicCanonical
@@ -218,6 +217,8 @@ Description: "R4/B Example of a topic-based 'admission' subscription."
 * channel.type                                    = #rest-hook
 * channel.endpoint                                = $webHookEndpoint
 * channel.payload                                 = #application/fhir+json
+* extension[identifier].valueIdentifier.system   = "http://example.org"
+* extension[identifier].valueIdentifier.value    = "abc"
 
 Instance:    BackportSubscriptionExampleMultiResource
 InstanceOf:  BackportSubscription
@@ -331,7 +332,7 @@ Usage: #definition
 * code = #identifier
 * base[0] = #Subscription
 * type = #token
-* expression = "extension('http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.identifier').value.ofType(Identifier)"
+* expression = "Subscription.extension('http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-subscription-identifier').value.ofType(Identifier)"
 * xpathUsage = #normal
 
 Instance: Subscription-payload-type
