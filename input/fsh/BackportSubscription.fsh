@@ -42,6 +42,8 @@ Description: "Profile on the Subscription resource to enable R5-style topic-base
 * channel.type.extension[BackportChannelType] ^short      = "Extended channel type for notifications"
 * channel.type.extension[BackportChannelType] ^definition = "The type of channel to send notifications on."
 * channel.type.extension[BackportChannelType] ^comment    = "This extension allows for the use of additional channel types that were not defined in the FHIR R4 subscription definition."
+* extension contains http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.identifier named identifier 0..*
+
 
 Extension:   BackportTopicCanonical
 Id:          backport-topic-canonical
@@ -314,6 +316,22 @@ Usage: #definition
 * base[0] = #Subscription
 * type = #token
 * expression = "extension('http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-channel-type').value.ofType(Coding)"
+* xpathUsage = #normal
+
+Instance: Subscription-identifier
+InstanceOf: SearchParameter
+Title: "Search by identifier on Subscription"
+Usage: #definition
+* insert ResourceJurisdiction
+* url = "http://hl7.org/fhir/uv/subscriptions-backport/SearchParameter/Subscription-identifier"
+* name = "SubscriptionIdentifierSearchParameter"
+* status = #draft
+* experimental = true
+* description = "This SearchParameter enables query of subscriptions by identifier."
+* code = #identifier
+* base[0] = #Subscription
+* type = #token
+* expression = "extension('http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.identifier').value.ofType(Identifier)"
 * xpathUsage = #normal
 
 Instance: Subscription-payload-type
