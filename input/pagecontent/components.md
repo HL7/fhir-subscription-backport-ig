@@ -27,7 +27,7 @@ The FHIR Topic-Based Subscription Model is composed of three parts:
   * How is it defined?
     * FHIR R4:
       * A [Bundle](http://hl7.org/fhir/R4/bundle.html) resource with type `history`,
-      * a [Parameters](http://hl7.org/fhir/R4/parameters.html) resource using the [Backport SubscriptionStatus Profile](StructureDefinition-backport-subscription-status-r4.html), and
+      * a [Basic](http://hl7.org/fhir/R4/basic.html) resource using the [Backport SubscriptionStatus Profile](StructureDefinition-backport-subscription-status-r4.html), and
       * zero or more additional entries, with either URLs or resources representing contents.
     * FHIR R4B:
       * A [Bundle](http://hl7.org/fhir/R4B/bundle.html) resource with type `history`,
@@ -46,7 +46,7 @@ In order to make subscription topics more widely available, support for `Subscri
 
 #### Subscription Topics in R4
 
-`SubscriptionTopic` resources contain information that is difficult to model without an appropriate resource to start from.  Representation is possible by using a later-defined version of the resource (e.g., from FHIR R5), cross-version extensions, and the `Basic` resource type.  Earlier versions of this guide left topics out of scope while this model was being developed, but today tooling will do the conversion automatically.
+`SubscriptionTopic` resources contain information that is difficult to model without an appropriate resource to start from.  This guide defines the [Backport SubscriptionTopic R4 Profile](StructureDefinition-backport-subscription-topic-r4.html) on the [Basic](http://hl7.org/fhir/R4/basic.html) resource to provide a standardized representation of `SubscriptionTopic` content in R4.  The profile uses a complex extension to carry the topic metadata, resource triggers, filter definitions, and notification shape, mirroring the structure of the R5 `SubscriptionTopic` resource.  Earlier versions of this guide left topics out of scope while this model was being developed, but today tooling will do the conversion automatically.
 
 In order to allow for discovery of supported subscription topics, this guide defines the [CapabilityStatement SubscriptionTopic Canonical](StructureDefinition-capabilitystatement-subscriptiontopic-canonical.html) extension.  The extension allows server implementers to advertise the canonical URLs of topics available to clients and allows clients to see the list of supported topics on a server.  The extension is expected to appear, if supported, on the `Subscription` resource entry.  Note that servers are NOT required to advertise supported topics via this extension.  Supported topics can also be advertised, for example, by the `CapabilityStatement.instantiates` or `CapabilityStatement.implementationGuide` elements of a CapabilityStatement, as defined by another Implementation Guide.  If a server supports `Basic`-wrapped versions of topics, they can be discovered by querying for `Basic` resources that have the `code` of `http://hl7.org/fhir/fhir-types|SubscriptionTopic`.  Finally, FHIR R4 servers MAY choose to leave topic discovery completely out-of-band and part of other steps, such as registration or integration.
 
@@ -60,9 +60,11 @@ The `Subscription` resource is used to request notifications for a specific clie
 
 For example, a subscription may ask for notifications based on an 'Encounter in-progress' topic, such as the one briefly described as an example in [Subscription Topics](#subscription-topics).  The subscription requires a link to the canonical URL of the topic, such as `http://server.example.org/fhir/subscriptiontopics/encounter-in-progress`, information about the channel, such as requesting notifications via `rest-hook` to the endpoint at `http://client.example.org/notification-endpoint/abc`), and payload configuration, such as requesting that bundles are encoded as `application/fhir+json` and include only identifiers (`id-only`).  Additionally, a subscription sets the filters which are applied to determine when notifications should be sent, such as indicating that only notifications for `Patient/123` should be sent.  More details about filters can be found in the [Subscription Filters](#subscription-filters) section.
 
-In order to support topic-based subscriptions in R4, this guide defines several extensions for use on the [R4 Subscription](http://hl7.org/fhir/subscription.html) resource.  A list of extensions defined by this guide can be found on the [Artifacts](artifacts.html#3) page. Note that the future FHIR R5 publication may define capabilities included in this specification as cross-version extensions. Since the FHIR R5 is currently under development, there are no guarantees these extensions will meet the requirements of this guide. In order to promote widespread compatibility, cross version extensions SHOULD NOT be used on R4 subscriptions to describe any elements also described by this guide
+In order to support topic-based subscriptions in R4, this guide defines several extensions for use on the [R4 Subscription](http://hl7.org/fhir/subscription.html) resource.  A list of extensions defined by this guide can be found on the [Artifacts](artifacts.html#3) page.
 
-In order to link a `Subscription` to a `SubscriptionTopic` and prevent any confusion between the R4 query-based and topic-based implementations, the link to a `SubscriptionTopic` is specified in the `Subscription.criteria` field.  For more details, please see the [Subscription Profile](StructureDefinition-backport-subscription.html) in this guide.
+> **Note on Cross-Version Extension Alignment:** The extensions defined in this guide are structurally aligned with the cross-version extensions defined in the XVer IG (`hl7.fhir.uv.xver-r5.r4`). A future version of this guide will depend on the XVer package directly and replace locally-defined extensions with references to the standard cross-version definitions.
+
+In order to link a `Subscription` to a `SubscriptionTopic`, this guide uses the `backport-topic-canonical` extension at the root of the Subscription resource.  The `backport-topic-canonical` extension holds the canonical URL of the `SubscriptionTopic` that drives the subscription.  For more details, please see the [Subscription Profile](StructureDefinition-backport-subscription.html) in this guide.
 
 
 #### Subscription Filters
@@ -71,15 +73,15 @@ While Subscription Topics are responsible for declaring the triggers for notific
 
 Information about defining filters can be found on the [R4B SubscriptionTopicResource](https://hl7.org/fhir/R4B/subscriptiontopic.html#filters).
 
-In FHIR R5, the usage of filters matches the definition structure - i.e., elements for the `resourceType`, `filterParameter`, `modifier`, and `value`.  However, modeling that number of elements in extensions is cumbersome and a relevant syntax already exists.  The [R5 FilterBy Criteria](StructureDefinition-backport-filter-criteria.html) extension contains filter information, formatted according to the search syntax defined by the FHIR core specification.
+In FHIR R5, the usage of filters matches the definition structure - i.e., elements for the `resourceType`, `filterParameter`, `comparator`, `modifier`, and `value`.  This guide provides the [Backport FilterBy](StructureDefinition-backport-filter-by.html) complex extension on `Subscription` with the following sub-extensions:
 
-In filter criteria strings, a `filterParameter`, as defined by the relevant `SubscriptionTopic` is used in the place of a search parameter.  A server MAY support search parameters not listed by a topic definition (e.g., if filtering is applied to a `Patient`, the server can honor filters for `Patient.name` even if the topic does not expose them), however topic authors are encouraged to explicitly list any parameters for best interoperability.
+* `resourceType` (0..1, uri) - The resource type to apply the filter to, if applicable.
+* `filterParameter` (1..1, string) - The filter parameter, as defined by the subscription topic or a search parameter.
+* `comparator` (0..1, code) - The comparator to use for the filter (e.g., eq, gt, lt, ge, le).
+* `modifier` (0..1, code) - The modifier to use for the filter.
+* `value` (1..1, string) - The value to use for filtering.
 
-The valid formats for criteria are: 
-* `[filterParameter]=[value]`
-* `[filterParameter]:[modifier]=[value]`
-* `[resourceType].[filterParameter]=[value]`
-* `[resourceType].[filterParameter]:[modifier]=[value]`
+A server MAY support search parameters not listed by a topic definition (e.g., if filtering is applied to a `Patient`, the server can honor filters for `Patient.name` even if the topic does not expose them), however topic authors are encouraged to explicitly list any parameters for best interoperability.
 
 Note that `resourceType` is only necessary for disambiguation in the case where there are filter parameters with the same code exposed for multiple resources available for filtering within a specific topic.  Even in the cases where this is true (e.g., hoisting existing search parameters), it is preferable for the topic definition to assign unique names for simplicity.
 
@@ -109,7 +111,7 @@ When processing a request for a `Subscription`, following are *some* checks that
 
 In FHIR R5, a new type of `Bundle` has been introduced, which uses the new `SubscriptionStatus` resource to convey status information in notifications.  Support for earlier FHIR versions has been designed to offer similar functionality and serialized data.
 
-In both FHIR R4 and R4B, notifications are based on a [history Bundle](http://hl7.org/fhir/bundle.html#history).  The first entry always contains `SubscriptionStatus` information, encoded as either a [Parameters](http://hl7.org/fhir/R4/parameters.html) resource using the [Backport SubscriptionStatus Profile](StructureDefinition-backport-subscription-status-r4.html) in FHIR R4 or a [SubscriptionStatus](http://hl7.org/fhir/subscriptionstatus.html) resource in FHIR R4B.
+In both FHIR R4 and R4B, notifications are based on a [history Bundle](http://hl7.org/fhir/bundle.html#history).  The first entry always contains `SubscriptionStatus` information, encoded as either a [Basic](http://hl7.org/fhir/R4/basic.html) resource with a complex extension using the [Backport SubscriptionStatus Profile](StructureDefinition-backport-subscription-status-r4.html) in FHIR R4 or a [SubscriptionStatus](http://hl7.org/fhir/subscriptionstatus.html) resource in FHIR R4B.
 
 Note that since notifications use `history` type Bundles, all notifications need to comply with the requirements for that bundle type.  Specifically, there are two invariants on Bundle (`bdl-3` and `bdl-4`) that require a `Bundle.entry.request` element for *every* `Bundle.entry`.
 * For the status resource (`entry[0]`), the request SHALL be filled out to match a request to the `$status` operation.

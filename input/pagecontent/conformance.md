@@ -40,8 +40,8 @@ Servers supporting this guide SHALL be able to read values present in this eleme
 Clients supporting this guide MAY support this extension, as necessary for their use case.
 
 
-##### backport-filter-criteria
-The [backport-filter-criteria](StructureDefinition-backport-filter-criteria.html) extension is used to describe the actual filters used in a specific instance of a subscription.
+##### backport-filter-by
+The [backport-filter-by](StructureDefinition-backport-filter-by.html) complex extension is used to describe the actual filters used in a specific instance of a subscription, with structured sub-extensions for `resourceType`, `filterParameter`, `comparator`, `modifier`, and `value`.
 
 * Server Support
 
@@ -54,8 +54,8 @@ If a server is capable of supporting filter criteria in general but unable to su
 Clients supporting this guide SHALL be able to write values in this extension.
 
 
-##### backport-payload-content
-The [backport-payload-content](StructureDefinition-backport-payload-content.html) extension is used to describe the amount of detail included in notification payloads.
+##### backport-content
+The [backport-content](StructureDefinition-backport-content.html) extension is used to describe the amount of detail included in notification payloads. This extension is placed at the root of the `Subscription` resource.
 
 * Server Support
 
@@ -78,16 +78,16 @@ Servers supporting this guide SHALL be able to generate a valid and correct `Sub
 Clients supporting this guide SHALL be able to process a valid `SubscriptionStatus` resource without errors.
 
 
-##### Subscription.criteria
-The `Subscription.criteria` element is required (cardinality of 1..1), so any compatible implementation SHALL be able to read and/or write as necessary.  Compared with the core specification, this guide specifies that the element SHALL contain the canonical URL for the Subscription Topic.
+##### Topic Reference (backport-topic-canonical)
+The topic reference is specified via the `backport-topic-canonical` extension at the root of the `Subscription` resource.  This extension holds the canonical URL of the `SubscriptionTopic` that drives the subscription.
 
 * Server Support
 
-Servers supporting this guide SHALL be able to read values in this element and process requests for subscription topics referenced by it.  If a server does not support a requested topic or will not honor the subscription otherwise, a server SHALL reject the subscription request.
+Servers supporting this guide SHALL be able to read the topic canonical URL from this extension and process requests for subscription topics referenced by it.  If a server does not support a requested topic or will not honor the subscription otherwise, a server SHALL reject the subscription request.
 
 * Client Support
 
-Clients supporting this guide SHALL be able to write subscription topic URLs into this element.
+Clients supporting this guide SHALL be able to write subscription topic canonical URLs into this extension.
 
 
 ### Conformance in FHIR R4
@@ -128,8 +128,8 @@ Servers supporting this guide SHALL be able to read values present in this eleme
 Clients supporting this guide MAY support this extension, as necessary for their use case.
 
 
-##### backport-filter-criteria
-The [backport-filter-criteria](StructureDefinition-backport-filter-criteria.html) extension is used to describe the actual filters used in a specific instance of a subscription.
+##### backport-filter-by
+The [backport-filter-by](StructureDefinition-backport-filter-by.html) complex extension is used to describe the actual filters used in a specific instance of a subscription, with structured sub-extensions for `resourceType`, `filterParameter`, `comparator`, `modifier`, and `value`.
 
 * Server Support
 
@@ -142,8 +142,8 @@ If a server is capable of supporting filter criteria in general but unable to su
 Clients supporting this guide SHALL be able to write values in this extension.
 
 
-##### backport-payload-content
-The [backport-payload-content](StructureDefinition-backport-payload-content.html) extension is used to describe the amount of detail included in notification payloads.
+##### backport-content
+The [backport-content](StructureDefinition-backport-content.html) extension is used to describe the amount of detail included in notification payloads. This extension is placed at the root of the `Subscription` resource.
 
 * Server Support
 
@@ -155,7 +155,7 @@ Clients supporting this guide SHALL be able to write values in this extension.
 
 
 ##### Notification entry: SubscriptionStatus
-Notification bundles SHALL contain a FHIR R4 [Parameters](http://hl7.org/fhir/R4/parameters.html) resource, conforming to the [R4 Backported R5 SubscriptionStatus](StructureDefinition-backport-subscription-status-r4.html) profile, as the first entry.
+Notification bundles SHALL contain a FHIR R4 [Basic](http://hl7.org/fhir/R4/basic.html) resource, conforming to the [R4 Backported R5 SubscriptionStatus](StructureDefinition-backport-subscription-status-r4.html) profile, as the first entry. The Basic resource uses a complex extension to represent SubscriptionStatus information.
 
 * Server Support
 
@@ -166,13 +166,13 @@ Servers supporting this guide SHALL be able to generate a valid and correct `R4 
 Clients supporting this guide SHALL be able to process a valid `R4 Backported R5 SubscriptionStatus` resource without errors.
 
 
-##### Subscription.criteria
-The `Subscription.criteria` element is required (cardinality of 1..1), so any compatible implementation SHALL be able to read and/or write as necessary.  Compared with the core specification, this guide specifies that the element SHALL contain the canonical URL for the Subscription Topic.
+##### Topic Reference (backport-topic-canonical)
+The topic reference is specified via the `backport-topic-canonical` extension at the root of the `Subscription` resource.  This extension holds the canonical URL of the `SubscriptionTopic` that drives the subscription.
 
 * Server Support
 
-Servers supporting this guide SHALL be able to read values in this element and process requests for subscription topics referenced by it.  If a server does not support a requested topic or will not honor the subscription otherwise, a server SHALL reject the subscription request.
+Servers supporting this guide SHALL be able to read the topic canonical URL from this extension and process requests for subscription topics referenced by it.  If a server does not support a requested topic or will not honor the subscription otherwise, a server SHALL reject the subscription request.
 
 * Client Support
 
-Clients supporting this guide SHALL be able to write subscription topic URLs into this element.
+Clients supporting this guide SHALL be able to write subscription topic canonical URLs into this extension.

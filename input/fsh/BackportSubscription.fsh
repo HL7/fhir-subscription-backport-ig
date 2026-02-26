@@ -4,35 +4,54 @@ Id:          backport-subscription
 Title:       "R4/B Topic-Based Subscription"
 Description: "Profile on the Subscription resource to enable R5-style topic-based subscriptions in FHIR R4 or R4B."
 * insert StructureJurisdiction
-* criteria 1..1 MS 
-* criteria ^short = "Canonical URL for the topic used to generate events"
-* criteria ^definition = "When using topic-based subscriptions, the primary criteria is always the topic, indicated by its canonical URL."
-* criteria.extension 0..*
-* criteria.extension contains BackportFilterCriteria named filterCriteria 0..*
-* criteria.extension[BackportFilterCriteria] MS SU
-* criteria.extension[BackportFilterCriteria] ^short      = "Filtering critiera applied to events"
-* criteria.extension[BackportFilterCriteria] ^definition = "Search-style filters to be applied to narrow the subscription topic stream. Keys can be either search parameters appropriate to the filtering resource or keys defined within the subscription topic."
-* criteria.extension[BackportFilterCriteria] ^comment    = "When multiple filters are applied, evaluates to true if all the conditions are met; otherwise it returns false. (i.e., logical AND)."
+* extension contains
+    BackportTopicCanonical named topic 1..1 MS and
+    BackportFilterBy named filterBy 0..* MS and
+    BackportContent named content 0..1 MS and
+    BackportHeartbeatPeriod named heartbeatPeriod 0..1 and
+    BackportTimeout named timeout 0..1 and
+    BackportMaxCount named maxCount 0..1 and
+    BackportSubscriptionIdentifier named identifier 0..* and
+    BackportSubscriptionName named name 0..1 and
+    BackportSubscriptionParameter named parameter 0..*
+* extension[topic] ^short = "Canonical URL for the SubscriptionTopic driving this subscription"
+* extension[topic] ^definition = "Canonical reference to the SubscriptionTopic that defines the events for this subscription."
+* extension[filterBy] ^short = "Filtering criteria applied to events"
+* extension[filterBy] ^definition = "Filtering criteria applied to narrow the subscription topic stream."
+* extension[filterBy] ^comment = "When multiple filters are applied, evaluates to true if all the conditions are met; otherwise it returns false. (i.e., logical AND)."
+* extension[content] ^short = "Notification content level"
+* extension[content] ^definition = "How much of the resource content to deliver in the notification payload."
+* extension[content] ^comment = "Sending the payload has obvious security implications. The server is responsible for ensuring that the content is appropriately secured."
+* extension[heartbeatPeriod] ^short = "Interval in seconds to send 'heartbeat' notification"
+* extension[heartbeatPeriod] ^definition = "If present, a 'heartbeat' notification (keepalive) is sent via this channel with an interval period equal to this element's integer value in seconds. If not present, a heartbeat notification is not sent."
+* extension[timeout] ^short = "Timeout in seconds to attempt notification delivery"
+* extension[timeout] ^definition = "If present, the maximum amount of time a server will allow before failing a notification attempt."
+* extension[maxCount] ^short = "Maximum number of triggering resources included in notification bundles"
+* extension[maxCount] ^definition = "If present, the maximum number of triggering resources that will be included in a notification bundle. Note that this is not a strict limit on the number of entries in a bundle, as dependent resources can be included."
+* extension[identifier] ^short = "Subscription identifier"
+* extension[identifier] ^definition = "A business identifier for this subscription."
+* extension[name] ^short = "Subscription name"
+* extension[name] ^definition = "A human-readable name for this subscription."
+* extension[parameter] ^short = "Channel parameters"
+* extension[parameter] ^definition = "Additional parameters for the channel, as name-value pairs."
+* criteria ^short = "Criteria (may be empty for topic-based subscriptions)"
+* criteria ^definition = "When using topic-based subscriptions, the topic is specified via the backport-topic-canonical extension. The criteria element is retained for compatibility."
 * channel.payload 1..1
-* channel.payload.extension contains BackportPayloadContent named content 1..1
-* channel.payload.extension[BackportPayloadContent] MS SU
-* channel.payload.extension[BackportPayloadContent] ^short      = "Notification content level"
-* channel.payload.extension[BackportPayloadContent] ^definition = "How much of the resource content to deliver in the notification payload. The choices are an empty payload, only the resource id, or the full resource content."
-* channel.payload.extension[BackportPayloadContent] ^comment    = "Sending the payload has obvious security implications. The server is responsible for ensuring that the content is appropriately secured."
-* channel.extension contains BackportHeartbeatPeriod named heartbeatPeriod 0..1
-* channel.extension[BackportHeartbeatPeriod] ^short      = "Interval in seconds to send 'heartbeat' notification"
-* channel.extension[BackportHeartbeatPeriod] ^definition = "If present, a 'hearbeat' notification (keepalive) is sent via this channel with an the interval period equal to this elements integer value in seconds. If not present, a heartbeat notification is not sent."
-* channel.extension contains BackportTimeout named timeout 0..1
-* channel.extension[BackportTimeout] ^short      = "Timeout in seconds to attempt notification delivery"
-* channel.extension[BackportTimeout] ^definition = "If present, the maximum amount of time a server will allow before failing a notification attempt."
-* channel.extension contains BackportMaxCount named maxCount 0..1
-* channel.extension[BackportMaxCount] ^short      = "Maximum number of triggering resources included in notification bundles"
-* channel.extension[BackportMaxCount] ^definition = "If present, the maximum number of triggering resources that will be included in a notification bundle (e.g., a server will not include more than this number of trigger resources in a single notification). Note that this is not a strict limit on the number of entries in a bundle, as dependent resources can be included."
 * channel.type.extension contains BackportChannelType named customChannelType 0..1
-* channel.type.extension[BackportChannelType] MS SU
+* channel.type.extension[BackportChannelType] MS
 * channel.type.extension[BackportChannelType] ^short      = "Extended channel type for notifications"
 * channel.type.extension[BackportChannelType] ^definition = "The type of channel to send notifications on."
 * channel.type.extension[BackportChannelType] ^comment    = "This extension allows for the use of additional channel types that were not defined in the FHIR R4 subscription definition."
+
+Extension:   BackportTopicCanonical
+Id:          backport-topic-canonical
+Title:       "Backport R5 Subscription Topic Canonical"
+Description: "Canonical URL reference to the SubscriptionTopic driving this subscription."
+* insert StructureJurisdiction
+* insert ExtensionContext(Subscription)
+* value[x] only uri
+* value[x] ^short      = "Canonical URL for the SubscriptionTopic"
+* value[x] ^definition = "Canonical reference to the SubscriptionTopic that defines the events for this subscription."
 
 Extension:   BackportChannelType
 Id:          backport-channel-type
@@ -46,18 +65,38 @@ Description: "Additional channel types not defined before FHIR R5."
 * value[x] ^definition = "The type of channel to send notifications on."
 * value[x] ^comment    = "This extension allows for the use of additional channel types that were not defined in the FHIR R4 subscription definition."
 
-Extension:   BackportFilterCriteria
-Id:          backport-filter-criteria
-Title:       "Backported R5 FilterBy Criteria"
-Description: "Criteria for topic-based filtering (filter-by)."
+Extension:   BackportFilterBy
+Id:          backport-filter-by
+Title:       "Backported R5 Subscription FilterBy"
+Description: "Defines structured criteria for filtering events in topic-based subscriptions."
 * insert StructureJurisdiction
-* ^context[0].type = #element
-* ^context[0].expression = "Subscription.criteria"
-* value[x] only string
-* value[x] ^short      = "Filtering critiera applied to events"
-* value[x] ^definition = "Search-style filters to be applied to narrow the subscription topic stream. Keys can be either search parameters appropriate to the filtering resource or keys defined within the subscription topic."
-* value[x] ^comment    = "When multiple filters are applied, evaluates to true if all the conditions are met; otherwise it returns false. (i.e., logical AND)."
+* insert ExtensionContext(Subscription)
+* extension contains
+    resourceType 0..1 and
+    filterParameter 1..1 and
+    comparator 0..1 and
+    modifier 0..1 and
+    value 1..1
+* extension[resourceType] ^short = "Resource type to filter on"
+* extension[resourceType] ^definition = "The resource type to apply the filter to, if applicable."
+* extension[resourceType].value[x] only uri
+* extension[filterParameter] ^short = "Filter parameter"
+* extension[filterParameter] ^definition = "The filter parameter, as defined by the subscription topic or a search parameter."
+* extension[filterParameter].value[x] only string
+* extension[comparator] ^short = "Search comparator"
+* extension[comparator] ^definition = "The comparator to use for the filter."
+* extension[comparator].value[x] only code
+* extension[comparator].valueCode from http://hl7.org/fhir/ValueSet/search-comparator
+* extension[modifier] ^short = "Search modifier"
+* extension[modifier] ^definition = "The modifier to use for the filter."
+* extension[modifier].value[x] only code
+* extension[modifier].valueCode from http://hl7.org/fhir/ValueSet/search-modifier-code
+* extension[value] ^short = "Filter value"
+* extension[value] ^definition = "The value to use for filtering."
+* extension[value].value[x] only string
 
+// Codes to represent how much resource content to send in the notification payload.
+// Aligned with XVer R5-subscription-payload-content-for-R4.
 CodeSystem:  BackportContentCodeSystem
 Id:          backport-content-code-system
 Title:       "Backported R5 Subscription Content Code System"
@@ -77,13 +116,12 @@ Description: "Codes to represent how much resource content to send in the notifi
 * ^experimental   = false
 * codes from system BackportContentCodeSystem
 
-Extension:   BackportPayloadContent
-Id:          backport-payload-content
+Extension:   BackportContent
+Id:          backport-content
 Title:       "Backport R5 Subscription Payload Content Information"
 Description: "How much of the resource content to deliver in the notification payload. The choices are an empty payload, only the resource id, or the full resource content."
 * insert StructureJurisdiction
-* ^context[0].type = #element
-* ^context[0].expression = "Subscription.channel.payload"
+* insert ExtensionContext(Subscription)
 * value[x] only code
 * valueCode from BackportContentValueSet
 * value[x] ^short      = "Notification content level"
@@ -95,8 +133,7 @@ Id:          backport-heartbeat-period
 Title:       "Backport R5 Subscription Heartbeat Period"
 Description: "Interval in seconds to send 'heartbeat' notifications."
 * insert StructureJurisdiction
-* ^context[0].type = #element
-* ^context[0].expression = "Subscription.channel"
+* insert ExtensionContext(Subscription)
 * value[x] only unsignedInt
 * value[x] ^short      = "Interval in seconds to send 'heartbeat' notification"
 * value[x] ^definition = "If present, a 'hearbeat' notification (keepalive) is sent via this channel with an the interval period equal to this elements integer value in seconds. If not present, a heartbeat notification is not sent."
@@ -106,8 +143,7 @@ Id:          backport-timeout
 Title:       "Backport R5 Subscription Timeout"
 Description: "Timeout in seconds to attempt notification delivery."
 * insert StructureJurisdiction
-* ^context[0].type = #element
-* ^context[0].expression = "Subscription.channel"
+* insert ExtensionContext(Subscription)
 * value[x] only unsignedInt
 * value[x] ^short      = "Timeout in seconds to attempt notification delivery"
 * value[x] ^definition = "If present, the maximum amount of time a server will allow before failing a notification attempt."
@@ -117,11 +153,47 @@ Id:          backport-max-count
 Title:       "Backported R5 Subscription MaxCount"
 Description: "Maximum number of triggering resources included in notification bundles."
 * insert StructureJurisdiction
-* ^context[0].type = #element
-* ^context[0].expression = "Subscription.channel"
+* insert ExtensionContext(Subscription)
 * value[x] only positiveInt
 * value[x] ^short      = "Maximum number of triggering resources included in notification bundles"
 * value[x] ^definition = "If present, the maximum number of triggering resources that will be included in a notification bundle (e.g., a server will not include more than this number of trigger resources in a single notification). Note that this is not a strict limit on the number of entries in a bundle, as dependent resources can be included."
+
+Extension:   BackportSubscriptionIdentifier
+Id:          backport-subscription-identifier
+Title:       "Backported R5 Subscription Identifier"
+Description: "A business identifier for the subscription."
+* insert StructureJurisdiction
+* insert ExtensionContext(Subscription)
+* value[x] only Identifier
+* value[x] ^short      = "Subscription identifier"
+* value[x] ^definition = "A business identifier for this subscription."
+
+Extension:   BackportSubscriptionName
+Id:          backport-subscription-name
+Title:       "Backported R5 Subscription Name"
+Description: "A human-readable name for the subscription."
+* insert StructureJurisdiction
+* insert ExtensionContext(Subscription)
+* value[x] only string
+* value[x] ^short      = "Subscription name"
+* value[x] ^definition = "A human-readable name for this subscription."
+
+Extension:   BackportSubscriptionParameter
+Id:          backport-subscription-parameter
+Title:       "Backported R5 Subscription Channel Parameter"
+Description: "Additional parameters for the subscription channel, as name-value pairs."
+* insert StructureJurisdiction
+* insert ExtensionContext(Subscription)
+* extension contains
+    name 1..1 and
+    value 1..1
+* extension[name] ^short = "Parameter name"
+* extension[name] ^definition = "The name of the parameter."
+* extension[name].value[x] only string
+* extension[value] ^short = "Parameter value"
+* extension[value] ^definition = "The value of the parameter."
+* extension[value].value[x] only string
+
 
 Instance:    BackportSubscriptionExampleAdmission
 InstanceOf:  BackportSubscription
@@ -133,14 +205,17 @@ Description: "R4/B Example of a topic-based 'admission' subscription."
 * end      = "2020-12-31T12:00:00Z"
 * reason   = "R4/B Example Topic-Based Subscription for Patient Admission"
 * criteria = $admissionTopic
-* criteria.extension[filterCriteria].valueString       = "Encounter?patient=Patient/123"
-* channel.type                                         = #rest-hook
-* channel.endpoint                                     = $webHookEndpoint
-* channel.extension[heartbeatPeriod].valueUnsignedInt  = 86400
-* channel.extension[timeout].valueUnsignedInt          = 60
-* channel.extension[maxCount].valuePositiveInt         = 20
-* channel.payload                                      = #application/fhir+json
-* channel.payload.extension[content].valueCode         = #id-only
+* extension[topic].valueUri                        = $admissionTopic
+* extension[filterBy].extension[resourceType].valueUri     = "Encounter"
+* extension[filterBy].extension[filterParameter].valueString = "patient"
+* extension[filterBy].extension[value].valueString         = "Patient/123"
+* extension[content].valueCode                    = #id-only
+* extension[heartbeatPeriod].valueUnsignedInt     = 86400
+* extension[timeout].valueUnsignedInt             = 60
+* extension[maxCount].valuePositiveInt            = 20
+* channel.type                                    = #rest-hook
+* channel.endpoint                                = $webHookEndpoint
+* channel.payload                                 = #application/fhir+json
 
 Instance:    BackportSubscriptionExampleMultiResource
 InstanceOf:  BackportSubscription
@@ -152,16 +227,23 @@ Description: "R4/B Example of a topic-based subscription with additional context
 * end      = "2020-12-31T12:00:00Z"
 * reason   = "R4/B Example Topic-Based Subscription for Multiple Resources"
 * criteria = $admissionTopic
-* criteria.extension[filterCriteria].valueString       = "Patient?id=Patient/123"
-* criteria.extension[filterCriteria].valueString       = "Encounter?patient=Patient/123"
-* criteria.extension[filterCriteria].valueString       = "Observation?subject=Patient/123"
-* channel.type                                         = #rest-hook
-* channel.endpoint                                     = $webHookEndpoint
-* channel.extension[heartbeatPeriod].valueUnsignedInt  = 86400
-* channel.extension[timeout].valueUnsignedInt          = 60
-* channel.extension[maxCount].valuePositiveInt         = 20
-* channel.payload                                      = #application/fhir+json
-* channel.payload.extension[content].valueCode         = #id-only
+* extension[topic].valueUri                                = $admissionTopic
+* extension[filterBy][0].extension[resourceType].valueUri     = "Patient"
+* extension[filterBy][0].extension[filterParameter].valueString = "id"
+* extension[filterBy][0].extension[value].valueString         = "Patient/123"
+* extension[filterBy][1].extension[resourceType].valueUri     = "Encounter"
+* extension[filterBy][1].extension[filterParameter].valueString = "patient"
+* extension[filterBy][1].extension[value].valueString         = "Patient/123"
+* extension[filterBy][2].extension[resourceType].valueUri     = "Observation"
+* extension[filterBy][2].extension[filterParameter].valueString = "subject"
+* extension[filterBy][2].extension[value].valueString         = "Patient/123"
+* extension[content].valueCode                    = #id-only
+* extension[heartbeatPeriod].valueUnsignedInt     = 86400
+* extension[timeout].valueUnsignedInt             = 60
+* extension[maxCount].valuePositiveInt            = 20
+* channel.type                                    = #rest-hook
+* channel.endpoint                                = $webHookEndpoint
+* channel.payload                                 = #application/fhir+json
 
 Instance:    BackportSubscriptionExampleCustomChannel
 InstanceOf:  BackportSubscription
@@ -173,15 +255,18 @@ Description: "R4/B Example of a topic-based subscription using a custom channel.
 * end      = "2020-12-31T12:00:00Z"
 * reason   = "R4/B Example Topic-Based Subscription for Patient Admission via Zulip"
 * criteria = $admissionTopic
-* criteria.extension[filterCriteria].valueString        = "Encounter?patient=Patient/123"
+* extension[topic].valueUri                                = $admissionTopic
+* extension[filterBy].extension[resourceType].valueUri     = "Encounter"
+* extension[filterBy].extension[filterParameter].valueString = "patient"
+* extension[filterBy].extension[value].valueString         = "Patient/123"
+* extension[content].valueCode                    = #id-only
+* extension[heartbeatPeriod].valueUnsignedInt     = 86400
+* extension[timeout].valueUnsignedInt             = 60
+* extension[maxCount].valuePositiveInt            = 20
 * channel.type                                          = #rest-hook
 * channel.type.extension[customChannelType].valueCoding = http://example.org/subscription-channel-type#zulip "Zulip Notification Channel"
 * channel.endpoint                                      = $zulipEndpoint
-* channel.extension[heartbeatPeriod].valueUnsignedInt   = 86400
-* channel.extension[timeout].valueUnsignedInt           = 60
-* channel.extension[maxCount].valuePositiveInt          = 20
 * channel.payload                                       = #application/fhir+json
-* channel.payload.extension[content].valueCode          = #id-only
 
 Instance: Subscription-topic
 InstanceOf: SearchParameter
@@ -195,9 +280,8 @@ Usage: #definition
 * description = "This SearchParameter enables query of subscriptions by canonical topic url."
 * code = #topic
 * base[0] = #Subscription
-* type = #string
-* expression = "Subscription.criteria"
-* xpath = "f:Subscription/f:criteria"
+* type = #uri
+* expression = "Subscription.extension('http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-topic-canonical').value"
 * xpathUsage = #normal
 
 Instance: Subscription-filter-criteria
@@ -213,7 +297,7 @@ Usage: #definition
 * code = #filter-criteria
 * base[0] = #Subscription
 * type = #string
-* expression = "extension('http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-filter-criteria').value.ofType(string)"
+* expression = "Subscription.extension('http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-filter-by').extension('value').value.ofType(string)"
 * xpathUsage = #normal
 
 Instance: Subscription-custom-channel
@@ -245,5 +329,5 @@ Usage: #definition
 * code = #payload-type
 * base[0] = #Subscription
 * type = #token
-* expression = "extension('http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-payload-content').value.ofType(code)"
+* expression = "Subscription.extension('http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-content').value.ofType(code)"
 * xpathUsage = #normal

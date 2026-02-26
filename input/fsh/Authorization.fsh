@@ -4,6 +4,8 @@ Title:       "Authorization information relevant to a notification"
 Description: "Authorization context information and value (e.g., token)."
 * insert StructureJurisdiction
 * insert ExtensionContext(SubscriptionStatus.notificationEvent)
+* insert ExtensionContext(Basic.extension)
+* insert ExtensionContext(Basic.extension.extension)
 * extension contains
     type 1..1 MS and
     value 0..1 MS
