@@ -214,7 +214,7 @@ Description: "R4 example of a basic-wrapped subscription topic for completed enc
 * modifierExtension[status].valueCode = #draft
 // Simple SubscriptionTopic metadata
 * extension[subscriptionTopic].extension[url].valueUri = "http://hl7.org/fhir/uv/subscriptions-backport/SubscriptionTopic/r4-encounter-complete"
-* extension[subscriptionTopic].extension[version].valueString = "1.2.0"
+* extension[subscriptionTopic].extension[version].valueString = "2.0.0"
 * extension[subscriptionTopic].extension[name].valueString = "R4 example of a basic-converted subscription topic for completed encounters."
 * extension[subscriptionTopic].extension[title].valueString = "Backported SubscriptionTopic: R4 Encounter Complete"
 * extension[subscriptionTopic].extension[date].valueDateTime = "2019-01-01"

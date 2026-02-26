@@ -1,4 +1,4 @@
-### STU 1.2.0
+### STU 2.0.0
 
 * [FHIR-43275](https://jira.hl7.org/browse/FHIR-43275): Add 'notified pull' option to notifications
   * Added `Notified Pull` section to the [Notifications](notifications.html) page
