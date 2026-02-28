@@ -98,11 +98,74 @@ Replaced raw cross-version extension URLs with a locally-defined profile and com
 - Updated R4 status description (Parameters to Basic).
 - Updated related-query description for nested extension pattern.
 
+## Phase 7: XVer Cross-Version Extension Migration
+
+### Overview
+
+Replaced 11 locally-defined extensions with their equivalents from the `hl7.fhir.uv.xver-r5.r4` package (version `0.0.1-snapshot-3`). Changed `fhirVersion` from `4.3.0` to `4.0.1` to match the xver package's base version. Moved R4B-specific artifacts to `input/fsh-r4b/` (excluded from SUSHI processing since R4B types like `SubscriptionStatus` and `SubscriptionTopic` are not available in an R4 build).
+
+### Subscription Profile (`BackportSubscription.fsh`)
+
+- **Removed** 10 local extension definitions: `BackportTopicCanonical`, `BackportChannelType`, `BackportFilterBy`, `BackportContent`, `BackportHeartbeatPeriod`, `BackportTimeout`, `BackportMaxCount`, `BackportSubscriptionIdentifier`, `BackportSubscriptionName`, `BackportSubscriptionParameter`.
+- **Removed** `BackportContentCodeSystem` and `BackportContentValueSet` (now provided by xver package).
+- **Rewrote** `BackportSubscription` profile to reference xver extensions via aliases defined in `Common.fsh`:
+  - Root-level: `extension-Subscription.topic`, `.filterBy`, `.content`, `.heartbeatPeriod`, `.timeout`, `.maxCount`, `.identifier`, `.name`, `.parameter`.
+  - On `channel.type`: `extension-Subscription.channelType` (context constrained by xver package to `Subscription.channel.type`).
+- **Updated** examples: `valueUri` → `valueCanonical` for topic; channelType on `channel.type.extension` for custom channel example.
+- **Updated** SearchParameter FHIRPath expressions to use xver extension URLs.
+
+### R4 SubscriptionStatus (`BackportNotificationR4.fsh`)
+
+- **Removed** `BackportSubscriptionStatusR4Extension` local extension definition (64 lines).
+- **Changed** `BackportSubscriptionStatusR4` profile to use `modifierExtension contains $xverSubStatus` (cross-version `extension-SubscriptionStatus` has `isModifier: true`).
+- **Updated** all 5 RuleSets and 12 instances: `extension[subscriptionStatus]` → `modifierExtension[subscriptionStatus]`.
+
+### R4B Artifacts Excluded
+
+- **Moved** `BackportNotificationR4B.fsh` to `input/fsh-r4b/` (not processed by SUSHI).
+- **Removed** R4B `SubscriptionTopic` instance from `BackportTopics.fsh` (IG Publisher cannot parse R4B SearchModifierCodes in R4 mode).
+- **Removed** R4B `CapabilityStatement` instance from `Capabilities.fsh` (references non-existent SubscriptionTopic resource type in R4).
+
+### Extension Contexts (`Authorization.fsh`, `Extensions.fsh`)
+
+- Changed `Basic.extension` → `Basic.modifierExtension` contexts on `NotificationAuthorizationHint` and `BackportRelatedQuery` to match the SubscriptionStatus modifierExtension change.
+
+### Configuration (`sushi-config.yaml`)
+
+- Changed `fhirVersion` from `4.3.0` to `4.0.1`.
+- Added `hl7.fhir.uv.xver-r5.r4: 0.0.1-snapshot-3` dependency.
+- Updated menu artifact section numbering (`#8` → `#6`) and removed Value Sets entry after artifact removal.
+
+### Documentation
+
+- Updated `conformance.md`: replaced "cross version extensions SHOULD NOT be used" with xver adoption language; renamed extension references to xver names; updated R4 SubscriptionStatus description to reference cross-version modifier extension.
+- Updated `components.md`: topic and filterBy extension references.
+- Updated `channels.md`: content extension references.
+- Updated `Operations.fsh`: `backport-content-value-set` → `subscription-payload-content` in documentation text.
+- Marked 12 removed artifacts as deprecated in `FHIR-subscriptions-backport.xml`.
+
+### Aliases Added (`Common.fsh`)
+
+```
+$xverSubTopic, $xverSubChannelType, $xverSubFilterBy, $xverSubContent,
+$xverSubHeartbeat, $xverSubTimeout, $xverSubMaxCount, $xverSubIdentifier,
+$xverSubName, $xverSubParameter, $xverSubStatus
+```
+
 ## Build Status
 
 - SUSHI: 0 errors, 0 warnings.
-- IG Publisher: 25 errors, 55 warnings, 13 broken links. All remaining errors are pre-existing (version mismatches, broken links for local builds, R5 CodeSystem `fhir-types` not found in R4B context, IG dependency version/packageId clashes). No errors from the XVer alignment changes. The 27 cross-version extension validation errors on `Basic-r4-encounter-complete` were eliminated by Phase 4b.
+- IG Publisher: 117 errors, 32 warnings. No errors from the xver migration itself. All remaining errors are:
+  - **xver package defects** (22): ValueSet `R5-subscription-status-for-R4` cannot resolve subscription status codes (`active`, `requested`, `error`).
+  - **xver package defects** (13): Windows file paths in xver extension narrative HTML.
+  - **Pre-existing** (8): `Basic/r4-encounter-complete` uses `4.3` version extension URLs.
+  - **Pre-existing** (3): Extension contexts for R4B types (`SubscriptionStatus.notificationEvent`, `SubscriptionTopic.notificationShape`) invalid in R4.
+  - **Pre-existing** (3): IG-level version mismatches with tools dependency.
+  - **Build infrastructure** (~68): Broken links to previous-version comparison pages.
 
 ## Known Issues
 
-- **IG Publisher R4ToR4BAnalyser NPE**: The `r4-exclusion` and `r4b-exclusion` lists in `sushi-config.yaml` are commented out as a workaround for a bug in IG Publisher v2.0.6+ where `R4ToR4BAnalyser.markExempt()` is called before the analyser is initialized. These should be restored once the publisher is fixed.
+- **R4B support removed**: R4B-specific artifacts are no longer built. The R4B notification profiles remain in `input/fsh-r4b/` for reference but are not processed.
+- **xver ValueSet resolution**: The xver package's `R5-subscription-status-for-R4` ValueSet fails to resolve standard subscription status codes. This affects all 12 notification status examples. Awaiting fix in xver package.
+- **xver narrative paths**: The xver package contains Windows-style file paths in extension narrative HTML, causing 13 validation errors.
+- **R4 SubscriptionTopic example**: `Basic/r4-encounter-complete` still uses `4.3` version extension URLs (not migrated to `5.0` in this phase).

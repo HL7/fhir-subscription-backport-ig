@@ -22,72 +22,6 @@ Severity:    #error
 XPath:       "f:entry[1]/f:resource/f:Basic"
 
 
-Extension:   BackportSubscriptionStatusR4Extension
-Id:          backport-subscription-status-r4-extension
-Title:       "Backported R5 SubscriptionStatus for R4"
-Description: "Complex extension representing SubscriptionStatus information on a Basic resource for R4."
-* insert StructureCommonR4
-* insert ExtensionContext(Basic)
-* extension contains
-    subscription 1..1 MS and
-    topic 0..1 MS and
-    status 0..1 MS and
-    type 1..1 MS and
-    eventsSinceSubscriptionStart 0..1 MS and
-    notificationEvent 0..* MS and
-    error 0..* MS
-* extension[subscription] ^short = "Reference to the Subscription"
-* extension[subscription] ^definition = "The reference to the Subscription which generated this notification."
-* extension[subscription].value[x] 1..1 MS
-* extension[subscription].value[x] only Reference(Subscription)
-* extension[topic] ^short = "Canonical reference to the SubscriptionTopic"
-* extension[topic] ^definition = "Canonical reference to the SubscriptionTopic for the Subscription which generated this notification."
-* extension[topic] ^comment = "This value SHOULD NOT be present when using `empty` payloads, MAY be present when using id-only payloads, and SHOULD be present when using `full-resource` payloads."
-* extension[topic].value[x] 0..1 MS
-* extension[topic].value[x] only canonical
-* extension[status] ^short = "Subscription status"
-* extension[status] ^definition = "The status of the subscription, which marks the server state for managing the subscription."
-* extension[status].value[x] 1..1 MS
-* extension[status].value[x] only code
-* extension[status].valueCode from http://hl7.org/fhir/ValueSet/subscription-status
-* extension[type] ^short = "Notification type"
-* extension[type] ^definition = "The type of event being conveyed with this notification."
-* extension[type].value[x] 1..1 MS
-* extension[type].value[x] only code
-* extension[type].valueCode from http://hl7.org/fhir/ValueSet/subscription-notification-type
-* extension[eventsSinceSubscriptionStart] ^short = "Events since subscription start"
-* extension[eventsSinceSubscriptionStart] ^definition = "The total number of actual events which have been generated since the Subscription was created (inclusive of this notification) - regardless of how many have been successfully communicated. This number is NOT incremented for handshake and heartbeat notifications."
-* extension[eventsSinceSubscriptionStart].value[x] 0..1 MS
-* extension[eventsSinceSubscriptionStart].value[x] only string
-* extension[notificationEvent] ^short = "Notification event details"
-* extension[notificationEvent] ^definition = "Detailed information about events relevant to this notification."
-* extension[notificationEvent].extension contains
-    eventNumber 1..1 MS and
-    timestamp 0..1 MS and
-    focus 0..1 MS and
-    additionalContext 0..* MS
-* extension[notificationEvent].extension[eventNumber] ^short = "Event number"
-* extension[notificationEvent].extension[eventNumber] ^definition = "The sequential number of this event in this subscription context."
-* extension[notificationEvent].extension[eventNumber].value[x] 1..1 MS
-* extension[notificationEvent].extension[eventNumber].value[x] only string
-* extension[notificationEvent].extension[timestamp] ^short = "Event timestamp"
-* extension[notificationEvent].extension[timestamp] ^definition = "The actual time this event occurred on the server."
-* extension[notificationEvent].extension[timestamp].value[x] 0..1 MS
-* extension[notificationEvent].extension[timestamp].value[x] only instant
-* extension[notificationEvent].extension[focus] ^short = "Event focus"
-* extension[notificationEvent].extension[focus] ^definition = "The focus of this event. While this will usually be a reference to the focus resource of the event, it MAY contain a reference to a non-FHIR object."
-* extension[notificationEvent].extension[focus].value[x] 0..1 MS
-* extension[notificationEvent].extension[focus].value[x] only Reference
-* extension[notificationEvent].extension[additionalContext] ^short = "Additional context for this event"
-* extension[notificationEvent].extension[additionalContext] ^definition = "Additional context information for this event. Generally, this will contain references to additional resources included with the event (e.g., the Patient relevant to an Encounter), however it MAY refer to non-FHIR objects."
-* extension[notificationEvent].extension[additionalContext].value[x] 0..1 MS
-* extension[notificationEvent].extension[additionalContext].value[x] only Reference
-* extension[error] ^short = "Error on the subscription"
-* extension[error] ^definition = "A record of errors that occurred when the server processed a notification."
-* extension[error].value[x] 0..1 MS
-* extension[error].value[x] only CodeableConcept
-
-
 Profile:      BackportSubscriptionStatusR4
 Parent:       Basic
 Id:           backport-subscription-status-r4
@@ -95,7 +29,7 @@ Title:        "R4 Backported R5 SubscriptionStatus"
 Description:  "Profile on Basic for topic-based subscription notifications in R4."
 * insert StructureCommonR4
 * code = http://hl7.org/fhir/fhir-types#SubscriptionStatus
-* extension contains BackportSubscriptionStatusR4Extension named subscriptionStatus 1..1 MS
+* modifierExtension contains $xverSubStatus named subscriptionStatus 1..1 MS
 
 
 // --------------------------------------------------------------------------
@@ -103,24 +37,24 @@ Description:  "Profile on Basic for topic-based subscription notifications in R4
 // --------------------------------------------------------------------------
 
 RuleSet: StatusBase(subscriptionRef, topic, status, type, sinceStart)
-* extension[subscriptionStatus].extension[subscription].valueReference.reference = {subscriptionRef}
-* extension[subscriptionStatus].extension[topic].valueCanonical = {topic}
-* extension[subscriptionStatus].extension[status].valueCode = {status}
-* extension[subscriptionStatus].extension[type].valueCode = {type}
-* extension[subscriptionStatus].extension[eventsSinceSubscriptionStart].valueString = "{sinceStart}"
+* modifierExtension[subscriptionStatus].extension[subscription].valueReference.reference = {subscriptionRef}
+* modifierExtension[subscriptionStatus].extension[topic].valueCanonical = {topic}
+* modifierExtension[subscriptionStatus].extension[status].valueCode = {status}
+* modifierExtension[subscriptionStatus].extension[type].valueCode = {type}
+* modifierExtension[subscriptionStatus].extension[eventsSinceSubscriptionStart].valueString = "{sinceStart}"
 
 RuleSet: StatusEvent(eventNumber)
-* extension[subscriptionStatus].extension[notificationEvent].extension[eventNumber].valueString = "{eventNumber}"
-* extension[subscriptionStatus].extension[notificationEvent].extension[timestamp].valueInstant = "2020-05-29T11:44:13.1882432-05:00"
+* modifierExtension[subscriptionStatus].extension[notificationEvent].extension[eventNumber].valueString = "{eventNumber}"
+* modifierExtension[subscriptionStatus].extension[notificationEvent].extension[timestamp].valueInstant = "2020-05-29T11:44:13.1882432-05:00"
 
 RuleSet: StatusEventFocus(focus)
-* extension[subscriptionStatus].extension[notificationEvent].extension[focus].valueReference.reference = {focus}
+* modifierExtension[subscriptionStatus].extension[notificationEvent].extension[focus].valueReference.reference = {focus}
 
 RuleSet: StatusEventContext(additionalContext)
-* extension[subscriptionStatus].extension[notificationEvent].extension[additionalContext].valueReference.reference = {additionalContext}
+* modifierExtension[subscriptionStatus].extension[notificationEvent].extension[additionalContext].valueReference.reference = {additionalContext}
 
 RuleSet: StatusError(vs, code)
-* extension[subscriptionStatus].extension[error].valueCodeableConcept = {vs}{code}
+* modifierExtension[subscriptionStatus].extension[error].valueCodeableConcept = {vs}{code}
 
 // RuleSet for bundle entry metadata (applied to Bundle instances)
 RuleSet: BundleEntry0(id)
@@ -170,11 +104,11 @@ InstanceOf:  BackportSubscriptionStatusR4
 Usage:       #inline
 * insert StatusBase($admissionSub, $admissionTopic, #active, #event-notification, 2)
 * insert StatusEvent(2)
-* extension[subscriptionStatus].extension[notificationEvent].extension[2].url = $authorizationHintExt
-* extension[subscriptionStatus].extension[notificationEvent].extension[2].extension[0].url = "type"
-* extension[subscriptionStatus].extension[notificationEvent].extension[2].extension[0].valueCoding = http://example.org/auth#authorization_base "OAuth request token"
-* extension[subscriptionStatus].extension[notificationEvent].extension[2].extension[1].url = "value"
-* extension[subscriptionStatus].extension[notificationEvent].extension[2].extension[1].valueString = "ZGFhNDFjY2MtZGFmMi00YjZkLThiNDYtN2JlZDk1MWEyYzk2"
+* modifierExtension[subscriptionStatus].extension[notificationEvent].extension[2].url = $authorizationHintExt
+* modifierExtension[subscriptionStatus].extension[notificationEvent].extension[2].extension[0].url = "type"
+* modifierExtension[subscriptionStatus].extension[notificationEvent].extension[2].extension[0].valueCoding = http://example.org/auth#authorization_base "OAuth request token"
+* modifierExtension[subscriptionStatus].extension[notificationEvent].extension[2].extension[1].url = "value"
+* modifierExtension[subscriptionStatus].extension[notificationEvent].extension[2].extension[1].valueString = "ZGFhNDFjY2MtZGFmMi00YjZkLThiNDYtN2JlZDk1MWEyYzk2"
 
 Instance:    StatusForIdOnlyR4
 InstanceOf:  BackportSubscriptionStatusR4
@@ -189,11 +123,11 @@ Usage:       #inline
 * insert StatusBase($admissionSub, $admissionTopic, #active, #event-notification, 2)
 * insert StatusEvent(2)
 * insert StatusEventFocus($notificationEncounter1)
-* extension[subscriptionStatus].extension[notificationEvent].extension[3].url = $authorizationHintExt
-* extension[subscriptionStatus].extension[notificationEvent].extension[3].extension[0].url = "type"
-* extension[subscriptionStatus].extension[notificationEvent].extension[3].extension[0].valueCoding = http://example.org/auth#authorization_base "OAuth request token"
-* extension[subscriptionStatus].extension[notificationEvent].extension[3].extension[1].url = "value"
-* extension[subscriptionStatus].extension[notificationEvent].extension[3].extension[1].valueString = "ZGFhNDFjY2MtZGFmMi00YjZkLThiNDYtN2JlZDk1MWEyYzk2"
+* modifierExtension[subscriptionStatus].extension[notificationEvent].extension[3].url = $authorizationHintExt
+* modifierExtension[subscriptionStatus].extension[notificationEvent].extension[3].extension[0].url = "type"
+* modifierExtension[subscriptionStatus].extension[notificationEvent].extension[3].extension[0].valueCoding = http://example.org/auth#authorization_base "OAuth request token"
+* modifierExtension[subscriptionStatus].extension[notificationEvent].extension[3].extension[1].url = "value"
+* modifierExtension[subscriptionStatus].extension[notificationEvent].extension[3].extension[1].valueString = "ZGFhNDFjY2MtZGFmMi00YjZkLThiNDYtN2JlZDk1MWEyYzk2"
 
 Instance:    StatusForIdOnlyWithQueryR4
 InstanceOf:  BackportSubscriptionStatusR4
@@ -201,11 +135,11 @@ Usage:       #inline
 * insert StatusBase($admissionSub, $admissionTopic, #active, #event-notification, 2)
 * insert StatusEvent(2)
 * insert StatusEventFocus($notificationEncounter1)
-* extension[subscriptionStatus].extension[notificationEvent].extension[3].url = $relatedQueryExt
-* extension[subscriptionStatus].extension[notificationEvent].extension[3].extension[0].url = "queryType"
-* extension[subscriptionStatus].extension[notificationEvent].extension[3].extension[0].valueCoding = http://example.org/query-types#example "Example query"
-* extension[subscriptionStatus].extension[notificationEvent].extension[3].extension[1].url = "query"
-* extension[subscriptionStatus].extension[notificationEvent].extension[3].extension[1].valueString = "http://example.org/fhir/$example?patient=$notificationPatientId"
+* modifierExtension[subscriptionStatus].extension[notificationEvent].extension[3].url = $relatedQueryExt
+* modifierExtension[subscriptionStatus].extension[notificationEvent].extension[3].extension[0].url = "queryType"
+* modifierExtension[subscriptionStatus].extension[notificationEvent].extension[3].extension[0].valueCoding = http://example.org/query-types#example "Example query"
+* modifierExtension[subscriptionStatus].extension[notificationEvent].extension[3].extension[1].url = "query"
+* modifierExtension[subscriptionStatus].extension[notificationEvent].extension[3].extension[1].valueString = "http://example.org/fhir/$example?patient=$notificationPatientId"
 
 Instance:    StatusForFullResourceR4
 InstanceOf:  BackportSubscriptionStatusR4
@@ -220,16 +154,16 @@ Usage:       #inline
 * insert StatusBase($admissionSub, $admissionTopic, #active, #event-notification, 2)
 * insert StatusEvent(2)
 * insert StatusEventFocus($notificationEncounter1)
-* extension[subscriptionStatus].extension[notificationEvent].extension[3].url = $relatedQueryExt
-* extension[subscriptionStatus].extension[notificationEvent].extension[3].extension[0].url = "queryType"
-* extension[subscriptionStatus].extension[notificationEvent].extension[3].extension[0].valueCoding = http://example.org/query-types#example "Example query"
-* extension[subscriptionStatus].extension[notificationEvent].extension[3].extension[1].url = "query"
-* extension[subscriptionStatus].extension[notificationEvent].extension[3].extension[1].valueString = "http://example.org/fhir/$example?patient=$notificationPatientId"
-* extension[subscriptionStatus].extension[notificationEvent].extension[4].url = $relatedQueryExt
-* extension[subscriptionStatus].extension[notificationEvent].extension[4].extension[0].url = "queryType"
-* extension[subscriptionStatus].extension[notificationEvent].extension[4].extension[0].valueCoding = http://example.org/query-types#prescribed "Prescribed medications"
-* extension[subscriptionStatus].extension[notificationEvent].extension[4].extension[1].url = "query"
-* extension[subscriptionStatus].extension[notificationEvent].extension[4].extension[1].valueString = "http://example.org/fhir/MedicationRequest?patient=$notificationPatientId&encounter=$notificationEncounter1Id"
+* modifierExtension[subscriptionStatus].extension[notificationEvent].extension[3].url = $relatedQueryExt
+* modifierExtension[subscriptionStatus].extension[notificationEvent].extension[3].extension[0].url = "queryType"
+* modifierExtension[subscriptionStatus].extension[notificationEvent].extension[3].extension[0].valueCoding = http://example.org/query-types#example "Example query"
+* modifierExtension[subscriptionStatus].extension[notificationEvent].extension[3].extension[1].url = "query"
+* modifierExtension[subscriptionStatus].extension[notificationEvent].extension[3].extension[1].valueString = "http://example.org/fhir/$example?patient=$notificationPatientId"
+* modifierExtension[subscriptionStatus].extension[notificationEvent].extension[4].url = $relatedQueryExt
+* modifierExtension[subscriptionStatus].extension[notificationEvent].extension[4].extension[0].url = "queryType"
+* modifierExtension[subscriptionStatus].extension[notificationEvent].extension[4].extension[0].valueCoding = http://example.org/query-types#prescribed "Prescribed medications"
+* modifierExtension[subscriptionStatus].extension[notificationEvent].extension[4].extension[1].url = "query"
+* modifierExtension[subscriptionStatus].extension[notificationEvent].extension[4].extension[1].valueString = "http://example.org/fhir/MedicationRequest?patient=$notificationPatientId&encounter=$notificationEncounter1Id"
 
 Instance:    StatusForMultiResourceR4
 InstanceOf:  BackportSubscriptionStatusR4

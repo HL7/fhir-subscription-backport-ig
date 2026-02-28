@@ -12,10 +12,10 @@
 <artifactPageExtension value="-examples"/>
 <artifactPageExtension value="-mappings"/>
 <artifact id="StructureDefinition/notification-authorization-hint" key="StructureDefinition-notification-authorization-hint" name="Authorization information relevant to a notification"/>
-<artifact id="StructureDefinition/backport-heartbeat-period" key="StructureDefinition-backport-heartbeat-period" name="Backport R5 Subscription Heartbeat Period"/>
+<artifact deprecated="true" id="StructureDefinition/backport-heartbeat-period" key="StructureDefinition-backport-heartbeat-period" name="Backport R5 Subscription Heartbeat Period"/>
 <artifact deprecated="true" id="StructureDefinition/backport-notification-url-location" key="StructureDefinition-backport-notification-url-location" name="Backport R5 Subscription Notification URL Location"/>
-<artifact id="StructureDefinition/backport-content" key="StructureDefinition-backport-payload-content" name="Backport R5 Subscription Payload Content Information"/>
-<artifact id="StructureDefinition/backport-timeout" key="StructureDefinition-backport-timeout" name="Backport R5 Subscription Timeout"/>
+<artifact deprecated="true" id="StructureDefinition/backport-payload-content" key="StructureDefinition-backport-payload-content" name="Backport R5 Subscription Payload Content Information"/>
+<artifact deprecated="true" id="StructureDefinition/backport-timeout" key="StructureDefinition-backport-timeout" name="Backport R5 Subscription Timeout"/>
 <artifact deprecated="true" id="StructureDefinition/backport-topic-canonical" key="StructureDefinition-backport-topic-canonical" name="Backport R5 Subscription Topic Canonical"/>
 <artifact deprecated="true" id="OperationDefinition/Backport-subscription-status" key="OperationDefinition-Backport-subscription-status" name="Backport Subscription Status Operation"/>
 <artifact deprecated="true" id="OperationDefinition/Backport-subscriptiontopic-list" key="OperationDefinition-Backport-subscriptiontopic-list" name="Backport Subscription Topic List Operation"/>
@@ -27,27 +27,22 @@
 <artifact deprecated="true" id="Bundle/notification-id-only" key="Bundle-notification-id-only" name="Backported Notification: Id Only"/>
 <artifact deprecated="true" id="Bundle/notification-multi-resource" key="Bundle-notification-multi-resource" name="Backported Notification: Multiple Resources"/>
 <artifact deprecated="true" id="SubscriptionStatus/notification-status" key="Parameters-notification-status" name="Backported Notification: Status"/>
-<artifact id="StructureDefinition/backport-channel-type" key="StructureDefinition-backport-channel-type" name="Backported R5 Additional Channel Types"/>
+<artifact deprecated="true" id="StructureDefinition/backport-channel-type" key="StructureDefinition-backport-channel-type" name="Backported R5 Additional Channel Types"/>
 <artifact deprecated="true" id="StructureDefinition/backport-additional-criteria" key="StructureDefinition-backport-additional-criteria" name="Backported R5 Additional Criteria"/>
 <artifact deprecated="true" id="StructureDefinition/backport-filter-criteria" key="StructureDefinition-backport-filter-criteria" name="Backported R5 FilterBy Criteria"/>
-<artifact id="StructureDefinition/backport-subscription-parameter" key="StructureDefinition-backport-subscription-parameter" name="Backported R5 Subscription Channel Parameter"/>
-<artifact id="CodeSystem/backport-content-code-system" key="CodeSystem-backport-content-code-system" name="Backported R5 Subscription Content Code System"/>
-<artifact id="ValueSet/backport-content-value-set" key="ValueSet-backport-content-value-set" name="Backported R5 Subscription Content Value Set"/>
-<artifact id="StructureDefinition/backport-filter-by" key="StructureDefinition-backport-filter-by" name="Backported R5 Subscription FilterBy"/>
-<artifact id="StructureDefinition/backport-subscription-identifier" key="StructureDefinition-backport-subscription-identifier" name="Backported R5 Subscription Identifier"/>
-<artifact id="StructureDefinition/backport-max-count" key="StructureDefinition-backport-max-count" name="Backported R5 Subscription MaxCount"/>
-<artifact id="StructureDefinition/backport-subscription-name" key="StructureDefinition-backport-subscription-name" name="Backported R5 Subscription Name"/>
+<artifact deprecated="true" id="CodeSystem/backport-content-code-system" key="CodeSystem-backport-content-code-system" name="Backported R5 Subscription Content Code System"/>
+<artifact deprecated="true" id="ValueSet/backport-content-value-set" key="ValueSet-backport-content-value-set" name="Backported R5 Subscription Content Value Set"/>
+<artifact deprecated="true" id="StructureDefinition/backport-max-count" key="StructureDefinition-backport-max-count" name="Backported R5 Subscription MaxCount"/>
 <artifact deprecated="true" id="StructureDefinition/backport-subscriptionstatus" key="StructureDefinition-backport-subscriptionstatus" name="Backported R5 Subscription Notification Status"/>
 <artifact deprecated="true" id="CodeSystem/backport-notification-url-location-code-system" key="CodeSystem-backport-notification-url-location-code-system" name="Backported R5 Subscription Notification URL Location Code System"/>
 <artifact deprecated="true" id="ValueSet/backport-notification-url-location-value-set" key="ValueSet-backport-notification-url-location-value-set" name="Backported R5 Subscription Notification URL Location Value Set"/>
-<artifact id="StructureDefinition/backport-subscription-status-r4-extension" key="StructureDefinition-backport-subscription-status-r4-extension" name="Backported R5 SubscriptionStatus for R4"/>
 <artifact deprecated="true" id="StructureDefinition/backport-subscription-topic-canonical-urls" key="StructureDefinition-backport-subscription-topic-canonical-urls" name="Backported R5 SubscriptionTopic Canonical URL Parameters"/>
 <artifact deprecated="true" id="Parameters/topic-list-single" key="Parameters-topic-list-single" name="Backported Subscription Topic List"/>
 <artifact id="Subscription/subscription-admission" key="Subscription-subscription-admission" name="Backported Subscription: Admission"/>
 <artifact id="Subscription/subscription-zulip" key="Subscription-subscription-zulip" name="Backported Subscription: Custom Channel"/>
 <artifact id="Subscription/subscription-multi-resource" key="Subscription-subscription-multi-resource" name="Backported Subscription: Multi-Resource"/>
 <artifact id="Basic/r4-encounter-complete" key="Basic-r4-encounter-complete" name="Backported SubscriptionTopic: R4 Encounter Complete"/>
-<artifact id="SubscriptionTopic/r4b-encounter-complete" key="SubscriptionTopic-r4b-encounter-complete" name="Backported SubscriptionTopic: R4B Encounter Complete"/>
+<artifact deprecated="true" id="SubscriptionTopic/r4b-encounter-complete" key="SubscriptionTopic-r4b-encounter-complete" name="Backported SubscriptionTopic: R4B Encounter Complete"/>
 <artifact id="StructureDefinition/capabilitystatement-subscriptiontopic-canonical" key="StructureDefinition-capabilitystatement-subscriptiontopic-canonical" name="CapabilityStatement SubscriptionTopic Canonical"/>
 <artifact id="OperationDefinition/backport-subscription-get-ws-binding-token" key="OperationDefinition-backport-subscription-get-ws-binding-token" name="Get WS Binding Token for Subscription Operation"/>
 <artifact id="StructureDefinition/backport-subscription-status-r4" key="StructureDefinition-backport-subscription-status-r4" name="R4 Backported R5 SubscriptionStatus"/>
@@ -67,20 +62,20 @@
 <artifact id="StructureDefinition/backport-subscription-notification-r4" key="StructureDefinition-backport-subscription-notification-r4" name="R4 Topic-Based Subscription Notification Bundle"/>
 <artifact id="CapabilityStatement/backport-subscription-server-r4" key="CapabilityStatement-backport-subscription-server-r4" name="R4 Topic-Based Subscription Server Capability Statement"/>
 <artifact id="StructureDefinition/backport-subscription" key="StructureDefinition-backport-subscription" name="R4/B Topic-Based Subscription"/>
-<artifact id="Bundle/r4b-notification-empty" key="Bundle-r4b-notification-empty" name="R4B Notification: Empty"/>
-<artifact id="Bundle/r4b-notification-empty-with-auth" key="Bundle-r4b-notification-empty-with-auth" name="R4B Notification: Empty with Authorization Hint"/>
-<artifact id="Bundle/r4b-notification-error" key="Bundle-r4b-notification-error" name="R4B Notification: Error"/>
-<artifact id="Bundle/r4b-notification-full-resource" key="Bundle-r4b-notification-full-resource" name="R4B Notification: Full Resource"/>
-<artifact id="Bundle/r4b-notification-full-resource-with-query" key="Bundle-r4b-notification-full-resource-with-query" name="R4B Notification: Full Resource with Query"/>
-<artifact id="Bundle/r4b-notification-handshake" key="Bundle-r4b-notification-handshake" name="R4B Notification: Handshake"/>
-<artifact id="Bundle/r4b-notification-heartbeat" key="Bundle-r4b-notification-heartbeat" name="R4B Notification: Heartbeat"/>
-<artifact id="Bundle/r4b-notification-id-only" key="Bundle-r4b-notification-id-only" name="R4B Notification: Id Only"/>
-<artifact id="Bundle/r4b-notification-id-only-with-auth" key="Bundle-r4b-notification-id-only-with-auth" name="R4B Notification: Id Only with Authorization Hint"/>
-<artifact id="Bundle/r4b-notification-id-only-with-query" key="Bundle-r4b-notification-id-only-with-query" name="R4B Notification: Id Only with Query"/>
-<artifact id="Bundle/r4b-notification-multi-resource" key="Bundle-r4b-notification-multi-resource" name="R4B Notification: Multiple Resources"/>
-<artifact id="SubscriptionStatus/r4b-notification-status" key="SubscriptionStatus-r4b-notification-status" name="R4B Notification: Status"/>
-<artifact id="StructureDefinition/backport-subscription-notification" key="StructureDefinition-backport-subscription-notification" name="R4B Topic-Based Subscription Notification Bundle"/>
-<artifact id="CapabilityStatement/backport-subscription-server" key="CapabilityStatement-backport-subscription-server" name="R4B Topic-Based Subscription Server Capability Statement"/>
+<artifact deprecated="true" id="Bundle/r4b-notification-empty" key="Bundle-r4b-notification-empty" name="R4B Notification: Empty"/>
+<artifact deprecated="true" id="Bundle/r4b-notification-empty-with-auth" key="Bundle-r4b-notification-empty-with-auth" name="R4B Notification: Empty with Authorization Hint"/>
+<artifact deprecated="true" id="Bundle/r4b-notification-error" key="Bundle-r4b-notification-error" name="R4B Notification: Error"/>
+<artifact deprecated="true" id="Bundle/r4b-notification-full-resource" key="Bundle-r4b-notification-full-resource" name="R4B Notification: Full Resource"/>
+<artifact deprecated="true" id="Bundle/r4b-notification-full-resource-with-query" key="Bundle-r4b-notification-full-resource-with-query" name="R4B Notification: Full Resource with Query"/>
+<artifact deprecated="true" id="Bundle/r4b-notification-handshake" key="Bundle-r4b-notification-handshake" name="R4B Notification: Handshake"/>
+<artifact deprecated="true" id="Bundle/r4b-notification-heartbeat" key="Bundle-r4b-notification-heartbeat" name="R4B Notification: Heartbeat"/>
+<artifact deprecated="true" id="Bundle/r4b-notification-id-only" key="Bundle-r4b-notification-id-only" name="R4B Notification: Id Only"/>
+<artifact deprecated="true" id="Bundle/r4b-notification-id-only-with-auth" key="Bundle-r4b-notification-id-only-with-auth" name="R4B Notification: Id Only with Authorization Hint"/>
+<artifact deprecated="true" id="Bundle/r4b-notification-id-only-with-query" key="Bundle-r4b-notification-id-only-with-query" name="R4B Notification: Id Only with Query"/>
+<artifact deprecated="true" id="Bundle/r4b-notification-multi-resource" key="Bundle-r4b-notification-multi-resource" name="R4B Notification: Multiple Resources"/>
+<artifact deprecated="true" id="SubscriptionStatus/r4b-notification-status" key="SubscriptionStatus-r4b-notification-status" name="R4B Notification: Status"/>
+<artifact deprecated="true" id="StructureDefinition/backport-subscription-notification" key="StructureDefinition-backport-subscription-notification" name="R4B Topic-Based Subscription Notification Bundle"/>
+<artifact deprecated="true" id="CapabilityStatement/backport-subscription-server" key="CapabilityStatement-backport-subscription-server" name="R4B Topic-Based Subscription Server Capability Statement"/>
 <artifact deprecated="true" id="CodeSystem/backport-notification-error-code-system" key="CodeSystem-backport-notification-error-code-system" name="R5 Subscription Error Code System"/>
 <artifact deprecated="true" id="ValueSet/backport-notification-error-value-set" key="ValueSet-backport-notification-error-value-set" name="R5 Subscription Error Codes Value Set"/>
 <artifact deprecated="true" id="CodeSystem/backport-notification-type-code-system" key="CodeSystem-backport-notification-type-code-system" name="R5 Subscription Notification Type Code System"/>

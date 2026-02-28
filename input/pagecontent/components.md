@@ -62,7 +62,7 @@ For example, a subscription may ask for notifications based on an 'Encounter in-
 
 In order to support topic-based subscriptions in R4, this guide defines several extensions for use on the [R4 Subscription](http://hl7.org/fhir/subscription.html) resource.  A list of extensions defined by this guide can be found on the [Artifacts](artifacts.html#3) page.
 
-In order to link a `Subscription` to a `SubscriptionTopic`, this guide uses the `backport-topic-canonical` extension at the root of the Subscription resource.  The `backport-topic-canonical` extension holds the canonical URL of the `SubscriptionTopic` that drives the subscription.  For more details, please see the [Subscription Profile](StructureDefinition-backport-subscription.html) in this guide.
+In order to link a `Subscription` to a `SubscriptionTopic`, this guide uses the cross-version `extension-Subscription.topic` extension at the root of the Subscription resource.  This extension holds the canonical URL of the `SubscriptionTopic` that drives the subscription.  For more details, please see the [Subscription Profile](StructureDefinition-backport-subscription.html) in this guide.
 
 
 #### Subscription Filters
@@ -71,7 +71,7 @@ While Subscription Topics are responsible for declaring the triggers for notific
 
 Information about defining filters can be found on the [R4B SubscriptionTopicResource](https://hl7.org/fhir/R4B/subscriptiontopic.html#filters).
 
-In FHIR R5, the usage of filters matches the definition structure - i.e., elements for the `resourceType`, `filterParameter`, `comparator`, `modifier`, and `value`.  This guide provides the [Backport FilterBy](StructureDefinition-backport-filter-by.html) complex extension on `Subscription` with the following sub-extensions:
+In FHIR R5, the usage of filters matches the definition structure - i.e., elements for the `resourceType`, `filterParameter`, `comparator`, `modifier`, and `value`.  This guide uses the cross-version `extension-Subscription.filterBy` extension on `Subscription` with the following sub-extensions:
 
 * `resourceType` (0..1, uri) - The resource type to apply the filter to, if applicable.
 * `filterParameter` (1..1, string) - The filter parameter, as defined by the subscription topic or a search parameter.
