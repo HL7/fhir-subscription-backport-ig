@@ -20,7 +20,13 @@ Alias: $xverSubMaxCount     = http://hl7.org/fhir/5.0/StructureDefinition/extens
 Alias: $xverSubIdentifier   = http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.identifier
 Alias: $xverSubName         = http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.name
 Alias: $xverSubParameter    = http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.parameter
-Alias: $xverSubStatus       = http://hl7.org/fhir/5.0/StructureDefinition/extension-SubscriptionStatus
+Alias: $xverSubStatusSubscription = http://hl7.org/fhir/5.0/StructureDefinition/extension-SubscriptionStatus.subscription
+Alias: $xverSubStatusTopic        = http://hl7.org/fhir/5.0/StructureDefinition/extension-SubscriptionStatus.topic
+Alias: $xverSubStatusStatus       = http://hl7.org/fhir/5.0/StructureDefinition/extension-SubscriptionStatus.status
+Alias: $xverSubStatusType         = http://hl7.org/fhir/5.0/StructureDefinition/extension-SubscriptionStatus.type
+Alias: $xverSubStatusESSS         = http://hl7.org/fhir/5.0/StructureDefinition/extension-SubscriptionStatus.eventsSinceSubscriptionStart
+Alias: $xverSubStatusNotifEvent   = http://hl7.org/fhir/5.0/StructureDefinition/extension-SubscriptionStatus.notificationEvent
+Alias: $xverSubStatusError        = http://hl7.org/fhir/5.0/StructureDefinition/extension-SubscriptionStatus.error
 
 
 RuleSet: StructureJurisdiction
