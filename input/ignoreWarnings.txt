@@ -1,5 +1,9 @@
 == Suppressed Messages ==
 
+# The xver ValueSet R5-subscription-status-for-R4 only includes entered-in-error; other valid codes (active, requested, error, off) are in the CodeSystem but not the ValueSet. This is an xver package issue.
+The System URI could not be determined for the code '%' in the ValueSet 'http://hl7.org/fhir/uv/xver/ValueSet/R5-subscription-status-for-R4|0.1.0'
+The value provided ('%') was not found in the value set 'Cross-version ValueSet R5.SubscriptionStatusCodes for use in FHIR R4'
+
 # Additional entries in notification bundles are expected
 
 ## Build 1.2.0

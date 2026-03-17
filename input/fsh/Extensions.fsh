@@ -5,6 +5,7 @@ Description: "Combination of coded information and query for information related
 * insert StructureJurisdiction
 * insert ExtensionContext(SubscriptionStatus.notificationEvent)
 * insert ExtensionContext(SubscriptionTopic.notificationShape)
+* insert ExtensionContext(Basic.extension)
 * insert ExtensionContext(Basic.modifierExtension)
 * insert ExtensionContext(Basic.modifierExtension.extension)
 // * insert ExtensionContext(Element)
