@@ -34,7 +34,6 @@ All three examples (`subscription-admission`, `subscription-multi-resource`, `su
 
 - **Changed `BackportSubscriptionStatusR4`** profile parent from `Parameters` to `Basic`.
 - `code` fixed to `http://hl7.org/fhir/fhir-types#SubscriptionStatus`.
-- **Defined `BackportSubscriptionStatusR4Extension`** (`backport-subscription-status-r4-extension`) complex extension on `Basic` with sub-extensions: `subscription` (Reference), `topic` (canonical), `status` (code), `type` (code), `eventsSinceSubscriptionStart` (string), `notificationEvent` (complex with eventNumber/timestamp/focus/additionalContext), `error` (CodeableConcept).
 - Updated bundle invariant from `is(Parameters)` to `is(Basic)`.
 
 ### Instance Pattern
@@ -70,14 +69,8 @@ Replaced raw cross-version extension URLs with a locally-defined profile and com
 ### `Common.fsh`
 - Removed `$alternateCanonical` alias (no longer used).
 
-### `Authorization.fsh`
-- Added `ExtensionContext(Basic.extension.extension)` to `NotificationAuthorizationHint` to allow use within the nested notificationEvent sub-extension on Basic resources.
-
-### `Extensions.fsh`
-- Added `ExtensionContext(Basic.extension.extension)` to `BackportRelatedQuery` for the same reason.
-
 ### `sushi-config.yaml`
-- Commented out `r4-exclusion` and `r4b-exclusion` lists as a temporary workaround for an IG Publisher bug (`R4ToR4BAnalyser.markExempt` NPE in v2.0.6+).
+- Updated `fhirVersion` from `4.3.0` to `4.0.1`.
 
 ## Phase 6: Documentation
 
@@ -102,7 +95,7 @@ Replaced raw cross-version extension URLs with a locally-defined profile and com
 
 ### Overview
 
-Replaced 11 locally-defined extensions with their equivalents from the `hl7.fhir.uv.xver-r5.r4` package (version `0.0.1-snapshot-3`). Changed `fhirVersion` from `4.3.0` to `4.0.1` to match the xver package's base version. Moved R4B-specific artifacts to `input/fsh-r4b/` (excluded from SUSHI processing since R4B types like `SubscriptionStatus` and `SubscriptionTopic` are not available in an R4 build).
+Replaced 11 locally-defined extensions with their equivalents from the `hl7.fhir.uv.xver-r5.r4` package. Moved R4B-specific artifacts to `input/fsh-r4b/` (excluded from SUSHI processing since R4B types like `SubscriptionStatus` and `SubscriptionTopic` are not available in an R4 build).
 
 ### Subscription Profile (`BackportSubscription.fsh`)
 
@@ -111,14 +104,8 @@ Replaced 11 locally-defined extensions with their equivalents from the `hl7.fhir
 - **Rewrote** `BackportSubscription` profile to reference xver extensions via aliases defined in `Common.fsh`:
   - Root-level: `extension-Subscription.topic`, `.filterBy`, `.content`, `.heartbeatPeriod`, `.timeout`, `.maxCount`, `.identifier`, `.name`, `.parameter`.
   - On `channel.type`: `extension-Subscription.channelType` (context constrained by xver package to `Subscription.channel.type`).
-- **Updated** examples: `valueUri` → `valueCanonical` for topic; channelType on `channel.type.extension` for custom channel example.
+- **Updated** examples: `valueUri` -> `valueCanonical` for topic; channelType on `channel.type.extension` for custom channel example.
 - **Updated** SearchParameter FHIRPath expressions to use xver extension URLs.
-
-### R4 SubscriptionStatus (`BackportNotificationR4.fsh`)
-
-- **Removed** `BackportSubscriptionStatusR4Extension` local extension definition (64 lines).
-- **Changed** `BackportSubscriptionStatusR4` profile to use `modifierExtension contains $xverSubStatus` (cross-version `extension-SubscriptionStatus` has `isModifier: true`).
-- **Updated** all 5 RuleSets and 12 instances: `extension[subscriptionStatus]` → `modifierExtension[subscriptionStatus]`.
 
 ### R4B Artifacts Excluded
 
@@ -126,22 +113,17 @@ Replaced 11 locally-defined extensions with their equivalents from the `hl7.fhir
 - **Removed** R4B `SubscriptionTopic` instance from `BackportTopics.fsh` (IG Publisher cannot parse R4B SearchModifierCodes in R4 mode).
 - **Removed** R4B `CapabilityStatement` instance from `Capabilities.fsh` (references non-existent SubscriptionTopic resource type in R4).
 
-### Extension Contexts (`Authorization.fsh`, `Extensions.fsh`)
-
-- Changed `Basic.extension` → `Basic.modifierExtension` contexts on `NotificationAuthorizationHint` and `BackportRelatedQuery` to match the SubscriptionStatus modifierExtension change.
-
 ### Configuration (`sushi-config.yaml`)
 
-- Changed `fhirVersion` from `4.3.0` to `4.0.1`.
-- Added `hl7.fhir.uv.xver-r5.r4: 0.0.1-snapshot-3` dependency.
-- Updated menu artifact section numbering (`#8` → `#6`) and removed Value Sets entry after artifact removal.
+- Added `hl7.fhir.uv.xver-r5.r4` dependency.
+- Updated menu artifact section numbering (`#8` -> `#6`) and removed Value Sets entry after artifact removal.
 
 ### Documentation
 
 - Updated `conformance.md`: replaced "cross version extensions SHOULD NOT be used" with xver adoption language; renamed extension references to xver names; updated R4 SubscriptionStatus description to reference cross-version modifier extension.
 - Updated `components.md`: topic and filterBy extension references.
 - Updated `channels.md`: content extension references.
-- Updated `Operations.fsh`: `backport-content-value-set` → `subscription-payload-content` in documentation text.
+- Updated `Operations.fsh`: `backport-content-value-set` -> `subscription-payload-content` in documentation text.
 - Marked 12 removed artifacts as deprecated in `FHIR-subscriptions-backport.xml`.
 
 ### Aliases Added (`Common.fsh`)
@@ -149,23 +131,77 @@ Replaced 11 locally-defined extensions with their equivalents from the `hl7.fhir
 ```
 $xverSubTopic, $xverSubChannelType, $xverSubFilterBy, $xverSubContent,
 $xverSubHeartbeat, $xverSubTimeout, $xverSubMaxCount, $xverSubIdentifier,
-$xverSubName, $xverSubParameter, $xverSubStatus
+$xverSubName, $xverSubParameter
 ```
+
+## Phase 8: Top-Level Element Extensions for R4 SubscriptionStatus
+
+### Overview
+
+Migrated SubscriptionStatus from a single monolithic `extension-SubscriptionStatus` wrapping extension to individual per-element xver extensions on `Basic`. This follows the xver profile pattern where each R5 SubscriptionStatus element maps to its own top-level extension on the R4 Basic resource, rather than being nested sub-extensions of a single wrapping extension.
+
+### `Common.fsh` — Alias Changes
+
+Replaced the single `$xverSubStatus` alias with 7 individual element-level aliases:
+
+```
+$xverSubStatusSubscription  = extension-SubscriptionStatus.subscription
+$xverSubStatusTopic         = extension-SubscriptionStatus.topic
+$xverSubStatusStatus        = extension-SubscriptionStatus.status
+$xverSubStatusType          = extension-SubscriptionStatus.type
+$xverSubStatusESSS          = extension-SubscriptionStatus.eventsSinceSubscriptionStart
+$xverSubStatusNotifEvent    = extension-SubscriptionStatus.notificationEvent
+$xverSubStatusError         = extension-SubscriptionStatus.error
+```
+
+### `BackportNotificationR4.fsh` — Profile Restructuring
+
+- **Profile `BackportSubscriptionStatusR4`**: replaced `modifierExtension contains $xverSubStatus named subscriptionStatus 1..1 MS` with individual extensions matching the xver profile mapping:
+  - `extension contains`: subscription (1..1), topic (1..1), status (0..1), eventsSinceSubscriptionStart (0..1), notificationEvent (0..*), error (0..*)
+  - `modifierExtension contains`: notificationType (1..1) — only `type` is a modifier per the xver profile (`isModifier: true`)
+- **Slice naming**: `type` renamed to `notificationType` to avoid a SUSHI fisher name collision where the generic name `type` matched a different non-modifier extension in loaded packages, causing false validation errors.
+- **All RuleSets updated**: paths changed from `modifierExtension[subscriptionStatus].extension[X]` to `extension[X]` (or `modifierExtension[notificationType]` for type).
+- **All 12 inline instances and 1 standalone example updated** with the new flat extension paths.
+
+### `Authorization.fsh` — Extension Context
+
+- Added `Basic.extension` context to `NotificationAuthorizationHint`. Required because the notificationEvent extension moved from `Basic.modifierExtension` to `Basic.extension`.
+
+### `Extensions.fsh` — Extension Context
+
+- Added `Basic.extension` context to `BackportRelatedQuery` for the same reason.
+
+### `sushi-config.yaml` — Re-enabled Exclusion Lists
+
+- Updated xver dependency version from `0.0.1-snapshot-3` to `0.1.0`.
+- Uncommented `r4-exclusion` and `r4b-exclusion` parameter lists (previously disabled due to IG Publisher `R4ToR4BAnalyser.markExempt` NPE bug — now fixed).
+
+### `ignoreWarnings.txt` — ValueSet Suppressions
+
+- Added suppressions for xver `R5-subscription-status-for-R4` ValueSet validation errors. The xver ValueSet only includes `entered-in-error`; other valid codes (`active`, `requested`, `error`, `off`) are in the CodeSystem but not the ValueSet. This is an xver package defect.
 
 ## Build Status
 
 - SUSHI: 0 errors, 0 warnings.
-- IG Publisher: 117 errors, 32 warnings. No errors from the xver migration itself. All remaining errors are:
-  - **xver package defects** (22): ValueSet `R5-subscription-status-for-R4` cannot resolve subscription status codes (`active`, `requested`, `error`).
-  - **xver package defects** (13): Windows file paths in xver extension narrative HTML.
-  - **Pre-existing** (8): `Basic/r4-encounter-complete` uses `4.3` version extension URLs.
-  - **Pre-existing** (3): Extension contexts for R4B types (`SubscriptionStatus.notificationEvent`, `SubscriptionTopic.notificationShape`) invalid in R4.
-  - **Pre-existing** (3): IG-level version mismatches with tools dependency.
-  - **Build infrastructure** (~68): Broken links to previous-version comparison pages.
+- IG Publisher QA: 131 errors, 25 warnings. Remaining errors are:
+  - **R4B broken links** (~79,000 in build errors): Generated R4B HTML/TTL/XML pages link to `http://hl7.org/fhir/R4B/` URLs that can't be resolved. IG Publisher issue, not actionable from IG source.
+  - **Inline script errors**: Generated HTML contains inline `<script>` tags. Template issue.
+  - **Missing file links**: CSV, Excel, Schematron, OpenAPI, examples pages not generated. IG Publisher configuration/template issue.
+  - **IG version mismatches** (2): `hl7.fhir.uv.tools#current` and `hl7.terminology.r5` are FHIR 5.0.0 but this IG targets 4.0.1.
+  - **SubscriptionTopic version errors** (4): `Basic/r4-encounter-complete` uses `4.3` version extension URLs.
+  - **Extension context errors** for R4B types (`SubscriptionStatus.notificationEvent`, `SubscriptionTopic.notificationShape`) which are invalid in pure R4 mode.
 
 ## Known Issues
 
 - **R4B support removed**: R4B-specific artifacts are no longer built. The R4B notification profiles remain in `input/fsh-r4b/` for reference but are not processed.
-- **xver ValueSet resolution**: The xver package's `R5-subscription-status-for-R4` ValueSet fails to resolve standard subscription status codes. This affects all 12 notification status examples. Awaiting fix in xver package.
-- **xver narrative paths**: The xver package contains Windows-style file paths in extension narrative HTML, causing 13 validation errors.
+- **xver ValueSet resolution**: The xver package's `R5-subscription-status-for-R4` ValueSet fails to resolve standard subscription status codes. This affects all 12 notification status examples. Suppressed in `ignoreWarnings.txt`. Awaiting fix in xver package.
+- **xver narrative paths**: The xver package contains Windows-style file paths in extension narrative HTML, causing validation errors.
 - **R4 SubscriptionTopic example**: `Basic/r4-encounter-complete` still uses `4.3` version extension URLs (not migrated to `5.0` in this phase).
+
+## IG Publisher Fix
+
+Fixed `R4ToR4BAnalyser.markExempt` NPE in the IG Publisher (`hl7/fhir-ig-publisher`). The bug was that `r4-exclusion`/`r4b-exclusion` parameters were processed during `initializeFromIg()`, which called `pf.r4tor4b.markExempt()` — but `pf.r4tor4b` was not initialized until later in `load()`. Fix: buffer the exclusion values in `PublisherFields` during parameter processing and apply them after `R4ToR4BAnalyser` is constructed.
+
+**Files changed:**
+- `PublisherFields.java` — Added `r4Exclusions` and `r4bExclusions` lists.
+- `PublisherIGLoader.java` — Parameter processing collects into lists; exclusions applied after `r4tor4b` initialization.
