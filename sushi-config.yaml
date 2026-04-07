@@ -86,7 +86,7 @@ dependencies:
   hl7.fhir.extensions.r5: 4.0.1
   #hl7.fhir.uv.extensions.r5: 1.0.0
   hl7.fhir.uv.extensions.r4: 1.0.0
-  hl7.fhir.uv.tools: current
+  hl7.fhir.uv.tools.r4: current
   hl7.fhir.uv.xver-r5.r4: 0.1.0
   #hl7.fhir.xver-extensions: 0.0.13
 
