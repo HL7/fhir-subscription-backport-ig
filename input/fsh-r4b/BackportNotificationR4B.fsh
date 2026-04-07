@@ -1,3 +1,28 @@
+// NOTE: This file contains R4B-native resources that CANNOT be compiled or loaded in the
+// current R4 (4.0.1) IG build for the following reasons:
+//
+// 1. SubscriptionStatus (instances and Bundle entries): R4B introduced SubscriptionStatus as a
+//    resource type. In R4, it does not exist. The IG Publisher parses resources using the R4
+//    type registry and does not recognise 'SubscriptionStatus' as a valid resource type, so
+//    any JSON placed in input/resources/ that uses SubscriptionStatus will fail to load.
+//
+// 2. BackportSubscriptionNotification profile: This profile constrains Bundle.entry.resource
+//    to SubscriptionStatus. Because SubscriptionStatus is unknown in R4, the IG Publisher
+//    cannot generate a snapshot for this StructureDefinition and crashes.
+//
+// 3. R4B Bundle notification examples: All Bundle examples here embed a SubscriptionStatus
+//    resource as their first entry (see point 1 above). They cannot be loaded.
+//
+// Root cause: Loading hl7.fhir.r4b.core alongside hl7.fhir.r4.core causes 'Ambiguous type'
+// conflicts in the IG Publisher (e.g. two definitions of 'uri' at versions 4.0.1 and 4.3.0),
+// so both cores cannot be present at the same time. Until the IG Publisher resolves this
+// multi-core conflict, these R4B-native resources can only be maintained as FSH source here
+// and compiled separately using a dedicated R4B SUSHI project (see /tmp/sushi-r4b-build/).
+//
+// To regenerate the compiled JSON when the publisher supports dual-core loading:
+//   cd /tmp/sushi-r4b-build && sushi .
+// then copy fsh-generated/resources/ into input/resources/.
+
 Profile:     BackportSubscriptionNotification
 Parent:      Bundle
 Id:          backport-subscription-notification

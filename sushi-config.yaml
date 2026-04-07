@@ -31,7 +31,9 @@ description: The Subscription R5 Backport Implementation Guide enables servers r
   versions of FHIR earlier than R5 to implement a subset of R5 Subscriptions in a
   standardized way.
 license: CC0-1.0
-fhirVersion: 4.0.1
+fhirVersion:
+  - 4.0.1
+  - 4.3.0
 parameters:
   apply-wg: true
   default-wg: true
@@ -88,6 +90,7 @@ dependencies:
   hl7.fhir.uv.extensions.r4: 1.0.0
   hl7.fhir.uv.tools.r4: current
   hl7.fhir.uv.xver-r5.r4: 0.1.0
+  hl7.fhir.uv.xver-r4b.r4: 0.1.0
   #hl7.fhir.xver-extensions: 0.0.13
 
 pages:
