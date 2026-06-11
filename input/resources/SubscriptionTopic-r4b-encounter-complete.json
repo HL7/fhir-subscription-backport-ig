@@ -1,0 +1,74 @@
+{
+  "resourceType": "SubscriptionTopic",
+  "id": "r4b-encounter-complete",
+  "url": "http://hl7.org/fhir/uv/subscriptions-backport/SubscriptionTopic/r4b-encounter-complete",
+  "status": "draft",
+  "resourceTrigger": [
+    {
+      "description": "Triggered when an encounter is completed.",
+      "resource": "Encounter",
+      "supportedInteraction": [
+        "create",
+        "update"
+      ],
+      "queryCriteria": {
+        "previous": "status:not=finished",
+        "resultForCreate": "test-passes",
+        "current": "status=finished",
+        "resultForDelete": "test-fails",
+        "requireBoth": true
+      },
+      "fhirPathCriteria": "(%previous.id.empty() or (%previous.status != 'finished')) and (%current.status = 'finished')"
+    }
+  ],
+  "canFilterBy": [
+    {
+      "description": "Filter based on the subject of an encounter.",
+      "resource": "Encounter",
+      "filterParameter": "subject"
+    },
+    {
+      "description": "Filter based on the group membership of the subject of an encounter.",
+      "resource": "Encounter",
+      "filterParameter": "_in"
+    },
+    {
+      "description": "Filter based on the length of an encounter.",
+      "resource": "Encounter",
+      "filterParameter": "length"
+    }
+  ],
+  "notificationShape": [
+    {
+      "resource": "Encounter",
+      "include": [
+        "Encounter:patient&iterate=Patient.link",
+        "Encounter:practitioner",
+        "Encounter:service-provider",
+        "Encounter:account",
+        "Encounter:diagnosis",
+        "Encounter:observation",
+        "Encounter:location"
+      ],
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-related-query",
+          "extension": [
+            {
+              "url": "queryType",
+              "valueCoding": {
+                "code": "prescribed",
+                "system": "http://example.org/query-types",
+                "display": "Prescribed medications"
+              }
+            },
+            {
+              "url": "query",
+              "valueString": "http://example.org/fhir/Encounter/[id]/$prescribed-medications"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

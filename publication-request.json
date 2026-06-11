@@ -1,6 +1,6 @@
 {
   "package-id" : "hl7.fhir.uv.subscriptions-backport",
-  "version" : "1.2.0-ballot",
+  "version" : "2.0.0-alpha",
   "path" : "http://hl7.org/fhir/uv/subscriptions-backport/2024Jan",
   "mode": "working",
   "status" : "ballot",

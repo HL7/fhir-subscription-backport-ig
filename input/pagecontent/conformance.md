@@ -16,11 +16,11 @@ FHIR Servers claiming conformance to this Implementation Guide must conform to t
 
 Some options of the Subscriptions Framework are not easily expressed in a `CapabilityStatement`.  In addition to the basic support in the CapabilityStatement (e.g., resources, interactions, and operations), a conformant server SHALL support at least one [Payload Type](payloads.html) and SHOULD support one [Channel Type](channels.html) listed in this IG.
 
-Note that the future publication of FHIR R5 may define capabilities included in this specification as cross-version extensions. Since FHIR R5 is currently under development, there are no guarantees these extensions will meet the requirements of this guide. In order to promote widespread compatibility, cross version extensions SHOULD NOT be used on R4 subscriptions to describe any elements described by this guide.
+This guide uses cross-version extensions from the `hl7.fhir.uv.xver-r5.r4` package to represent R5 Subscription elements in R4.  These extensions provide a standardized way to carry R5 concepts in R4 resources.
 
 ##### Profile Support
 Profile Support refers to the support of the profiles defined in this guide in a system exposing FHIR resources. Specifically, a conformant server:
-* SHALL communicate all profile data elements that are mandatory by that profile's StructureDefinition. 
+* SHALL communicate all profile data elements that are mandatory by that profile's StructureDefinition.
 * SHOULD declare conformance with the Backport Subscription Server Capability Statement by including its official URL in the server's `CapabilityStatement.instantiates` element: `http://hl7.org/fhir/uv/subscriptions-backport/CapabilityStatement/CapabilitySubscriptionServer`.
 * SHALL specify the full capability details from the CapabilityStatement it claims to implement, including declaring support for the Backport Subscription Profile by including its official URL in the server's `CapabilityStatement.rest.resource.supportedProfile` element: `http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-subscription`
 
@@ -28,8 +28,8 @@ Profile Support refers to the support of the profiles defined in this guide in a
 #### Must-support
 In this guide, some elements are marked as [Must Support](https://www.hl7.org/fhir/conformance-rules.html#mustSupport). Elements that are flagged as MS are enumerated below, with details on what support means.
 
-##### backport-channel-type
-The [backport-channel-type](StructureDefinition-backport-channel-type.html) extension is used to allow for custom channels not described in this guide.
+##### extension-Subscription.channelType
+The `extension-Subscription.channelType` cross-version extension is used to allow for custom channels not described in this guide.
 
 * Server Support
 
@@ -40,8 +40,8 @@ Servers supporting this guide SHALL be able to read values present in this eleme
 Clients supporting this guide MAY support this extension, as necessary for their use case.
 
 
-##### backport-filter-criteria
-The [backport-filter-criteria](StructureDefinition-backport-filter-criteria.html) extension is used to describe the actual filters used in a specific instance of a subscription.
+##### extension-Subscription.filterBy
+The `extension-Subscription.filterBy` cross-version extension is used to describe the actual filters used in a specific instance of a subscription, with structured sub-extensions for `resourceType`, `filterParameter`, `comparator`, `modifier`, and `value`.
 
 * Server Support
 
@@ -54,8 +54,8 @@ If a server is capable of supporting filter criteria in general but unable to su
 Clients supporting this guide SHALL be able to write values in this extension.
 
 
-##### backport-payload-content
-The [backport-payload-content](StructureDefinition-backport-payload-content.html) extension is used to describe the amount of detail included in notification payloads.
+##### extension-Subscription.content
+The `extension-Subscription.content` cross-version extension is used to describe the amount of detail included in notification payloads. This extension is placed at the root of the `Subscription` resource.
 
 * Server Support
 
@@ -78,16 +78,16 @@ Servers supporting this guide SHALL be able to generate a valid and correct `Sub
 Clients supporting this guide SHALL be able to process a valid `SubscriptionStatus` resource without errors.
 
 
-##### Subscription.criteria
-The `Subscription.criteria` element is required (cardinality of 1..1), so any compatible implementation SHALL be able to read and/or write as necessary.  Compared with the core specification, this guide specifies that the element SHALL contain the canonical URL for the Subscription Topic.
+##### Topic Reference (extension-Subscription.topic)
+The topic reference is specified via the `extension-Subscription.topic` cross-version extension at the root of the `Subscription` resource.  This extension holds the canonical URL of the `SubscriptionTopic` that drives the subscription.
 
 * Server Support
 
-Servers supporting this guide SHALL be able to read values in this element and process requests for subscription topics referenced by it.  If a server does not support a requested topic or will not honor the subscription otherwise, a server SHALL reject the subscription request.
+Servers supporting this guide SHALL be able to read the topic canonical URL from this extension and process requests for subscription topics referenced by it.  If a server does not support a requested topic or will not honor the subscription otherwise, a server SHALL reject the subscription request.
 
 * Client Support
 
-Clients supporting this guide SHALL be able to write subscription topic URLs into this element.
+Clients supporting this guide SHALL be able to write subscription topic canonical URLs into this extension.
 
 
 ### Conformance in FHIR R4
@@ -105,11 +105,11 @@ FHIR Servers claiming conformance to this Implementation Guide must conform to t
 
 Some options of the Subscriptions Framework are not easily expressed in a `CapabilityStatement`.  In addition to the basic support in the CapabilityStatement (e.g., resources, interactions, and operations), a conformant server SHALL support at least one [Payload Type](payloads.html) and SHOULD support one [Channel Type](channels.html) listed in this IG.
 
-Note that the future publication of FHIR R5 may define capabilities included in this specification as cross-version extensions. Since FHIR R5 is currently under development, there are no guarantees these extensions will meet the requirements of this guide. In order to promote widespread compatibility, cross version extensions SHOULD NOT be used on R4 subscriptions to describe any elements described by this guide.
+This guide uses cross-version extensions from the `hl7.fhir.uv.xver-r5.r4` package to represent R5 Subscription elements in R4.  These extensions provide a standardized way to carry R5 concepts in R4 resources.
 
 ##### Profile Support
 Profile Support refers to the support of the profiles defined in this guide in a system exposing FHIR resources. Specifically, a conformant server:
-* SHALL communicate all profile data elements that are mandatory by that profile's StructureDefinition. 
+* SHALL communicate all profile data elements that are mandatory by that profile's StructureDefinition.
 * SHOULD declare conformance with the Backport Subscription Server Capability Statement by including its official URL in the server's `CapabilityStatement.instantiates` element: `http://hl7.org/fhir/uv/subscriptions-backport/CapabilityStatement/backport-subscription-server-r4`.
 * SHALL specify the full capability details from the CapabilityStatement it claims to implement, including declaring support for the Backport Subscription Profile by including its official URL in the server's `CapabilityStatement.rest.resource.supportedProfile` element: `http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-subscription`
 
@@ -117,8 +117,8 @@ Profile Support refers to the support of the profiles defined in this guide in a
 #### Must-support
 In this guide, some elements are marked as [Must Support](https://www.hl7.org/fhir/conformance-rules.html#mustSupport). Elements that are flagged as MS are enumerated below, with details on what support means.
 
-##### backport-channel-type
-The [backport-channel-type](StructureDefinition-backport-channel-type.html) extension is used to allow for custom channels not described in this guide.
+##### extension-Subscription.channelType
+The `extension-Subscription.channelType` cross-version extension is used to allow for custom channels not described in this guide.
 
 * Server Support
 
@@ -128,8 +128,8 @@ Servers supporting this guide SHALL be able to read values present in this eleme
 Clients supporting this guide MAY support this extension, as necessary for their use case.
 
 
-##### backport-filter-criteria
-The [backport-filter-criteria](StructureDefinition-backport-filter-criteria.html) extension is used to describe the actual filters used in a specific instance of a subscription.
+##### extension-Subscription.filterBy
+The `extension-Subscription.filterBy` cross-version extension is used to describe the actual filters used in a specific instance of a subscription, with structured sub-extensions for `resourceType`, `filterParameter`, `comparator`, `modifier`, and `value`.
 
 * Server Support
 
@@ -142,8 +142,8 @@ If a server is capable of supporting filter criteria in general but unable to su
 Clients supporting this guide SHALL be able to write values in this extension.
 
 
-##### backport-payload-content
-The [backport-payload-content](StructureDefinition-backport-payload-content.html) extension is used to describe the amount of detail included in notification payloads.
+##### extension-Subscription.content
+The `extension-Subscription.content` cross-version extension is used to describe the amount of detail included in notification payloads. This extension is placed at the root of the `Subscription` resource.
 
 * Server Support
 
@@ -155,7 +155,7 @@ Clients supporting this guide SHALL be able to write values in this extension.
 
 
 ##### Notification entry: SubscriptionStatus
-Notification bundles SHALL contain a FHIR R4 [Parameters](http://hl7.org/fhir/R4/parameters.html) resource, conforming to the [R4 Backported R5 SubscriptionStatus](StructureDefinition-backport-subscription-status-r4.html) profile, as the first entry.
+Notification bundles SHALL contain a FHIR R4 [Basic](http://hl7.org/fhir/R4/basic.html) resource, conforming to the [R4 Backported R5 SubscriptionStatus](StructureDefinition-backport-subscription-status-r4.html) profile, as the first entry. The Basic resource uses the cross-version `extension-SubscriptionStatus` modifier extension to represent SubscriptionStatus information.
 
 * Server Support
 
@@ -166,13 +166,13 @@ Servers supporting this guide SHALL be able to generate a valid and correct `R4 
 Clients supporting this guide SHALL be able to process a valid `R4 Backported R5 SubscriptionStatus` resource without errors.
 
 
-##### Subscription.criteria
-The `Subscription.criteria` element is required (cardinality of 1..1), so any compatible implementation SHALL be able to read and/or write as necessary.  Compared with the core specification, this guide specifies that the element SHALL contain the canonical URL for the Subscription Topic.
+##### Topic Reference (extension-Subscription.topic)
+The topic reference is specified via the `extension-Subscription.topic` cross-version extension at the root of the `Subscription` resource.  This extension holds the canonical URL of the `SubscriptionTopic` that drives the subscription.
 
 * Server Support
 
-Servers supporting this guide SHALL be able to read values in this element and process requests for subscription topics referenced by it.  If a server does not support a requested topic or will not honor the subscription otherwise, a server SHALL reject the subscription request.
+Servers supporting this guide SHALL be able to read the topic canonical URL from this extension and process requests for subscription topics referenced by it.  If a server does not support a requested topic or will not honor the subscription otherwise, a server SHALL reject the subscription request.
 
 * Client Support
 
-Clients supporting this guide SHALL be able to write subscription topic URLs into this element.
+Clients supporting this guide SHALL be able to write subscription topic canonical URLs into this extension.

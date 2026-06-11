@@ -15,9 +15,9 @@ canonical: http://hl7.org/fhir/uv/subscriptions-backport
 name: SubscriptionsR5Backport
 title: "Subscriptions R5 Backport"
 status: active
-version: 1.2.0-ballot
+version: 2.0.0-alpha
 #releaseLabel: CI-Build #ci-build|draft|qa-preview|ballot|trial-use|release|update|normative+trial-use
-releaseLabel: ballot
+releaseLabel: ci-build
 
 publisher:
   name: HL7 International / FHIR Infrastructure
@@ -31,7 +31,9 @@ description: The Subscription R5 Backport Implementation Guide enables servers r
   versions of FHIR earlier than R5 to implement a subset of R5 Subscriptions in a
   standardized way.
 license: CC0-1.0
-fhirVersion: 4.3.0
+fhirVersion:
+  - 4.0.1
+  - 4.3.0
 parameters:
   apply-wg: true
   default-wg: true
@@ -67,8 +69,8 @@ parameters:
     - Bundle/r4-notification-error
     - Bundle/r4-notification-empty
     - Bundle/r4-notification-empty-with-auth
+    - Basic/r4-notification-status
     - CapabilityStatement/backport-subscription-server-r4
-    - Basic/r4-encounter-complete
 extension:
   - url: http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status
     valueCode: trial-use
@@ -82,11 +84,13 @@ jurisdiction: http://unstats.un.org/unsd/methods/m49/m49.htm#001 "World"
 # use cases, the value can be an object with keys for id, uri, and version.
 #
 dependencies:
-  hl7.fhir.extensions.r5: 4.3.0
-  #hl7.fhir.extensions.r5: 4.0.1
+  #hl7.fhir.extensions.r5: 4.3.0
+  hl7.fhir.extensions.r5: 4.0.1
   #hl7.fhir.uv.extensions.r5: 1.0.0
   hl7.fhir.uv.extensions.r4: 1.0.0
-  hl7.fhir.uv.tools: current
+  hl7.fhir.uv.tools.r4: current
+  hl7.fhir.uv.xver-r5.r4: 0.1.0
+  hl7.fhir.uv.xver-r4b.r4: 0.1.0
   #hl7.fhir.xver-extensions: 0.0.13
 
 pages:
@@ -139,8 +143,7 @@ menu:
     Search Parameters: artifacts.html#3
     Profiles: artifacts.html#4
     Extensions: artifacts.html#5
-    Value Sets: artifacts.html#6
-    Examples: artifacts.html#8
+    Examples: artifacts.html#6
   Support:
     Downloads: downloads.html
     Change Log: ig_changelog.html
