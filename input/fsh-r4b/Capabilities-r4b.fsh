@@ -50,16 +50,16 @@ Description:   "CapabilityStatement describing the minimal required capabilities
 * rest[+].mode  = #server
 * rest[=].mode.extension[http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation].valueCode = #SHALL
 
-* insert SupportResource(SubscriptionTopic, #SHOULD)
-* insert SupportInteraction(#read, #SHOULD)
+* insert SupportResource(SubscriptionTopic, #MAY)
+* insert SupportInteraction(#read, #MAY)
 * insert SupportInteraction(#create, #MAY)
 * insert SupportInteraction(#update, #MAY)
 * insert SupportInteraction(#delete, #MAY)
-* insert SupportSearchParam(url, http://hl7.org/fhir/SearchParameter/SubscriptionTopic-url, #uri, #SHOULD)
-* insert SupportSearchParam(derived-or-self, http://hl7.org/fhir/SearchParameter/SubscriptionTopic-derived-or-self, #uri, #SHOULD)
-* insert SupportSearchParam(resource, http://hl7.org/fhir/SearchParameter/SubscriptionTopic-resource, #uri, #SHOULD)
-* insert SupportSearchParam(title, http://hl7.org/fhir/SearchParameter/SubscriptionTopic-title, #string, #SHOULD)
-* insert SupportSearchParam(trigger-description, http://hl7.org/fhir/SearchParameter/SubscriptionTopic-trigger-description, #string, #SHOULD)
+* insert SupportSearchParam(url, http://hl7.org/fhir/SearchParameter/SubscriptionTopic-url, #uri, #MAY)
+* insert SupportSearchParam(derived-or-self, http://hl7.org/fhir/SearchParameter/SubscriptionTopic-derived-or-self, #uri, #MAY)
+* insert SupportSearchParam(resource, http://hl7.org/fhir/SearchParameter/SubscriptionTopic-resource, #uri, #MAY)
+* insert SupportSearchParam(title, http://hl7.org/fhir/SearchParameter/SubscriptionTopic-title, #string, #MAY)
+* insert SupportSearchParam(trigger-description, http://hl7.org/fhir/SearchParameter/SubscriptionTopic-trigger-description, #string, #MAY)
 
 * insert SupportResource(Subscription, #SHALL)
 * insert SupportProfile(http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-subscription, #SHALL)

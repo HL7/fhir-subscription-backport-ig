@@ -1,5 +1,8 @@
 ### STU 2.0.0
 
+* [FHIR-43514](https://jira.hl7.org/browse/FHIR-43514): Should SubscriptionTopic.read and search be required?
+  * Updated 'administrative' capability statements for topic discovery from 'SHOULD' to 'MAY'.
+  * Updated the [Conformance](conformance.html) page to match.
 * [FHIR-43513](https://jira.hl7.org/browse/FHIR-43513): Should conformance require Subscription write?
   * Added 'administrative' capability statements.
   * Further clarified language on the [Conformance](conformance.html) page.

@@ -103,6 +103,7 @@ Description:   "CapabilityStatement describing the minimal required capabilities
 * insert SupportInteraction(#delete, #MAY)
 * insert SupportSearchParam(code, http://hl7.org/fhir/SearchParameter/clinical-code, #token, #SHOULD)
 
+
 Instance:      CapabilitySubscriptionServerR4Administrative
 InstanceOf:    CapabilityStatement
 Usage:         #definition
@@ -129,12 +130,12 @@ Description:   "CapabilityStatement describing the minimal required capabilities
 * insert SupportOperation(events, http://hl7.org/fhir/uv/subscriptions-backport/OperationDefinition/backport-subscription-events, #MAY)
 * insert SupportOperation(get-ws-binding-token, http://hl7.org/fhir/uv/subscriptions-backport/OperationDefinition/backport-subscription-get-ws-binding-token, #MAY)
 
-* insert SupportResource(Basic, #SHOULD)
-* insert SupportInteraction(#read, #SHOULD)
+* insert SupportResource(Basic, #MAY)
+* insert SupportInteraction(#read, #MAY)
 * insert SupportInteraction(#create, #MAY)
 * insert SupportInteraction(#update, #MAY)
 * insert SupportInteraction(#delete, #MAY)
-* insert SupportSearchParam(code, http://hl7.org/fhir/SearchParameter/clinical-code, #token, #SHOULD)
+* insert SupportSearchParam(code, http://hl7.org/fhir/SearchParameter/clinical-code, #token, #MAY)
 
 Extension:   CapabilityStatementSubscriptionTopic
 Id:          capabilitystatement-subscriptiontopic-canonical

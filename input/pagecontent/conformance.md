@@ -6,9 +6,9 @@ Note that the conformance verbs - SHALL, SHOULD, MAY - used in this guide are de
 ### Conformance in FHIR R4
 In order to claim conformance with this guide, a server:
 * SHALL support the `read` interaction for the `Subscription` resource.
-* SHALL support the `create` and `update` interactions `Subscription` resource, if `dynamic` subscriptions are supported.
+* SHALL support the `create` and `update` interactions `Subscription` resource if `dynamic` subscriptions are supported.
 * SHALL support the `$status` operation on the `Subscription` resource.
-* SHOULD support topic discovery via the [CapabilityStatement SubscriptionTopic Canonical](StructureDefinition-capabilitystatement-subscriptiontopic-canonical.html) extension.
+* SHOULD support topic discovery via the [CapabilityStatement SubscriptionTopic Canonical](StructureDefinition-capabilitystatement-subscriptiontopic-canonical.html) extension if `dynamic` subscriptions are supported.
 * SHALL support at least one channel type, and SHOULD include one from this guide.
 * SHALL support at least one Payload Type.
 
@@ -97,7 +97,6 @@ In order to claim conformance with this guide, a server:
 * SHALL support the `create` and `update` interactions `Subscription` resource if `dynamic` subscriptions are supported.
 * SHALL support the `$status` operation on the `Subscription` resource.
 * SHALL support the `read` and `search` interactions for the `SubscriptionTopic` resource if `dynamic` subscriptions are supported`.
-* SHOULD support the `read` and `search` interactions for the `SubscriptionTopic` resource if `administrative` subscriptions are supported`.
 * SHALL support at least one channel type, and SHOULD include one from this guide.
 * SHALL support at least one Payload Type.
 
