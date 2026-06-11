@@ -1,5 +1,8 @@
 ### STU 2.0.0
 
+* [FHIR-43513](https://jira.hl7.org/browse/FHIR-43513): Should conformance require Subscription write?
+  * Added 'administrative' capability statements.
+  * Further clarified language on the [Conformance](conformance.html) page.
 * Updated to use Cross-Version extension packages.
 * [FHIR-43505](https://jira.hl7.org/browse/FHIR-43505): Consider describing administratively created subscriptions
   * Added note to the `Server` section of the [Actors](actors.html) page.

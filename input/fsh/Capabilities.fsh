@@ -87,9 +87,9 @@ Description:   "CapabilityStatement describing the minimal required capabilities
 * insert SupportResource(Subscription, #SHALL)
 * insert SupportProfile(http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-subscription, #SHOULD)
 * insert SupportInteraction(#read, #SHALL)
-* insert SupportInteraction(#create, #SHOULD)
-* insert SupportInteraction(#update, #SHOULD)
-* insert SupportInteraction(#delete, #SHOULD)
+* insert SupportInteraction(#create, #SHALL)
+* insert SupportInteraction(#update, #SHALL)
+* insert SupportInteraction(#delete, #SHALL)
 * insert SupportSearchParam(url, http://hl7.org/fhir/SearchParameter/Subscription-url, #uri, #SHALL)
 * insert SupportSearchParam(status, http://hl7.org/fhir/SearchParameter/Subscription-status, #token, #SHOULD)
 * insert SupportOperation(status, http://hl7.org/fhir/uv/subscriptions-backport/OperationDefinition/backport-subscription-status, #SHALL)
@@ -103,6 +103,38 @@ Description:   "CapabilityStatement describing the minimal required capabilities
 * insert SupportInteraction(#delete, #MAY)
 * insert SupportSearchParam(code, http://hl7.org/fhir/SearchParameter/clinical-code, #token, #SHOULD)
 
+Instance:      CapabilitySubscriptionServerR4Administrative
+InstanceOf:    CapabilityStatement
+Usage:         #definition
+Title:         "R4 Topic-Based Administrative Subscription Server Capability Statement"
+Description:   "CapabilityStatement describing the minimal required capabilities of a FHIR Server supporting backported R5 Subscriptions in R4 that uses administrative subscription management."
+* insert ResourceCommonR4
+* id            = "backport-subscription-server-r4-administrative"
+* name          = "BackportSubscriptionCapabilityStatementR4Administrative"
+* url           = "http://hl7.org/fhir/uv/subscriptions-backport/CapabilityStatement/backport-subscription-server-r4-administrative"
+* description   = "CapabilityStatement describing the required and optional capabilities of a FHIR Server supporting backported R5 Subscriptions in R4 that uses administrative subscription management."
+* insert CapabilityCommon
+* rest[+].mode  = #server
+* rest[=].mode.extension[http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation].valueCode = #SHALL
+
+* insert SupportResource(Subscription, #SHALL)
+* insert SupportProfile(http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-subscription, #SHOULD)
+* insert SupportInteraction(#read, #SHALL)
+* insert SupportInteraction(#create, #MAY)
+* insert SupportInteraction(#update, #MAY)
+* insert SupportInteraction(#delete, #MAY)
+* insert SupportSearchParam(url, http://hl7.org/fhir/SearchParameter/Subscription-url, #uri, #SHALL)
+* insert SupportSearchParam(status, http://hl7.org/fhir/SearchParameter/Subscription-status, #token, #SHOULD)
+* insert SupportOperation(status, http://hl7.org/fhir/uv/subscriptions-backport/OperationDefinition/backport-subscription-status, #SHALL)
+* insert SupportOperation(events, http://hl7.org/fhir/uv/subscriptions-backport/OperationDefinition/backport-subscription-events, #MAY)
+* insert SupportOperation(get-ws-binding-token, http://hl7.org/fhir/uv/subscriptions-backport/OperationDefinition/backport-subscription-get-ws-binding-token, #MAY)
+
+* insert SupportResource(Basic, #SHOULD)
+* insert SupportInteraction(#read, #SHOULD)
+* insert SupportInteraction(#create, #MAY)
+* insert SupportInteraction(#update, #MAY)
+* insert SupportInteraction(#delete, #MAY)
+* insert SupportSearchParam(code, http://hl7.org/fhir/SearchParameter/clinical-code, #token, #SHOULD)
 
 Extension:   CapabilityStatementSubscriptionTopic
 Id:          capabilitystatement-subscriptiontopic-canonical
