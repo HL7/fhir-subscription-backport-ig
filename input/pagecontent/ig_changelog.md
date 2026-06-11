@@ -4,6 +4,9 @@
 * [FHIR-43505](https://jira.hl7.org/browse/FHIR-43505): Consider describing administratively created subscriptions
   * Added note to the `Server` section of the [Actors](actors.html) page.
   * Added the `Managing Subscriptions` section to the [Components](components.html) page.
+  * Categorized the existing FHIR R4 and FHIR R4B subscription-creation sequence diagrams as the `Dynamic` mechanism on the [Workflow](workflow.html) page.
+  * Added a new `Administrative Workflow` section to the [Workflow](workflow.html) page describing server-admin-configured subscriptions.
+  * Updated the [Conformance](conformance.html) page to include qualifications for `Administrative` conformance.
 * [FHIR-43275](https://jira.hl7.org/browse/FHIR-43275): Add 'notified pull' option to notifications
   * Added `Notified Pull` section to the [Notifications](notifications.html) page
   * Added `related-query` to [Backport R5 SubscriptionStatus](StructureDefinition-backport-subscription-status-r4.html) profile
@@ -43,6 +46,7 @@
   * [FHIR-43606](https://jira.hl7.org/browse/FHIR-43606): Typo (ballot)
   * [FHIR-43726](https://jira.hl7.org/browse/FHIR-43726): Link for Direct (ballot)
   * [FHIR-44040](https://jira.hl7.org/browse/FHIR-44040): Update URLs to be explicit to R4/R4B (ballot)
+  * [FHIR-43504](https://jira.hl7.org/browse/FHIR-43504): R5 is no longer in the future (ballot)
 * Added change log.
 
 ### STU 1.1.0
