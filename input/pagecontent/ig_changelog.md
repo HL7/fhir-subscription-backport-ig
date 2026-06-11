@@ -28,6 +28,8 @@
     * Updated to use Extensions-Pack common extension: `http://hl7.org/fhir/StructureDefinition/authorization-hint`.
 
 * Non-substantive
+  * [FHIR-43605](https://jira.hl7.org/browse/FHIR-43605): "history" bundle type requirement seems inconsistent with Messaging channel
+    * Added clarifying text and a 'Dragon' note to the [Channels](channels.html) page regarding messaging and 'double bundles'.
   * [FHIR-43564](https://jira.hl7.org/browse/FHIR-43564): Subscription.status with handshake
     * Added clarifying text to the [Workflow](workflow.html) page about handshakes and state transitions.
   * [FHIR-43563](https://jira.hl7.org/browse/FHIR-43563): Subscription lifecycle doesn't account for governance

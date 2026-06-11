@@ -155,7 +155,10 @@ There are times when it is desirable to use Subscriptions as a communication cha
 
 To receive notifications via messaging, a client should request a subscription with the channel type of `message` and set the endpoint to the destination FHIR server base URL. Note that this URL must be accessible by the hosting server.
 
-The FHIR server hosting the subscription (server) will send FHIR messages to the destination FHIR server (endpoint) as needed. These messages will, as the contents of the message, have a fully-formed notification Bundle.
+The FHIR server hosting the subscription (server) will send FHIR messages to the destination FHIR server (endpoint) as needed.  Each message is a `Bundle` with `type` of `message` (the messaging envelope) that references a fully-formed notification `Bundle` with `type` of `history` (see [Notifications](notifications.html)) as the focus of its `MessageHeader`.
+
+{:.dragon}
+Note that FHIR Messaging is the only channel defined in this IG that wraps the notification in an additional `Bundle`.  When a `Subscription` uses the `message` channel type, the server sends a `Bundle` with `type` of `message` whose first entry is a `MessageHeader`.  The notification itself remains a `Bundle` with `type` of `history` exactly as described in [Notifications](notifications.html) and [Topic-Based Subscription Components](components.html#subscription-notifications); that history `Bundle` is the focus of the `MessageHeader` (i.e., the resource referenced by `MessageHeader.focus`).  This double-`Bundle` structure is specific to the FHIR Messaging channel and is required so that the message complies with the [`$process-message` operation](http://hl7.org/fhir/R4/messageheader-operation-process-message.html), which requires `Bundle.type = message`.
 
 An example workflow for receiving notification via FHIR messaging is shown below:
 
