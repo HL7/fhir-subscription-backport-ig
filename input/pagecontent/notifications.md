@@ -41,7 +41,7 @@ Note that the include list MAY contain resources that do not exist in a particul
 
 #### Comparison with Payload Types
 
-`Notified Pull` is an alternative delivery pattern that builds on the [`id-only`](payloads.html#id-only) payload type defined in the [Payloads](payloads.html) page. Where the three baseline payload types (`empty`, `id-only`, `full-resource`) differ along *how much resource data is inlined in the notification bundle*, `Notified Pull` adds a second axis: the semantics a subscriber can rely on when interpreting each referenced resource.
+'Notified Pull' is an alternative delivery pattern that builds on the [`id-only`](payloads.html#id-only) payload type defined in the [Payloads](payloads.html) page. Where the three baseline payload types (`empty`, `id-only`, `full-resource`) differ along how much resource data is inlined in the notification bundle, Notified Pull adds a second axis: the semantics a subscriber can rely on when interpreting each referenced resource.
 
 When deciding which combination to support, consider:
 
@@ -50,18 +50,32 @@ When deciding which combination to support, consider:
 * `full-resource` notifications inline both references and resource bodies. The subscriber generally does not need a follow-up GET, but the channel must be appropriate for PHI.
 * `Notified Pull` notifications use the [`backport-related-query`](StructureDefinition-backport-related-query.html) extension on `SubscriptionStatus.notificationEvent` (and/or on `SubscriptionTopic.notificationShape` in the topic definition) to pair each related resource with a `queryType` `Coding` describing the role the resource plays in the event and/or an executable `query` URL the subscriber follows to retrieve data. The footprint is similar to `id-only` (only references and the small extension travel on the wire), but only some IDs in the query URL need to be known and stable at the time of notification (e.g., the patient ID instead of individual observation IDs). `Notified Pull` adds *expressed semantics* over `id-only`. It can be appropriate when the subscriber needs to disambiguate the role each reference plays in the event, when the follow-up query to retrieve the data is not part of a standardized FHIR search profile, etc.. Some example use cases are included below.
 
+#### How Notified Pull Works
+
+Notified Pull combines the core Subscription mechanics described in [Topic-Based Subscription Components](components.html) with a pre-coordinated query that the Client executes after receiving a notification. There are three distinct steps and three distinct actors:
+
+1. **Subscription setup**: The Client uses a standard [Workflow](workflow.html) to establish a subscription. Topics that participate in Notified Pull advertise the available query via the [backport-related-query](StructureDefinition-backport-related-query.html) extension on `SubscriptionTopic.notificationShape` (R4B and later) or on the equivalent `Basic` representation (R4); see [Adding Queries to Notifications](#adding-queries-to-notifications) below.
+2. **Notification**: When the Server emits a notification, the bundle status information (`SubscriptionStatus` or equivalent) carries the information for one or more related-queries the Client can execute.
+3. **Pull / Query**: When the Client is ready to act on the notification, it issues the query or queries from the notification against the relevant FHIR Server (which may or may not be the same server that sent the notification) and receives the actual payload at that time.
+
+<figure>
+  {% include notified-pull-overview.svg %}
+  <figcaption>Notified Pull overview: Subscription setup, Notification carrying a related query, and the subsequent pull query the subscriber issues later.</figcaption>
+</figure>
+
+The use cases below illustrate some scenarios where this pattern is useful in practice: e.g., the subscriber needs data that does not exist (or cannot usefully be transmitted) at the time the subscription fires, so the notification is used to hand the subscriber a query rather than the data itself.
+
 
 #### Use Cases
 
 ##### Time Shifted Services
 
-One presented use case is centered around a referral workflow.  The scenario is that some facility (A) is sending a referral to another facility (B) for some sort of patient service.  While Facility A knows the information that Facility B needs, Facility A does not know *when* Facility B will be performing services.  If there is a time gap (e.g., services at Facility B are running six months out), it is better for Facility B to resolve information at the time of service instead of at the time of referral.
+One presented use case is centered around a referral workflow.  The scenario is that some facility (A) is sending a referral to another facility (B) for some sort of patient service.  While Facility A knows the information that Facility B needs, Facility A does not know *when* Facility B will be performing services.  If there is a time gap (e.g., services at Facility B are running six months out), it is better for Facility B to resolve information at the time of service instead of at the time of referral.  In Subscription terms, Facility B is the **Client** and Facility A is the **Server**; the **notification** sent when the referral is recorded carries the related query that Facility B will execute as the subsequent pull close to the time of service.
 
 <figure>
   {% include time-shifted-services.svg %}
   <figcaption>Workflow for referral service with a significant time delay</figcaption>
 </figure>
-
 
 ##### Query Standardization
 

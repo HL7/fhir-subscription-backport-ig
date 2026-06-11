@@ -31,6 +31,8 @@
     * Updated to use Extensions-Pack common extension: `http://hl7.org/fhir/StructureDefinition/authorization-hint`.
 
 * Non-substantive
+  * [FHIR-43735](https://jira.hl7.org/browse/FHIR-43735): Clarify Notified Pull workflow against core subscription concepts
+    * Added `How Notified Pull Works` overview to the [Notifications](notifications.html#notified-pull) page.
   * [FHIR-43612](https://jira.hl7.org/browse/FHIR-43612): Discuss related-queries in the ID Only section
     * Expanded the [Notifications](notifications.html#notified-pull) page `Notified Pull` section with a new `Comparison with Payload Types` subsection.
   * [FHIR-43608](https://jira.hl7.org/browse/FHIR-43608): The query for notify pull wouldn't be in the Topic, only the query "name" would
