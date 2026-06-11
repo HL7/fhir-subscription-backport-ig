@@ -37,7 +37,7 @@ To convey an event notification, the server POSTs a `Bundle` to the client's nom
 * Each [Subscription.channel.header](http://hl7.org/fhir/R4/subscription-definitions.html#Subscription.channel.header) value SHALL be conveyed as an HTTP request header.
 * The bundle SHALL comply with the [Backported R5 Notification Bundle Profile](StructureDefinition-backport-subscription-notification.html).
 
-When a `Subscription` is created for a REST Hook channel type, the server SHALL set initial status to `requested`, pending verification of the nominated endpoint URL. After a successful `handshake` notification has been sent and accepted, the server SHALL update the status to `active`. Any errors in the initial `handshake` SHALL result in the status being changed to `error`.
+When a `Subscription` is created for a REST Hook channel type, the server SHALL set the initial status to `requested`, pending any internal requirements and verification of the nominated endpoint URL. Once accepted in a `requested` state, a server SHALL be responsible for updating the status to either `active` or `error`. Servers that require additional process or review must perform those steps before sending the `handshake` to the notification endpoint. After a successful `handshake` notification has been sent and accepted, the server SHALL update the status to `active`. Any errors in the initial `handshake` SHALL result in the status being changed to `error`.
 
 An example workflow for establishing a <code>rest-hook</code> subscription is shown below.
 

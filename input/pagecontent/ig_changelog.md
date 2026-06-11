@@ -1,5 +1,7 @@
 ### STU 2.0.0
 
+* [FHIR-43563](https://jira.hl7.org/browse/FHIR-43563): Subscription lifecycle doesn't account for governance
+  * Loosened the REST-Hook lifecycle wording on the [Channels](channels.html) page.
 * [FHIR-43515](https://jira.hl7.org/browse/FHIR-43515): Application vs. Server for subscription authorization
   * Updated the [Safety and Security page](safety_security.html) to align with defined actors.
 * [FHIR-43514](https://jira.hl7.org/browse/FHIR-43514): Should SubscriptionTopic.read and search be required?
