@@ -70,7 +70,9 @@ This guide takes no position on whether standardized or unstandardized queries w
 
 In both Use Cases described above, there are two pieces of information a subscriber needs in order to successfully use the provided queries: the URL for the query and coded information describing the query.
 
-In this guide, the query and coded information are paired together as a `string` and a `Coding` respectively.  There are two places that need to contain this data: the topic definition and the notification itself.
+In this guide, the query and a coded description of the data provided by the query are paired together as a `string` and a `Coding` respectively.  For example, you may have a coded description of the query of `patient-problem-list`, and an associated query of `/Condition?patient=<patient ID>&category=http://terminology.hl7.org/CodeSystem/condition-category|problem-list-item`.
+
+The topic definition MAY contain the coded description of the queries and/or the query string itself, while the notification will contain both the coded description and the query string.  In cases where the query string does not depend on parameters determined at run time, it SHOULD be included in the topic definition.
 
 ##### FHIR R4
 

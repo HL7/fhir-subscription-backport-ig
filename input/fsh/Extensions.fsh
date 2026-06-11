@@ -11,7 +11,7 @@ Description: "Combination of coded information and query for information related
 // * insert ExtensionContext(Element)
 * extension contains
     queryType 0..1 MS and
-    query 1..1 MS
+    query 0..1 MS
 * extension[queryType] ^short = "Type of query."
 * extension[queryType] ^definition = "Coded value used to describe the type of information this query can be used to retrieve."
 * extension[queryType].value[x] only Coding

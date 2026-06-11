@@ -28,6 +28,9 @@
     * Updated to use Extensions-Pack common extension: `http://hl7.org/fhir/StructureDefinition/authorization-hint`.
 
 * Non-substantive
+  * [FHIR-43608](https://jira.hl7.org/browse/FHIR-43608): The query for notify pull wouldn't be in the Topic, only the query "name" would
+    * Relaxed `query` sub-extension cardinality from `1..1` to `0..1` on the [backport-related-query](StructureDefinition-backport-related-query.html) extension
+    * Clarified [Adding Queries to Notifications](notifications.html#adding-queries-to-notifications) so the topic definition MAY contain the runtime query string and the notification SHALL contain it
   * [FHIR-43607](https://jira.hl7.org/browse/FHIR-43607): Don't imply that standardized queries are the norm
     * Changed the `Unstandardized Queries` section to `Query Standardization` on the [Notifications](notifications.html) page to describe both standardized and unstandardized queries from a neutral stance.
   * [FHIR-43605](https://jira.hl7.org/browse/FHIR-43605): "history" bundle type requirement seems inconsistent with Messaging channel
