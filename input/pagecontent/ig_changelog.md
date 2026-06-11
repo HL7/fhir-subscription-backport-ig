@@ -1,5 +1,6 @@
 ### STU 2.0.0
 
+* Updated to use Cross-Version extension packages.
 * [FHIR-43505](https://jira.hl7.org/browse/FHIR-43505): Consider describing administratively created subscriptions
   * Added note to the `Server` section of the [Actors](actors.html) page.
   * Added the `Managing Subscriptions` section to the [Components](components.html) page.
@@ -21,6 +22,7 @@
 * [FHIR-43081](https://jira.hl7.org/browse/FHIR-43081): Add authorization information to notifications
   * Added [notification-authorization-hint](StructureDefinition-notification-authorization-hint.html) extension
   * Added content to the [Safety and Security page](safety_security.html) regarding authorization in notifications.
+  * Updated to use Extensions-Pack common extension: `http://hl7.org/fhir/StructureDefinition/authorization-hint`.
 * [FHIR-43072](https://jira.hl7.org/browse/FHIR-43072): Incorrect search parameter type
   * `http://hl7.org/fhir/uv/subscriptions-backport/SearchParameter/Subscription-custom-channel` : `string` to `token`
   * `http://hl7.org/fhir/uv/subscriptions-backport/SearchParameter/Subscription-payload-type` : `string` to `token`

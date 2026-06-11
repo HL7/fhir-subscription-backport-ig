@@ -11,7 +11,7 @@
 <artifactPageExtension value="-definitions"/>
 <artifactPageExtension value="-examples"/>
 <artifactPageExtension value="-mappings"/>
-<artifact id="StructureDefinition/notification-authorization-hint" key="StructureDefinition-notification-authorization-hint" name="Authorization information relevant to a notification"/>
+<artifact deprecated="true" id="StructureDefinition/notification-authorization-hint" key="StructureDefinition-notification-authorization-hint" name="Authorization information relevant to a notification"/>
 <artifact deprecated="true" id="StructureDefinition/backport-heartbeat-period" key="StructureDefinition-backport-heartbeat-period" name="Backport R5 Subscription Heartbeat Period"/>
 <artifact deprecated="true" id="StructureDefinition/backport-notification-url-location" key="StructureDefinition-backport-notification-url-location" name="Backport R5 Subscription Notification URL Location"/>
 <artifact deprecated="true" id="StructureDefinition/backport-payload-content" key="StructureDefinition-backport-payload-content" name="Backport R5 Subscription Payload Content Information"/>
