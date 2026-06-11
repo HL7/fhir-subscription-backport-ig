@@ -2,8 +2,11 @@
 
 * Non-compatible
   * Updated to use Cross-Version extension packages.
+    * Covers: [FHIR-44705](https://jira.hl7.org/browse/FHIR-44705): adding profile for the Basic resource
 
 * Compatible, Substantive
+  * [FHIR-44705](https://jira.hl7.org/browse/FHIR-44705): adding profile for the Basic resource
+    * Covered by updating to cross-version extensions.
   * [FHIR-43505](https://jira.hl7.org/browse/FHIR-43505): Consider describing administratively created subscriptions
     * Added note to the `Server` section of the [Actors](actors.html) page.
     * Added the `Managing Subscriptions` section to the [Components](components.html) page.
