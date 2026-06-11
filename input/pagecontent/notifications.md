@@ -39,6 +39,18 @@ Note that the include list MAY contain resources that do not exist in a particul
 
 ### Notified Pull
 
+#### Comparison with Payload Types
+
+`Notified Pull` is an alternative delivery pattern that builds on the [`id-only`](payloads.html#id-only) payload type defined in the [Payloads](payloads.html) page. Where the three baseline payload types (`empty`, `id-only`, `full-resource`) differ along *how much resource data is inlined in the notification bundle*, `Notified Pull` adds a second axis: the semantics a subscriber can rely on when interpreting each referenced resource.
+
+When deciding which combination to support, consider:
+
+* `empty` notifications carry no `focus` or `additionalContext` references. The subscriber must issue a topic-appropriate query (e.g., `_since=`) to discover what changed. Lightest footprint, no PHI, highest subscriber processing cost.
+* `id-only` notifications inline focus references but no resource bodies. The subscriber dereferences each URL to retrieve the resource. The IDs need to be known and stable at the time of notification and retrieval. The semantics of each reference (for example, which `Patient` is the source vs. target of a merge, or which `Appointment` is the prior vs. rescheduled booking) are not carried on the wire; the subscriber must assume them from the `SubscriptionTopic` definition and the order or position of the references.
+* `full-resource` notifications inline both references and resource bodies. The subscriber generally does not need a follow-up GET, but the channel must be appropriate for PHI.
+* `Notified Pull` notifications use the [`backport-related-query`](StructureDefinition-backport-related-query.html) extension on `SubscriptionStatus.notificationEvent` (and/or on `SubscriptionTopic.notificationShape` in the topic definition) to pair each related resource with a `queryType` `Coding` describing the role the resource plays in the event and/or an executable `query` URL the subscriber follows to retrieve data. The footprint is similar to `id-only` (only references and the small extension travel on the wire), but only some IDs in the query URL need to be known and stable at the time of notification (e.g., the patient ID instead of individual observation IDs). `Notified Pull` adds *expressed semantics* over `id-only`. It can be appropriate when the subscriber needs to disambiguate the role each reference plays in the event, when the follow-up query to retrieve the data is not part of a standardized FHIR search profile, etc.. Some example use cases are included below.
+
+
 #### Use Cases
 
 ##### Time Shifted Services
