@@ -54,6 +54,7 @@ Note that both mechanisms result in equivalent `Subscription` resource content b
 
 Once the subscription is active, notifications will be sent according to the [Channel](channels.html).  Note that error states may occur, see [Handling Errors](errors.html) for more information.
 
+When a `handshake` notification is required by the channel, the Subscriber learns that its `Subscription` has transitioned from `requested` to `active` by *receiving* the `handshake` notification on its configured endpoint. A Subscriber does not need to poll its own `Subscription` resource and does not need to subscribe to changes on its own `Subscription`.  If the `handshake` fails, or if the Server requires additional approval steps before activating the `Subscription`, no `handshake` notification will be delivered and the Subscriber MAY read its `Subscription` resource on the Server to determine the current `Subscription.status`.
 
 ### Dynamic Workflow: FHIR R4B
 
@@ -79,6 +80,8 @@ Once the subscription is active, notifications will be sent according to the [Ch
 
 Once the subscription is active, notifications will be sent according to the [Channel](channels.html).  Note that error states may occur, see [Handling Errors](errors.html) for more information.
 
+When a `handshake` notification is required by the channel, the Subscriber learns that its `Subscription` has transitioned from `requested` to `active` by *receiving* the `handshake` notification on its configured endpoint. A Subscriber does not need to poll its own `Subscription` resource and does not need to subscribe to changes on its own `Subscription`.  If the `handshake` fails, or if the Server requires additional approval steps before activating the `Subscription`, no `handshake` notification will be delivered and the Subscriber MAY read its `Subscription` resource on the Server to determine the current `Subscription.status`.
+
 ### Administrative Workflow
 
 Administrative subscriptions are created and maintained by a server administrator (or by a server-side configuration tool) rather than by the consuming client itself. This pattern is common in deployments where one or more of the following apply:
@@ -94,3 +97,5 @@ The high-level stages are the same as for the Dynamic workflow (topic implementa
 1. A server user or administrator handles channel handshake / endpoint validation as required by the chosen channel (see [Channels](channels.html)). The handshake MAY be performed at the time the `Subscription` or equivalent is created, or be deferred until the client's endpoint is ready, etc..
 1. Once the subscription is `active`, notifications are sent to the configured endpoint exactly as described for Dynamic subscriptions; see [Channels](channels.html) for channel-specific behaviour and [Handling Errors](errors.html) for error states.
 
+
+When a `handshake` notification is required by the channel, the Subscriber learns that an administrative `Subscription` is `active` by *receiving* the `handshake` notification on its endpoint.
