@@ -1,5 +1,7 @@
 ### STU 2.0.0
 
+* [FHIR-43515](https://jira.hl7.org/browse/FHIR-43515): Application vs. Server for subscription authorization
+  * Updated the [Safety and Security page](safety_security.html) to align with defined actors.
 * [FHIR-43514](https://jira.hl7.org/browse/FHIR-43514): Should SubscriptionTopic.read and search be required?
   * Updated 'administrative' capability statements for topic discovery from 'SHOULD' to 'MAY'.
   * Updated the [Conformance](conformance.html) page to match.
