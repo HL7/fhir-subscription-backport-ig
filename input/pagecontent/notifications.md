@@ -51,13 +51,19 @@ One presented use case is centered around a referral workflow.  The scenario is 
 </figure>
 
 
-##### Unstandardized Queries
+##### Query Standardization
 
-Another use case for a 'notified pull' mechanism is a continuation of the `id-only` return data.  Specifically, in cases where the data necessary is not well-standardized, it is unreasonable to expect the referring facility to be able to construct the queries necessary to retrieve the data.  For example, in the United States, there is no standardized query to retrieve the current insurance coverage information for a patient.  The process for retrieving that information is vendor-specific and it is unreasonable to expect a referring facility to be able to construct the queries necessary to retrieve it.
+Another use case for a 'notified pull' mechanism is a continuation of the `id-only` return data in which the subscriber dereferences the notified resource by issuing a query against the publisher. The shape of that query depends on whether a standardized query exists for the data being retrieved.
+
+Where a standardized query is defined, for example by a use-case-specific or realm-specific implementation guide such as US Core (for USCDI), MedMij, or another domain guide, the referring facility can construct that query from publicly available query definitions and a `notified pull` can be performed without prior coordination between the parties beyond their normal conformance to that guide.
+
+Where no standardized query exists, the publisher's query for the relevant data may be vendor-, deployment-, or trading-partner-specific. In that case, it is generally unreasonable to expect the referring facility to construct the necessary queries unless there is direct pre-coordination between the parties regarding which queries to use. The 'notified pull' pattern can still be used by carrying the specific query (and a coded description of it) in the notification itself, as described in [Adding Queries to Notifications](#adding-queries-to-notifications) below.
+
+This guide takes no position on whether standardized or unstandardized queries will be more common for a given use case in any particular jurisdiction; that determination is left to realm- or use-case-specific implementation guides, which can indicate which approach is preferred for their scope.
 
 <figure>
   {% include unstandardized-query.svg %}
-  <figcaption>Workflow showing how an unstandardized query can be used</figcaption>
+  <figcaption>Workflow showing how a query, whether standardized or unstandardized, can be carried in a notification</figcaption>
 </figure>
 
 #### Adding Queries to Notifications
