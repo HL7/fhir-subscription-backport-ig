@@ -1,4 +1,4 @@
-### STU 1.2.0
+### STU 2.0.0
 
 * [FHIR-43505](https://jira.hl7.org/browse/FHIR-43505): Consider describing administratively created subscriptions
   * Added note to the `Server` section of the [Actors](actors.html) page.

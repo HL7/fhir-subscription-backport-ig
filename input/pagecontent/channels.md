@@ -92,7 +92,7 @@ An example workflow for receiving notifications via websockets is shown below:
 Notes:
 
 * Notifications sent from the server SHALL be in the MIME Type specified by the [Subscription.channel.payload](http://hl7.org/fhir/R4/subscription-definitions.html#Subscription.channel.payload), however, if notifications are requested for multiple subscriptions with different MIME types, the server MAY choose to send all notifications in a single MIME type.
-* Notifications SHALL conform to the content level specified by the `http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-payload-content` extension.
+* Notifications SHALL conform to the content level specified by the `http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.content` extension.
 * When receiving notifications, a connected websocket client has no responsibilities beyond reading the message (e.g., there is no acknowledgement message).
 
 #### Security Notes
@@ -109,7 +109,7 @@ While the primary interface for FHIR servers is the FHIR REST API, notifications
 
 A client can declare its intention to receive notifications via Email by requesting a subscription with the channel type of `email` and setting the endpoint to the appropriate email URI (e.g., `mailto:public_health_notifications@example.org`).
 
-The server will send a new message each time a notification should be sent (e.g., per event or per batch). The server will create a message based on the values present in the [Subscription.channel.payload](http://hl7.org/fhir/R4/subscription-definitions.html#Subscription.channel.payload) and [payload content](StructureDefinition-backport-payload-content.html) fields. If a server cannot honor the requested combination, the server SHOULD reject the Subscription request rather than send unexpected email messages.
+The server will send a new message each time a notification should be sent (e.g., per event or per batch). The server will create a message based on the values present in the [Subscription.channel.payload](http://hl7.org/fhir/R4/subscription-definitions.html#Subscription.channel.payload) and payload content (`extension-Subscription.content`) fields. If a server cannot honor the requested combination, the server SHOULD reject the Subscription request rather than send unexpected email messages.
 
 The email channel sets two guidelines about content:
 
@@ -123,7 +123,7 @@ Due to these guidelines, the [Subscription.channel.payload](http://hl7.org/fhir/
 * text/plain;attach=application/fhir+json: a plain-text body with a FHIR JSON bundle attached
 * text/html;attach=application/fhir+xml: an HTML body with a FHIR XML bundle attached
 
-The [payload content](StructureDefinition-backport-payload-content.html) field SHALL be applied to any attachments and MAY be applied to body contents (depending on server implementation). However, a server must not include a body which exceeds the specified content level. For example, a server may choose to always include a standard message in the body of the message containing no PHI and vary the attachment, but cannot include PHI in the body of an email when the content is set to `empty`.
+The payload content (`extension-Subscription.content`) field SHALL be applied to any attachments and MAY be applied to body contents (depending on server implementation). However, a server must not include a body which exceeds the specified content level. For example, a server may choose to always include a standard message in the body of the message containing no PHI and vary the attachment, but cannot include PHI in the body of an email when the content is set to `empty`.
 
 An example workflow for receiving notifications via email is shown below:
 

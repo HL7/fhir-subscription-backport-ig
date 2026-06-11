@@ -31,7 +31,7 @@ Description:   "This operation is used to return historical events in the backpo
 * parameter[=].use           = #in
 * parameter[=].min           = 0
 * parameter[=].max           = "1"
-* parameter[=].documentation = "Requested content style of returned data. Codes from backport-content-value-set (e.g., empty, id-only, full-resource). This is a hint to the server what a client would prefer, and MAY be ignored."
+* parameter[=].documentation = "Requested content style of returned data. Codes from subscription-payload-content (e.g., empty, id-only, full-resource). This is a hint to the server what a client would prefer, and MAY be ignored."
 * parameter[=].type          = #code
 
 * parameter[+].name          = #return

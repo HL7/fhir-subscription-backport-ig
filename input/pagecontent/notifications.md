@@ -1,6 +1,6 @@
 ### Notifications
 
-As described in [Topic-Based Subscription Components](components.html#subscription-notifications), **all** notifications are enclosed in a [Bundle](http://hl7.org/fhir/R4/bundle.html) with the `type` of `history`.  Additionally, the first `entry` of the bundle SHALL be the `SubscriptionStatus` information, encoded as either a [Parameters](http://hl7.org/fhir/R4/parameters.html) resource using the [Backport SubscriptionStatus Profile](StructureDefinition-backport-subscription-status-r4.html) in FHIR R4 or a [SubscriptionStatus](http://hl7.org/fhir/R4B/subscriptionstatus.html) resource in FHIR R4B.
+As described in [Topic-Based Subscription Components](components.html#subscription-notifications), **all** notifications are enclosed in a [Bundle](http://hl7.org/fhir/R4/bundle.html) with the `type` of `history`.  Additionally, the first `entry` of the bundle SHALL be the `SubscriptionStatus` information, encoded as either a [Basic](http://hl7.org/fhir/R4/basic.html) resource with a complex extension using the [Backport SubscriptionStatus Profile](StructureDefinition-backport-subscription-status-r4.html) in FHIR R4 or a [SubscriptionStatus](http://hl7.org/fhir/subscriptionstatus.html) resource in FHIR R4B.
 
 The notification bundle has a profile defined in this IG for each FHIR version: [R4 Topic-Based Subscription Notification Bundle](StructureDefinition-backport-subscription-notification-r4.html) and [R4B Topic-Based Subscription Notification Bundle](StructureDefinition-backport-subscription-notification.html).
 
@@ -70,7 +70,7 @@ In this guide, the query and coded information are paired together as a `string`
 
 In FHIR R4, the topic definition is represented as a `Basic` resource that uses cross-version extensions to contain the information from a later-defined `SubscriptionTopic` resource (e.g., the FHIR R5 `SubscriptionTopic`).  Until FHIR R6 is published, there is no stable cross-version extension available to represent this data.  As such, this guide defines the [backport-related-query](StructureDefinition-backport-related-query.html) extension to represent the query and coded information.
 
-Regarding notifications in FHIR R4, the information normally contained in a `SubscriptionStatus` resource, including details about notification events, is represented by a `Parameters` resource.  A `related-query` part was added to the [backport-subscription-status-r4](StructureDefinition-backport-subscription-status-r4.html) profile, inside the `notification-event` part.
+Regarding notifications in FHIR R4, the information normally contained in a `SubscriptionStatus` resource, including details about notification events, is represented by a `Basic` resource with a complex extension.  Related query information can be added as a nested extension within the `notificationEvent` sub-extension of the [backport-subscription-status-r4](StructureDefinition-backport-subscription-status-r4.html) profile.
 
 For examples, please see [Backported SubscriptionTopic: R4 Encounter Complete](Basic-r4-encounter-complete.html), [R4 Notification: Id Only with Related Query](Bundle-r4-notification-id-only-with-query.html), or [R4 Notification: Full Resource with related query](Bundle-r4-notification-full-resource-with-query.html).
 
