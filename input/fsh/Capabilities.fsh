@@ -142,6 +142,7 @@ Id:          capabilitystatement-subscriptiontopic-canonical
 Title:       "CapabilityStatement SubscriptionTopic Canonical"
 Description: "Extension used to advertise supported SubscriptionTopic canonical URLs in a CapabilityStatement."
 * insert StructureJurisdiction
+* . 0..*
 * ^context[0].type = #element
 * ^context[0].expression = "CapabilityStatement.rest.resource"
 * value[x] only canonical

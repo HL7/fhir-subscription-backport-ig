@@ -3,6 +3,7 @@ Id:          backport-related-query
 Title:       "Related query information"
 Description: "Combination of coded information and query for information related to a notification event."
 * insert StructureJurisdiction
+* . 0..*
 * insert ExtensionContext(SubscriptionStatus.notificationEvent)
 * insert ExtensionContext(SubscriptionTopic.notificationShape)
 * insert ExtensionContext(Basic.extension)

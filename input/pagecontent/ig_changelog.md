@@ -31,6 +31,8 @@
     * Updated to use Extensions-Pack common extension: `http://hl7.org/fhir/StructureDefinition/authorization-hint`.
 
 * Non-substantive
+  * [FHIR-45365](https://jira.hl7.org/browse/FHIR-45365): Extensions should have cardinality set correctly
+    * Verified remaining extensions have correct `min` and `max` values.
   * [FHIR-44046](https://jira.hl7.org/browse/FHIR-44046): Invalid conformance language in place
     * Updated requested 'will not' to 'SHALL NOT' on the [Payloads page](payloads.html).
   * [FHIR-43905](https://jira.hl7.org/browse/FHIR-43905): Section 2.5.4 seems disconnected from the rest of the page
