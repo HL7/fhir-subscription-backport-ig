@@ -7,10 +7,10 @@ Description: "Profile on the Subscription resource to enable R5-style topic-base
 * extension contains
     $xverSubTopic named topic 1..1 MS and
     $xverSubFilterBy named filterBy 0..* MS and
-    $xverSubContent named content 0..1 MS and
-    $xverSubHeartbeat named heartbeatPeriod 0..1 and
-    $xverSubTimeout named timeout 0..1 and
-    $xverSubMaxCount named maxCount 0..1 and
+    BackportPayloadContent named content 0..1 MS and
+    BackportHeartbeatPeriod named heartbeatPeriod 0..1 and
+    BackportTimeout named timeout 0..1 and
+    BackportMaxCount named maxCount 0..1 and
     $xverSubIdentifier named identifier 0..* and
     $xverSubName named name 0..1 and
     $xverSubParameter named parameter 0..*
@@ -37,7 +37,7 @@ Description: "Profile on the Subscription resource to enable R5-style topic-base
 * criteria ^short = "Criteria (may be empty for topic-based subscriptions)"
 * criteria ^definition = "When using topic-based subscriptions, the topic is specified via the topic extension. The criteria element is retained for compatibility."
 * channel.payload 1..1
-* channel.type.extension contains $xverSubChannelType named channelType 0..1 MS
+* channel.type.extension contains BackportChannelType named channelType 0..1 MS
 * channel.type.extension[channelType] ^short = "Extended channel type for notifications"
 * channel.type.extension[channelType] ^definition = "The type of channel to send notifications on."
 * channel.type.extension[channelType] ^comment = "This extension allows for the use of additional channel types that were not defined in the FHIR R4 subscription definition."
@@ -163,7 +163,7 @@ Usage: #definition
 * code = #custom-channel
 * base[0] = #Subscription
 * type = #token
-* expression = "Subscription.channel.type.extension('http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.channelType').value.ofType(Coding)"
+* expression = "Subscription.channel.type.extension('http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-channel-type').value.ofType(Coding)"
 * xpathUsage = #normal
 
 Instance: Subscription-identifier
@@ -195,5 +195,5 @@ Usage: #definition
 * code = #payload-type
 * base[0] = #Subscription
 * type = #token
-* expression = "Subscription.extension('http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.content').value.ofType(code)"
+* expression = "Subscription.extension('http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-payload-content').value.ofType(code)"
 * xpathUsage = #normal

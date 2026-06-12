@@ -9,14 +9,12 @@ Alias: $authorizationHintExt = http://hl7.org/fhir/uv/subscriptions-backport/Str
 
 Alias: $relatedQueryExt = http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-related-query
 
-// XVer cross-version extension aliases (from hl7.fhir.uv.xver-r5.r4)
+// XVer cross-version extension aliases (from hl7.fhir.uv.xver-r5.r4).
+// NOTE: content / heartbeatPeriod / timeout / maxCount / channelType are NOT
+// provided by xver-r5.r4 0.1.0 — they are defined locally as backport-*
+// extensions in Extensions.fsh and referenced by name in the profile.
 Alias: $xverSubTopic        = http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.topic
-Alias: $xverSubChannelType  = http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.channelType
 Alias: $xverSubFilterBy     = http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.filterBy
-Alias: $xverSubContent      = http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.content
-Alias: $xverSubHeartbeat    = http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.heartbeatPeriod
-Alias: $xverSubTimeout      = http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.timeout
-Alias: $xverSubMaxCount     = http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.maxCount
 Alias: $xverSubIdentifier   = http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.identifier
 Alias: $xverSubName         = http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.name
 Alias: $xverSubParameter    = http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.parameter

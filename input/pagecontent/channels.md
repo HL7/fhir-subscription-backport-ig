@@ -92,7 +92,7 @@ An example workflow for receiving notifications via websockets is shown below:
 Notes:
 
 * Notifications sent from the server SHALL be in the MIME Type specified by the [Subscription.channel.payload](http://hl7.org/fhir/subscription-definitions.html#Subscription.channel.payload), however, if notifications are requested for multiple subscriptions with different MIME types, the server MAY choose to send all notifications in a single MIME type.
-* Notifications SHALL conform to the content level specified by the `http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.content` extension.
+* Notifications SHALL conform to the content level specified by the `http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-payload-content` extension.
 * When receiving notifications, a connected websocket client has no responsibilities beyond reading the message (e.g., there is no acknowledgement message).
 
 ##### Security Notes
