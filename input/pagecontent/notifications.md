@@ -43,9 +43,11 @@ Note that the include list MAY contain resources that do not exist in a particul
 
 ### Notified Pull
 
+Notified Pull is a topic-based subscription pattern in which the notification conveys (or refers to) a query the subscriber can run against the server to retrieve the relevant data at the time it is needed.  It is complementary to, not a replacement for, the standard `empty`, `id-only`, and `full-resource` payload modes described in [Payload Types](payloads.html). Implementers can choose this pattern when the data clients need is time-shifted, sensitive, or otherwise not well-served by inline delivery.
+
 #### Comparison with Payload Types
 
-'Notified Pull' is an alternative delivery pattern that builds on the [`id-only`](payloads.html#id-only) payload type defined in the [Payloads](payloads.html) page. Where the three baseline payload types (`empty`, `id-only`, `full-resource`) differ along how much resource data is inlined in the notification bundle, Notified Pull adds a second axis: the semantics a subscriber can rely on when interpreting each referenced resource.
+Notified Pull is an alternative delivery pattern that builds on the [`id-only`](payloads.html#id-only) payload type defined in the [Payloads](payloads.html) page. Where the three baseline payload types (`empty`, `id-only`, `full-resource`) differ along how much resource data is inlined in the notification bundle, Notified Pull adds a second axis: the semantics a subscriber can rely on when interpreting each referenced resource.
 
 When deciding which combination to support, consider:
 

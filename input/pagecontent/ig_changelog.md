@@ -31,6 +31,8 @@
     * Updated to use Extensions-Pack common extension: `http://hl7.org/fhir/StructureDefinition/authorization-hint`.
 
 * Non-substantive
+  * [FHIR-43905](https://jira.hl7.org/browse/FHIR-43905): Section 2.5.4 seems disconnected from the rest of the page
+    * Added narrative introducing Notified Pull to the [Notifications Page](notifications.html).
   * [FHIR-43920](https://jira.hl7.org/browse/FHIR-43920): Subscriber actor: is the same as Client?
     * Updated the [Handling Errors page](errors.html) to reference 'Client' instead of 'Subscriber' in narrative and diagrams.
   * [FHIR-44110](https://jira.hl7.org/browse/FHIR-44110): "Adding Queries to Notifications" heading is incomplete
