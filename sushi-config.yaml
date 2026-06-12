@@ -15,7 +15,7 @@ canonical: http://hl7.org/fhir/uv/subscriptions-backport
 name: SubscriptionsR5Backport
 title: "Subscriptions R5 Backport"
 status: active
-version: 2.0.0-alpha
+version: 2.0.0-draft
 #releaseLabel: CI-Build #ci-build|draft|qa-preview|ballot|trial-use|release|update|normative+trial-use
 releaseLabel: ci-build
 
@@ -85,10 +85,10 @@ jurisdiction: http://unstats.un.org/unsd/methods/m49/m49.htm#001 "World"
 #
 dependencies:
   #hl7.fhir.extensions.r5: 4.3.0
-  hl7.fhir.extensions.r5: 4.0.1
+  #hl7.fhir.extensions.r5: 4.0.1
   #hl7.fhir.uv.extensions.r5: 1.0.0
-  hl7.fhir.uv.extensions.r4: 1.0.0
-  hl7.fhir.uv.tools.r4: current
+  hl7.fhir.uv.extensions: 5.3.0
+  hl7.fhir.uv.tools: 1.1.2
   hl7.fhir.uv.xver-r5.r4: 0.1.0
   hl7.fhir.uv.xver-r4b.r4: 0.1.0
   #hl7.fhir.xver-extensions: 0.0.13
