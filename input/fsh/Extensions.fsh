@@ -34,7 +34,6 @@ Id:          backport-content-value-set
 Title:       "Backported R5 Subscription Content Value Set"
 Description: "Codes to represent how much resource content to send in the notification payload."
 * insert StructureJurisdiction
-* . 0..*
 * ^experimental   = false
 * codes from system http://hl7.org/fhir/subscription-payload-content|5.0.0
 
