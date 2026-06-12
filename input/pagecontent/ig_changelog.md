@@ -2,7 +2,9 @@
 
 * Non-compatible
   * Updated to use Cross-Version extension packages.
-    * Covers: [FHIR-44705](https://jira.hl7.org/browse/FHIR-44705): adding profile for the Basic resource
+    * Addresses: [FHIR-44705](https://jira.hl7.org/browse/FHIR-44705): adding profile for the Basic resource
+    * Addresses: [FHIR-44403](https://jira.hl7.org/browse/FHIR-44403): Code Systems and Valuesets should be anchored in THO
+    * Addresses: [FHIR-44404](https://jira.hl7.org/browse/FHIR-44404): Code Systems and Valuesets should be anchored in THO
 
 * Compatible, Substantive
   * [FHIR-44705](https://jira.hl7.org/browse/FHIR-44705): adding profile for the Basic resource
