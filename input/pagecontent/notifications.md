@@ -58,7 +58,7 @@ When deciding which combination to support, consider:
 
 Notified Pull combines the core Subscription mechanics described in [Topic-Based Subscription Components](components.html) with a pre-coordinated query that the Client executes after receiving a notification. There are three distinct steps and three distinct actors:
 
-1. **Subscription setup**: The Client uses a standard [Workflow](workflow.html) to establish a subscription. Topics that participate in Notified Pull advertise the available query via the [backport-related-query](StructureDefinition-backport-related-query.html) extension on `SubscriptionTopic.notificationShape` (R4B and later) or on the equivalent `Basic` representation (R4); see [Adding Queries to Notifications](#adding-queries-to-notifications) below.
+1. **Subscription setup**: The Client uses a standard [Workflow](workflow.html) to establish a subscription. Topics that participate in Notified Pull advertise the available query via the [backport-related-query](StructureDefinition-backport-related-query.html) extension on `SubscriptionTopic.notificationShape` (R4B and later) or on the equivalent `Basic` representation (R4); see [Adding Queries to Topics and Notifications](#adding-queries-to-topics-and-notifications) below.
 2. **Notification**: When the Server emits a notification, the bundle status information (`SubscriptionStatus` or equivalent) carries the information for one or more related-queries the Client can execute.
 3. **Pull / Query**: When the Client is ready to act on the notification, it issues the query or queries from the notification against the relevant FHIR Server (which may or may not be the same server that sent the notification) and receives the actual payload at that time.
 
@@ -96,7 +96,7 @@ This guide takes no position on whether standardized or unstandardized queries w
   <figcaption>Workflow showing how a query, whether standardized or unstandardized, can be carried in a notification</figcaption>
 </figure>
 
-#### Adding Queries to Notifications
+#### Adding Queries to Topics and Notifications
 
 In both Use Cases described above, there are two pieces of information a subscriber needs in order to successfully use the provided queries: the URL for the query and coded information describing the query.
 

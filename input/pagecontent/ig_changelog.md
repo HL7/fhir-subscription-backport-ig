@@ -31,6 +31,8 @@
     * Updated to use Extensions-Pack common extension: `http://hl7.org/fhir/StructureDefinition/authorization-hint`.
 
 * Non-substantive
+  * [FHIR-44110](https://jira.hl7.org/browse/FHIR-44110): "Adding Queries to Notifications" heading is incomplete
+    * Updated topic heading and reference on the [Notifications page](notifications.html)
   * [FHIR-43730](https://jira.hl7.org/browse/FHIR-43730): Bundle type history vs collection
     * Added narrative to the [Notifications page](notifications.html) explaining rationale for the `history` bundle type.
   * [FHIR-43735](https://jira.hl7.org/browse/FHIR-43735): Clarify Notified Pull workflow against core subscription concepts
