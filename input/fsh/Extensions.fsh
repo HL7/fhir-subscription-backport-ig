@@ -34,6 +34,7 @@ Id:          backport-content-value-set
 Title:       "Backported R5 Subscription Content Value Set"
 Description: "Codes to represent how much resource content to send in the notification payload."
 * insert StructureJurisdiction
+* . 0..*
 * ^experimental   = false
 * codes from system http://hl7.org/fhir/subscription-payload-content|5.0.0
 
@@ -42,6 +43,7 @@ Id:          backport-payload-content
 Title:       "Backported R5 Subscription Payload Content"
 Description: "How much of the resource content to deliver in the notification payload. The choices are an empty payload, only the resource id, or the full resource content."
 * insert StructureJurisdiction
+* . 0..*
 * insert ExtensionContext(Subscription)
 * value[x] only code
 * valueCode from BackportContentValueSet (required)
@@ -54,6 +56,7 @@ Id:          backport-heartbeat-period
 Title:       "Backported R5 Subscription Heartbeat Period"
 Description: "Interval in seconds to send 'heartbeat' notifications."
 * insert StructureJurisdiction
+* . 0..*
 * insert ExtensionContext(Subscription)
 * value[x] only unsignedInt
 * value[x] ^short      = "Interval in seconds to send 'heartbeat' notification"
@@ -64,6 +67,7 @@ Id:          backport-timeout
 Title:       "Backported R5 Subscription Timeout"
 Description: "Timeout in seconds to attempt notification delivery."
 * insert StructureJurisdiction
+* . 0..*
 * insert ExtensionContext(Subscription)
 * value[x] only unsignedInt
 * value[x] ^short      = "Timeout in seconds to attempt notification delivery"
@@ -74,6 +78,7 @@ Id:          backport-max-count
 Title:       "Backported R5 Subscription MaxCount"
 Description: "Maximum number of triggering resources included in notification bundles."
 * insert StructureJurisdiction
+* . 0..*
 * insert ExtensionContext(Subscription)
 * value[x] only positiveInt
 * value[x] ^short      = "Maximum number of triggering resources included in notification bundles"
@@ -84,6 +89,7 @@ Id:          backport-channel-type
 Title:       "Backported R5 Subscription Additional Channel Type"
 Description: "Additional channel types not defined before FHIR R5."
 * insert StructureJurisdiction
+* . 0..*
 * insert ExtensionContext(Subscription.channel.type)
 * value[x] only Coding
 * value[x] ^short      = "Extended channel type for notifications"
