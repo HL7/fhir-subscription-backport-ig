@@ -85,6 +85,7 @@ A [Change log](ig_changelog.html) is provided to highlight differences between v
 | Contributor | Eric Haas | Health eData |
 | Contributor | Josh Mandel | Microsoft / SMART Health IT |
 | Contributor | Adam Strickland | Epic |
+| Contributor | Jens Villadsen | Trifork |
 | Contributor | Jason Vogt | Meditech |
 {: .grid }
 
