@@ -43,7 +43,9 @@ Note that the include list MAY contain resources that do not exist in a particul
 
 ### Notified Pull
 
-Notified Pull is a topic-based subscription pattern in which the notification conveys (or refers to) a query the subscriber can run against the server to retrieve the relevant data at the time it is needed.  It is complementary to, not a replacement for, the standard `empty`, `id-only`, and `full-resource` payload modes described in [Payload Types](payloads.html). Implementers can choose this pattern when the data clients need is time-shifted, sensitive, or otherwise not well-served by inline delivery.
+Notified Pull is a topic-based subscription pattern in which the notification provides a query and/or a code representing a query to run later instead of delivering the triggering data inline. In every Notified Pull scenario the notification carries (or refers to) one or more queries and/or coded information describing what a query represents or returns. Clients executes those queries against a FHIR server to retrieve the relevant data at the time it is actually needed. The common thread across the use cases below is therefore not *what* data is exchanged, but *when* and *how* it is fetched: the data of interest is retrieved by the client after the notification, on the client's own schedule, rather than being included in the notification itself.
+
+Notified Pull is complementary to, not a replacement for, the standard `empty`, `id-only`, and `full-resource` payload modes described in [Payload Types](payloads.html). Implementers can choose this pattern when the data clients need is time-shifted, sensitive, or otherwise not well-served by inline delivery.
 
 #### Comparison with Payload Types
 
@@ -78,6 +80,8 @@ The use cases below illustrate some scenarios where this pattern is useful in pr
 
 One presented use case is centered around a referral workflow.  The scenario is that some facility (A) is sending a referral to another facility (B) for some sort of patient service.  While Facility A knows the information that Facility B needs, Facility A does not know *when* Facility B will be performing services.  If there is a time gap (e.g., services at Facility B are running six months out), it is better for Facility B to resolve information at the time of service instead of at the time of referral.  In Subscription terms, Facility B is the **Client** and Facility A is the **Server**; the **notification** sent when the referral is recorded carries the related query that Facility B will execute as the subsequent pull close to the time of service.
 
+This use case does not depend on any special expiry behavior. Nothing in the standard notification workflow places a time limit on how long a notification remains actionable, and a client  is free to defer its follow-up query for as long as the referenced data remains retrievable. What sets Time Shifted Services apart is therefore not a different mechanism, but the deliberately long and variable delay between the notification and the pull. Because that gap can be months, resolving the data inline at notification time (for example, as a `full-resource` payload) risks delivering information that is stale by the time it is used; carrying a query instead lets Facility B fetch current data at the moment of service.
+
 <figure>
   {% include time-shifted-services.svg %}
   <figcaption>Workflow for referral service with a significant time delay</figcaption>
@@ -85,11 +89,13 @@ One presented use case is centered around a referral workflow.  The scenario is 
 
 ##### Query Standardization
 
-Another use case for a 'notified pull' mechanism is a continuation of the `id-only` return data in which the subscriber dereferences the notified resource by issuing a query against the publisher. The shape of that query depends on whether a standardized query exists for the data being retrieved.
+Another use case builds on the [`id-only`](payloads.html#id-only) payload type described on the [Payloads](payloads.html) page. With `id-only`, the server anticipates which resources the client will want, resolves them to specific resource references, and includes those references in the notification; the client then simply dereferences each item rather than having to search for the data itself. Mapping this onto the referral example above, the referring facility is the server/publisher and the servicing facility is the client/subscriber - so it is the referring facility that decides, ahead of time, what the servicing facility will need.
 
-Where a standardized query is defined, for example by a use-case-specific or realm-specific implementation guide such as US Core (for USCDI), MedMij, or another domain guide, the referring facility can construct that query from publicly available query definitions and a `notified pull` can be performed without prior coordination between the parties beyond their normal conformance to that guide.
+Notified Pull extends this idea from individual resource references to whole queries: instead of (or in addition to) pre-resolving each specific resource, the notification carries a query that the servicing facility runs against the publisher to retrieve the data when it is needed. Whether the servicing facility can act on such a notification depends on whether a standardized query exists for the data being retrieved.
 
-Where no standardized query exists, the publisher's query for the relevant data may be vendor-, deployment-, or trading-partner-specific. In that case, it is generally unreasonable to expect the referring facility to construct the necessary queries unless there is direct pre-coordination between the parties regarding which queries to use. The 'notified pull' pattern can still be used by carrying the specific query (and a coded description of it) in the notification itself, as described in [Adding Queries to Notifications](#adding-queries-to-notifications) below.
+Where a standardized query is defined, for example by a use-case-specific or realm-specific implementation guide such as US Core (for USCDI), MedMij, or another domain guide, the client (servicing facility) can recognize and run the query from publicly available query definitions. In these cases a Notified Pull can be performed without the need to express any queries inline.
+
+Where no standardized query exists, relevant queries may be vendor-, deployment-, or trading-partner-specific, and the servicing facility generally cannot derive them on its own without direct pre-coordination about which queries to use. The Notified Pull pattern can still apply in this situation: the notification carries the specific queries and/or coded information about them, so the client (servicing facility) can execute it directly instead of having to construct it. See [Adding Queries to Topics and Notifications](#adding-queries-to-topics-and-notifications) below.
 
 This guide takes no position on whether standardized or unstandardized queries will be more common for a given use case in any particular jurisdiction; that determination is left to realm- or use-case-specific implementation guides, which can indicate which approach is preferred for their scope.
 
