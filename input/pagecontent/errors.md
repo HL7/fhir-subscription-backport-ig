@@ -1,6 +1,17 @@
 
 Errors can occur at any point in the processing or delivery of a notification. This page describes some common error scenarios and mechanisms used to detect and recover from them.
 
+### Event Numbering
+
+Each notification event carries a `notificationEvent.eventNumber`, which is *either* the sequential number of this event in the subscription context *or* a relative event number for this notification. The way a server populates `eventNumber` depends on the delivery guarantees of the channel:
+
+* In subscriptions where delivery of notifications **is not** guaranteed (e.g., `rest-hook`), `eventNumber` is a globally unique and monotonically-increasing event number for the subscription. This global, monotonic numbering is what allows a client to detect a missed notification, as described in [Detecting Errors as a Client](#detecting-errors-as-a-client) below.
+* In channels where delivery of notifications **is** guaranteed, `eventNumber` MAY instead be a relative index for the events present in the notification (e.g., `1`, `2`, etc.).
+
+A channel SHOULD only allow `eventNumber` values to deviate from globally unique, monotonically-increasing numbers when reliable (guaranteed) delivery is in use - the global, monotonic interpretation is the default and is what subscribers can rely on for missed-event detection on channels that do not guarantee delivery. A server MAY use `eventNumber` in a local-only context (for example, numbering relative to a single notification) only when the channel type describes such usage and the server supports it.
+
+Note that `eventNumber` is distinct from `eventsSinceSubscriptionStart`. The latter is a subscription-level counter of the total number of events generated since the subscription was created (regardless of how many were successfully communicated) and is the value clients use to determine whether any notifications have been missed.
+
 ### Handling Errors as a Server
 
 Error handling as a Server is intended to be simple.  A server is not expected to know the best process for every use case of every client, so the focus is on allowing clients to detect that there is an issue.  A server SHALL:

@@ -31,6 +31,9 @@
     * Updated to use Extensions-Pack common extension: `http://hl7.org/fhir/StructureDefinition/authorization-hint`.
 
 * Non-substantive
+  * [FHIR-48808](https://jira.hl7.org/browse/FHIR-48808): SubscriptionStatus eventNumber description not up to date to R5
+    * Aligned `eventNumber` semantics with FHIR R5/R6: the cross-version `SubscriptionStatus` representation now inherits the R5 definition, so the IG no longer imposes its own constraints on `eventNumber`.
+    * Added an `Event Numbering` section to the [Handling Errors](errors.html) page clarifying that `eventNumber` is globally unique and monotonically-increasing by default, MAY be a relative (local-only) index when described by the channel type and supported by the server, and that channels SHOULD only allow deviation from global, monotonic values when reliable (guaranteed) delivery is used.
   * [FHIR-43707](https://jira.hl7.org/browse/FHIR-43707): Clarify the Notified Pulls narrative
     * Added additional narrative to the [Notifications Page](notifications.html) for Notified Pull.
     * Also covers [FHIR-44107](https://jira.hl7.org/browse/FHIR-44107)
