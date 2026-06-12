@@ -33,6 +33,7 @@
 * Non-substantive
   * [FHIR-43707](https://jira.hl7.org/browse/FHIR-43707): Clarify the Notified Pulls narrative
     * Added additional narrative to the [Notifications Page](notifications.html) for Notified Pull.
+    * Also covers [FHIR-44107](https://jira.hl7.org/browse/FHIR-44107)
   * [FHIR-45365](https://jira.hl7.org/browse/FHIR-45365): Extensions should have cardinality set correctly
     * Verified remaining extensions have correct `min` and `max` values.
   * [FHIR-44046](https://jira.hl7.org/browse/FHIR-44046): Invalid conformance language in place
