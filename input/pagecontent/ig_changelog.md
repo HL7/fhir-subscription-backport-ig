@@ -71,6 +71,7 @@
   * Added change log.
 
 * Technical Corrections
+  * [FHIR-43917](https://jira.hl7.org/browse/FHIR-43917): expand abbreviation PHI
   * [FHIR-41024](https://jira.hl7.org/browse/FHIR-41024): 2.3.3 Workflow for R4 includes a subsection referencing R4B
   * Fixes to `CapabilityStatement` resources for correctness.
   * Fixes to FHIRPath expressions in `SearchParameter` resources for correctness.
