@@ -44,7 +44,7 @@ From a security perspective, `id-only` payloads have a low risk of exposing PHI.
 
 To summarize, in an `id-only` notification:
 * the status contains one or more `notificationEvent` entries, each with a `focus` or possibly one or more `additionalContext`, and
-* the bundle can contain additional entries, but those entries will not have the `resource` element present.
+* the bundle can contain additional entries, but those entries SHALL NOT have the `resource` element present.
 
 For examples, see [Bundle-r4-notification-id-only](Bundle-r4-notification-id-only.html) and [Bundle-r4b-notification-id-only](Bundle-r4b-notification-id-only.html).
 

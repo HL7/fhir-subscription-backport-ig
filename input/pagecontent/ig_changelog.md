@@ -31,6 +31,8 @@
     * Updated to use Extensions-Pack common extension: `http://hl7.org/fhir/StructureDefinition/authorization-hint`.
 
 * Non-substantive
+  * [FHIR-44046](https://jira.hl7.org/browse/FHIR-44046): Invalid conformance language in place
+    * Updated requested 'will not' to 'SHALL NOT' on the [Payloads page](payloads.html).
   * [FHIR-43905](https://jira.hl7.org/browse/FHIR-43905): Section 2.5.4 seems disconnected from the rest of the page
     * Added narrative introducing Notified Pull to the [Notifications Page](notifications.html).
   * [FHIR-43920](https://jira.hl7.org/browse/FHIR-43920): Subscriber actor: is the same as Client?
