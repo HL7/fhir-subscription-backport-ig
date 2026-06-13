@@ -1,0 +1,30 @@
+@startuml
+skinparam NoteTextAlignment left
+skinparam Padding 2
+skinparam ParticipantPadding 50
+skinparam LifelineStrategy solid
+
+participant "Sever\n(subscriber)" as Sub
+participant "Subscription Server" as Srv
+participant "FHIR Source\n(may be the same Server)" as Data
+
+== Subscription setup ==
+Sub -> Srv: Discover SubscriptionTopic(s)
+return Topic with ""backport-related-query"" extension
+Sub -> Srv: Request a Subscription
+return ""active"" Subscription
+
+== Notification (push) ==
+Srv -> Sub: Notification Bundle\n(SubscriptionStatus + ""related-query"")
+note left of Sub
+  Notification carries:
+  * subscription id
+  * focus resource id(s)
+  * pre-coordinated query URL
+  * query type (Coding)
+end note
+
+== Subsequent (pull) query ==
+Sub -> Data: GET <query URL>\n(from the related-query in the Notification)
+return Requested data
+@enduml

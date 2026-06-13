@@ -12,7 +12,7 @@ Description: "Profile on the R4 Bundle resource to enable R5-style topic-based s
 * entry ^slicing.description = "Slice based on resource"
 * entry contains subscriptionStatus 1..1 MS
 * entry[subscriptionStatus].resource 1..1 MS
-* entry[subscriptionStatus].resource only BackportSubscriptionStatusR4
+* entry[subscriptionStatus].resource only $xverSubStatusProfile
 * obeys backport-notification-bundle-r4-1
 
 Invariant:   backport-notification-bundle-r4-1
@@ -22,44 +22,27 @@ Severity:    #error
 XPath:       "f:entry[1]/f:resource/f:Basic"
 
 
-Profile:      BackportSubscriptionStatusR4
-Parent:       Basic
-Id:           backport-subscription-status-r4
-Title:        "R4 Backported R5 SubscriptionStatus"
-Description:  "Profile on Basic for topic-based subscription notifications in R4."
-* insert StructureCommonR4
-* code = http://hl7.org/fhir/fhir-types#SubscriptionStatus
-* extension contains
-    $xverSubStatusSubscription named subscription 1..1 MS and
-    $xverSubStatusTopic named topic 1..1 MS and
-    $xverSubStatusStatus named status 0..1 MS and
-    $xverSubStatusESSS named eventsSinceSubscriptionStart 0..1 MS and
-    $xverSubStatusNotifEvent named notificationEvent 0..* MS and
-    $xverSubStatusError named error 0..* MS
-* modifierExtension contains
-    $xverSubStatusType named notificationType 1..1 MS
-
-
 // --------------------------------------------------------------------------
 // RuleSets for inline status instances (applied to BackportSubscriptionStatusR4 instances)
 // --------------------------------------------------------------------------
 
 RuleSet: StatusBase(subscriptionRef, topic, status, type, sinceStart)
-* extension[subscription].valueReference.reference = {subscriptionRef}
-* extension[topic].valueCanonical = {topic}
-* extension[status].valueCode = {status}
-* modifierExtension[notificationType].valueCode = {type}
-* extension[eventsSinceSubscriptionStart].valueString = "{sinceStart}"
+* code.coding[0] = http://hl7.org/fhir/fhir-types#SubscriptionStatus
+* extension[$xverSubStatusSubscription].valueReference.reference = {subscriptionRef}
+* extension[$xverSubStatusTopic].valueCanonical = {topic}
+* extension[$xverSubStatusStatus].valueCode = {status}
+* modifierExtension[$xverSubStatusType].valueCode = {type}
+* extension[$xverSubStatusESSS].valueString = "{sinceStart}"
 
 RuleSet: StatusEvent(eventNumber)
-* extension[notificationEvent].extension[eventNumber].valueString = "{eventNumber}"
-* extension[notificationEvent].extension[timestamp].valueInstant = "2020-05-29T11:44:13.1882432-05:00"
+* extension[$xverSubStatusNotifEvent].extension[eventNumber].valueString = "{eventNumber}"
+* extension[$xverSubStatusNotifEvent].extension[timestamp].valueInstant = "2020-05-29T11:44:13.1882432-05:00"
 
 RuleSet: StatusEventFocus(focus)
-* extension[notificationEvent].extension[focus].valueReference.reference = {focus}
+* extension[$xverSubStatusNotifEvent].extension[focus].valueReference.reference = {focus}
 
 RuleSet: StatusEventContext(additionalContext)
-* extension[notificationEvent].extension[additionalContext].valueReference.reference = {additionalContext}
+* extension[$xverSubStatusNotifEvent].extension[additionalContext].valueReference.reference = {additionalContext}
 
 RuleSet: StatusError(vs, code)
 * extension[error].valueCodeableConcept = {vs}{code}
@@ -78,7 +61,7 @@ RuleSet: BundleEntry0(id)
 // --------------------------------------------------------------------------
 
 Instance:    BackportNotificationStatusExampleR4
-InstanceOf:  BackportSubscriptionStatusR4
+InstanceOf:  $xverSubStatusProfile
 Usage:       #example
 Title:       "R4 Notification: Status"
 Description: "R4 Example of a topic-based subscription notification with status content."
@@ -92,23 +75,23 @@ Description: "R4 Example of a topic-based subscription notification with status 
 // --------------------------------------------------------------------------
 
 Instance:    StatusForHandshakeR4
-InstanceOf:  BackportSubscriptionStatusR4
+InstanceOf:  $xverSubStatusProfile
 Usage:       #inline
 * insert StatusBase($admissionSub, $admissionTopic, #requested, #handshake, 0)
 
 Instance:    StatusForHeartbeatR4
-InstanceOf:  BackportSubscriptionStatusR4
+InstanceOf:  $xverSubStatusProfile
 Usage:       #inline
 * insert StatusBase($admissionSub, $admissionTopic, #active, #heartbeat, 2)
 
 Instance:    StatusForEmptyR4
-InstanceOf:  BackportSubscriptionStatusR4
+InstanceOf:  $xverSubStatusProfile
 Usage:       #inline
 * insert StatusBase($admissionSub, $admissionTopic, #active, #event-notification, 2)
 * insert StatusEvent(2)
 
 Instance:    StatusForEmptyWithAuthR4
-InstanceOf:  BackportSubscriptionStatusR4
+InstanceOf:  $xverSubStatusProfile
 Usage:       #inline
 * insert StatusBase($admissionSub, $admissionTopic, #active, #event-notification, 2)
 * insert StatusEvent(2)
@@ -119,14 +102,14 @@ Usage:       #inline
 * extension[notificationEvent].extension[2].extension[1].valueString = "ZGFhNDFjY2MtZGFmMi00YjZkLThiNDYtN2JlZDk1MWEyYzk2"
 
 Instance:    StatusForIdOnlyR4
-InstanceOf:  BackportSubscriptionStatusR4
+InstanceOf:  $xverSubStatusProfile
 Usage:       #inline
 * insert StatusBase($admissionSub, $admissionTopic, #active, #event-notification, 2)
 * insert StatusEvent(2)
 * insert StatusEventFocus($notificationEncounter1)
 
 Instance:    StatusForIdOnlyWithAuthR4
-InstanceOf:  BackportSubscriptionStatusR4
+InstanceOf:  $xverSubStatusProfile
 Usage:       #inline
 * insert StatusBase($admissionSub, $admissionTopic, #active, #event-notification, 2)
 * insert StatusEvent(2)
@@ -138,7 +121,7 @@ Usage:       #inline
 * extension[notificationEvent].extension[3].extension[1].valueString = "ZGFhNDFjY2MtZGFmMi00YjZkLThiNDYtN2JlZDk1MWEyYzk2"
 
 Instance:    StatusForIdOnlyWithQueryR4
-InstanceOf:  BackportSubscriptionStatusR4
+InstanceOf:  $xverSubStatusProfile
 Usage:       #inline
 * insert StatusBase($admissionSub, $admissionTopic, #active, #event-notification, 2)
 * insert StatusEvent(2)
@@ -150,14 +133,14 @@ Usage:       #inline
 * extension[notificationEvent].extension[3].extension[1].valueString = "http://example.org/fhir/$example?patient=$notificationPatientId"
 
 Instance:    StatusForFullResourceR4
-InstanceOf:  BackportSubscriptionStatusR4
+InstanceOf:  $xverSubStatusProfile
 Usage:       #inline
 * insert StatusBase($admissionSub, $admissionTopic, #active, #event-notification, 2)
 * insert StatusEvent(2)
 * insert StatusEventFocus($notificationEncounter1)
 
 Instance:    StatusForFullResourceWithQueryR4
-InstanceOf:  BackportSubscriptionStatusR4
+InstanceOf:  $xverSubStatusProfile
 Usage:       #inline
 * insert StatusBase($admissionSub, $admissionTopic, #active, #event-notification, 2)
 * insert StatusEvent(2)
@@ -174,7 +157,7 @@ Usage:       #inline
 * extension[notificationEvent].extension[4].extension[1].valueString = "http://example.org/fhir/MedicationRequest?patient=$notificationPatientId&encounter=$notificationEncounter1Id"
 
 Instance:    StatusForMultiResourceR4
-InstanceOf:  BackportSubscriptionStatusR4
+InstanceOf:  $xverSubStatusProfile
 Usage:       #inline
 * insert StatusBase($admissionSub, $admissionTopic, #active, #event-notification, 2)
 * insert StatusEvent(2)
@@ -182,7 +165,7 @@ Usage:       #inline
 * insert StatusEventContext($notificationPatient)
 
 Instance:    StatusForErrorR4
-InstanceOf:  BackportSubscriptionStatusR4
+InstanceOf:  $xverSubStatusProfile
 Usage:       #inline
 * insert StatusBase($admissionSub, $admissionTopic, #error, #query-status, 3)
 * insert StatusError(http://terminology.hl7.org/CodeSystem/subscription-error, #no-response)

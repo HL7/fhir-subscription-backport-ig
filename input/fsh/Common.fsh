@@ -5,18 +5,13 @@ Alias: $admissionSubStatus = https://example.org/fhir/Subscription/admission/$st
 Alias: $webHookEndpoint = https://example.org/Endpoints/d7dcc004-808d-452b-8030-3a3a13cd871d
 Alias: $zulipEndpoint = https://example.org/Endpoints/ZulipForwarder
 
-Alias: $authorizationHintExt = http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/notification-authorization-hint
+Alias: $authorizationHintExt = http://hl7.org/fhir/StructureDefinition/authorization-hint
 
 Alias: $relatedQueryExt = http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-related-query
 
 // XVer cross-version extension aliases (from hl7.fhir.uv.xver-r5.r4)
 Alias: $xverSubTopic        = http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.topic
-Alias: $xverSubChannelType  = http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.channelType
 Alias: $xverSubFilterBy     = http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.filterBy
-Alias: $xverSubContent      = http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.content
-Alias: $xverSubHeartbeat    = http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.heartbeatPeriod
-Alias: $xverSubTimeout      = http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.timeout
-Alias: $xverSubMaxCount     = http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.maxCount
 Alias: $xverSubIdentifier   = http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.identifier
 Alias: $xverSubName         = http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.name
 Alias: $xverSubParameter    = http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.parameter
@@ -28,6 +23,9 @@ Alias: $xverSubStatusESSS         = http://hl7.org/fhir/5.0/StructureDefinition/
 Alias: $xverSubStatusNotifEvent   = http://hl7.org/fhir/5.0/StructureDefinition/extension-SubscriptionStatus.notificationEvent
 Alias: $xverSubStatusError        = http://hl7.org/fhir/5.0/StructureDefinition/extension-SubscriptionStatus.error
 
+// XVer: cross-version profile aliases (from hl7.fhir.uv.xver-r5.r4)
+Alias: $xverSubProfile       = http://hl7.org/fhir/5.0/StructureDefinition/profile-Subscription
+Alias: $xverSubStatusProfile = http://hl7.org/fhir/5.0/StructureDefinition/profile-SubscriptionStatus
 
 RuleSet: StructureJurisdiction
 * ^jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
