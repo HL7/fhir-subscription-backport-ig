@@ -26,7 +26,7 @@ XPath:       "f:entry[1]/f:resource/f:Basic"
 // RuleSets for inline status instances (applied to BackportSubscriptionStatusR4 instances)
 // --------------------------------------------------------------------------
 
-RuleSet: StatusBase(subscriptionRef, topic, status, type, sinceStart)
+RuleSet: StatusBaseR4(subscriptionRef, topic, status, type, sinceStart)
 * code.coding[0] = http://hl7.org/fhir/fhir-types#SubscriptionStatus
 * extension[$xverSubStatusSubscription].valueReference.reference = {subscriptionRef}
 * extension[$xverSubStatusTopic].valueCanonical = {topic}
@@ -34,21 +34,21 @@ RuleSet: StatusBase(subscriptionRef, topic, status, type, sinceStart)
 * modifierExtension[$xverSubStatusType].valueCode = {type}
 * extension[$xverSubStatusESSS].valueString = "{sinceStart}"
 
-RuleSet: StatusEvent(eventNumber)
+RuleSet: StatusEventR4(eventNumber)
 * extension[$xverSubStatusNotifEvent].extension[eventNumber].valueString = "{eventNumber}"
 * extension[$xverSubStatusNotifEvent].extension[timestamp].valueInstant = "2020-05-29T11:44:13.1882432-05:00"
 
-RuleSet: StatusEventFocus(focus)
+RuleSet: StatusEventFocusR4(focus)
 * extension[$xverSubStatusNotifEvent].extension[focus].valueReference.reference = {focus}
 
-RuleSet: StatusEventContext(additionalContext)
+RuleSet: StatusEventContextR4(additionalContext)
 * extension[$xverSubStatusNotifEvent].extension[additionalContext].valueReference.reference = {additionalContext}
 
-RuleSet: StatusError(vs, code)
+RuleSet: StatusErrorR4(vs, code)
 * extension[error].valueCodeableConcept = {vs}{code}
 
 // RuleSet for bundle entry metadata (applied to Bundle instances)
-RuleSet: BundleEntry0(id)
+RuleSet: BundleEntry0R4(id)
 * entry[0].fullUrl  = "urn:uuid:{id}"
 * entry[0].resource.id = "{id}"
 * entry[0].request.method = #GET
@@ -66,8 +66,8 @@ Usage:       #example
 Title:       "R4 Notification: Status"
 Description: "R4 Example of a topic-based subscription notification with status content."
 * id       = "r4-notification-status"
-* insert StatusBase($admissionSub, $admissionTopic, #active, #event-notification, 2)
-* insert StatusEvent(2)
+* insert StatusBaseR4($admissionSub, $admissionTopic, #active, #event-notification, 2)
+* insert StatusEventR4(2)
 
 
 // --------------------------------------------------------------------------
@@ -77,24 +77,24 @@ Description: "R4 Example of a topic-based subscription notification with status 
 Instance:    StatusForHandshakeR4
 InstanceOf:  $xverSubStatusProfile
 Usage:       #inline
-* insert StatusBase($admissionSub, $admissionTopic, #requested, #handshake, 0)
+* insert StatusBaseR4($admissionSub, $admissionTopic, #requested, #handshake, 0)
 
 Instance:    StatusForHeartbeatR4
 InstanceOf:  $xverSubStatusProfile
 Usage:       #inline
-* insert StatusBase($admissionSub, $admissionTopic, #active, #heartbeat, 2)
+* insert StatusBaseR4($admissionSub, $admissionTopic, #active, #heartbeat, 2)
 
 Instance:    StatusForEmptyR4
 InstanceOf:  $xverSubStatusProfile
 Usage:       #inline
-* insert StatusBase($admissionSub, $admissionTopic, #active, #event-notification, 2)
-* insert StatusEvent(2)
+* insert StatusBaseR4($admissionSub, $admissionTopic, #active, #event-notification, 2)
+* insert StatusEventR4(2)
 
 Instance:    StatusForEmptyWithAuthR4
 InstanceOf:  $xverSubStatusProfile
 Usage:       #inline
-* insert StatusBase($admissionSub, $admissionTopic, #active, #event-notification, 2)
-* insert StatusEvent(2)
+* insert StatusBaseR4($admissionSub, $admissionTopic, #active, #event-notification, 2)
+* insert StatusEventR4(2)
 * extension[notificationEvent].extension[2].url = $authorizationHintExt
 * extension[notificationEvent].extension[2].extension[0].url = "type"
 * extension[notificationEvent].extension[2].extension[0].valueCoding = http://example.org/auth#authorization_base "OAuth request token"
@@ -104,16 +104,16 @@ Usage:       #inline
 Instance:    StatusForIdOnlyR4
 InstanceOf:  $xverSubStatusProfile
 Usage:       #inline
-* insert StatusBase($admissionSub, $admissionTopic, #active, #event-notification, 2)
-* insert StatusEvent(2)
-* insert StatusEventFocus($notificationEncounter1)
+* insert StatusBaseR4($admissionSub, $admissionTopic, #active, #event-notification, 2)
+* insert StatusEventR4(2)
+* insert StatusEventFocusR4($notificationEncounter1)
 
 Instance:    StatusForIdOnlyWithAuthR4
 InstanceOf:  $xverSubStatusProfile
 Usage:       #inline
-* insert StatusBase($admissionSub, $admissionTopic, #active, #event-notification, 2)
-* insert StatusEvent(2)
-* insert StatusEventFocus($notificationEncounter1)
+* insert StatusBaseR4($admissionSub, $admissionTopic, #active, #event-notification, 2)
+* insert StatusEventR4(2)
+* insert StatusEventFocusR4($notificationEncounter1)
 * extension[notificationEvent].extension[3].url = $authorizationHintExt
 * extension[notificationEvent].extension[3].extension[0].url = "type"
 * extension[notificationEvent].extension[3].extension[0].valueCoding = http://example.org/auth#authorization_base "OAuth request token"
@@ -123,9 +123,9 @@ Usage:       #inline
 Instance:    StatusForIdOnlyWithQueryR4
 InstanceOf:  $xverSubStatusProfile
 Usage:       #inline
-* insert StatusBase($admissionSub, $admissionTopic, #active, #event-notification, 2)
-* insert StatusEvent(2)
-* insert StatusEventFocus($notificationEncounter1)
+* insert StatusBaseR4($admissionSub, $admissionTopic, #active, #event-notification, 2)
+* insert StatusEventR4(2)
+* insert StatusEventFocusR4($notificationEncounter1)
 * extension[notificationEvent].extension[3].url = $relatedQueryExt
 * extension[notificationEvent].extension[3].extension[0].url = "queryType"
 * extension[notificationEvent].extension[3].extension[0].valueCoding = http://example.org/query-types#example "Example query"
@@ -135,16 +135,16 @@ Usage:       #inline
 Instance:    StatusForFullResourceR4
 InstanceOf:  $xverSubStatusProfile
 Usage:       #inline
-* insert StatusBase($admissionSub, $admissionTopic, #active, #event-notification, 2)
-* insert StatusEvent(2)
-* insert StatusEventFocus($notificationEncounter1)
+* insert StatusBaseR4($admissionSub, $admissionTopic, #active, #event-notification, 2)
+* insert StatusEventR4(2)
+* insert StatusEventFocusR4($notificationEncounter1)
 
 Instance:    StatusForFullResourceWithQueryR4
 InstanceOf:  $xverSubStatusProfile
 Usage:       #inline
-* insert StatusBase($admissionSub, $admissionTopic, #active, #event-notification, 2)
-* insert StatusEvent(2)
-* insert StatusEventFocus($notificationEncounter1)
+* insert StatusBaseR4($admissionSub, $admissionTopic, #active, #event-notification, 2)
+* insert StatusEventR4(2)
+* insert StatusEventFocusR4($notificationEncounter1)
 * extension[notificationEvent].extension[3].url = $relatedQueryExt
 * extension[notificationEvent].extension[3].extension[0].url = "queryType"
 * extension[notificationEvent].extension[3].extension[0].valueCoding = http://example.org/query-types#example "Example query"
@@ -159,16 +159,16 @@ Usage:       #inline
 Instance:    StatusForMultiResourceR4
 InstanceOf:  $xverSubStatusProfile
 Usage:       #inline
-* insert StatusBase($admissionSub, $admissionTopic, #active, #event-notification, 2)
-* insert StatusEvent(2)
-* insert StatusEventFocus($notificationEncounter1)
-* insert StatusEventContext($notificationPatient)
+* insert StatusBaseR4($admissionSub, $admissionTopic, #active, #event-notification, 2)
+* insert StatusEventR4(2)
+* insert StatusEventFocusR4($notificationEncounter1)
+* insert StatusEventContextR4($notificationPatient)
 
 Instance:    StatusForErrorR4
 InstanceOf:  $xverSubStatusProfile
 Usage:       #inline
-* insert StatusBase($admissionSub, $admissionTopic, #error, #query-status, 3)
-* insert StatusError(http://terminology.hl7.org/CodeSystem/subscription-error, #no-response)
+* insert StatusBaseR4($admissionSub, $admissionTopic, #error, #query-status, 3)
+* insert StatusErrorR4(http://terminology.hl7.org/CodeSystem/subscription-error, #no-response)
 
 
 // --------------------------------------------------------------------------

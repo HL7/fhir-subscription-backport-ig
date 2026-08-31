@@ -49,6 +49,9 @@ RuleSet: ResourceCommonR4B
 * jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
 * fhirVersion = #4.3.0
 
+RuleSet: ResourceCommonR5
+* jurisdiction = http://unstats.un.org/unsd/methods/m49/m49.htm#001
+* fhirVersion = #5.0.0
 
 // The path is either the name of a resource or path to an element
 RuleSet: ExtensionContext(path)

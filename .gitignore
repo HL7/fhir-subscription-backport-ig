@@ -171,3 +171,10 @@ appsettings.*.json
 !appsettings.Development.json.example
 secrets.json
 local.settings.json
+
+# >>> dev-* skills (managed by dev-setup) >>>
+# Local scratch workspace for dev-* skills.
+# NOTE: already covered by the hand-added `/scratch` and `scratch/` rules in the
+# Project-specific section above; kept here only so a re-run can find this block.
+# /scratch/
+# <<< dev-* skills (managed by dev-setup) <<<
