@@ -35,6 +35,7 @@ fhirVersion:
   - 4.0.1
   - 4.3.0
 parameters:
+  auto-oid-root: 2.16.840.1.113883.4.642.40.75
   apply-wg: true
   default-wg: true
   show-inherited-invariants: false
