@@ -1,11 +1,11 @@
-Instance:      CapabilitySubscriptionServer
+Instance:      CapabilitySubscriptionServerR5
 InstanceOf:    CapabilityStatement
 Usage:         #definition
 Title:         "R5 Topic-Based Subscription Server Capability Statement"
 Description:   "CapabilityStatement describing the minimal required capabilities of a FHIR Server supporting R5 Subscriptions."
 * insert ResourceCommonR5
 * id            = "backport-subscription-server-r5"
-* name          = "BackportSubscriptionCapabilityStatement"
+* name          = "BackportSubscriptionCapabilityStatementR5"
 * url           = "http://hl7.org/fhir/uv/subscriptions-backport/CapabilityStatement/backport-subscription-server"
 * description   = "CapabilityStatement describing the required and optional capabilities of a FHIR Server supporting R5 Subscriptions."
 * insert CapabilityCommon
@@ -36,14 +36,14 @@ Description:   "CapabilityStatement describing the minimal required capabilities
 * insert SupportOperation(get-ws-binding-token, http://hl7.org/fhir/uv/subscriptions-backport/OperationDefinition/backport-subscription-get-ws-binding-token, #MAY)
 
 
-Instance:      CapabilitySubscriptionServerAdministrative
+Instance:      CapabilitySubscriptionServerAdministrativeR5
 InstanceOf:    CapabilityStatement
 Usage:         #definition
 Title:         "R5 Topic-Based Administrative Subscription Server Capability Statement"
 Description:   "CapabilityStatement describing the minimal required capabilities of a FHIR Server supporting backported R5 Subscriptions in R4B that uses administrative subscription management.."
 * insert ResourceCommonR5
 * id            = "backport-subscription-server-administrative-r5"
-* name          = "BackportSubscriptionCapabilityStatementAdministrative"
+* name          = "BackportSubscriptionCapabilityStatementAdministrativeR5"
 * url           = "http://hl7.org/fhir/uv/subscriptions-backport/CapabilityStatement/backport-subscription-server-administrative"
 * description   = "CapabilityStatement describing the required and optional capabilities of a FHIR Server supporting backported R5 Subscriptions in R4 that uses administrative subscription management."
 * insert CapabilityCommon

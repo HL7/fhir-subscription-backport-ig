@@ -41,8 +41,8 @@ parameters:
   usage-stats-opt-out: true
   shownav: 'true'
   generate-version:
-    - 4.0.1
-    - 4.3.0
+    - r4
+    - r4b
   r4-inclusion:
     - CapabilityStatement/backport-subscription-server-r4
     - CapabilityStatement/backport-subscription-server-r4-administrative
@@ -84,7 +84,7 @@ parameters:
     - CapabilityStatement/backport-subscription-server
     - CapabilityStatement/backport-subscription-server-administrative
     - SubscriptionTopic/r4b-encounter-complete
-    - StructureDefinition/backport-subscription-notification-r4b
+    - StructureDefinition/backport-subscription-notification
     - SubscriptionStatus/r4b-notification-status
     - Bundle/r4b-notification-heartbeat
     - Bundle/r4b-notification-handshake

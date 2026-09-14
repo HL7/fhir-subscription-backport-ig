@@ -87,7 +87,7 @@ Usage: #definition
 * base[0] = #Subscription
 * type = #uri
 * expression = "Subscription.extension('http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.topic').value"
-* xpathUsage = #normal
+// * xpathUsage = #normal
 
 Instance: Subscription-filter-criteria
 InstanceOf: SearchParameter
@@ -103,7 +103,7 @@ Usage: #definition
 * base[0] = #Subscription
 * type = #string
 * expression = "Subscription.extension('http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.filterBy').extension('value').value.ofType(string)"
-* xpathUsage = #normal
+// * xpathUsage = #normal
 
 Instance: Subscription-custom-channel
 InstanceOf: SearchParameter
@@ -119,7 +119,7 @@ Usage: #definition
 * base[0] = #Subscription
 * type = #token
 * expression = "Subscription.channel.type.extension('http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-channel-type').value.ofType(Coding)"
-* xpathUsage = #normal
+// * xpathUsage = #normal
 
 Instance: Subscription-identifier
 InstanceOf: SearchParameter
@@ -135,7 +135,7 @@ Usage: #definition
 * base[0] = #Subscription
 * type = #token
 * expression = "Subscription.extension('http://hl7.org/fhir/5.0/StructureDefinition/extension-Subscription.identifier').value.ofType(Identifier)"
-* xpathUsage = #normal
+// * xpathUsage = #normal
 
 Instance: Subscription-payload-type
 InstanceOf: SearchParameter
@@ -151,4 +151,4 @@ Usage: #definition
 * base[0] = #Subscription
 * type = #token
 * expression = "Subscription.extension('http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-payload-content').value.ofType(code)"
-* xpathUsage = #normal
+// * xpathUsage = #normal
