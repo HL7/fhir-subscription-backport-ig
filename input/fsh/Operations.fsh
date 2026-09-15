@@ -152,7 +152,7 @@ Description:   "This operation is used to get a token for a websocket client to 
 * parameter[=].use           = #in
 * parameter[=].min           = 0
 * parameter[=].max           = "*"
-* parameter[=].documentation = "At the Instance level, this parameter is ignored. At the Resource level, one or more parameters containing a FHIR id for a Subscription to get a token for. In the absense of any specified ids, the server may either return a token for all Subscriptions available to the caller with a channel-type of websocket or fail the request."
+* parameter[=].documentation = "At the Instance level, this parameter is ignored. At the Resource level, one or more parameters containing a FHIR id for a Subscription to get a token for. In the absence of any specified ids, the server may either return a token for all Subscriptions available to the caller with a channel-type of websocket or fail the request."
 
 * parameter[+].name          = #token
 * parameter[=].type          = #string

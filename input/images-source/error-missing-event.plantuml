@@ -5,7 +5,7 @@ skinparam ParticipantPadding 50
 skinparam LifelineStrategy solid
 
 participant "FHIR Server" as S
-participant Subscriber    as C
+participant Client    as C
 
 group Normal Operation
   ...
@@ -18,10 +18,10 @@ group Normal Operation
 end
 
 note left of C
-  Subscriber determines event **22** is missing
+  Client determines event **22** is missing
 end note
 
-group Subscriber Recovery Process
+group Client Recovery Process
   ...
   C <-> S: FHIR API calls...
   ...

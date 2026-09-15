@@ -5,7 +5,7 @@ skinparam ParticipantPadding 50
 skinparam LifelineStrategy solid
 
 participant "FHIR Server" as S
-participant Subscriber    as C
+participant Client    as C
 
 group Normal Operation
   ...

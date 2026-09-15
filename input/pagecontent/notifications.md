@@ -1,19 +1,23 @@
 ### Notifications
 
-As described in [Topic-Based Subscription Components](components.html#subscription-notifications), **all** notifications are enclosed in a [Bundle](http://hl7.org/fhir/bundle.html) with the `type` of `history`.  Additionally, the first `entry` of the bundle SHALL be the `SubscriptionStatus` information, encoded as either a [Basic](http://hl7.org/fhir/R4/basic.html) resource with a complex extension using the [Backport SubscriptionStatus Profile](StructureDefinition-backport-subscription-status-r4.html) in FHIR R4 or a [SubscriptionStatus](http://hl7.org/fhir/subscriptionstatus.html) resource in FHIR R4B.
+As described in [Topic-Based Subscription Components](components.html#subscription-notifications), **all** notifications are enclosed in a [Bundle](http://hl7.org/fhir/R4/bundle.html) with the `type` of `history`.  Additionally, the first `entry` of the bundle SHALL be the `SubscriptionStatus` information, encoded as either a [Basic](http://hl7.org/fhir/R4/basic.html) resource with a complex extension using the [Backport SubscriptionStatus Profile](StructureDefinition-backport-subscription-status-r4.html) in FHIR R4 or a [SubscriptionStatus](http://hl7.org/fhir/subscriptionstatus.html) resource in FHIR R4B.
 
 The notification bundle has a profile defined in this IG for each FHIR version: [R4 Topic-Based Subscription Notification Bundle](StructureDefinition-backport-subscription-notification-r4.html) and [R4B Topic-Based Subscription Notification Bundle](StructureDefinition-backport-subscription-notification.html).
 
 
 For detailed information about the R4B `SubscriptionStatus` resource, please see the HL7 FHIR website:
-* [SubscriptionStatus Resource](http://hl7.org/fhir/subscriptionstatus.html)
-* [Notification Types](http://hl7.org/fhir/subscriptionstatus.html#notification-types)
-* [Notifications and Errors](http://hl7.org/fhir/subscriptionstatus.html#errors)
+* [SubscriptionStatus Resource](http://hl7.org/fhir/R4B/subscriptionstatus.html)
+* [Notification Types](http://hl7.org/fhir/R4B/subscriptionstatus.html#notification-types)
+* [Notifications and Errors](http://hl7.org/fhir/R4B/subscriptionstatus.html#errors)
 
 
 ### Bundle Type Considerations
 
-In FHIR R5, a new type of `Bundle` has been introduced, which uses the new `SubscriptionStatus` resource to convey status information in notifications.  For FHIR R4, notifications are instead based on a [history Bundle](http://hl7.org/fhir/bundle.html#history), and a [SubscriptionStatus](http://hl7.org/fhir/subscriptionstatus.html) resource is used to convey related meta-information (e.g., which subscription the notification is for).
+In FHIR R5, a new type of `Bundle` has been introduced, which uses the new `SubscriptionStatus` resource to convey status information in notifications.  For FHIR R4, notifications are instead based on a [history Bundle](http://hl7.org/fhir/R4/bundle.html#history), and either an [R4B SubscriptionStatus](http://hl7.org/fhir/R4B/subscriptionstatus.html) or [R4 Parameters](http://hl7.org/fhir/R4/parameters.html) resource is used to convey related meta-information (e.g., which subscription the notification is for).
+
+The choice of the `history` Bundle type predates the `SubscriptionStatus` resource.  In earlier iterations of the Subscriptions specification, status information was conveyed by entries in the Bundle itself, and `id-only` notifications had to be expressed as entries carrying only a `Bundle.entry.request` (with no `Bundle.entry.resource`).  The [R4 `collection` Bundle](http://hl7.org/fhir/R4/bundle.html#collection) is defined as "A collection (type = `collection`) consists of a series of 0 or more entries. ... Each entry element SHALL contain a resource", which forbids resource-less entries and therefore precludes the use of `id-only` notifications.  The `history` Bundle, by contrast, supports entries that carry only a `Bundle.entry.request`, and so was the only standard Bundle type that could carry the full range of notification payloads.
+
+With the introduction of the [SubscriptionStatus](http://hl7.org/fhir/subscriptionstatus.html) resource (FHIR R4B and later) and R4 equivalent defined by this IG, the original technical reason for requiring `history` no longer applies - the status information now travels as a first-class resource in `entry[0]`, and `id-only` notifications can be expressed in other ways.  However, changing the Bundle type at this point would be a breaking change for every existing notification producer and consumer in the deployed implementer community.  When the work group polled implementers on this question, the consensus was that the burden of changing existing implementations outweighed the benefit of moving to a "lighter" Bundle type.  The Subscriptions R5 Backport therefore retains `history` as the required Bundle type for notifications in FHIR R4 and R4B.
 
 Note that since notifications use `history` type Bundles, all notifications need to comply with the requirements for that bundle type.  Specifically, there are two invariants on Bundle (`bdl-3` and `bdl-4`) that require a `Bundle.entry.request` element for *every* `Bundle.entry`.
 * For the status resource (`entry[0]`), the request SHALL be filled out to match a request to the `$status` operation.
@@ -27,44 +31,86 @@ In addition to general Subscription status information, each notification MAY in
 
 #### Focus Resource
 
-Each topic trigger defines a resource type that is the focus for notifications.  For example: [SubscriptionTopic.resourceTrigger.resource](http://hl7.org/fhir/subscriptiontopic-definitions.html#SubscriptionTopic.resourceTrigger.resource) and [SubscriptionTopic.eventTrigger.resource](http://hl7.org/fhir/subscriptiontopic-definitions.html#SubscriptionTopic.eventTrigger.resource).
+Each topic trigger defines a resource type that is the focus for notifications.  For example: [SubscriptionTopic.resourceTrigger.resource](http://hl7.org/fhir/R4B/subscriptiontopic-definitions.html#SubscriptionTopic.resourceTrigger.resource) and [SubscriptionTopic.eventTrigger.resource](http://hl7.org/fhir/R4B/subscriptiontopic-definitions.html#SubscriptionTopic.eventTrigger.resource).
 
 #### Additional Resources
 
 Servers MAY choose to include additional resources with notifications that may be of interest to clients.  Servers SHALL conform to the payload configuration of the subscription when adding additional resources (e.g., if the subscription is `id-only`, then only ids of additional resources may be provided; if the subscription is `full-resource`, then full resources should be provided).
 
-In order to aid servers in determining which resources may be of interest to clients, subscription topics can define a list of included resources (see [SubscriptionTopic.notificationShape.include](http://hl7.org/fhir/subscriptiontopic-definitions.html#SubscriptionTopic.notificationShape.include)).  Included resources are matches based on the type of focus resource specified.
+In order to aid servers in determining which resources may be of interest to clients, subscription topics can define a list of included resources (see [SubscriptionTopic.notificationShape.include](http://hl7.org/fhir/R4B/subscriptiontopic-definitions.html#SubscriptionTopic.notificationShape.include)).  Included resources are matches based on the type of focus resource specified.
 
 Note that the include list MAY contain resources that do not exist in a particular context (e.g., an Encounter with no Observations) or that a user may not be authorized to access (e.g., an Observation tagged as sensitive that cannot be shared with the owner of a subscription).  Servers SHOULD attempt to provide the resources described in the topic, however clients SHALL expect that any resource beyond the focus resource are not guaranteed to be present.
 
 ### Notified Pull
 
+Notified Pull is a topic-based subscription pattern in which the notification provides a query and/or a code representing a query to run later instead of delivering the triggering data inline. In every Notified Pull scenario the notification carries (or refers to) one or more queries and/or coded information describing what a query represents or returns. Clients executes those queries against a FHIR server to retrieve the relevant data at the time it is actually needed. The common thread across the use cases below is therefore not *what* data is exchanged, but *when* and *how* it is fetched: the data of interest is retrieved by the client after the notification, on the client's own schedule, rather than being included in the notification itself.
+
+Notified Pull is complementary to, not a replacement for, the standard `empty`, `id-only`, and `full-resource` payload modes described in [Payload Types](payloads.html). Implementers can choose this pattern when the data clients need is time-shifted, sensitive, or otherwise not well-served by inline delivery.
+
+#### Comparison with Payload Types
+
+Notified Pull is an alternative delivery pattern that builds on the [`id-only`](payloads.html#id-only) payload type defined in the [Payloads](payloads.html) page. Where the three baseline payload types (`empty`, `id-only`, `full-resource`) differ along how much resource data is inlined in the notification bundle, Notified Pull adds a second axis: the semantics a subscriber can rely on when interpreting each referenced resource.
+
+When deciding which combination to support, consider:
+
+* `empty` notifications carry no `focus` or `additionalContext` references. The subscriber must issue a topic-appropriate query (e.g., `_since=`) to discover what changed. Lightest footprint, no PHI, highest subscriber processing cost.
+* `id-only` notifications inline focus references but no resource bodies. The subscriber dereferences each URL to retrieve the resource. The IDs need to be known and stable at the time of notification and retrieval. The semantics of each reference (for example, which `Patient` is the source vs. target of a merge, or which `Appointment` is the prior vs. rescheduled booking) are not carried on the wire; the subscriber must assume them from the `SubscriptionTopic` definition and the order or position of the references.
+* `full-resource` notifications inline both references and resource bodies. The subscriber generally does not need a follow-up GET, but the channel must be appropriate for PHI.
+* `Notified Pull` notifications use the [`backport-related-query`](StructureDefinition-backport-related-query.html) extension on `SubscriptionStatus.notificationEvent` (and/or on `SubscriptionTopic.notificationShape` in the topic definition) to pair each related resource with a `queryType` `Coding` describing the role the resource plays in the event and/or an executable `query` URL the subscriber follows to retrieve data. The footprint is similar to `id-only` (only references and the small extension travel on the wire), but only some IDs in the query URL need to be known and stable at the time of notification (e.g., the patient ID instead of individual observation IDs). `Notified Pull` adds *expressed semantics* over `id-only`. It can be appropriate when the subscriber needs to disambiguate the role each reference plays in the event, when the follow-up query to retrieve the data is not part of a standardized FHIR search profile, etc.. Some example use cases are included below.
+
+#### How Notified Pull Works
+
+Notified Pull combines the core Subscription mechanics described in [Topic-Based Subscription Components](components.html) with a pre-coordinated query that the Client executes after receiving a notification. There are three distinct steps and three distinct actors:
+
+1. **Subscription setup**: The Client uses a standard [Workflow](workflow.html) to establish a subscription. Topics that participate in Notified Pull advertise the available query via the [backport-related-query](StructureDefinition-backport-related-query.html) extension on `SubscriptionTopic.notificationShape` (R4B and later) or on the equivalent `Basic` representation (R4); see [Adding Queries to Topics and Notifications](#adding-queries-to-topics-and-notifications) below.
+2. **Notification**: When the Server emits a notification, the bundle status information (`SubscriptionStatus` or equivalent) carries the information for one or more related-queries the Client can execute.
+3. **Pull / Query**: When the Client is ready to act on the notification, it issues the query or queries from the notification against the relevant FHIR Server (which may or may not be the same server that sent the notification) and receives the actual payload at that time.
+
+<figure>
+  {% include notified-pull-overview.svg %}
+  <figcaption>Notified Pull overview: Subscription setup, Notification carrying a related query, and the subsequent pull query the subscriber issues later.</figcaption>
+</figure>
+
+The use cases below illustrate some scenarios where this pattern is useful in practice: e.g., the subscriber needs data that does not exist (or cannot usefully be transmitted) at the time the subscription fires, so the notification is used to hand the subscriber a query rather than the data itself.
+
+
 #### Use Cases
 
 ##### Time Shifted Services
 
-One presented use case is centered around a referral workflow.  The scenario is that some facility (A) is sending a referral to another facility (B) for some sort of patient service.  While Facility A knows the information that Facility B needs, Facility A does not know *when* Facility B will be performing services.  If there is a time gap (e.g., services at Facility B are running six months out), it is better for Facility B to resolve information at the time of service instead of at the time of referral.
+One presented use case is centered around a referral workflow.  The scenario is that some facility (A) is sending a referral to another facility (B) for some sort of patient service.  While Facility A knows the information that Facility B needs, Facility A does not know *when* Facility B will be performing services.  If there is a time gap (e.g., services at Facility B are running six months out), it is better for Facility B to resolve information at the time of service instead of at the time of referral.  In Subscription terms, Facility B is the **Client** and Facility A is the **Server**; the **notification** sent when the referral is recorded carries the related query that Facility B will execute as the subsequent pull close to the time of service.
+
+This use case does not depend on any special expiry behavior. Nothing in the standard notification workflow places a time limit on how long a notification remains actionable, and a client  is free to defer its follow-up query for as long as the referenced data remains retrievable. What sets Time Shifted Services apart is therefore not a different mechanism, but the deliberately long and variable delay between the notification and the pull. Because that gap can be months, resolving the data inline at notification time (for example, as a `full-resource` payload) risks delivering information that is stale by the time it is used; carrying a query instead lets Facility B fetch current data at the moment of service.
 
 <figure>
   {% include time-shifted-services.svg %}
   <figcaption>Workflow for referral service with a significant time delay</figcaption>
 </figure>
 
+##### Query Standardization
 
-##### Unstandardized Queries
+Another use case builds on the [`id-only`](payloads.html#id-only) payload type described on the [Payloads](payloads.html) page. With `id-only`, the server anticipates which resources the client will want, resolves them to specific resource references, and includes those references in the notification; the client then simply dereferences each item rather than having to search for the data itself. Mapping this onto the referral example above, the referring facility is the server/publisher and the servicing facility is the client/subscriber - so it is the referring facility that decides, ahead of time, what the servicing facility will need.
 
-Another use case for a 'notified pull' mechanism is a continuation of the `id-only` return data.  Specifically, in cases where the data necessary is not well-standardized, it is unreasonable to expect the referring facility to be able to construct the queries necessary to retrieve the data.  For example, in the United States, there is no standardized query to retrieve the current insurance coverage information for a patient.  The the process for retrieving that information is vendor-specific and it is unreasonable to expect a referring facility to be able to construct the queries necessary to retrieve it.
+Notified Pull extends this idea from individual resource references to whole queries: instead of (or in addition to) pre-resolving each specific resource, the notification carries a query that the servicing facility runs against the publisher to retrieve the data when it is needed. Whether the servicing facility can act on such a notification depends on whether a standardized query exists for the data being retrieved.
+
+Where a standardized query is defined, for example by a use-case-specific or realm-specific implementation guide such as US Core (for USCDI), MedMij, or another domain guide, the client (servicing facility) can recognize and run the query from publicly available query definitions. In these cases a Notified Pull can be performed without the need to express any queries inline.
+
+Where no standardized query exists, relevant queries may be vendor-, deployment-, or trading-partner-specific, and the servicing facility generally cannot derive them on its own without direct pre-coordination about which queries to use. The Notified Pull pattern can still apply in this situation: the notification carries the specific queries and/or coded information about them, so the client (servicing facility) can execute it directly instead of having to construct it. See [Adding Queries to Topics and Notifications](#adding-queries-to-topics-and-notifications) below.
+
+This guide takes no position on whether standardized or unstandardized queries will be more common for a given use case in any particular jurisdiction; that determination is left to realm- or use-case-specific implementation guides, which can indicate which approach is preferred for their scope.
 
 <figure>
   {% include unstandardized-query.svg %}
-  <figcaption>Workflow showing how an unstandardized query can be used</figcaption>
+  <figcaption>Workflow showing how a query, whether standardized or unstandardized, can be carried in a notification</figcaption>
 </figure>
 
-#### Adding Queries to Notifications
+#### Adding Queries to Topics and Notifications
 
 In both Use Cases described above, there are two pieces of information a subscriber needs in order to successfully use the provided queries: the URL for the query and coded information describing the query.
 
-In this guide, the query and coded information are paired together as a `string` and a `Coding` respectively.  There are two places that need to contain this data: the topic definition and the notification itself.
+In this guide, the query and a coded description of the data provided by the query are paired together as a `string` and a `Coding` respectively.  For example, you may have a coded description of the query of `patient-problem-list`, and an associated query of `/Condition?patient=<patient ID>&category=http://terminology.hl7.org/CodeSystem/condition-category|problem-list-item`.
+
+The topic definition MAY contain the coded description of the queries and/or the query string itself, while the notification will contain both the coded description and the query string.  In cases where the query string does not depend on parameters determined at run time, it SHOULD be included in the topic definition.
 
 ##### FHIR R4
 
